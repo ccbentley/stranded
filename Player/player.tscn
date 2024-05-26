@@ -1,0 +1,114 @@
+[gd_scene load_steps=18 format=3 uid="uid://b13j56wiy5bjp"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
+[ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/player_idle.png" id="2_eh4ke"]
+[ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://Player/player_walk_cycle.png" id="3_p6gjd"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_q3ebq"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
+[ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="6_of8sk"]
+[ext_resource type="Script" path="res://Components/weapon.gd" id="6_ueq3c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
+atlas = ExtResource("2_eh4ke")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr3rr"]
+atlas = ExtResource("2_eh4ke")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sigtv"]
+atlas = ExtResource("3_p6gjd")
+region = Rect2(0, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiuyg"]
+atlas = ExtResource("3_p6gjd")
+region = Rect2(16, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50fa7"]
+atlas = ExtResource("3_p6gjd")
+region = Rect2(32, 0, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50g36"]
+atlas = ExtResource("3_p6gjd")
+region = Rect2(48, 0, 16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vu2q5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tni6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr3rr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sigtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiuyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50fa7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50g36")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
+size = Vector2(10, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
+size = Vector2(10, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6en"]
+size = Vector2(22, 7)
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_qsibb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vu2q5")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_4f3oy")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_q3ebq")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hgslm")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
+
+[node name="HeldItem" type="Node2D" parent="."]
+
+[node name="Sword" type="StaticBody2D" parent="HeldItem"]
+position = Vector2(12, -3)
+script = ExtResource("6_ueq3c")
+
+[node name="Area2D" type="Area2D" parent="HeldItem/Sword"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeldItem/Sword/Area2D"]
+position = Vector2(6, 1.5)
+shape = SubResource("RectangleShape2D_yc6en")
+
+[node name="Sprite2D" type="Sprite2D" parent="HeldItem/Sword"]
+texture = ExtResource("6_of8sk")
+hframes = 3
+vframes = 3
+frame = 2
+
+[connection signal="area_entered" from="HeldItem/Sword/Area2D" to="HeldItem/Sword" method="_on_area_2d_area_entered"]
