@@ -1,16 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=19 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
-[ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
-[ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://Player/Art/player_walk_cycle.png" id="3_p6gjd"]
+[ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/player_idle.png" id="2_eh4ke"]
+[ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://Player/player_walk_cycle.png" id="3_p6gjd"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
-[ext_resource type="Script" path="res://Scripts/weapon.gd" id="6_5ci1d"]
 [ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="6_of8sk"]
-[ext_resource type="Script" path="res://Scripts/FSM/finite_state_machine.gd" id="8_oi7d2"]
-[ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="9_0khh0"]
-[ext_resource type="Script" path="res://Player/States/player_moving_state.gd" id="9_02503"]
-[ext_resource type="Script" path="res://Player/States/player_attack_state.gd" id="11_76vsd"]
+[ext_resource type="Script" path="res://Components/weapon.gd" id="6_ueq3c"]
+[ext_resource type="Script" path="res://finite_state_machine.gd" id="8_asgwr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -63,7 +60,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_50g36")
 }],
 "loop": true,
-"name": &"move",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -76,14 +73,13 @@ size = Vector2(10, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6en"]
 size = Vector2(22, 7)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("held_item")]
+[node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_qsibb")
-held_item = NodePath("HeldItem")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vu2q5")
-animation = &"move"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -97,13 +93,12 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hgslm")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
-MAX_HEALTH = 6.942e+12
 
 [node name="HeldItem" type="Node2D" parent="."]
 
 [node name="Sword" type="StaticBody2D" parent="HeldItem"]
 position = Vector2(12, -3)
-script = ExtResource("6_5ci1d")
+script = ExtResource("6_ueq3c")
 
 [node name="Area2D" type="Area2D" parent="HeldItem/Sword"]
 
@@ -118,22 +113,9 @@ vframes = 3
 frame = 2
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("8_oi7d2")
+script = ExtResource("8_asgwr")
 state = NodePath("PlayerIdleState")
 
-[node name="PlayerIdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("9_0khh0")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
-
-[node name="PlayerMovingState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("9_02503")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
-
-[node name="PlayerAttackState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("11_76vsd")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
+[node name="PlayerIdleState" type="Node" parent="FiniteStateMachine"]
 
 [connection signal="area_entered" from="HeldItem/Sword/Area2D" to="HeldItem/Sword" method="_on_area_2d_area_entered"]

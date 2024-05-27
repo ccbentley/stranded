@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0p7eem5cnubx"]
 
-[ext_resource type="Texture2D" uid="uid://c8uamh6sibu3h" path="res://Art/Nature Pixels V2/Remake/Tiles/Nature.png" id="1_k57yj"]
-[ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_0nome"]
-[ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://Art/Nature Pixels V2/Remake/Trees/Tree2.png" id="3_oy3ih"]
-[ext_resource type="PackedScene" uid="uid://dnj62ts5tdlcl" path="res://Scenes/tree.tscn" id="4_rkpxj"]
+[ext_resource type="Texture2D" uid="uid://c8uamh6sibu3h" path="res://Art/Nature Pixels V2/Remake/Tiles/Nature.png" id="1_no5ay"]
+[ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_rs7gc"]
+[ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://Art/Nature Pixels V2/Remake/Trees/Tree2.png" id="3_61270"]
+[ext_resource type="PackedScene" uid="uid://dnj62ts5tdlcl" path="res://Scenes/Objects/tree.tscn" id="4_nk7qg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ila1"]
-texture = ExtResource("1_k57yj")
+texture = ExtResource("1_no5ay")
 0:0/0 = 0
 0:0/0/terrain_set = 1
 0:0/0/terrain = 0
@@ -1018,7 +1018,7 @@ zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("2_0nome")]
+[node name="Player" parent="." instance=ExtResource("2_rs7gc")]
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -1027,54 +1027,54 @@ remote_path = NodePath("../../Camera2D")
 y_sort_enabled = true
 position = Vector2(-216, -144)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree3" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-158, -168)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree4" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(65, -120)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree5" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-71, -218)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree6" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-232, 22)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree7" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(201, -104)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree8" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-115, 3)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
-[node name="Tree10" parent="." instance=ExtResource("4_rkpxj")]
+[node name="Tree10" parent="." instance=ExtResource("4_nk7qg")]
 
 [node name="Tree11" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(141, -19)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")
 
 [node name="Tree12" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(50, 118)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_oy3ih")
+texture = ExtResource("3_61270")

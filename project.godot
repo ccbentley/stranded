@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RPG"
-run/main_scene="res://Scenes/world.tscn"
+run/main_scene="res://Scenes/Worlds/world.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 
