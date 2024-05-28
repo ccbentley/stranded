@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=23 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -7,12 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
 [ext_resource type="Script" path="res://Scripts/weapon.gd" id="6_5ci1d"]
 [ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="6_of8sk"]
-[ext_resource type="Script" path="res://Player/States/movement_state_machine.gd" id="8_na4i2"]
-[ext_resource type="Script" path="res://Player/States/Movement States/player_idle_state.gd" id="9_0khh0"]
-[ext_resource type="Script" path="res://Player/States/Movement States/player_move_state.gd" id="9_02503"]
-[ext_resource type="Script" path="res://Player/States/Action States/player_attack_state.gd" id="11_76vsd"]
-[ext_resource type="Script" path="res://Player/States/action_state_machine.gd" id="11_epdro"]
-[ext_resource type="Script" path="res://Player/States/Action States/player_no_action_state.gd" id="13_5c8o8"]
+[ext_resource type="Script" path="res://Scripts/FSM/finite_state_machine.gd" id="8_oi7d2"]
+[ext_resource type="Script" path="res://Player/States/player_idle_state.gd" id="9_0khh0"]
+[ext_resource type="Script" path="res://Player/States/player_movement_state.gd" id="9_5nl3y"]
+[ext_resource type="Script" path="res://Player/States/player_move_state.gd" id="9_02503"]
+[ext_resource type="Script" path="res://Player/States/player_attack_state.gd" id="11_76vsd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -102,10 +101,9 @@ shape = SubResource("RectangleShape2D_hgslm")
 MAX_HEALTH = 6.942e+12
 
 [node name="HeldItem" type="Node2D" parent="."]
-position = Vector2(6, 2)
 
 [node name="Sword" type="StaticBody2D" parent="HeldItem"]
-position = Vector2(6, -7)
+position = Vector2(12, -3)
 script = ExtResource("6_5ci1d")
 
 [node name="Area2D" type="Area2D" parent="HeldItem/Sword"]
@@ -120,28 +118,26 @@ hframes = 3
 vframes = 3
 frame = 2
 
-[node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("8_na4i2")
-state = NodePath("PlayerIdleState")
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("8_oi7d2")
+state = NodePath("MoveState/PlayerIdleState")
 
-[node name="PlayerIdleState" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+[node name="MoveState" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_5nl3y")
+
+[node name="PlayerIdleState" type="Node" parent="FiniteStateMachine/MoveState" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("9_0khh0")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
 
-[node name="PlayerMovingState" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+[node name="PlayerMoveState" type="Node" parent="FiniteStateMachine/MoveState" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("9_02503")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
 
-[node name="ActionStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("11_epdro")
-state = NodePath("PlayerNoActionState")
-
-[node name="PlayerAttackState" type="Node" parent="ActionStateMachine"]
+[node name="PlayerAttackState" type="Node" parent="FiniteStateMachine/MoveState" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("11_76vsd")
-
-[node name="PlayerNoActionState" type="Node" parent="ActionStateMachine"]
-script = ExtResource("13_5c8o8")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
 
 [connection signal="area_entered" from="HeldItem/Sword/Area2D" to="HeldItem/Sword" method="_on_area_2d_area_entered"]

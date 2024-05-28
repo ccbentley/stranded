@@ -5,7 +5,6 @@ extends State
 @export var anim : AnimatedSprite2D
 
 signal player_moved
-signal player_attacked
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -27,6 +26,3 @@ func _physics_process(delta) -> void:
 	#Exits state if player moved
 	if actor.get_input() != Vector2.ZERO:
 		player_moved.emit()
-	
-	if Input.is_action_just_pressed("attack"):
-		player_attacked.emit()

@@ -7,7 +7,6 @@ extends State
 var input : Vector2 = Vector2.ZERO
 
 signal player_stopped_moving
-signal player_attacked
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -36,7 +35,3 @@ func _physics_process(delta) -> void:
 	elif input.x > 0:
 		anim.flip_h = false
 		actor.is_facing_right = true
-		
-	if Input.is_action_just_pressed("attack"):
-		player_attacked.emit()
-
