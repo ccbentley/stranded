@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var player_no_action_state = $ActionStateMachine/PlayerNoActionState as PlayerNoActionState
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
 
+@onready var action_bar = %ActionBar
 @export var held_item : Node2D
 
 #Player stats
@@ -34,5 +35,12 @@ func get_input() -> Vector2:
 	input.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	return input.normalized()
 
-func _physics_process(_delta) -> void:
-	held_item.look_at(get_global_mouse_position())
+func add_item(ID) -> void:
+	action_bar.add_item(ID)
+	
+func use_item() -> void:
+	action_bar.use_item()
+	
+func _input(event) -> void:
+	if event.is_action_pressed("use"):
+		use_item()

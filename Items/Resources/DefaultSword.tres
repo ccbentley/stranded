@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://kq47806qy5qd"]
+
+[ext_resource type="Script" path="res://Items/item.gd" id="1_5xj7p"]
+[ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="1_ykjkh"]
+
+[resource]
+script = ExtResource("1_5xj7p")
+icon = ExtResource("1_ykjkh")
+name = "Default Sword"
+type = "Weapon"
+rarity = "Common"
+description = "Sword go hit"

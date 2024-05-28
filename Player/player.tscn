@@ -1,18 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=23 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
 [ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://Player/Art/player_walk_cycle.png" id="3_p6gjd"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
-[ext_resource type="Script" path="res://Scripts/weapon.gd" id="6_5ci1d"]
-[ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="6_of8sk"]
 [ext_resource type="Script" path="res://Player/States/movement_state_machine.gd" id="8_na4i2"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_idle_state.gd" id="9_0khh0"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_move_state.gd" id="9_02503"]
 [ext_resource type="Script" path="res://Player/States/Action States/player_attack_state.gd" id="11_76vsd"]
 [ext_resource type="Script" path="res://Player/States/action_state_machine.gd" id="11_epdro"]
 [ext_resource type="Script" path="res://Player/States/Action States/player_no_action_state.gd" id="13_5c8o8"]
+[ext_resource type="Script" path="res://Player/action_bar.gd" id="14_u7ro3"]
+[ext_resource type="PackedScene" uid="uid://rfqwajlonkke" path="res://Items/slot.tscn" id="15_bo2on"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -75,13 +75,9 @@ size = Vector2(10, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
 size = Vector2(10, 19)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc6en"]
-size = Vector2(22, 7)
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("held_item")]
+[node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_qsibb")
-held_item = NodePath("HeldItem")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vu2q5")
@@ -100,25 +96,6 @@ shape = SubResource("RectangleShape2D_hgslm")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
 MAX_HEALTH = 6.942e+12
-
-[node name="HeldItem" type="Node2D" parent="."]
-position = Vector2(6, 2)
-
-[node name="Sword" type="StaticBody2D" parent="HeldItem"]
-position = Vector2(6, -7)
-script = ExtResource("6_5ci1d")
-
-[node name="Area2D" type="Area2D" parent="HeldItem/Sword"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeldItem/Sword/Area2D"]
-position = Vector2(6, 1.5)
-shape = SubResource("RectangleShape2D_yc6en")
-
-[node name="Sprite2D" type="Sprite2D" parent="HeldItem/Sword"]
-texture = ExtResource("6_of8sk")
-hframes = 3
-vframes = 3
-frame = 2
 
 [node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("8_na4i2")
@@ -144,4 +121,21 @@ script = ExtResource("11_76vsd")
 [node name="PlayerNoActionState" type="Node" parent="ActionStateMachine"]
 script = ExtResource("13_5c8o8")
 
-[connection signal="area_entered" from="HeldItem/Sword/Area2D" to="HeldItem/Sword" method="_on_area_2d_area_entered"]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ActionBar" type="HBoxContainer" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("14_u7ro3")
+
+[node name="Slot" parent="UI/ActionBar" instance=ExtResource("15_bo2on")]
+layout_mode = 2
