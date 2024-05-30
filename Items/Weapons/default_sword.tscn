@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddq5ln3wmd827"]
-
-[ext_resource type="PackedScene" uid="uid://c5fnwpn5m7kai" path="res://Items/abstract_item.tscn" id="1_ivptl"]
-[ext_resource type="Script" path="res://Items/Weapons/default_sword.gd" id="2_5alb7"]
-
-[node name="DefaultSword" instance=ExtResource("1_ivptl")]
-script = ExtResource("2_5alb7")

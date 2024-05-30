@@ -13,7 +13,7 @@ extends CharacterBody2D
 @onready var player_no_action_state = $ActionStateMachine/PlayerNoActionState as PlayerNoActionState
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
 
-@onready var action_bar = %ActionBar
+@onready var hotbar = %Hotbar
 @export var held_item : Node2D
 
 #Player stats
@@ -36,10 +36,10 @@ func get_input() -> Vector2:
 	return input.normalized()
 
 func add_item(ID) -> void:
-	action_bar.add_item(ID)
+	hotbar.add_item(ID)
 	
 func use_item() -> void:
-	action_bar.use_item()
+	hotbar.use_item()
 	
 func _input(event) -> void:
 	if event.is_action_pressed("use"):
