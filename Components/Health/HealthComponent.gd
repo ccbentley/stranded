@@ -7,8 +7,8 @@ var health : float
 func _ready() -> void:
 	health = MAX_HEALTH
 	
-func damage(attack: Attack) -> void:
-	health -= attack.attack_damage
+#func damage(attack: Attack) -> void:
+	#health -= attack.attack_damage
 	
-	if health <= 0:
-		get_parent().queue_free()
+	#if health <= 0:
+		#get_parent().queue_free()

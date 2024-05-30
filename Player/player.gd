@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@export var inventory_data: InventoryData
+
 #State Machines
 @onready var msm = $MovementStateMachine as MovementStateMachine
 @onready var asm = $ActionStateMachine as ActionStateMachine
@@ -13,9 +15,6 @@ extends CharacterBody2D
 @onready var player_no_action_state = $ActionStateMachine/PlayerNoActionState as PlayerNoActionState
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
 
-@onready var hotbar = %Hotbar
-@export var held_item : Node2D
-
 #Player stats
 const max_speed : int = 90
 const accel : int = 1500
@@ -24,6 +23,12 @@ const friction : int = 1000
 var input : Vector2 = Vector2.ZERO
 
 var is_facing_right : bool = false
+
+signal toggle_inventory
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory.emit()
 
 func _ready() -> void:
 	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
@@ -35,12 +40,3 @@ func get_input() -> Vector2:
 	input.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	return input.normalized()
 
-func add_item(ID) -> void:
-	hotbar.add_item(ID)
-	
-func use_item() -> void:
-	hotbar.use_item()
-	
-func _input(event) -> void:
-	if event.is_action_pressed("use"):
-		use_item()
