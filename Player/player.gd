@@ -1,6 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var hitbox_component = $HitboxComponent
+@onready var health_component = $HealthComponent
+
 @export var inventory_data: InventoryData
 
 #State Machines
@@ -29,6 +32,8 @@ signal toggle_inventory
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
+	if Input.is_action_just_pressed("interact"):
+		interact()
 
 func _ready() -> void:
 	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
@@ -40,3 +45,7 @@ func get_input() -> Vector2:
 	input.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	return input.normalized()
 
+func interact() -> void:
+	for area in hitbox_component.get_overlapping_areas():
+		if area.is_in_group("interactable"):
+			area.get_parent().player_interact()

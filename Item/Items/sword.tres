@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_ar46r")
 name = "Sword"
-description = "Sword hit"
+description = "Just a regular sword"
 stackable = false
 texture = ExtResource("2_47j7f")

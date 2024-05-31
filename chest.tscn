@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://madc445wb3oe"]
+
+[ext_resource type="Script" path="res://Scripts/chest.gd" id="1_ueeyf"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_njviy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8tdc"]
+
+[node name="Chest" type="StaticBody2D" groups=["external_inventory"]]
+script = ExtResource("1_ueeyf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_njviy")
+
+[node name="Area2D" type="Area2D" parent="." groups=["interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_k8tdc")
