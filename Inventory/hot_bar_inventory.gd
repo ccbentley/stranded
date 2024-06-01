@@ -20,6 +20,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 	if range(KEY_1, KEY_7).has(event.keycode):
 		selected_slot = event.keycode - KEY_1
+		set_selected()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -28,6 +30,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				hot_bar_use.emit(selected_slot)
 			MOUSE_BUTTON_RIGHT:
 				pass
+
+func set_selected() -> void:
+	var slots : Array
+	for child in h_box_container.get_children():
+		slots.append(child)
+	selected.position = slots[selected_slot].position + Vector2(40,40)
 
 func populate_hot_bar(inventory_data: InventoryData) -> void:
 	for child in h_box_container.get_children():
