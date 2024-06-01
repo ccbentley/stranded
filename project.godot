@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Worlds/world.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 
+[autoload]
+
+PlayerManager="*res://Player/player_manager.gd"
+
 [filesystem]
 
 import/blender/enabled=false

@@ -5,7 +5,7 @@ extends Node
 
 func _ready() -> void:
 	change_state(state)
-	
+
 func change_state(new_state: State) -> void:
 	if state is State:
 		state._exit_state()

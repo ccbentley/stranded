@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var health_component = $HealthComponent
 
 @export var inventory_data: InventoryData
+@export var equip_inventory_data: InventoryDataEquip
 
 #State Machines
 @onready var msm = $MovementStateMachine as MovementStateMachine
@@ -29,13 +30,14 @@ var is_facing_right : bool = false
 
 signal toggle_inventory
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
 	if Input.is_action_just_pressed("interact"):
 		interact()
 
 func _ready() -> void:
+	PlayerManager.player = self
 	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
 	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
 
@@ -49,3 +51,15 @@ func interact() -> void:
 	for area in hitbox_component.get_overlapping_areas():
 		if area.is_in_group("interactable"):
 			area.get_parent().player_interact()
+
+func get_drop_position() -> Vector2:
+	var direction : Vector2
+	match is_facing_right:
+		true:
+			direction = Vector2(20,0)
+		false:
+			direction = Vector2(-20,0)
+	return self.global_position + direction
+
+func heal(heal_value: int) -> void:
+	$HealthComponent.health += heal_value

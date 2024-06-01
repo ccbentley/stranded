@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=22 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -10,10 +10,7 @@
 [ext_resource type="Script" path="res://Player/States/Movement States/player_move_state.gd" id="9_02503"]
 [ext_resource type="Script" path="res://Player/States/Action States/player_attack_state.gd" id="11_76vsd"]
 [ext_resource type="Script" path="res://Player/States/action_state_machine.gd" id="11_epdro"]
-[ext_resource type="Script" path="res://Inventory/inventory_interface.gd" id="12_ahyhd"]
-[ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://Inventory/inventory.tscn" id="12_sf1u7"]
 [ext_resource type="Script" path="res://Player/States/Action States/player_no_action_state.gd" id="13_5c8o8"]
-[ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://Inventory/slot.tscn" id="14_vc230"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -116,6 +113,7 @@ func swap(i,j):
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_qsibb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -162,39 +160,5 @@ script = ExtResource("13_5c8o8")
 
 [node name="Items" type="Node2D" parent="."]
 script = SubResource("GDScript_oylxb")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="InventoryInterface" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("12_ahyhd")
-
-[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("12_sf1u7")]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
-
-[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("12_sf1u7")]
-visible = false
-layout_mode = 0
-offset_left = 633.0
-offset_top = 170.0
-offset_right = 673.0
-offset_bottom = 210.0
-
-[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("14_vc230")]
-modulate = Color(1, 1, 1, 0.494118)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 65.0
 
 [connection signal="child_entered_tree" from="Items" to="Items" method="_on_child_entered_tree"]
