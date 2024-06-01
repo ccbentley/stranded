@@ -4,7 +4,7 @@ signal hot_bar_use(index: int)
 
 const Slot = preload("res://Inventory/slot.tscn")
 
-var selected_slot : int = 1
+var selected_slot : int = 0
 
 @onready var h_box_container: HBoxContainer = $MarginContainer/HBoxContainer
 @onready var selected: Sprite2D = $MarginContainer/Selected
@@ -22,19 +22,23 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		selected_slot = event.keycode - KEY_1
 		set_selected()
 
-
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				hot_bar_use.emit(selected_slot)
-			MOUSE_BUTTON_RIGHT:
-				pass
+	if event.is_action_pressed("use"):
+		hot_bar_use.emit(selected_slot)
+
+	if event.is_action_pressed("scroll_down"):
+		selected_slot += 1
+		set_selected()
+	elif event.is_action_pressed("scroll_up"):
+		selected_slot -= 1
+		set_selected()
 
 func set_selected() -> void:
-	var slots : Array
-	for child in h_box_container.get_children():
-		slots.append(child)
+	var slots : Array = h_box_container.get_children()
+	if selected_slot > slots.size() - 1:
+		selected_slot = 0
+	elif selected_slot < 0:
+		selected_slot = slots.size() - 1
 	selected.position = slots[selected_slot].position + Vector2(40,40)
 
 func populate_hot_bar(inventory_data: InventoryData) -> void:

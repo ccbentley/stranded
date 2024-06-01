@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="InventoryData" load_steps=9 format=3 uid="uid://bnxpj0puqauvh"]
 
 [ext_resource type="Script" path="res://Inventory/inventory_data.gd" id="1_2tn4t"]
-[ext_resource type="Resource" uid="uid://blxmhp3ajixlm" path="res://Item/Items/health_potion.tres" id="2_jl7b5"]
-[ext_resource type="Resource" uid="uid://craa5p0feg3bh" path="res://Item/Items/sword.tres" id="2_nq58x"]
+[ext_resource type="Resource" uid="uid://blxmhp3ajixlm" path="res://Item/Items/Health Potion/health_potion.tres" id="2_jl7b5"]
+[ext_resource type="Resource" uid="uid://cnepkvwxe6frn" path="res://Item/Items/Sword/sword.tres" id="2_nq58x"]
 [ext_resource type="Script" path="res://Inventory/slot_data.gd" id="3_stwwk"]
-[ext_resource type="Resource" uid="uid://dgkg6ipudlxov" path="res://Item/Items/iron_helm.tres" id="4_nq7gi"]
+[ext_resource type="Resource" uid="uid://dgkg6ipudlxov" path="res://Item/Items/IronHelmet/iron_helm.tres" id="4_nq7gi"]
 
 [sub_resource type="Resource" id="Resource_k6w8c"]
 script = ExtResource("3_stwwk")
@@ -16,11 +16,11 @@ script = ExtResource("3_stwwk")
 item_data = ExtResource("4_nq7gi")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_2dhfj"]
+[sub_resource type="Resource" id="Resource_28bqu"]
 script = ExtResource("3_stwwk")
 item_data = ExtResource("2_nq58x")
 quantity = 1
 
 [resource]
 script = ExtResource("1_2tn4t")
-slot_datas = Array[ExtResource("3_stwwk")]([SubResource("Resource_k6w8c"), SubResource("Resource_scbx0"), SubResource("Resource_2dhfj"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("3_stwwk")]([SubResource("Resource_k6w8c"), SubResource("Resource_scbx0"), SubResource("Resource_28bqu"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])

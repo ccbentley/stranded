@@ -6,5 +6,5 @@ class_name ItemData
 @export var stackable: bool = false
 @export var texture: Texture2D
 
-func use(target) -> void:
+func use(_target) -> void:
 	pass

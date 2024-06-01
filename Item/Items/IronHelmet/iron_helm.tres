@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_kxs5m")
-defnce = 1
+defence = 0
+equip_type = ""
 name = "Iron Helmet"
 description = "Protect noggin"
 stackable = false
