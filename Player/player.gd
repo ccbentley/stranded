@@ -1,8 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+#Custom Components
 @onready var hitbox_component = $HitboxComponent
 @onready var health_component = $HealthComponent
+@onready var attack_component = $AttackComponent
 
 @export var inventory_data: InventoryData
 @export var equip_inventory_data: InventoryDataEquip
@@ -18,6 +20,11 @@ extends CharacterBody2D
 #Action States
 @onready var player_no_action_state = $ActionStateMachine/PlayerNoActionState as PlayerNoActionState
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
+
+@onready var on_hand: Sprite2D = $OnHand
+
+#Timers
+@onready var attack_cooldown_timer: Timer = $AttackCooldown
 
 #Player stats
 const MAX_SPEED : int = 90
@@ -63,10 +70,21 @@ func get_drop_position() -> Vector2:
 	return self.global_position + direction
 
 func heal(heal_value: int) -> void:
-	$HealthComponent.health += heal_value
+	health_component.health += heal_value
 
-func try_attack(attack_cooldown: int, attack_range: int) -> bool:
-	return true
+func try_attack() -> bool:
+	return attack_cooldown_timer.time_left <= 0
 
-func attack(attack_damage: int, attack_knockback: int) -> void:
+func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float) -> void:
+	attack_cooldown_timer.start(attack_cooldown)
+	var attack = Attack.new()
+	attack.attack_damage = attack_damage
+	attack.attack_knockback = attack_knockback
+	attack.attack_position  = global_position
+	attack.attack_stun_time = attack_stun_time
+	attack_component.set_attack_range(attack_range, is_facing_right)
+	attack_component.attack(attack)
 	print("attacked with: ", attack_damage, " ", attack_knockback)
+
+func display_on_hand(item_data: ItemData):
+	on_hand.texture = item_data.texture

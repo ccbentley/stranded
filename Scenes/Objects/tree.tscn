@@ -24,6 +24,7 @@ y_sort_enabled = true
 texture = ExtResource("1_vtvgx")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_pl3hv")]
+MAX_HEALTH = 10.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_2jwj5")]
 health_component = NodePath("../HealthComponent")

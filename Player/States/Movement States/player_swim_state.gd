@@ -1,10 +1,8 @@
-class_name PlayerAttackState
+class_name PlayerSwimState
 extends State
 
 @export var actor : Player
 @export var anim : AnimatedSprite2D
-
-signal player_attack_finished
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -15,5 +13,5 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	set_physics_process(false)
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
 	pass

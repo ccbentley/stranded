@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=23 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Texture2D" uid="uid://c8uamh6sibu3h" path="res://Art/Nature Pixels V2/Remake/Tiles/Nature.png" id="1_no5ay"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_uw73h"]
@@ -11,12 +11,10 @@
 [ext_resource type="Script" path="res://Inventory/inventory_data.gd" id="8_0i1ge"]
 [ext_resource type="Script" path="res://Inventory/slot_data.gd" id="10_3y0n4"]
 [ext_resource type="Script" path="res://Item/item_data.gd" id="10_svqw4"]
-[ext_resource type="PackedScene" uid="uid://cqfpj7wumfjvp" path="res://Item/Pickup/pickup.tscn" id="11_uxomt"]
 [ext_resource type="Texture2D" uid="uid://bv308y0rhkwc0" path="res://Art/White.png" id="11_xjcok"]
 [ext_resource type="Script" path="res://Inventory/inventory_interface.gd" id="12_5ileu"]
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://Inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://Inventory/slot.tscn" id="14_fq4si"]
-[ext_resource type="Resource" uid="uid://cnepkvwxe6frn" path="res://Item/Items/Sword/sword.tres" id="14_km0xo"]
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://Inventory/hot_bar_inventory.tscn" id="15_sa7if"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ila1"]
@@ -1029,11 +1027,6 @@ quantity = 1
 script = ExtResource("8_0i1ge")
 slot_datas = Array[ExtResource("10_3y0n4")]([SubResource("Resource_8u53p"), null, null, null, null, null])
 
-[sub_resource type="Resource" id="Resource_w5dda"]
-script = ExtResource("10_3y0n4")
-item_data = ExtResource("14_km0xo")
-quantity = 1
-
 [node name="World" type="Node2D"]
 script = ExtResource("1_uw73h")
 
@@ -1065,57 +1058,59 @@ equip_inventory_data = SubResource("Resource_aiun2")
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Tree2" type="Sprite2D" parent="."]
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree2" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(-216, -144)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree3" type="Sprite2D" parent="."]
+[node name="Tree3" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(-158, -168)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree4" type="Sprite2D" parent="."]
+[node name="Tree4" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(65, -120)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree5" type="Sprite2D" parent="."]
+[node name="Tree5" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(-71, -218)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree6" type="Sprite2D" parent="."]
+[node name="Tree6" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(-232, 22)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree7" type="Sprite2D" parent="."]
+[node name="Tree7" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(201, -104)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree8" type="Sprite2D" parent="."]
+[node name="Tree8" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(-115, 3)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree10" parent="." instance=ExtResource("5_a2o2n")]
+[node name="Tree10" parent="Trees" instance=ExtResource("5_a2o2n")]
 
-[node name="Tree11" type="Sprite2D" parent="."]
+[node name="Tree11" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(141, -19)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_61270")
 
-[node name="Tree12" type="Sprite2D" parent="."]
+[node name="Tree12" type="Sprite2D" parent="Trees"]
 y_sort_enabled = true
 position = Vector2(50, 118)
 scale = Vector2(1.5, 1.5)
@@ -1124,10 +1119,6 @@ texture = ExtResource("3_61270")
 [node name="Chest" parent="." instance=ExtResource("7_5j5bh")]
 position = Vector2(-81, 41)
 inventory_data = SubResource("Resource_csm5f")
-
-[node name="Pickup" parent="." instance=ExtResource("11_uxomt")]
-position = Vector2(39, 39)
-slot_data = SubResource("Resource_w5dda")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
