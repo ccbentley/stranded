@@ -1161,11 +1161,12 @@ layout_mode = 0
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="HotBarInventory" parent="UI" instance=ExtResource("15_sa7if")]
+[node name="HotBarInventory" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("15_sa7if")]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 430.0
 offset_bottom = 91.0
+player = NodePath("../../Player")
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

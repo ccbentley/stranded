@@ -130,6 +130,7 @@ script = ExtResource("11_76vsd")
 script = ExtResource("13_5c8o8")
 
 [node name="OnHand" type="Sprite2D" parent="."]
+position = Vector2(6, 2)
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true

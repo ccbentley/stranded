@@ -86,5 +86,5 @@ func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: fl
 	attack_component.attack(attack)
 	print("attacked with: ", attack_damage, " ", attack_knockback)
 
-func display_on_hand(item_data: ItemData):
-	on_hand.texture = item_data.texture
+func display_on_hand(texture):
+	on_hand.texture = texture

@@ -5,6 +5,9 @@ signal hot_bar_use(index: int)
 const Slot = preload("res://Inventory/slot.tscn")
 
 var selected_slot : int = 0
+var _slot_datas
+
+@export var player : CharacterBody2D
 
 @onready var h_box_container: HBoxContainer = $MarginContainer/HBoxContainer
 @onready var selected: Sprite2D = $MarginContainer/Selected
@@ -41,6 +44,11 @@ func set_selected() -> void:
 		selected_slot = slots.size() - 1
 	selected.position = slots[selected_slot].position + Vector2(40,40)
 
+	if _slot_datas[selected_slot]:
+		player.display_on_hand(_slot_datas[selected_slot].item_data.texture)
+	else:
+		player.display_on_hand(null)
+
 func populate_hot_bar(inventory_data: InventoryData) -> void:
 	for child in h_box_container.get_children():
 		child.queue_free()
@@ -51,3 +59,6 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 
 		if slot_data:
 			slot.set_slot_data(slot_data)
+
+	_slot_datas = inventory_data.slot_datas.slice(0,6)
+	set_selected()
