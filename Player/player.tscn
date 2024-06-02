@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=21 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -73,44 +73,6 @@ size = Vector2(10, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
 size = Vector2(10, 19)
 
-[sub_resource type="GDScript" id="GDScript_oylxb"]
-script/source = "extends Node2D
-
-var current_index : int = 0
-var inventory = {}
-
-func _ready():
-	for i in range(6):
-		inventory[i] = null
-
-func reset():
-	var items = get_children()
-	for item in items:
-		item.hide()
-		
-func show_item(index):
-	if inventory[index] == null:
-		reset()
-		return
-	inventory[index].show()
-
-func _on_hotbar_index(i = current_index):
-	reset()
-	show_item(i)
-	current_index = i
-
-func _on_child_entered_tree(node):
-	var index = owner.find_child(\"Hotbar\").new_index
-	inventory[index] = node
-	_on_hotbar_index()
-
-func swap(i,j):
-	var temp = inventory[i]
-	inventory[i] = inventory[j]
-	inventory[j] = temp
-	_on_hotbar_index()
-"
-
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -157,8 +119,3 @@ script = ExtResource("11_76vsd")
 
 [node name="PlayerNoActionState" type="Node" parent="ActionStateMachine"]
 script = ExtResource("13_5c8o8")
-
-[node name="Items" type="Node2D" parent="."]
-script = SubResource("GDScript_oylxb")
-
-[connection signal="child_entered_tree" from="Items" to="Items" method="_on_child_entered_tree"]

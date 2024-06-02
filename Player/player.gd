@@ -20,7 +20,8 @@ extends CharacterBody2D
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
 
 #Player stats
-const max_speed : int = 90
+const MAX_SPEED : int = 90
+var max_speed : int = MAX_SPEED
 const accel : int = 1500
 const friction : int = 1000
 
@@ -63,3 +64,9 @@ func get_drop_position() -> Vector2:
 
 func heal(heal_value: int) -> void:
 	$HealthComponent.health += heal_value
+
+func try_attack(attack_cooldown: int, attack_range: int) -> bool:
+	return true
+
+func attack(attack_damage: int, attack_knockback: int) -> void:
+	print("attacked with: ", attack_damage, " ", attack_knockback)

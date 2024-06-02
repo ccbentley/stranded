@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_uw73h"]
 [ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_rs7gc"]
 [ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://Art/Nature Pixels V2/Remake/Trees/Tree2.png" id="3_61270"]
-[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://Inventory/test_inv.tres" id="4_e8g6s"]
+[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://Inventory/player_inventory.tres" id="4_e8g6s"]
 [ext_resource type="PackedScene" uid="uid://dnj62ts5tdlcl" path="res://Scenes/Objects/tree.tscn" id="5_a2o2n"]
 [ext_resource type="Script" path="res://Inventory/inventory_data_equip.gd" id="5_i2frv"]
 [ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://Scenes/Objects/chest.tscn" id="7_5j5bh"]

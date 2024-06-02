@@ -10,14 +10,14 @@ signal player_stopped_moving
 
 func _ready() -> void:
 	set_physics_process(false)
-	
+
 func _enter_state() -> void:
 	set_physics_process(true)
 	anim.play("move")
-	
+
 func _exit_state() -> void:
 	set_physics_process(false)
-	
+
 func _physics_process(delta) -> void:
 	input = actor.get_input()
 	#Exits state if there is no move input
