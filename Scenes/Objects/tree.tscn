@@ -1,11 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=9 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://Art/Nature Pixels V2/Remake/Trees/Tree2.png" id="1_vtvgx"]
+[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://Item/Items/Materials/wood.tres" id="3_1i03o"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_2jwj5"]
+[ext_resource type="Script" path="res://Inventory/slot_data.gd" id="4_ex1va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
 size = Vector2(12.6667, 9.33334)
+
+[sub_resource type="Resource" id="Resource_oaaju"]
+script = ExtResource("4_ex1va")
+item_data = ExtResource("3_1i03o")
+quantity = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8tvl"]
 size = Vector2(12.6667, 26.6667)
@@ -24,7 +31,7 @@ y_sort_enabled = true
 texture = ExtResource("1_vtvgx")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_pl3hv")]
-MAX_HEALTH = 10.0
+pickup_data = SubResource("Resource_oaaju")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_2jwj5")]
 health_component = NodePath("../HealthComponent")

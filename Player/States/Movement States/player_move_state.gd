@@ -30,8 +30,6 @@ func _physics_process(delta) -> void:
 	actor.move_and_slide()
 	#Changes player facing direction
 	if input.x < 0:
-		anim.flip_h = true
 		actor.is_facing_right = false
 	elif input.x > 0:
-		anim.flip_h = false
 		actor.is_facing_right = true

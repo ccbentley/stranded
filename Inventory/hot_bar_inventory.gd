@@ -45,9 +45,9 @@ func set_selected() -> void:
 	selected.position = slots[selected_slot].position + Vector2(40,40)
 
 	if _slot_datas[selected_slot]:
-		player.display_on_hand(_slot_datas[selected_slot].item_data.texture)
+		player.display_on_hand(_slot_datas[selected_slot].item_data.texture, _slot_datas[selected_slot].item_data.held_offset)
 	else:
-		player.display_on_hand(null)
+		player.display_on_hand(null, Vector2.ZERO)
 
 func populate_hot_bar(inventory_data: InventoryData) -> void:
 	for child in h_box_container.get_children():

@@ -18,6 +18,11 @@ boot_splash/show_image=false
 [autoload]
 
 PlayerManager="*res://Player/player_manager.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [filesystem]
 

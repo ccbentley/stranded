@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 #Custom Components
 @onready var hitbox_component = $HitboxComponent
 @onready var health_component = $HealthComponent
@@ -22,6 +24,8 @@ extends CharacterBody2D
 @onready var player_attack_state = $ActionStateMachine/PlayerAttackState as PlayerAttackState
 
 @onready var on_hand: Sprite2D = $OnHand
+@onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var held_offset: Vector2 = Vector2.ZERO
 
 #Timers
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
@@ -34,7 +38,18 @@ const friction : int = 1000
 
 var input : Vector2 = Vector2.ZERO
 
-var is_facing_right : bool = false
+var is_facing_right : bool = false:
+	set(value):
+		if value:
+			player_sprite.flip_h = false
+			on_hand.flip_h = false
+			on_hand.position.x = 7
+			on_hand.offset.x = held_offset.x
+		else:
+			player_sprite.flip_h = true
+			on_hand.flip_h = true
+			on_hand.position.x = -7
+			on_hand.offset.x = -held_offset.x
 
 signal toggle_inventory
 
@@ -84,7 +99,16 @@ func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: fl
 	attack.attack_stun_time = attack_stun_time
 	attack_component.set_attack_range(attack_range, is_facing_right)
 	attack_component.attack(attack)
-	print("attacked with: ", attack_damage, " ", attack_knockback)
+	animation_player.play("melee_attack")
 
-func display_on_hand(texture):
+func ranged_attack(attack_cooldown, attack_damage, attack_knockback, attack_stun_time):
+	attack_cooldown_timer.start(attack_cooldown)
+
+
+func display_on_hand(texture: Texture2D, _held_offset: Vector2):
 	on_hand.texture = texture
+	held_offset = _held_offset
+	on_hand.offset = held_offset
+
+func _physics_process(_delta: float) -> void:
+	on_hand.look_at(get_global_mouse_position())

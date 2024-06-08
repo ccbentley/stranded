@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataConsumable" load_steps=3 format=3 uid="uid://blxmhp3ajixlm"]
 
 [ext_resource type="Script" path="res://Item/item_data_consumable.gd" id="1_uyc5f"]
-[ext_resource type="Texture2D" uid="uid://bu7liyl0hkii4" path="res://Art/Exotic Swords.png" id="2_nun61"]
+[ext_resource type="Texture2D" uid="uid://c3o1lbfeeybe5" path="res://Art/Icon Pack/potion_03a.png" id="2_xamk8"]
 
 [resource]
 script = ExtResource("1_uyc5f")
@@ -9,4 +9,5 @@ heal_value = 1
 name = "Health Potion"
 description = "Made with no artifical sweeteners or colors"
 stackable = true
-texture = ExtResource("2_nun61")
+texture = ExtResource("2_xamk8")
+held_offset = Vector2(0, 0)

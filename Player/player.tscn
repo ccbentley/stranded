@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=27 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Player/States/Action States/player_attack_state.gd" id="11_76vsd"]
 [ext_resource type="Script" path="res://Player/States/action_state_machine.gd" id="11_epdro"]
 [ext_resource type="Script" path="res://Player/States/Action States/player_no_action_state.gd" id="13_5c8o8"]
+[ext_resource type="Texture2D" uid="uid://574h45iyvygm" path="res://Art/Icon Pack/bow_01a.png" id="14_tm3pu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -75,6 +76,43 @@ size = Vector2(10, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
 size = Vector2(10, 19)
 
+[sub_resource type="Animation" id="Animation_ltw5y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OnHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jnbma"]
+resource_name = "melee_attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OnHand:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0472, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66n73"]
+_data = {
+"RESET": SubResource("Animation_ltw5y"),
+"melee_attack": SubResource("Animation_jnbma")
+}
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -82,7 +120,7 @@ script = ExtResource("1_qsibb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vu2q5")
-animation = &"move"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -130,7 +168,14 @@ script = ExtResource("11_76vsd")
 script = ExtResource("13_5c8o8")
 
 [node name="OnHand" type="Sprite2D" parent="."]
-position = Vector2(6, 2)
+position = Vector2(7, 3)
+texture = ExtResource("14_tm3pu")
+offset = Vector2(7, -6.5)
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_66n73")
+}

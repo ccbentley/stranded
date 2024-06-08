@@ -8,8 +8,8 @@ var _attack : Attack
 func _ready() -> void:
 	collision_shape.disabled = true
 
-func attack(attack: Attack) -> void:
-	_attack = attack
+func attack(attack_stats: Attack) -> void:
+	_attack = attack_stats
 	collision_shape.disabled = false
 	await get_tree().create_timer(0.1).timeout
 	collision_shape.disabled = true
