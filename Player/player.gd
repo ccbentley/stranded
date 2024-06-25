@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+@export var tile_map: TileMap
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 #Custom Components
@@ -18,6 +20,7 @@ extends CharacterBody2D
 #Movement States
 @onready var player_idle_state = $MovementStateMachine/PlayerIdleState as PlayerIdleState
 @onready var player_moving_state = $MovementStateMachine/PlayerMovingState as PlayerMovingState
+@onready var player_swim_state = $MovementStateMachine/PlayerSwimState as PlayerSwimState
 
 #Action States
 @onready var player_no_action_state = $ActionStateMachine/PlayerNoActionState as PlayerNoActionState
@@ -32,11 +35,17 @@ var held_offset: Vector2 = Vector2.ZERO
 
 #Player stats
 const MAX_SPEED : int = 90
+const SWIM_SPEED : int = 50
 var max_speed : int = MAX_SPEED
 const accel : int = 1500
 const friction : int = 1000
 
 var input : Vector2 = Vector2.ZERO
+
+var player_tile: Vector2i
+
+func _physics_process(delta: float) -> void:
+	player_tile = tile_map.local_to_map(global_position)
 
 var is_facing_right : bool = false:
 	set(value):
@@ -63,6 +72,8 @@ func _ready() -> void:
 	PlayerManager.player = self
 	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
 	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
+	player_moving_state.player_entered_water.connect(msm.change_state.bind(player_swim_state))
+	player_swim_state.player_exited_water.connect(msm.change_state.bind(player_moving_state))
 
 #Returns move input as a Vector2
 func get_input() -> Vector2:
@@ -104,11 +115,18 @@ func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: fl
 func ranged_attack(attack_cooldown, attack_damage, attack_knockback, attack_stun_time):
 	attack_cooldown_timer.start(attack_cooldown)
 
+func set_speed(speed) -> void:
+	max_speed = speed
+	#TODO Change player velocity etc so it slows player down
 
 func display_on_hand(texture: Texture2D, _held_offset: Vector2):
 	on_hand.texture = texture
 	held_offset = _held_offset
 	on_hand.offset = held_offset
 
-func _physics_process(_delta: float) -> void:
-	on_hand.look_at(get_global_mouse_position())
+func is_in_water() -> bool:
+	var tile_data := tile_map.get_cell_tile_data(1,player_tile)
+	if tile_data:
+		return tile_data.get_custom_data("can_swim")
+	else:
+		return false
