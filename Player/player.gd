@@ -47,18 +47,20 @@ var player_tile: Vector2i
 func _physics_process(delta: float) -> void:
 	player_tile = tile_map.local_to_map(global_position)
 
-var is_facing_right : bool = false:
+var is_facing_right : bool = true:
 	set(value):
 		if value:
 			player_sprite.flip_h = false
 			on_hand.flip_h = false
 			on_hand.position.x = 7
 			on_hand.offset.x = held_offset.x
+			is_facing_right = true
 		else:
 			player_sprite.flip_h = true
 			on_hand.flip_h = true
 			on_hand.position.x = -7
 			on_hand.offset.x = -held_offset.x
+			is_facing_right = false
 
 signal toggle_inventory
 

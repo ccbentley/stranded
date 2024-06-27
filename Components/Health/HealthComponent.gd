@@ -4,7 +4,7 @@ class_name HealthComponent
 @export var MAX_HEALTH : float = 10.0
 var health : float
 
-@export var pickup_data : SlotData
+@export var loot_table: Array[LootData] = []
 
 const PICKUP = preload("res://Item/Pickup/pickup.tscn")
 
@@ -15,10 +15,12 @@ func damage(attack: Attack) -> void:
 	health -= attack.attack_damage
 
 	if health <= 0:
-		if pickup_data:
-			var pick_up = PICKUP.instantiate()
-			pick_up.slot_data = pickup_data
-			add_child(pick_up)
-			pick_up.global_position = get_parent().global_position
-			pick_up.reparent($"../..")
-		get_parent().queue_free()
+		#TODO Drop based on random chance
+		if loot_table:
+			for drop in loot_table.size():
+				var pick_up = PICKUP.instantiate()
+				pick_up.slot_data = loot_table[drop]
+				call_deferred("add_child", pick_up)
+				pick_up.call_deferred("set", "global_position", get_parent().global_position)
+				pick_up.call_deferred("reparent", $"../..")
+			get_parent().call_deferred("queue_free")
