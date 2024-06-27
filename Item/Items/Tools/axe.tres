@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDataTool" load_steps=3 format=3 uid="uid://djbx2tmam6tmv"]
+
+[ext_resource type="Script" path="res://Item/item_data_tool.gd" id="1_raahp"]
+[ext_resource type="Texture2D" uid="uid://q0cx8v3ylkuo" path="res://Art/Icon Pack/staff_02ab.png" id="2_rh4su"]
+
+[resource]
+script = ExtResource("1_raahp")
+attack_damage = 3.0
+attack_cooldown = 0.5
+attack_range = 5.0
+break_material = 2
+name = "Wooden Axe"
+description = "Chop Chop"
+stackable = false
+texture = ExtResource("2_rh4su")
+held_offset = Vector2(0, 0)

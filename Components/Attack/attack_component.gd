@@ -15,7 +15,7 @@ func attack(attack_stats: Attack) -> void:
 	collision_shape.disabled = true
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is HitboxComponent:
+	if area is HitboxComponent and area.type & _attack.material_type:
 		area.damage(_attack)
 
 func set_attack_range(attack_range: float, facing_right: bool) -> void:

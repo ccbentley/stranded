@@ -9,4 +9,4 @@ class_name ItemDataMeleeWeapon
 
 func use(target) -> void:
 	if target.try_attack():
-		target.melee_attack(attack_range, attack_cooldown, attack_damage, attack_knockback, attack_stun_time)
+		target.melee_attack(attack_range, attack_cooldown, attack_damage, attack_knockback, attack_stun_time, 0)

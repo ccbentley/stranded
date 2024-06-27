@@ -103,13 +103,14 @@ func heal(heal_value: int) -> void:
 func try_attack() -> bool:
 	return attack_cooldown_timer.time_left <= 0
 
-func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float) -> void:
+func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float, material_type) -> void:
 	attack_cooldown_timer.start(attack_cooldown)
 	var attack = Attack.new()
 	attack.attack_damage = attack_damage
 	attack.attack_knockback = attack_knockback
 	attack.attack_position  = global_position
 	attack.attack_stun_time = attack_stun_time
+	attack.material_type = material_type
 	attack_component.set_attack_range(attack_range, is_facing_right)
 	attack_component.attack(attack)
 	animation_player.play("melee_attack")
