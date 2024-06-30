@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce30hjwcituiy"]
+[gd_scene load_steps=4 format=3 uid="uid://ce30hjwcituiy"]
 
 [ext_resource type="Script" path="res://Inventory/hot_bar_inventory.gd" id="1_gycws"]
-[ext_resource type="Texture2D" uid="uid://bv308y0rhkwc0" path="res://Art/White.png" id="2_ge5w1"]
+[ext_resource type="Texture2D" uid="uid://b5yxadrl4lw2h" path="res://Art/Pixel UI Pack/07.png" id="2_acub1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8wd7"]
+atlas = ExtResource("2_acub1")
+region = Rect2(96, 176, 32, 32)
 
 [node name="HotBarInventory" type="PanelContainer"]
 offset_right = 40.0
@@ -21,6 +25,6 @@ layout_mode = 2
 [node name="Selected" type="Sprite2D" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.27451)
 z_index = 1
-position = Vector2(39, 41)
-scale = Vector2(9, 9.125)
-texture = ExtResource("2_ge5w1")
+position = Vector2(20, 20)
+scale = Vector2(2.75, 2.75)
+texture = SubResource("AtlasTexture_t8wd7")

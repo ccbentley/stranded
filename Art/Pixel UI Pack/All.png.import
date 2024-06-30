@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu7liyl0hkii4"
-path="res://.godot/imported/Exotic Swords.png-311b9f7250bdca64a84d190b433c2340.ctex"
+uid="uid://c2k1e08j3wcyn"
+path="res://.godot/imported/All.png-0718538733c1eb756b6884b717bf0947.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Exotic Swords.png"
-dest_files=["res://.godot/imported/Exotic Swords.png-311b9f7250bdca64a84d190b433c2340.ctex"]
+source_file="res://Art/Pixel UI Pack/All.png"
+dest_files=["res://.godot/imported/All.png-0718538733c1eb756b6884b717bf0947.ctex"]
 
 [params]
 

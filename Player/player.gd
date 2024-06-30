@@ -4,6 +4,7 @@ extends CharacterBody2D
 var save_file_path = "user://save/"
 var save_file_name = "PlayerSave.tres"
 var inventory_save_file_name = "PlayerInventorySave.tres"
+var equip_inventory_save_file_name = "PlayerEquipInventorySave.tres"
 var playerData = PlayerData.new()
 
 @export var tile_map: TileMap
@@ -54,15 +55,17 @@ signal load_inventory
 func load_data():
 	playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	inventory_data = ResourceLoader.load(save_file_path + inventory_save_file_name).duplicate(true)
+	equip_inventory_data = ResourceLoader.load(save_file_path + equip_inventory_save_file_name).duplicate(true)
 	load_inventory.emit()
-	print("Player Data Loaded From " + save_file_path + save_file_name)
+	print("Player Data Loaded From " + save_file_path)
 
 func save_data():
 	ResourceSaver.save(playerData, save_file_path + save_file_name)
 	ResourceSaver.save(inventory_data, save_file_path + inventory_save_file_name)
-	print("Player Data Saved To " + save_file_path + save_file_name)
+	ResourceSaver.save(equip_inventory_data, save_file_path + equip_inventory_save_file_name)
+	print("Player Data Saved To " + save_file_path)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_tile = tile_map.local_to_map(global_position)
 
 var is_facing_right : bool = true:
