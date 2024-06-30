@@ -8,13 +8,18 @@ const PickUp = preload("res://Item/Pickup/pickup.tscn")
 
 func _ready() -> void:
 	player.toggle_inventory.connect(toggle_inventory_interface)
-	inventory_interface.set_player_inventory_data(player.inventory_data)
-	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
+	player.load_inventory.connect(load_inventory)
 	inventory_interface.force_close.connect(toggle_inventory_interface)
-	hot_bar_inventory.set_inventory_data(player.inventory_data)
+
+	load_inventory()
 
 	for node in get_tree().get_nodes_in_group("external_inventory"):
 		node.toggle_inventory.connect(toggle_inventory_interface)
+
+func load_inventory():
+	inventory_interface.set_player_inventory_data(player.inventory_data)
+	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
+	hot_bar_inventory.set_inventory_data(player.inventory_data)
 
 func toggle_inventory_interface(external_inventory_owner = null) -> void:
 	inventory_interface.visible = not inventory_interface.visible

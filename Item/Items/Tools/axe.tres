@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="ItemDataTool" load_steps=3 format=3 uid="uid://djbx2tmam6tmv"]
+[gd_resource type="Resource" script_class="ItemDataMeleeWeapon" load_steps=3 format=3 uid="uid://d0s76x510hhta"]
 
-[ext_resource type="Script" path="res://Item/item_data_tool.gd" id="1_raahp"]
-[ext_resource type="Texture2D" uid="uid://q0cx8v3ylkuo" path="res://Art/Icon Pack/staff_02ab.png" id="2_rh4su"]
+[ext_resource type="Script" path="res://Item/item_data_melee_weapon.gd" id="1_746dl"]
+[ext_resource type="Texture2D" uid="uid://p27bivqt1cfa" path="res://Art/Icon Pack/sword_03b.png" id="2_05gvb"]
 
 [resource]
-script = ExtResource("1_raahp")
+script = ExtResource("1_746dl")
 attack_damage = 3.0
+attack_knockback = 0.0
 attack_cooldown = 0.5
 attack_range = 5.0
+attack_stun_time = 0.0
 break_material = 2
-name = "Wooden Axe"
-description = "Chop Chop"
+name = "Axe"
+description = "Chop chop"
 stackable = false
-texture = ExtResource("2_rh4su")
+texture = ExtResource("2_05gvb")
 held_offset = Vector2(0, 0)

@@ -1,6 +1,11 @@
 class_name Player
 extends CharacterBody2D
 
+var save_file_path = "user://save/"
+var save_file_name = "PlayerSave.tres"
+var inventory_save_file_name = "PlayerInventorySave.tres"
+var playerData = PlayerData.new()
+
 @export var tile_map: TileMap
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -44,6 +49,19 @@ var input : Vector2 = Vector2.ZERO
 
 var player_tile: Vector2i
 
+signal load_inventory
+
+func load_data():
+	playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	inventory_data = ResourceLoader.load(save_file_path + inventory_save_file_name).duplicate(true)
+	load_inventory.emit()
+	print("Player Data Loaded From " + save_file_path + save_file_name)
+
+func save_data():
+	ResourceSaver.save(playerData, save_file_path + save_file_name)
+	ResourceSaver.save(inventory_data, save_file_path + inventory_save_file_name)
+	print("Player Data Saved To " + save_file_path + save_file_name)
+
 func _physics_process(delta: float) -> void:
 	player_tile = tile_map.local_to_map(global_position)
 
@@ -69,13 +87,22 @@ func _unhandled_input(_event: InputEvent) -> void:
 		toggle_inventory.emit()
 	if Input.is_action_just_pressed("interact"):
 		interact()
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()
 
 func _ready() -> void:
+	verify_save_directory(save_file_path)
+
 	PlayerManager.player = self
 	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
 	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
 	player_moving_state.player_entered_water.connect(msm.change_state.bind(player_swim_state))
 	player_swim_state.player_exited_water.connect(msm.change_state.bind(player_moving_state))
+
+func verify_save_directory(path: String):
+	DirAccess.make_dir_absolute(path)
 
 #Returns move input as a Vector2
 func get_input() -> Vector2:
