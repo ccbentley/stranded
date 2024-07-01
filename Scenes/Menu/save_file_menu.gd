@@ -7,7 +7,8 @@ class_name SaveFileMenu
 
 @export var worldData: WorldData
 const save_file_path: String = "user://save/"
-const save_file_name: String = "WorldData.tres"
+const world_save_file_name: String = "WorldData.tres"
+const player_save_file_name: String = "PlayerSave.tres"
 
 func _ready() -> void:
 	handle_connecting_signals()
@@ -22,6 +23,7 @@ func on_world_icon_pressed() -> void:
 
 func on_delete_pressed() -> void:
 	var world_save_file_path: String = save_file_path + worldData.world_name
-	DirAccess.remove_absolute(world_save_file_path + "/" + save_file_name)
+	DirAccess.remove_absolute(world_save_file_path + "/" + world_save_file_name)
+	DirAccess.remove_absolute(world_save_file_path + "/" + player_save_file_name)
 	DirAccess.remove_absolute(world_save_file_path)
 	get_parent().get_parent().get_parent().get_parent().get_parent().check_for_worlds()
