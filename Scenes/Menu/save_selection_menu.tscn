@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm75c0m4fkq0j"]
+
+[ext_resource type="Script" path="res://Scenes/Menu/save_selection_menu.gd" id="1_hh8c2"]
+
+[sub_resource type="SystemFont" id="SystemFont_04wkd"]
+font_names = PackedStringArray("Impact")
+subpixel_positioning = 0
+
+[node name="SaveSelectionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hh8c2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="SaveMenu" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 100
+
+[node name="SelectionMenu" type="ScrollContainer" parent="MarginContainer/SaveMenu"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SaveMenu/SelectionMenu"]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -48
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("SystemFont_04wkd")
+theme_override_font_sizes/font_size = 32
+text = "Save Selection"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+text = "Back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -48
+
+[node name="CreateWorldButton" type="Button" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Create New  World"

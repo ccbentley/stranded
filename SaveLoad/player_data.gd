@@ -2,10 +2,6 @@ extends Resource
 class_name PlayerData
 
 @export var health: int = 100
-@export var save_pos: Vector2
-
-func change_health(value: int):
-	health += value
-
-func update_pos(value: Vector2):
-	save_pos = value
+@export var position: Vector2
+@export var inventory_data: InventoryData
+@export var equip_inventory_data: InventoryDataEquip

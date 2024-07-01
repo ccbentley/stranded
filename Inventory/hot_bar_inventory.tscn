@@ -25,6 +25,5 @@ layout_mode = 2
 [node name="Selected" type="Sprite2D" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.27451)
 z_index = 1
-position = Vector2(20, 20)
 scale = Vector2(2.75, 2.75)
 texture = SubResource("AtlasTexture_t8wd7")
