@@ -11,7 +11,7 @@ signal exit_save_selection_menu
 const save_file_path: String = "user://save/"
 const save_file_name: String = "WorldData.tres"
 
-const SAVE_FILE_MENU = preload("res://Scenes/Menu/save_file_menu.tscn")
+const SAVE_FILE_MENU = preload("res://Menu/Play/save_file_menu.tscn")
 
 @onready var save_selection_menu: SaveSelectionMenu = $"."
 @onready var create_world_menu: CreateWorldMenu = $"../CreateWorldMenu"
