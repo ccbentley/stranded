@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://by4naatqr1mvd"]
+[gd_scene load_steps=8 format=3 uid="uid://by4naatqr1mvd"]
 
 [ext_resource type="Texture2D" uid="uid://cemgv5glprguq" path="res://Art/Background/OceanClouds.png" id="1_17aop"]
 [ext_resource type="Script" path="res://Scenes/Menu/main_menu.gd" id="1_a1l53"]
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://Scenes/Menu/save_selection_menu.tscn" id="3_j43pa"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://Scenes/Menu/create_world_menu.tscn" id="4_bvifd"]
+[ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://Scenes/Menu/options_menu.tscn" id="5_gno6i"]
 
 [sub_resource type="SystemFont" id="SystemFont_hspdq"]
 font_names = PackedStringArray("Impact")
@@ -81,12 +82,12 @@ theme_override_fonts/font = SubResource("SystemFont_twwmo")
 theme_override_font_sizes/font_size = 24
 text = "Play"
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_twwmo")
 theme_override_font_sizes/font_size = 24
-text = "Settings"
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 32)
@@ -100,5 +101,9 @@ visible = false
 layout_mode = 1
 
 [node name="CreateWorldMenu" parent="." instance=ExtResource("4_bvifd")]
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_gno6i")]
 visible = false
 layout_mode = 1

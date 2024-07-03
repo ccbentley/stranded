@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://42tvumhya8xe"]
+
+[node name="GlobalUI" type="CanvasLayer"]
+layer = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Alpha 0.0.1"
