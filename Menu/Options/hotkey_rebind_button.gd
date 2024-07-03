@@ -10,18 +10,22 @@ func _ready() -> void:
 	set_process_unhandled_key_input(false)
 	set_action_name()
 	set_text_for_key()
+	load_keybinds()
+
+func load_keybinds() -> void:
+	rebind_action_key(SettingsSaveManager.get_keybind(action_name))
 
 func set_action_name() -> void:
 	label.text = "Unassigned"
 
 	match action_name:
-		"left":
+		"move_left":
 			label.text = "Move Left"
-		"right":
+		"move_right":
 			label.text = "Move Right"
-		"up":
+		"move_up":
 			label.text = "Move Up"
-		"down":
+		"move_down":
 			label.text = "Move Down"
 		"inventory":
 			label.text = "Inventory"
@@ -31,10 +35,7 @@ func set_action_name() -> void:
 			label.text = "Interact"
 
 func set_text_for_key() -> void:
-	var action_events = InputMap.action_get_events(action_name)
-	var action_event = action_events[0]
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-
+	var action_keycode = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
 	button.text = "%s" % action_keycode
 
 func _on_button_toggled(toggled_on: bool) -> void:
@@ -60,6 +61,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
+
+	SettingsSaveManager.set_keybind(action_name, event)
 
 	set_process_unhandled_key_input(false)
 	set_text_for_key()

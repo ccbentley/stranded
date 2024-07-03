@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwiv31qfcgpp1"]
 
-[ext_resource type="Script" path="res://Scenes/Menu/save_file_menu.gd" id="1_a35m4"]
+[ext_resource type="Script" path="res://Menu/Play/save_file_menu.gd" id="1_a35m4"]
 [ext_resource type="Texture2D" uid="uid://watkf0rmdoeq" path="res://Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/White-Icon/Play.png" id="2_fp543"]
 [ext_resource type="Texture2D" uid="uid://c7k2h4ux1sv4f" path="res://Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/Black-Icon/Play.png" id="3_kqxkh"]
 [ext_resource type="Texture2D" uid="uid://bedm8v7aw1buk" path="res://Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/White-Icon/Cross.png" id="3_vmyia"]

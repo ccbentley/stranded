@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm75c0m4fkq0j"]
+[gd_scene load_steps=3 format=3 uid="uid://sic3jewj25no"]
 
-[ext_resource type="Script" path="res://Scenes/Menu/save_selection_menu.gd" id="1_hh8c2"]
+[ext_resource type="Script" path="res://Menu/Play/create_world_menu.gd" id="1_pytys"]
 
-[sub_resource type="SystemFont" id="SystemFont_04wkd"]
+[sub_resource type="SystemFont" id="SystemFont_wwqun"]
 font_names = PackedStringArray("Impact")
 subpixel_positioning = 0
 
-[node name="SaveSelectionMenu" type="Control"]
+[node name="CreateWorldMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hh8c2")
+script = ExtResource("1_pytys")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -27,25 +27,6 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="SaveMenu" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 100
-
-[node name="SelectionMenu" type="ScrollContainer" parent="MarginContainer/SaveMenu"]
-layout_mode = 2
-size_flags_horizontal = 4
-horizontal_scroll_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SaveMenu/SelectionMenu"]
-custom_minimum_size = Vector2(450, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 60
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -55,9 +36,9 @@ theme_override_constants/separation = -48
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_04wkd")
+theme_override_fonts/font = SubResource("SystemFont_wwqun")
 theme_override_font_sizes/font_size = 32
-text = "Save Selection"
+text = "CREATE WORLD"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -78,4 +59,30 @@ custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
-text = "Create New  World"
+text = "Create World"
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WorldName" type="LineEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "World Name"
+max_length = 20
+expand_to_text_length = true
+
+[node name="CharacterName" type="LineEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Character Name"
+max_length = 20
+expand_to_text_length = true
+
+[node name="Seed" type="LineEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Seed (Leave Blank For Random)"
+max_length = 20
+expand_to_text_length = true

@@ -10,5 +10,6 @@ func _ready() -> void:
 	set_process(false)
 
 func on_exit_pressed() -> void:
+	SettingsSaveManager.save_settings()
 	exit_options_menu.emit()
 	set_process(false)
