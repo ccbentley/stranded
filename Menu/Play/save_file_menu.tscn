@@ -34,6 +34,7 @@ custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_stretch_ratio = 8.53
 text = "World 1"
+autowrap_mode = 0
 
 [node name="DeleteWorldButton" type="TextureButton" parent="BoxContainer"]
 custom_minimum_size = Vector2(50, 50)

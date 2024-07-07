@@ -22,6 +22,9 @@ func handle_connecting_signals() -> void:
 	create_world_button.button_down.connect(on_create_world_pressed)
 
 func on_exit_pressed():
+	world_name.text = ""
+	character_name.text = ""
+	world_seed.text = ""
 	exit_create_world_menu.emit()
 	set_process(false)
 
@@ -30,7 +33,10 @@ func on_create_world_pressed() -> void:
 	if world_name.text != "" and character_name.text != "":
 		worldData.world_name = world_name.text
 		worldData.character_name = character_name.text
-		worldData.world_seed = int(world_seed.text)
+		if int(world_seed.text) == 0:
+			worldData.world_seed = randi()
+		else:
+			worldData.world_seed = int(world_seed.text)
 		var world_save_file_path: String = save_file_path + worldData.world_name + "/"
 		verify_save_directory(world_save_file_path)
 		ResourceSaver.save(worldData, world_save_file_path + save_file_name)

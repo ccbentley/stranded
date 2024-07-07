@@ -60,5 +60,5 @@ func add_world(file_name: String) -> void:
 	var save_file_menu = SAVE_FILE_MENU.instantiate()
 	v_box_container.add_child(save_file_menu)
 	save_file_menu.worldData = worldData.duplicate()
-	save_file_menu.world_name.text = worldData.world_name
+	save_file_menu.world_name.text = worldData.world_name + "\n" + str(worldData.world_seed)
 

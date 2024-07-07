@@ -35,8 +35,8 @@ var held_offset: Vector2 = Vector2.ZERO
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
 
 #Player stats
-const MAX_SPEED : int = 300
-const SWIM_SPEED : int = 200
+const MAX_SPEED : int = 90
+const SWIM_SPEED : int = 50
 var max_speed : int = MAX_SPEED
 const accel : int = 1500
 const friction : int = 1000

@@ -49,8 +49,12 @@ func _ready() -> void:
 		node.toggle_inventory.connect(toggle_inventory_interface)
 
 	verify_save_directory(world_save_file_path)
+
 	noise = noise_height_text.noise
 	tree_noise = noise_tree_text.noise
+
+	noise.seed = Global.worldData.world_seed
+	tree_noise.seed = randi()
 
 	save_game()
 
