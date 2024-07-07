@@ -19,7 +19,8 @@ func handle_connecting_signals() -> void:
 
 func on_world_icon_pressed() -> void:
 	Global.worldData = worldData.duplicate()
-	get_tree().change_scene_to_file("res://Scenes/Worlds/world.tscn")
+	Global.next_scene = "res://Scenes/Worlds/world.tscn"
+	get_tree().change_scene_to_packed(Global.loading_screen)
 
 func on_delete_pressed() -> void:
 	var world_save_file_path: String = save_file_path + worldData.world_name

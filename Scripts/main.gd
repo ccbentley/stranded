@@ -9,16 +9,14 @@ const PickUp = preload("res://Item/Pickup/pickup.tscn")
 const save_file_path: String = "user://save/"
 const player_save_file_name: String = "PlayerSave.tres"
 const world_save_file_name: String = "WorldData.tres"
-const world_file_name: String = "World.dat"
 var world_save_file_path: String = save_file_path + Global.worldData.world_name + "/"
 var playerData: PlayerData = PlayerData.new()
 
 @export var noise_height_text : NoiseTexture2D
+@export var noise_tree_text : NoiseTexture2D
 var noise : Noise
-var width : int = 4
-var height : int = 4
+var tree_noise : Noise
 @onready var tile_map: TileMap = $TileMap
-@onready var loaded: TileMap = $TileMap/Loaded
 var source_id : int = 0
 
 #Layers
@@ -35,6 +33,12 @@ var grass_tiles_arr : Array = []
 var terrain_sand_int : int = 0
 var terrain_grass_int : int = 1
 
+const TREE = preload("res://Scenes/Objects/tree.tscn")
+
+var player_chunk_pos
+var loaded_chunks = []
+var view_distance = 2
+
 func _ready() -> void:
 	player.toggle_inventory.connect(toggle_inventory_interface)
 	inventory_interface.force_close.connect(toggle_inventory_interface)
@@ -46,23 +50,21 @@ func _ready() -> void:
 
 	verify_save_directory(world_save_file_path)
 	noise = noise_height_text.noise
+	tree_noise = noise_tree_text.noise
 
-	if load_world() == false:
-		generate_world()
-	else:
-		load_world()
+	save_game()
 
 func generate_world() -> void:
-	for x in width:
-		for y in height:
+	for x in view_distance:
+		for y in view_distance:
 			generate_chunk(x, y)
 
 func generate_chunk(x_chunk, y_chunk) -> void:
 	#Checks if chunk is already generated
-	if loaded.get_cell_source_id(0, Vector2i(x_chunk, y_chunk)) != -1:
+	if loaded_chunks.has(Vector2i(x_chunk, y_chunk)):
 		return
-	loaded.set_cell(0, Vector2i(x_chunk, y_chunk), 0, Vector2i(0, 0))
-
+	if not loaded_chunks.has(Vector2i(x_chunk, y_chunk)):
+		loaded_chunks.append(Vector2i(x_chunk, y_chunk))
 	var expanded_sand_tiles_arr : Array = []
 	var expanded_grass_tiles_arr : Array = []
 	for _x in range(32):
@@ -70,13 +72,14 @@ func generate_chunk(x_chunk, y_chunk) -> void:
 			var x = _x + x_chunk * 32
 			var y = _y + y_chunk * 32
 			var noise_val : float = noise.get_noise_2d(x, y)
+			var tree_noise_val : float = tree_noise.get_noise_2d(x, y)
 			if noise_val > 0.3:
 				sand_tiles_arr.append(Vector2i(x, y))
 				# Add adjacent tiles to expanded_sand_tiles_arr
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
 						var adj_tile = Vector2i(x + dx, y + dy)
-						if not expanded_sand_tiles_arr.has(adj_tile):
+						if not expanded_sand_tiles_arr.has(adj_tile) and is_in_chunk(Vector2i(x_chunk, y_chunk), adj_tile):
 							expanded_sand_tiles_arr.append(adj_tile)
 			if noise_val > 0.4:
 				grass_tiles_arr.append(Vector2i(x, y))
@@ -84,46 +87,59 @@ func generate_chunk(x_chunk, y_chunk) -> void:
 				for dx in range(-1, 2):
 					for dy in range(-1, 2):
 						var adj_tile = Vector2i(x + dx, y + dy)
-						if not expanded_grass_tiles_arr.has(adj_tile):
+						if not expanded_grass_tiles_arr.has(adj_tile) and is_in_chunk(Vector2i(x_chunk, y_chunk), adj_tile):
 							expanded_grass_tiles_arr.append(adj_tile)
+				if tree_noise_val > 0.6:
+					var tree_obj = TREE.instantiate()
+					$Trees.add_child(tree_obj)
+					tree_obj.position = tile_map.map_to_local(Vector2i(x, y))
 			else:
 				if not expanded_sand_tiles_arr.has(Vector2i(x, y)) and not expanded_grass_tiles_arr.has(Vector2i(x, y)):
 					tile_map.set_cell(water_layer, Vector2(x, y), source_id, water_atlas)
-
 	tile_map.set_cells_terrain_connect(ground_1_layer, expanded_sand_tiles_arr, terrain_sand_int, 0)
 	tile_map.set_cells_terrain_connect(ground_2_layer, expanded_grass_tiles_arr, terrain_grass_int, 0)
 
-func save_world() -> void:
-	var save_file := FileAccess.open(world_save_file_path + world_file_name, FileAccess.WRITE)
-	for chunk in loaded.get_used_cells_by_id(0):
-		save_file.store_double(chunk.x)  # Assuming chunk coordinates are integers
-		save_file.store_double(chunk.y)
-		for x in range(32):
-			for y in range(32):
-				save_file.store_var(tile_map.get_cell_atlas_coords(water_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
-				save_file.store_var(tile_map.get_cell_atlas_coords(ground_1_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
-				save_file.store_var(tile_map.get_cell_atlas_coords(ground_2_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
-				save_file.store_var(tile_map.get_cell_atlas_coords(cliff_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
-				save_file.store_var(tile_map.get_cell_atlas_coords(environment_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
-	save_file.close()
+func is_in_chunk(chunk : Vector2i, tile_pos: Vector2i) -> bool:
+	#Calculate the bottom-right corner of the chunk
+	chunk = chunk * 32
+	var chunk_end = chunk + Vector2i(32, 32)
+	# Check if the position is within the chunk boundaries
+	return tile_pos.x >= chunk.x and tile_pos.x < chunk_end.x and tile_pos.y >= chunk.y and tile_pos.y < chunk_end.y
 
-func load_world() -> bool:
-	if not FileAccess.file_exists(world_save_file_path + world_file_name):
-		return false
-	var save_file := FileAccess.open(world_save_file_path + world_file_name, FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var chunk = Vector2i()
-		chunk.x = save_file.get_double()
-		chunk.y = save_file.get_double()
-		loaded.set_cell(0, chunk, 0, Vector2i(0, 0))
-		for x in range(32):
-			for y in range(32):
-				for layer in range(5):
-					tile_map.set_cell(layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32), 0, save_file.get_var())
-	save_file.close()
-	return true
+func clear_chunk(x_chunk, y_chunk) -> void:
+	for _x in range(32):
+		for _y in range(32):
+			var x = _x + x_chunk * 32
+			var y = _y + y_chunk * 32
+			tile_map.set_cell(water_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
+			tile_map.set_cell(ground_1_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
+			tile_map.set_cell(ground_2_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
+			tile_map.set_cell(cliff_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
+			tile_map.set_cell(environment_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 
-func load_inventory():
+func unload_distant_chunks(player_pos) -> void:
+	var unload_dist = view_distance
+	for chunk in loaded_chunks:
+		var dist_to_player = dist(chunk, player_chunk_pos)
+		if dist_to_player.x > unload_dist or dist_to_player.y > unload_dist:
+			clear_chunk(chunk.x, chunk.y)
+			loaded_chunks.erase(chunk)
+
+func _process(delta: float) -> void:
+	player_chunk_pos = tile_map.local_to_map(player.position) / 32
+	for dx in range(-view_distance, 2):
+		for dy in range(-view_distance, 2):
+			var adj_chunk = Vector2i(player_chunk_pos.x + dx, player_chunk_pos.y + dy)
+			generate_chunk(adj_chunk.x, adj_chunk.y)
+	unload_distant_chunks(player_chunk_pos)
+
+func dist(p1, p2):
+	var d = p1 - p2
+	if d < Vector2i.ZERO:
+		d = d * -1
+	return d
+
+func load_inventory() -> void:
 	inventory_interface.set_player_inventory_data(player.inventory_data)
 	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
 	hot_bar_inventory.set_inventory_data(player.inventory_data)
@@ -159,8 +175,6 @@ func save_game() -> void:
 	ResourceSaver.save(playerData, world_save_file_path + player_save_file_name)
 	print("Player Data Saved To " + world_save_file_path)
 
-	save_world()
-
 func load_game() -> void:
 	playerData = ResourceLoader.load(world_save_file_path + player_save_file_name).duplicate(true)
 	player.inventory_data = playerData.inventory_data
@@ -171,4 +185,7 @@ func load_game() -> void:
 
 	print("Player Data Loaded From " + world_save_file_path)
 
-	load_world()
+func zoom_in() -> void:
+	$PhantomCamera2D.zoom += Vector2(0.5, 0.5)
+func zoom_out() -> void:
+	$PhantomCamera2D.zoom -= Vector2(0.5, 0.5)

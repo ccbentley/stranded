@@ -74,6 +74,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 		main.save_game()
 	if Input.is_action_just_pressed("load"):
 		main.load_game()
+	if Input.is_action_just_pressed("zoom_in"):
+		main.zoom_in()
+	if Input.is_action_just_pressed("zoom_out"):
+		main.zoom_out()
 
 func _ready() -> void:
 	PlayerManager.player = self
