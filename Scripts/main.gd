@@ -9,14 +9,16 @@ const PickUp = preload("res://Item/Pickup/pickup.tscn")
 const save_file_path: String = "user://save/"
 const player_save_file_name: String = "PlayerSave.tres"
 const world_save_file_name: String = "WorldData.tres"
+const world_file_name: String = "World.dat"
 var world_save_file_path: String = save_file_path + Global.worldData.world_name + "/"
 var playerData: PlayerData = PlayerData.new()
 
 @export var noise_height_text : NoiseTexture2D
 var noise : Noise
-var width : int = 400
-var height : int = 400
+var width : int = 4
+var height : int = 4
 @onready var tile_map: TileMap = $TileMap
+@onready var loaded: TileMap = $TileMap/Loaded
 var source_id : int = 0
 
 #Layers
@@ -44,13 +46,29 @@ func _ready() -> void:
 
 	verify_save_directory(world_save_file_path)
 	noise = noise_height_text.noise
-	generate_world()
+
+	if load_world() == false:
+		generate_world()
+	else:
+		load_world()
 
 func generate_world() -> void:
+	for x in width:
+		for y in height:
+			generate_chunk(x, y)
+
+func generate_chunk(x_chunk, y_chunk) -> void:
+	#Checks if chunk is already generated
+	if loaded.get_cell_source_id(0, Vector2i(x_chunk, y_chunk)) != -1:
+		return
+	loaded.set_cell(0, Vector2i(x_chunk, y_chunk), 0, Vector2i(0, 0))
+
 	var expanded_sand_tiles_arr : Array = []
 	var expanded_grass_tiles_arr : Array = []
-	for x in range(-width/2, width/2):
-		for y in range(-height/2, height/2):
+	for _x in range(32):
+		for _y in range(32):
+			var x = _x + x_chunk * 32
+			var y = _y + y_chunk * 32
 			var noise_val : float = noise.get_noise_2d(x, y)
 			if noise_val > 0.3:
 				sand_tiles_arr.append(Vector2i(x, y))
@@ -74,6 +92,36 @@ func generate_world() -> void:
 
 	tile_map.set_cells_terrain_connect(ground_1_layer, expanded_sand_tiles_arr, terrain_sand_int, 0)
 	tile_map.set_cells_terrain_connect(ground_2_layer, expanded_grass_tiles_arr, terrain_grass_int, 0)
+
+func save_world() -> void:
+	var save_file := FileAccess.open(world_save_file_path + world_file_name, FileAccess.WRITE)
+	for chunk in loaded.get_used_cells_by_id(0):
+		save_file.store_double(chunk.x)  # Assuming chunk coordinates are integers
+		save_file.store_double(chunk.y)
+		for x in range(32):
+			for y in range(32):
+				save_file.store_var(tile_map.get_cell_atlas_coords(water_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
+				save_file.store_var(tile_map.get_cell_atlas_coords(ground_1_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
+				save_file.store_var(tile_map.get_cell_atlas_coords(ground_2_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
+				save_file.store_var(tile_map.get_cell_atlas_coords(cliff_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
+				save_file.store_var(tile_map.get_cell_atlas_coords(environment_layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32)))
+	save_file.close()
+
+func load_world() -> bool:
+	if not FileAccess.file_exists(world_save_file_path + world_file_name):
+		return false
+	var save_file := FileAccess.open(world_save_file_path + world_file_name, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var chunk = Vector2i()
+		chunk.x = save_file.get_double()
+		chunk.y = save_file.get_double()
+		loaded.set_cell(0, chunk, 0, Vector2i(0, 0))
+		for x in range(32):
+			for y in range(32):
+				for layer in range(5):
+					tile_map.set_cell(layer, Vector2i(x + chunk.x * 32, y + chunk.y * 32), 0, save_file.get_var())
+	save_file.close()
+	return true
 
 func load_inventory():
 	inventory_interface.set_player_inventory_data(player.inventory_data)
@@ -111,6 +159,8 @@ func save_game() -> void:
 	ResourceSaver.save(playerData, world_save_file_path + player_save_file_name)
 	print("Player Data Saved To " + world_save_file_path)
 
+	save_world()
+
 func load_game() -> void:
 	playerData = ResourceLoader.load(world_save_file_path + player_save_file_name).duplicate(true)
 	player.inventory_data = playerData.inventory_data
@@ -120,3 +170,5 @@ func load_game() -> void:
 	player.global_position = playerData.position
 
 	print("Player Data Loaded From " + world_save_file_path)
+
+	load_world()

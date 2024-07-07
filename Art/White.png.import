@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://geqxiy1jx45n"
-path="res://.godot/imported/islands_tileset_v2_byBrysia-export.png-dbd4e753945766021d5cbbd61cefdf6b.ctex"
+uid="uid://ceagpgcnijotl"
+path="res://.godot/imported/White.png-1250d2e5e7a0b08c840fc154c502cd3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Islands Tileset/islands_tileset_v2_byBrysia-export.png"
-dest_files=["res://.godot/imported/islands_tileset_v2_byBrysia-export.png-dbd4e753945766021d5cbbd61cefdf6b.ctex"]
+source_file="res://Art/White.png"
+dest_files=["res://.godot/imported/White.png-1250d2e5e7a0b08c840fc154c502cd3c.ctex"]
 
 [params]
 

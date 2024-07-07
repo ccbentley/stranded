@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=25 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_uw73h"]
 [ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_rs7gc"]
@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://Inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://Art/Islands Tileset/islands_tileset_v2_byBrysia.png" id="14_1bycs"]
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://Inventory/slot.tscn" id="14_fq4si"]
+[ext_resource type="Texture2D" uid="uid://ceagpgcnijotl" path="res://Art/White.png" id="15_5gko8"]
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://Inventory/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="17_mroq7"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="18_lqivv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="19_5yl3g"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a08pw"]
-seed = 1
 frequency = 0.03
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8cl7"]
@@ -655,30 +655,37 @@ custom_data_layer_0/name = "can_swim"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_xsmls")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xcnkd"]
+texture = ExtResource("15_5gko8")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6l1u6"]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_xcnkd")
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_uw73h")
 noise_height_text = SubResource("NoiseTexture2D_p8cl7")
 
 [node name="Player" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("2_rs7gc")]
-position = Vector2(2613, 1760)
+z_index = 1
 tile_map = NodePath("../TileMap")
 inventory_data = ExtResource("4_e8g6s")
 equip_inventory_data = SubResource("Resource_aiun2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2613, 1760)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(4, 4)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("17_mroq7")
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
-position = Vector2(2613, 1760)
 script = ExtResource("18_lqivv")
 follow_mode = 1
 follow_target = NodePath("../Player")
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(4, 4)
 tween_resource = SubResource("Resource_ol4hg")
 follow_damping = true
 
@@ -746,6 +753,10 @@ layer_3/name = "cliff"
 layer_3/tile_data = PackedInt32Array()
 layer_4/name = "environment"
 layer_4/tile_data = PackedInt32Array()
+
+[node name="Loaded" type="TileMap" parent="TileMap"]
+tile_set = SubResource("TileSet_6l1u6")
+format = 2
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
