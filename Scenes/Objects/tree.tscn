@@ -16,19 +16,19 @@ item_data = ExtResource("3_1i03o")
 quantity = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8tvl"]
-size = Vector2(12.6667, 26.6667)
+size = Vector2(18, 41)
 
 [node name="Tree10" type="StaticBody2D"]
 y_sort_enabled = true
 position = Vector2(-26, 42)
-scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.333334, 6.66667)
+position = Vector2(1, 15)
 shape = SubResource("RectangleShape2D_q7wl3")
 
 [node name="Tree" type="Sprite2D" parent="."]
 y_sort_enabled = true
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_vtvgx")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_pl3hv")]
@@ -39,5 +39,5 @@ health_component = NodePath("../HealthComponent")
 type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0.333334, -0.666666)
+position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_p8tvl")

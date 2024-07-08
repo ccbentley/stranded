@@ -1,3 +1,4 @@
+@icon("res://Art/Icon Pack/sword_02c.png")
 extends Area2D
 class_name AttackComponent
 
