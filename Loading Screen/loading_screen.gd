@@ -8,7 +8,7 @@ class_name LoadingScreen
 func _ready():
 	ResourceLoader.load_threaded_request(Global.next_scene)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var progress = []
 	ResourceLoader.load_threaded_get_status(Global.next_scene, progress)
 	progress_bar.value = progress[0] * 100

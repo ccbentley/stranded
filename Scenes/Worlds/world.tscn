@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_uw73h"]
 [ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_rs7gc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://Inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://Art/Islands Tileset/islands_tileset_v2_byBrysia.png" id="14_1bycs"]
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://Inventory/slot.tscn" id="14_fq4si"]
+[ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://Menu/Pause Menu/pause_menu.tscn" id="15_fqub2"]
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://Inventory/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="17_mroq7"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="18_lqivv"]
@@ -823,6 +824,9 @@ offset_top = 10.0
 offset_right = 430.0
 offset_bottom = 91.0
 player = NodePath("../../Player")
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
+visible = false
 
 [node name="Chest" parent="." instance=ExtResource("7_5j5bh")]
 position = Vector2(-81, 41)
