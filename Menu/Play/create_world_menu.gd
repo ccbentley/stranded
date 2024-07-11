@@ -40,7 +40,6 @@ func on_create_world_pressed() -> void:
 		var world_save_file_path: String = save_file_path + worldData.world_name + "/"
 		verify_save_directory(world_save_file_path)
 		ResourceSaver.save(worldData, world_save_file_path + save_file_name)
-		print("World Data Saved To " + world_save_file_path + save_file_name)
 		on_exit_pressed()
 
 func verify_save_directory(path: String) -> void:

@@ -28,6 +28,7 @@ func _on_options_button_button_down() -> void:
 	options_menu.visible = true
 
 func _on_quit_button_button_down() -> void:
+	get_tree().paused = false
 	main.save_game()
 	get_tree().change_scene_to_file("res://Menu/main_menu.tscn")
 

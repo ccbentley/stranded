@@ -76,7 +76,6 @@ func get_keybind(action: String):
 func save_settings() -> void:
 	verify_save_directory(save_file_path)
 	ResourceSaver.save(settingsData, save_file_path + save_file_name)
-	print("Settings Data Saved To " + save_file_path + save_file_name)
 
 func load_settings() -> void:
 	settingsData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)

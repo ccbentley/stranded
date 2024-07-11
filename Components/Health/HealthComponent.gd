@@ -5,7 +5,7 @@ class_name HealthComponent
 @export var MAX_HEALTH : float = 10.0
 var health : float
 
-@export var loot_table: Array[LootData] = []
+@export var loot_table: Array[SlotData] = []
 
 @export var health_bar_enabled : bool = true
 
@@ -38,9 +38,8 @@ func damage(attack: Attack) -> void:
 			for drop in loot_table.size():
 				var pick_up = PICKUP.instantiate()
 				pick_up.slot_data = loot_table[drop]
-				call_deferred("add_child", pick_up)
-				pick_up.call_deferred("set", "global_position", get_parent().global_position)
-				pick_up.call_deferred("reparent", $"../..")
+				get_parent().get_parent().get_parent().call_deferred("add_child", pick_up)
+				pick_up.call_deferred("set", "position", get_parent().global_position)
 		get_parent().call_deferred("queue_free")
 
 
