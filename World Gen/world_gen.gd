@@ -14,6 +14,8 @@ var water_noise : Noise
 var source_id : int = 0
 
 #Layers
+var number_of_layers : int = 5
+
 var water_layer : int = 0
 var ground_1_layer : int = 1
 var ground_2_layer : int = 2
@@ -75,8 +77,8 @@ func generate_chunk(x_chunk: int, y_chunk: int) -> void:
 	var times_water_removed : int = 0
 	for tile : int in water_tiles_arr.size():
 		var _tile : int = tile - times_water_removed
-		var x : int = water_tiles_arr[_tile].x
-		var y : int = water_tiles_arr[_tile].y
+		var x : int = int(water_tiles_arr[_tile].x)
+		var y : int = int(water_tiles_arr[_tile].y)
 		var water_noise_val : float = water_noise.get_noise_2d(x, y)
 		if (sand_tiles_arr.has(water_tiles_arr[_tile]) or grass_tiles_arr.has(water_tiles_arr[_tile])) and _tile <= water_tiles_arr.size():
 			water_tiles_arr.remove_at(_tile)
@@ -107,18 +109,18 @@ func clear_chunk(x_chunk: int, y_chunk: int) -> void:
 		for _y : int in range(32):
 			var x : int = _x + x_chunk * 32
 			var y : int = _y + y_chunk * 32
-			set_cell(water_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
-			set_cell(ground_1_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
-			set_cell(ground_2_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
-			set_cell(cliff_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
-			set_cell(environment_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
+			for layer : int in number_of_layers:
+				set_cell(layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 
 func unload_distant_chunks() -> void:
-	for chunk in loaded_chunks.size():
-		var dist_to_player : Vector2i = dist(Vector2i(loaded_chunks[chunk]), player_chunk_pos)
-		if dist_to_player.x > view_distance or dist_to_player.y > view_distance:
-			clear_chunk(loaded_chunks[chunk].x, loaded_chunks[chunk].y)
-			loaded_chunks.remove_at(chunk)
+	var times_chunk_removed : int = 0
+	for chunk : int in loaded_chunks.size():
+		var _chunk : int = chunk - times_chunk_removed
+		var dist_to_player : Vector2i = dist(Vector2i(loaded_chunks[_chunk]), player_chunk_pos)
+		if (dist_to_player.x > view_distance or dist_to_player.y > view_distance) and _chunk <= loaded_chunks.size():
+			clear_chunk(int(loaded_chunks[_chunk].x), int(loaded_chunks[_chunk].y))
+			loaded_chunks.remove_at(_chunk)
+			times_chunk_removed += 1
 
 func _process(_delta: float) -> void:
 	player_chunk_pos = local_to_map(player.position) / 32
@@ -135,7 +137,7 @@ func try_to_generate_chunk(chunk: Vector2i) -> void:
 		var task : TaskManager.Task = TaskManager.create_task(generate_chunk.bind(chunk.x, chunk.y))
 		await task.completed
 		task.is_completed()
-	#unload_distant_chunks(player_chunk_pos)
+	unload_distant_chunks()
 
 func dist(p1: Vector2i, p2: Vector2i) -> Vector2i:
 	var distance : Vector2i = p1 - p2

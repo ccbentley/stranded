@@ -70,6 +70,10 @@ func load_game() -> bool:
 	return true
 
 func zoom_in() -> void:
-	$Camera2D.zoom += Vector2(0.5, 0.5)
+	var new_zoom : Vector2 = $Camera2D.zoom + Vector2(0.5, 0.5)
+	if new_zoom > Vector2.ZERO:
+		$Camera2D.zoom = new_zoom
 func zoom_out() -> void:
-	$Camera2D.zoom -= Vector2(0.5, 0.5)
+	var new_zoom : Vector2 = $Camera2D.zoom - Vector2(0.5, 0.5)
+	if new_zoom > Vector2.ZERO:
+		$Camera2D.zoom = new_zoom

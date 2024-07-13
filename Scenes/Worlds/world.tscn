@@ -798,6 +798,7 @@ inventory_data = SubResource("Resource_csm5f")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
+y_sort_enabled = true
 tile_set = SubResource("TileSet_k8h87")
 format = 2
 layer_0/name = "water"
@@ -815,6 +816,7 @@ noise_tree_text = ExtResource("3_d1a5b")
 noise_water_text = ExtResource("4_q26cw")
 
 [node name="Trees" type="Node2D" parent="TileMap"]
+z_as_relative = false
 y_sort_enabled = true
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
