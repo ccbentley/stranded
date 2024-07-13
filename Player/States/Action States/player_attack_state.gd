@@ -15,5 +15,5 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	set_physics_process(false)
 
-func _physics_process(_delta) -> void:
+func _physics_process(_delta: float) -> void:
 	pass

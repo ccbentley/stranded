@@ -2,10 +2,10 @@ extends PanelContainer
 
 signal hot_bar_use(index: int)
 
-const Slot = preload("res://Inventory/slot.tscn")
+const SLOT = preload("res://Inventory/slot.tscn")
 
 var selected_slot : int = 0
-var _slot_datas
+var _slot_datas : Array[SlotData]
 
 @export var player : CharacterBody2D
 
@@ -53,8 +53,8 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 	for child in h_box_container.get_children():
 		child.queue_free()
 
-	for slot_data in inventory_data.slot_datas.slice(0,6):
-		var slot = Slot.instantiate()
+	for slot_data : SlotData in inventory_data.slot_datas.slice(0,6):
+		var slot : Slot = SLOT.instantiate()
 		h_box_container.add_child(slot)
 
 		if slot_data:

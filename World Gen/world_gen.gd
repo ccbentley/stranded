@@ -22,13 +22,9 @@ var environment_layer : int = 4
 
 #Tiles
 var water_atlas : Vector2i = Vector2i(8, 4)
-var sand_tiles_arr : PackedVector2Array = []
-var grass_tiles_arr : PackedVector2Array = []
-var water_tiles_arr : PackedVector2Array = []
 var water_bubble_atlas_arr : Array = [Vector2i(28,2), Vector2i(29,2), Vector2i(30,2), Vector2i(31,2)]
 var terrain_sand_int : int = 0
 var terrain_grass_int : int = 1
-var terrain_water_int : int = 2
 
 #Chunks
 var player_chunk_pos : Vector2i
@@ -47,18 +43,20 @@ func _ready() -> void:
 	tree_noise.seed = randi()
 	water_noise.seed = randi()
 
-func generate_chunk(x_chunk, y_chunk) -> void:
-	for _x in range(32):
-		for _y in range(32):
-			var x = _x + x_chunk * 32
-			var y = _y + y_chunk * 32
+func generate_chunk(x_chunk: int, y_chunk: int) -> void:
+	var sand_tiles_arr : PackedVector2Array = []
+	var grass_tiles_arr : PackedVector2Array = []
+	var water_tiles_arr : PackedVector2Array = []
+	for _x : int in range(32):
+		for _y : int in range(32):
+			var x : int = _x + x_chunk * 32
+			var y : int = _y + y_chunk * 32
 			var noise_val : float = noise.get_noise_2d(x, y)
 			var tree_noise_val : float = tree_noise.get_noise_2d(x, y)
-			var water_noise_val : float = water_noise.get_noise_2d(x, y)
 			if noise_val >= 0.4:
 				for dx in range(-1, 2):
 					for dy in range(-1, 2):
-						var adj_tile = Vector2i(x + dx, y + dy)
+						var adj_tile : Vector2i = Vector2i(x + dx, y + dy)
 						if not grass_tiles_arr.has(adj_tile):
 							if is_in_chunk(Vector2i(x_chunk, y_chunk), adj_tile):
 								grass_tiles_arr.append(adj_tile)
@@ -67,56 +65,66 @@ func generate_chunk(x_chunk, y_chunk) -> void:
 			elif noise_val >= 0.3:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
-						var adj_tile = Vector2i(x + dx, y + dy)
+						var adj_tile : Vector2i = Vector2i(x + dx, y + dy)
 						if not sand_tiles_arr.has(adj_tile):
 							if is_in_chunk(Vector2i(x_chunk, y_chunk), adj_tile):
 								sand_tiles_arr.append(adj_tile)
 			else:
-				if not sand_tiles_arr.has(Vector2i(x, y)) and not grass_tiles_arr.has(Vector2i(x, y)):
-					water_tiles_arr.append(Vector2i(x, y))
-					if water_noise_val > 0.8:
-						call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
+				water_tiles_arr.append(Vector2i(x, y))
+	#Checks if water tiles are overlapping grass or sand tiles
+	var times_water_removed : int = 0
+	for tile : int in water_tiles_arr.size():
+		var _tile : int = tile - times_water_removed
+		var x : int = water_tiles_arr[_tile].x
+		var y : int = water_tiles_arr[_tile].y
+		var water_noise_val : float = water_noise.get_noise_2d(x, y)
+		if (sand_tiles_arr.has(water_tiles_arr[_tile]) or grass_tiles_arr.has(water_tiles_arr[_tile])) and _tile <= water_tiles_arr.size():
+			water_tiles_arr.remove_at(_tile)
+			times_water_removed += 1
+		else:
+			if water_noise_val > 0.8:
+				call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
 	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
 
-func draw_tiles(_water_tiles_arr, _sand_tiles_arr, _grass_tiles_arr) -> void:
-	for tile in _water_tiles_arr:
+func draw_tiles(_water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
+	for tile : Vector2i in _water_tiles_arr:
 		set_cell(water_layer, tile, source_id, water_atlas)
 	set_cells_terrain_connect(ground_1_layer, _sand_tiles_arr, terrain_sand_int, 0)
 	set_cells_terrain_connect(ground_2_layer, _grass_tiles_arr, terrain_grass_int, 0)
 
 func draw_tree(pos: Vector2i) -> void:
-	var tree_obj = TREE.instantiate()
+	var tree_obj : Node2D = TREE.instantiate()
 	$Trees.add_child(tree_obj)
 	tree_obj.position = pos
 
 func is_in_chunk(chunk : Vector2i, tile_pos: Vector2i) -> bool:
 	chunk = chunk * 32
-	var chunk_end = chunk + Vector2i(32, 32)
+	var chunk_end : Vector2i = chunk + Vector2i(32, 32)
 	return tile_pos.x >= chunk.x and tile_pos.x < chunk_end.x and tile_pos.y >= chunk.y and tile_pos.y < chunk_end.y
 
-func clear_chunk(x_chunk, y_chunk) -> void:
-	for _x in range(32):
-		for _y in range(32):
-			var x = _x + x_chunk * 32
-			var y = _y + y_chunk * 32
+func clear_chunk(x_chunk: int, y_chunk: int) -> void:
+	for _x : int in range(32):
+		for _y : int in range(32):
+			var x : int = _x + x_chunk * 32
+			var y : int = _y + y_chunk * 32
 			set_cell(water_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 			set_cell(ground_1_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 			set_cell(ground_2_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 			set_cell(cliff_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 			set_cell(environment_layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 
-func unload_distant_chunks(player_pos) -> void:
+func unload_distant_chunks() -> void:
 	for chunk in loaded_chunks.size():
-		var dist_to_player = dist(Vector2i(loaded_chunks[chunk]), player_chunk_pos)
+		var dist_to_player : Vector2i = dist(Vector2i(loaded_chunks[chunk]), player_chunk_pos)
 		if dist_to_player.x > view_distance or dist_to_player.y > view_distance:
 			clear_chunk(loaded_chunks[chunk].x, loaded_chunks[chunk].y)
 			loaded_chunks.remove_at(chunk)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	player_chunk_pos = local_to_map(player.position) / 32
 	for dx in range(-view_distance, view_distance + 1):
 		for dy in range(-view_distance, view_distance + 1):
-			var adj_chunk = Vector2i(player_chunk_pos.x + dx, player_chunk_pos.y + dy)
+			var adj_chunk : Vector2i = Vector2i(player_chunk_pos.x + dx, player_chunk_pos.y + dy)
 			try_to_generate_chunk(adj_chunk)
 
 func try_to_generate_chunk(chunk: Vector2i) -> void:
@@ -124,14 +132,13 @@ func try_to_generate_chunk(chunk: Vector2i) -> void:
 		return
 	else:
 		loaded_chunks.append(chunk)
-		var task := TaskManager.create_task(generate_chunk.bind(chunk.x, chunk.y))
-		if task:
-			await task.completed
-			task.is_completed()
+		var task : TaskManager.Task = TaskManager.create_task(generate_chunk.bind(chunk.x, chunk.y))
+		await task.completed
+		task.is_completed()
 	#unload_distant_chunks(player_chunk_pos)
 
-func dist(p1, p2):
-	var distance = p1 - p2
+func dist(p1: Vector2i, p2: Vector2i) -> Vector2i:
+	var distance : Vector2i = p1 - p2
 	if distance.x < 0:
 		distance.x = distance.x * -1
 	if distance.y < 0:

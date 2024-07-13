@@ -18,11 +18,11 @@ func _exit_state() -> void:
 	set_physics_process(false)
 	actor.set_speed(actor.MAX_SPEED)
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	if !actor.is_in_water():
 		player_exited_water.emit()
 
-	var input = actor.get_input()
+	var input : Vector2 = actor.get_input()
 	#Exits state if there is no move input
 	if input == Vector2.ZERO:
 		if actor.velocity.length() > (actor.friction * delta):

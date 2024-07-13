@@ -1,12 +1,13 @@
 extends PanelContainer
+class_name Slot
 
 signal slot_clicked(index: int, button: int)
 
-@onready var texture_rect = $MarginContainer/TextureRect
-@onready var quantity_label = $QuantityLabel
+@onready var texture_rect : TextureRect = $MarginContainer/TextureRect
+@onready var quantity_label : Label = $QuantityLabel
 
 func set_slot_data(slot_data: SlotData) -> void:
-	var item_data = slot_data.item_data
+	var item_data : ItemData = slot_data.item_data
 	texture_rect.texture = item_data.texture
 	tooltip_text = "%s\n%s" % [item_data.name, item_data.description]
 

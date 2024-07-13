@@ -11,7 +11,7 @@ signal exit_save_selection_menu
 const save_file_path: String = "user://save/"
 const save_file_name: String = "WorldData.tres"
 
-const SAVE_FILE_MENU = preload("res://Menu/Play/save_file_menu.tscn")
+const SAVE_FILE_MENU : PackedScene = preload("res://Menu/Play/save_file_menu.tscn")
 
 @onready var save_selection_menu: SaveSelectionMenu = $"."
 @onready var create_world_menu: CreateWorldMenu = $"../CreateWorldMenu"
@@ -44,7 +44,7 @@ func check_for_worlds() -> void:
 	var dir := DirAccess.open(save_file_path)
 	if dir:
 		dir.list_dir_begin()
-		var file_name = dir.get_next()
+		var file_name : String = dir.get_next()
 		while file_name != "":
 			if file_name != "." and file_name != ".." and dir.current_is_dir():
 				add_world(file_name)
@@ -57,7 +57,7 @@ func add_world(file_name: String) -> void:
 	var worldData: WorldData = WorldData.new()
 	var world_save_file_path: String = save_file_path + file_name + "/" + save_file_name
 	worldData = ResourceLoader.load(world_save_file_path).duplicate(true)
-	var save_file_menu = SAVE_FILE_MENU.instantiate()
+	var save_file_menu : SaveFileMenu = SAVE_FILE_MENU.instantiate()
 	v_box_container.add_child(save_file_menu)
 	save_file_menu.worldData = worldData.duplicate()
 	save_file_menu.world_name.text = worldData.world_name + "\n" + str(worldData.world_seed)

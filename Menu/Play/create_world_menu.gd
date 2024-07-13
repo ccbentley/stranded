@@ -21,7 +21,7 @@ func handle_connecting_signals() -> void:
 	exit_button.button_down.connect(on_exit_pressed)
 	create_world_button.button_down.connect(on_create_world_pressed)
 
-func on_exit_pressed():
+func on_exit_pressed() -> void:
 	world_name.text = ""
 	character_name.text = ""
 	world_seed.text = ""

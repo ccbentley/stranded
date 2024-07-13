@@ -28,7 +28,7 @@ func on_music_sound_set(index: float) -> void:
 func on_sfx_sound_set(index: float) -> void:
 	settingsData.sfx_volume = index
 
-func set_keybind(action: String, event) -> void:
+func set_keybind(action: String, event: InputEventKey) -> void:
 	match action:
 		settingsData.keybindData.MOVE_LEFT:
 			settingsData.keybindData.move_left_key = event
@@ -58,7 +58,7 @@ func get_music_volume() -> float:
 func get_sfx_volume() -> float:
 	return settingsData.sfx_volume
 
-func get_keybind(action: String):
+func get_keybind(action: String) -> InputEventKey:
 	match action:
 		settingsData.keybindData.MOVE_LEFT:
 			return settingsData.keybindData.move_left_key
@@ -72,6 +72,7 @@ func get_keybind(action: String):
 			return settingsData.keybindData.inventory_key
 		settingsData.keybindData.INTERACT:
 			return settingsData.keybindData.interact_key
+	return
 
 func save_settings() -> void:
 	verify_save_directory(save_file_path)

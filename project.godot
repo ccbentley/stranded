@@ -24,6 +24,10 @@ GlobalUi="*res://Scenes/global_ui.tscn"
 SettingsSaveManager="*res://Autoloads/settings_save_manager.gd"
 TaskManager="*res://Autoloads/task_manager.gd"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")

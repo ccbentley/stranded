@@ -35,7 +35,7 @@ func set_action_name() -> void:
 			label.text = "Interact"
 
 func set_text_for_key() -> void:
-	var action_keycode = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
+	var action_keycode : String = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
 	button.text = "%s" % action_keycode
 
 func _on_button_toggled(toggled_on: bool) -> void:
@@ -58,7 +58,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	rebind_action_key(event)
 	button.button_pressed = false
 
-func rebind_action_key(event) -> void:
+func rebind_action_key(event: InputEventKey) -> void:
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
 

@@ -3,7 +3,7 @@ extends Node2D
 const PickUp = preload("res://Item/Pickup/pickup.tscn")
 
 @onready var player : CharacterBody2D = $Player
-@onready var inventory_interface : Control = $UI/InventoryInterface
+@onready var inventory_interface : InventoryInterface = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
 
 const save_file_path: String = "user://save/"
@@ -31,7 +31,7 @@ func load_inventory() -> void:
 	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
 	hot_bar_inventory.set_inventory_data(player.inventory_data)
 
-func toggle_inventory_interface(external_inventory_owner = null) -> void:
+func toggle_inventory_interface(external_inventory_owner: Node2D = null) -> void:
 	inventory_interface.visible = not inventory_interface.visible
 
 	if inventory_interface.visible:
@@ -45,7 +45,7 @@ func toggle_inventory_interface(external_inventory_owner = null) -> void:
 		inventory_interface.clear_external_inventory()
 
 func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
-	var pick_up = PickUp.instantiate()
+	var pick_up : Pickup = PickUp.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = player.get_drop_position()
 	add_child(pick_up)

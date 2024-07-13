@@ -8,9 +8,9 @@ const MOVE_DOWN : String = "move_down"
 const INVENTORY : String = "inventory"
 const INTERACT : String = "interact"
 
-@export var move_left_key =  InputEventKey.new()
-@export var move_right_key =  InputEventKey.new()
-@export var move_up_key =  InputEventKey.new()
-@export var move_down_key =  InputEventKey.new()
-@export var inventory_key =  InputEventKey.new()
-@export var interact_key =  InputEventKey.new()
+@export var move_left_key : InputEventKey =  InputEventKey.new()
+@export var move_right_key : InputEventKey =  InputEventKey.new()
+@export var move_up_key : InputEventKey =  InputEventKey.new()
+@export var move_down_key : InputEventKey =  InputEventKey.new()
+@export var inventory_key : InputEventKey =  InputEventKey.new()
+@export var interact_key : InputEventKey =  InputEventKey.new()

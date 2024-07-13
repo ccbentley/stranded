@@ -1,8 +1,9 @@
 extends StaticBody2D
+class_name Pickup
 
 @export var slot_data : SlotData
 
-@onready var sprite_2d = $Sprite2D
+@onready var sprite_2d : Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:

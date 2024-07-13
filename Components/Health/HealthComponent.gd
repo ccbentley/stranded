@@ -24,7 +24,7 @@ func _ready() -> void:
 	health_bar.visible = false
 
 func damage(attack: Attack) -> void:
-	var prev_health = health
+	var prev_health : float = health
 	health -= attack.attack_damage
 	health = min(MAX_HEALTH, health)
 	health_bar.value = health
@@ -36,7 +36,7 @@ func damage(attack: Attack) -> void:
 		#TODO Drop based on random chance
 		if loot_table:
 			for drop in loot_table.size():
-				var pick_up = PICKUP.instantiate()
+				var pick_up : Pickup = PICKUP.instantiate()
 				pick_up.slot_data = loot_table[drop]
 				get_parent().get_parent().get_parent().call_deferred("add_child", pick_up)
 				pick_up.call_deferred("set", "position", get_parent().global_position)

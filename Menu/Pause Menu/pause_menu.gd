@@ -7,7 +7,7 @@ var game_paused : bool = false
 @onready var options_menu: OptionsMenu = $OptionsMenu
 @onready var margin_container: MarginContainer = $MarginContainer
 
-func _ready():
+func _ready() -> void:
 	set_process_input(true) #Enable input handling
 
 func _input(_event: InputEvent) -> void:

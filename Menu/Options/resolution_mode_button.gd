@@ -22,8 +22,8 @@ func save_data(index: int) -> void:
 	SettingsSaveManager.on_resolution_selected(index)
 
 func add_resolution_items() -> void:
-	for resolution_size_test in RESOLUTION_DICTONARY:
-		option_button.add_item(resolution_size_test)
+	for resolution_size_text : String in RESOLUTION_DICTONARY:
+		option_button.add_item(resolution_size_text)
 
 func on_resolution_selected(index: int) -> void:
 	DisplayServer.window_set_size(RESOLUTION_DICTONARY.values()[index])
