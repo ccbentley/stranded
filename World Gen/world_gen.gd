@@ -49,6 +49,7 @@ func generate_chunk(x_chunk: int, y_chunk: int) -> void:
 	var sand_tiles_arr : PackedVector2Array = []
 	var grass_tiles_arr : PackedVector2Array = []
 	var water_tiles_arr : PackedVector2Array = []
+	var tree_obj_arr : PackedVector2Array = []
 	for _x : int in range(32):
 		for _y : int in range(32):
 			var x : int = _x + x_chunk * 32
@@ -63,7 +64,8 @@ func generate_chunk(x_chunk: int, y_chunk: int) -> void:
 							if is_in_chunk(Vector2i(x_chunk, y_chunk), adj_tile):
 								grass_tiles_arr.append(adj_tile)
 								if tree_noise_val > 0.7:
-									call_deferred("draw_tree", map_to_local(Vector2i(x, y)))
+									if not tree_obj_arr.has(Vector2i(x, y)):
+										tree_obj_arr.append(Vector2i(x, y))
 			elif noise_val >= 0.3:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
@@ -87,12 +89,17 @@ func generate_chunk(x_chunk: int, y_chunk: int) -> void:
 			if water_noise_val > 0.8:
 				call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
 	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
+	call_deferred("draw_trees", tree_obj_arr)
 
 func draw_tiles(_water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
 	for tile : Vector2i in _water_tiles_arr:
 		set_cell(water_layer, tile, source_id, water_atlas)
 	set_cells_terrain_connect(ground_1_layer, _sand_tiles_arr, terrain_sand_int, 0)
 	set_cells_terrain_connect(ground_2_layer, _grass_tiles_arr, terrain_grass_int, 0)
+
+func draw_trees(_tree_obj_arr: PackedVector2Array) -> void:
+	for tree in _tree_obj_arr:
+		draw_tree(map_to_local(tree))
 
 func draw_tree(pos: Vector2i) -> void:
 	var tree_obj : Node2D = TREE.instantiate()

@@ -13,6 +13,8 @@ var world_save_file_path: String = save_file_path + Global.worldData.world_name 
 var playerData: PlayerData = PlayerData.new()
 
 func _ready() -> void:
+	WorldManager.world = self
+
 	player.toggle_inventory.connect(toggle_inventory_interface)
 	inventory_interface.force_close.connect(toggle_inventory_interface)
 
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 	if not load_game():
 		save_game()
+
 
 func load_inventory() -> void:
 	inventory_interface.set_player_inventory_data(player.inventory_data)
@@ -77,3 +80,11 @@ func zoom_out() -> void:
 	var new_zoom : Vector2 = $Camera2D.zoom - Vector2(0.5, 0.5)
 	if new_zoom > Vector2.ZERO:
 		$Camera2D.zoom = new_zoom
+
+const PICKUP : PackedScene = preload("res://Item/Pickup/pickup.tscn")
+
+func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
+	var pickup_instance : Pickup = PICKUP.instantiate()
+	pickup_instance.slot_data = slot_data
+	call_deferred("add_child", pickup_instance)
+	pickup_instance.global_position = pos
