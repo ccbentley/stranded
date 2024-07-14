@@ -2,6 +2,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a08pw"]
 frequency = 0.03
+fractal_gain = 0.3
+fractal_ping_pong_strength = -1.21
 
 [resource]
 noise = SubResource("FastNoiseLite_a08pw")

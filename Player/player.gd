@@ -16,7 +16,7 @@ extends CharacterBody2D
 
 #State Machines
 @onready var msm : MovementStateMachine = $MovementStateMachine as MovementStateMachine
-@onready var asm :ActionStateMachine = $ActionStateMachine as ActionStateMachine
+@onready var asm : ActionStateMachine = $ActionStateMachine as ActionStateMachine
 
 #Movement States
 @onready var player_idle_state : PlayerIdleState = $MovementStateMachine/PlayerIdleState as PlayerIdleState

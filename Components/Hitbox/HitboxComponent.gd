@@ -1,3 +1,4 @@
+@icon("res://Art/Material Icons/pageless_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
 extends Area2D
 class_name HitboxComponent
 

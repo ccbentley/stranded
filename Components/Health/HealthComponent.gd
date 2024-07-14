@@ -1,4 +1,4 @@
-@icon("res://Art/Icon Pack/potion_03a.png")
+@icon("res://Art/Material Icons/favorite_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
 extends Node2D
 class_name HealthComponent
 
@@ -9,13 +9,11 @@ var health : float
 var slot_datas: Array[SlotData]
 const WOOD = preload("res://Item/Items/Materials/wood.tres")
 
-@export var health_bar_enabled : bool = true
-
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var damage_bar: ProgressBar = $HealthBar/DamageBar
-@onready var timer: Timer = $HealthBar/Timer
+signal damaged(prev_health: float, health: float)
 
 func _ready() -> void:
+	health = MAX_HEALTH
+
 	if drop_data:
 		for drop: LootData in drop_data:
 			var slot_data : LootData = LootData.new()
@@ -24,22 +22,12 @@ func _ready() -> void:
 			slot_data.drop_chance = drop.drop_chance
 			slot_datas.append(slot_data)
 
-	health = MAX_HEALTH
-
-	health_bar.max_value = MAX_HEALTH
-	health_bar.value = health
-	damage_bar.max_value = MAX_HEALTH
-	damage_bar.value = health
-	health_bar.visible = false
-
 func damage(attack: Attack) -> void:
 	var prev_health : float = health
 	health -= attack.attack_damage
 	health = min(MAX_HEALTH, health)
-	health_bar.value = health
 
-	if health < MAX_HEALTH and health_bar_enabled:
-		health_bar.visible = true
+	damaged.emit(prev_health, health)
 
 	if health <= 0:
 		if slot_datas:
@@ -49,10 +37,3 @@ func damage(attack: Attack) -> void:
 					WorldManager.spawn_pickup(drop, global_position)
 		owner.call_deferred("queue_free")
 
-	if health < prev_health:
-		timer.start()
-	else:
-		damage_bar.value = health
-
-func _on_timer_timeout() -> void:
-	damage_bar.value = health

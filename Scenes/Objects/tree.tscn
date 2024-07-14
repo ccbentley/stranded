@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=12 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://Art/Nature Pixels V2/Remake/Trees/Tree2.png" id="1_vtvgx"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://Item/Items/Materials/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_2jwj5"]
 [ext_resource type="Script" path="res://Inventory/loot_data.gd" id="4_kpk1k"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://Components/Health/health_bar_component.tscn" id="6_kqkgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
 size = Vector2(18, 8)
@@ -38,7 +39,7 @@ position = Vector2(-26, 42)
 position = Vector2(1, 14)
 shape = SubResource("RectangleShape2D_q7wl3")
 
-[node name="Tree" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_vtvgx")
@@ -53,3 +54,7 @@ type = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_p8tvl")
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_kqkgg")]
+position = Vector2(0, 24)
+health_component = NodePath("../HealthComponent")

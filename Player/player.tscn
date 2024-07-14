@@ -156,7 +156,6 @@ shape = SubResource("RectangleShape2D_hgslm")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
 MAX_HEALTH = 1e+10
-health_bar_enabled = false
 
 [node name="AttackComponent" parent="." instance=ExtResource("6_in0ea")]
 
