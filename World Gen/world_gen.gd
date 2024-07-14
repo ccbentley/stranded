@@ -4,11 +4,9 @@ extends TileMap
 
 #Noise
 @export var noise_height_text: NoiseTexture2D
-@export var noise_tree_text: NoiseTexture2D
-@export var noise_water_text: NoiseTexture2D
+@export var noise_decoration_text: NoiseTexture2D
 var noise: Noise
-var tree_noise: Noise
-var water_noise: Noise
+var decoration_noise: Noise
 
 #Source ID
 var source_id: int = 0
@@ -25,6 +23,25 @@ var environment_layer: int = 4
 #Tiles
 var water_atlas: Vector2i = Vector2i(8, 4)
 var water_bubble_atlas_arr: Array = [Vector2i(28, 2), Vector2i(29, 2), Vector2i(30, 2), Vector2i(31, 2)]
+var grass_blade_atlas_arr: Array = [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)]
+var flower_atlas_arr: Array = [Vector2i(0, 12), Vector2i(4, 12), Vector2i(8, 12)]
+var sand_decoration_atlas_arr: Array = [
+	Vector2i(14, 10),
+	Vector2i(15, 10),
+	Vector2i(14, 11),
+	Vector2i(15, 11),
+	Vector2i(15, 12),
+	Vector2i(16, 13),
+	Vector2i(17, 13),
+	Vector2i(18, 13),
+	Vector2i(16, 14),
+	Vector2i(17, 14),
+	Vector2i(18, 14),
+	Vector2i(15, 0),
+	Vector2i(15, 1),
+	Vector2i(15, 2),
+	Vector2i(15, 3)
+]
 var terrain_sand_int: int = 0
 var terrain_grass_int: int = 1
 
@@ -39,12 +56,10 @@ const TREE = preload("res://Scenes/Objects/tree.tscn")
 
 func _ready() -> void:
 	noise = noise_height_text.noise
-	tree_noise = noise_tree_text.noise
-	water_noise = noise_water_text.noise
+	decoration_noise = noise_decoration_text.noise
 
 	noise.seed = Global.worldData.world_seed
-	tree_noise.seed = randi()
-	water_noise.seed = randi()
+	decoration_noise.seed = randi()
 
 
 func find_spawn_location() -> void:
@@ -66,7 +81,7 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 			var x: int = _x + chunk.x * 32
 			var y: int = _y + chunk.y * 32
 			var noise_val: float = noise.get_noise_2d(x, y)
-			var tree_noise_val: float = tree_noise.get_noise_2d(x, y)
+			var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 			if noise_val >= 0.65:
 				for dx in range(-1, 2):
 					for dy in range(-1, 2):
@@ -74,8 +89,12 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 						if not grass_tiles_arr.has(adj_tile):
 							if is_in_chunk(chunk, adj_tile):
 								grass_tiles_arr.append(adj_tile)
-				if tree_noise_val > 0.7:
+				if decoration_noise_val > 0.7:
 					call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)
+				elif decoration_noise_val > 0.5:
+					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
+				elif decoration_noise_val > 0.4:
+					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
 			elif noise_val >= 0.6:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
@@ -91,19 +110,36 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 		var _tile: int = tile - times_water_removed
 		var x: int = int(water_tiles_arr[_tile].x)
 		var y: int = int(water_tiles_arr[_tile].y)
-		var water_noise_val: float = water_noise.get_noise_2d(x, y)
+		var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 		if (sand_tiles_arr.has(water_tiles_arr[_tile]) or grass_tiles_arr.has(water_tiles_arr[_tile])) and _tile <= water_tiles_arr.size():
 			water_tiles_arr.remove_at(_tile)
 			times_water_removed += 1
 		else:
-			if water_noise_val > 0.8:
+			if decoration_noise_val > 0.8:
 				call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
+	#Checks if sand tiles are overlapping grass tiles
+	for tile: Vector2i in sand_tiles_arr:
+		if not grass_tiles_arr.has(tile):
+			var valid_tile: bool = true
+			for dx in range(-1, 2):
+				for dy in range(-1, 2):
+					var adj_tile: Vector2i = Vector2i(tile.x + dx, tile.y + dy)
+					if not sand_tiles_arr.has(adj_tile):
+						valid_tile = false
+			if valid_tile:
+				var x: int = tile.x
+				var y: int = tile.y
+				var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
+				if decoration_noise_val > 0.5:
+					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, sand_decoration_atlas_arr.pick_random())
 	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
 
 
 func get_chunk_node(chunk: Vector2i) -> Node2D:
 	var chunk_node: Node2D = Node2D.new()
 	chunk_node.name = str(chunk)
+	chunk_node.y_sort_enabled = true
+	chunk_node.z_as_relative = false
 	add_child(chunk_node)
 	return chunk_node
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=20 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://World Gen/noise.tres" id="2_iuy5t"]
 [ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Player/player.tscn" id="2_rs7gc"]
-[ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://World Gen/tree_noise.tres" id="3_d1a5b"]
+[ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://World Gen/decoration_noise.tres" id="3_d1a5b"]
 [ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://Player/player_inventory.tres" id="4_e8g6s"]
-[ext_resource type="Texture2D" uid="uid://dfjv2u8dwo4l6" path="res://World Gen/water_noise.tres" id="4_q26cw"]
 [ext_resource type="Script" path="res://Inventory/inventory_data_equip.gd" id="5_i2frv"]
 [ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://Scenes/Objects/chest.tscn" id="7_5j5bh"]
 [ext_resource type="Script" path="res://Inventory/inventory_data.gd" id="8_0i1ge"]
@@ -812,8 +811,7 @@ layer_4/name = "environment"
 layer_4/tile_data = PackedInt32Array()
 script = ExtResource("16_dsn1p")
 noise_height_text = ExtResource("2_iuy5t")
-noise_tree_text = ExtResource("3_d1a5b")
-noise_water_text = ExtResource("4_q26cw")
+noise_decoration_text = ExtResource("3_d1a5b")
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

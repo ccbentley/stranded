@@ -36,7 +36,7 @@ var held_offset: Vector2 = Vector2.ZERO
 
 #Player stats
 const MAX_SPEED: int = 90
-const SWIM_SPEED: int = 500
+const SWIM_SPEED: int = 50
 var max_speed: int = MAX_SPEED
 const accel: int = 1500
 const friction: int = 1000
@@ -81,6 +81,14 @@ func _unhandled_input(_event: InputEvent) -> void:
 		main.zoom_in()
 	if Input.is_action_just_pressed("zoom_out"):
 		main.zoom_out()
+	if Input.is_action_just_pressed("use"):
+		var mouse_position: Vector2 = get_viewport().get_mouse_position()
+		#Clicked left side
+		if mouse_position.x < get_viewport().size.x / 2:
+			is_facing_right = false
+		#Clicked right side
+		else:
+			is_facing_right = true
 
 
 func _ready() -> void:
@@ -135,13 +143,16 @@ func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: fl
 	animation_player.play("melee_attack")
 
 
-#func ranged_attack(attack_cooldown, attack_damage, attack_knockback, attack_stun_time):
-#attack_cooldown_timer.start(attack_cooldown)
+func ranged_attack(attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float) -> void:
+	attack_cooldown_timer.start(attack_cooldown)
+	var attack: Attack = Attack.new()
+	attack.attack_damage = attack_damage
+	attack.attack_knockback = attack_knockback
+	attack.attack_stun_time = attack_stun_time
 
 
 func set_speed(speed: int) -> void:
 	max_speed = speed
-	#TODO Change player velocity etc so it slows player down
 
 
 func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
