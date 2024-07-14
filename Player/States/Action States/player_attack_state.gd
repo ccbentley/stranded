@@ -1,8 +1,8 @@
 class_name PlayerAttackState
 extends State
 
-@export var actor : Player
-@export var anim : AnimatedSprite2D
+@export var actor: Player
+@export var anim: AnimatedSprite2D
 
 signal player_attack_finished
 

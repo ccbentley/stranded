@@ -2,12 +2,12 @@ extends PanelContainer
 
 signal hot_bar_use(index: int)
 
-const SLOT = preload("res://Inventory/slot.tscn")
+const SLOT = preload ("res://Inventory/slot.tscn")
 
-var selected_slot : int = 0
-var _slot_datas : Array[SlotData]
+var selected_slot: int = 0
+var _slot_datas: Array[SlotData]
 
-@export var player : CharacterBody2D
+@export var player: CharacterBody2D
 
 @onready var h_box_container: HBoxContainer = $MarginContainer/HBoxContainer
 @onready var selected: Sprite2D = $MarginContainer/Selected
@@ -37,12 +37,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		set_selected()
 
 func set_selected() -> void:
-	var slots : Array = h_box_container.get_children()
+	var slots: Array = h_box_container.get_children()
 	if selected_slot > slots.size() - 1:
 		selected_slot = 0
 	elif selected_slot < 0:
 		selected_slot = slots.size() - 1
-	selected.position = slots[selected_slot].position + Vector2(40,40)
+	selected.position = slots[selected_slot].position + Vector2(40, 40)
 
 	if _slot_datas[selected_slot]:
 		player.display_on_hand(_slot_datas[selected_slot].item_data.texture, _slot_datas[selected_slot].item_data.held_offset)
@@ -53,12 +53,12 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 	for child in h_box_container.get_children():
 		child.queue_free()
 
-	for slot_data : SlotData in inventory_data.slot_datas.slice(0,6):
-		var slot : Slot = SLOT.instantiate()
+	for slot_data: SlotData in inventory_data.slot_datas.slice(0, 6):
+		var slot: Slot = SLOT.instantiate()
 		h_box_container.add_child(slot)
 
 		if slot_data:
 			slot.set_slot_data(slot_data)
 
-	_slot_datas = inventory_data.slot_datas.slice(0,6)
+	_slot_datas = inventory_data.slot_datas.slice(0, 6)
 	set_selected()

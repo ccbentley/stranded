@@ -7,7 +7,6 @@ class_name CreateWorldMenu
 @onready var world_seed: LineEdit = $MarginContainer/CenterContainer/VBoxContainer/Seed
 @onready var create_world_button: Button = $MarginContainer/VBoxContainer2/CreateWorldButton
 
-
 signal exit_create_world_menu
 
 const save_file_path: String = "user://save/"
@@ -44,4 +43,3 @@ func on_create_world_pressed() -> void:
 
 func verify_save_directory(path: String) -> void:
 	DirAccess.make_dir_absolute(path)
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=31 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -92,9 +92,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
-size = Vector2(10, 19)
-
 [sub_resource type="Animation" id="Animation_ltw5y"]
 length = 0.001
 tracks/0/type = "value"
@@ -132,10 +129,55 @@ _data = {
 "melee_attack": SubResource("Animation_jnbma")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_binr2"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdnxj"]
+bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
+size = Vector2(10, 19)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_qsibb")
+
+[node name="StateMachines" type="Node" parent="."]
+
+[node name="MovementStateMachine" type="Node" parent="StateMachines" node_paths=PackedStringArray("state")]
+script = ExtResource("8_na4i2")
+state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+script = ExtResource("9_0khh0")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
+
+[node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+script = ExtResource("9_02503")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
+
+[node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar")]
+script = ExtResource("9_fa61r")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
+drown_bar = NodePath("../../../DrownBar")
+
+[node name="ActionStateMachine" type="Node" parent="StateMachines" node_paths=PackedStringArray("state")]
+script = ExtResource("11_epdro")
+state = NodePath("PlayerNoActionState")
+
+[node name="PlayerAttackState" type="Node" parent="StateMachines/ActionStateMachine"]
+script = ExtResource("11_76vsd")
+
+[node name="PlayerNoActionState" type="Node" parent="StateMachines/ActionStateMachine"]
+script = ExtResource("13_5c8o8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vu2q5")
@@ -145,6 +187,36 @@ frame_progress = 0.646775
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4f3oy")
+
+[node name="OnHand" type="Sprite2D" parent="."]
+position = Vector2(7, 3)
+scale = Vector2(0.75, 0.75)
+offset = Vector2(7, -6.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_66n73")
+}
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="DrownBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 1
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 17.0
+offset_bottom = -14.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_binr2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sdnxj")
+value = 100.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="DrownBar"]
+wait_time = 0.5
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_q3ebq")]
 health_component = NodePath("../HealthComponent")
@@ -158,45 +230,3 @@ shape = SubResource("RectangleShape2D_hgslm")
 MAX_HEALTH = 1e+10
 
 [node name="AttackComponent" parent="." instance=ExtResource("6_in0ea")]
-
-[node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("8_na4i2")
-state = NodePath("PlayerIdleState")
-
-[node name="PlayerIdleState" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("9_0khh0")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
-
-[node name="PlayerMovingState" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("9_02503")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
-
-[node name="PlayerSwimState" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
-script = ExtResource("9_fa61r")
-actor = NodePath("../..")
-anim = NodePath("../../AnimatedSprite2D")
-
-[node name="ActionStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("11_epdro")
-state = NodePath("PlayerNoActionState")
-
-[node name="PlayerAttackState" type="Node" parent="ActionStateMachine"]
-script = ExtResource("11_76vsd")
-
-[node name="PlayerNoActionState" type="Node" parent="ActionStateMachine"]
-script = ExtResource("13_5c8o8")
-
-[node name="OnHand" type="Sprite2D" parent="."]
-position = Vector2(7, 3)
-scale = Vector2(0.75, 0.75)
-offset = Vector2(7, -6.5)
-
-[node name="AttackCooldown" type="Timer" parent="."]
-one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_66n73")
-}

@@ -1,7 +1,7 @@
 class_name FiniteStateMachine
 extends Node
 
-@export var state : State
+@export var state: State
 
 func _ready() -> void:
 	change_state(state)

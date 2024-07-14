@@ -1,12 +1,12 @@
 extends ItemData
 class_name ItemDataMeleeWeapon
 
-@export var attack_damage : float
-@export var attack_knockback : float
-@export var attack_cooldown : float
-@export var attack_range : float
-@export var attack_stun_time : float
-@export_flags("Enemy", "Wood", "Stone", "Grass") var break_material : int = 1
+@export var attack_damage: float
+@export var attack_knockback: float
+@export var attack_cooldown: float
+@export var attack_range: float
+@export var attack_stun_time: float
+@export_flags("Enemy", "Wood", "Stone", "Grass") var break_material: int = 1
 
 func use(target: Node2D) -> void:
 	if target.try_attack():

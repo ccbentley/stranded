@@ -1,14 +1,14 @@
 extends Control
 class_name PauseMenu
 
-var game_paused : bool = false
+var game_paused: bool = false
 
 @onready var main: Node2D = $"../.."
 @onready var options_menu: OptionsMenu = $OptionsMenu
 @onready var margin_container: MarginContainer = $MarginContainer
 
 func _ready() -> void:
-	set_process_input(true) #Enable input handling
+	set_process_input(true) # Enable input handling
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):

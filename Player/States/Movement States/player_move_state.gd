@@ -1,8 +1,8 @@
 class_name PlayerMovingState
 extends State
 
-@export var actor : Player
-@export var anim : AnimatedSprite2D
+@export var actor: Player
+@export var anim: AnimatedSprite2D
 
 signal player_stopped_moving
 signal player_entered_water
@@ -18,7 +18,7 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
-	var input : Vector2 = actor.get_input()
+	var input: Vector2 = actor.get_input()
 	#Exits state if there is no move input
 	if input == Vector2.ZERO:
 		player_stopped_moving.emit()

@@ -1,7 +1,7 @@
 extends Node
 
 class Task:
-	var id : int
+	var id: int
 
 	signal completed
 
@@ -29,27 +29,27 @@ class GroupTask:
 	func wait() -> void:
 		WorkerThreadPool.wait_for_group_task_completion(self.id)
 
-var tasks : Array = []
+var tasks: Array = []
 
-func create_task(action : Callable, high_priority: bool = false, description: String = "") -> Task:
-		var task_id : int = WorkerThreadPool.add_task(action, high_priority, description)
-		var task : Task = Task.new(task_id)
+func create_task(action: Callable, high_priority: bool=false, description: String="") -> Task:
+		var task_id: int = WorkerThreadPool.add_task(action, high_priority, description)
+		var task: Task = Task.new(task_id)
 		tasks.append(task)
 		return task
 
-func create_group_task(action : Callable, elements : int, tasks_needed: int = -1, high_priority: bool = false, description: String= "") -> GroupTask:
-	var group_task_id : int = WorkerThreadPool.add_group_task(action, elements, tasks_needed, high_priority, description,)
-	var group_task : GroupTask = GroupTask.new(group_task_id)
+func create_group_task(action: Callable, elements: int, tasks_needed: int=- 1, high_priority: bool=false, description: String="") -> GroupTask:
+	var group_task_id: int = WorkerThreadPool.add_group_task(action, elements, tasks_needed, high_priority, description, )
+	var group_task: GroupTask = GroupTask.new(group_task_id)
 	tasks.append(group_task)
-	return(group_task)
+	return (group_task)
 
 func _process(_delta: float) -> void:
-	var completed_tasks : Array = tasks.filter(
+	var completed_tasks: Array = tasks.filter(
 		func completed(task: Task) -> bool:
 			return task.is_completed()
 	)
 
-	for completed_task : Task in completed_tasks:
-		var task : Task = completed_task
+	for completed_task: Task in completed_tasks:
+		var task: Task = completed_task
 		task.completed.emit()
 		tasks.erase(task)

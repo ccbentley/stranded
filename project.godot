@@ -29,9 +29,13 @@ WorldManager="*res://Autoloads/world_manager.gd"
 
 gdscript/warnings/untyped_declaration=1
 
+[display]
+
+window/size/always_on_top=true
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg")
 
 [filesystem]
 

@@ -4,7 +4,7 @@ class_name HotkeyRebindButton
 @onready var label: Label = $HBoxContainer/Label
 @onready var button: Button = $HBoxContainer/Button
 
-@export var action_name : String = ""
+@export var action_name: String = ""
 
 func _ready() -> void:
 	set_process_unhandled_key_input(false)
@@ -35,7 +35,7 @@ func set_action_name() -> void:
 			label.text = "Interact"
 
 func set_text_for_key() -> void:
-	var action_keycode : String = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
+	var action_keycode: String = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
 	button.text = "%s" % action_keycode
 
 func _on_button_toggled(toggled_on: bool) -> void:
