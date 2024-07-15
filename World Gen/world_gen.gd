@@ -52,6 +52,7 @@ var view_distance: int = 1
 
 #Objects
 const TREE = preload("res://Scenes/Objects/tree.tscn")
+const ROCK = preload("res://Scenes/Objects/rock.tscn")
 
 
 func _ready() -> void:
@@ -91,6 +92,8 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 								grass_tiles_arr.append(adj_tile)
 				if decoration_noise_val > 0.7:
 					call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)
+				elif decoration_noise_val > 0.6:
+					call_deferred("draw_object", ROCK, map_to_local(Vector2i(x, y)), chunk_node)
 				elif decoration_noise_val > 0.5:
 					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
 				elif decoration_noise_val > 0.4:
