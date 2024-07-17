@@ -162,7 +162,7 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 
 
 func is_in_water() -> bool:
-	var tile_data := tile_map.get_cell_tile_data(0, player_tile)
+	var tile_data: TileData = tile_map.get_cell_tile_data(0, player_tile)
 	if tile_data:
 		return tile_data.get_custom_data("can_swim")
 	else:

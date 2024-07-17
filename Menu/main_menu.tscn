@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://by4naatqr1mvd"]
 
-[ext_resource type="Texture2D" uid="uid://cemgv5glprguq" path="res://Art/Background/OceanClouds.png" id="1_17aop"]
 [ext_resource type="Script" path="res://Menu/main_menu.gd" id="1_a1l53"]
+[ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://Art/Background/Screenshot 2024-07-15 183426.png" id="2_h8a2m"]
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://Menu/Play/save_selection_menu.tscn" id="3_j43pa"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://Menu/Play/create_world_menu.tscn" id="4_bvifd"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://Menu/Options/options_menu.tscn" id="5_gno6i"]
@@ -24,14 +24,14 @@ grow_vertical = 2
 script = ExtResource("1_a1l53")
 
 [node name="Background" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(0.585062, 0.585062, 0.585062, 0.411765)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_17aop")
+texture = ExtResource("2_h8a2m")
 expand_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -59,7 +59,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
 theme_override_fonts/font = SubResource("SystemFont_hspdq")
 theme_override_font_sizes/font_size = 64
-text = "TITLE"
+text = "Untitled Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 

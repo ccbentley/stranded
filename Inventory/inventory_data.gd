@@ -6,6 +6,7 @@ signal inventory_interact(inventory_data: InventoryData, index: int, button: int
 
 @export var slot_datas: Array[SlotData]
 
+
 func grab_slot_data(index: int) -> SlotData:
 	var slot_data: SlotData = slot_datas[index]
 	if slot_data:
@@ -14,6 +15,7 @@ func grab_slot_data(index: int) -> SlotData:
 		return slot_data
 	else:
 		return null
+
 
 func drop_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	var slot_data: SlotData = slot_datas[index]
@@ -26,6 +28,7 @@ func drop_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	inventory_updated.emit(self)
 	return return_slot_data
 
+
 func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	var slot_data: SlotData = slot_datas[index]
 	if not slot_data:
@@ -37,6 +40,7 @@ func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 		return grabbed_slot_data
 	else:
 		return null
+
 
 func use_slot_data(index: int) -> void:
 	var slot_data: SlotData = slot_datas[index]
@@ -53,6 +57,7 @@ func use_slot_data(index: int) -> void:
 
 	inventory_updated.emit(self)
 
+
 func pick_up_slot_data(slot_data: SlotData) -> bool:
 	for index in slot_datas.size():
 		if slot_datas[index] and slot_datas[index].can_fully_merge_with(slot_data):
@@ -67,5 +72,36 @@ func pick_up_slot_data(slot_data: SlotData) -> bool:
 			return true
 	return false
 
+
 func on_slot_clicked(index: int, button: int) -> void:
 	inventory_interact.emit(self, index, button)
+
+
+func get_amount(name: String) -> int:
+	var amount: int = 0
+	for slot_data in slot_datas:
+		if slot_data and slot_data.item_data:
+			if slot_data.item_data.name == name:
+				amount += slot_data.quantity
+	return amount
+
+
+func remove_item(name: String, amount: int) -> void:
+	for slot_data in slot_datas.size():
+		if slot_datas[slot_data] and slot_datas[slot_data].item_data:
+			if slot_datas[slot_data].item_data.name == name:
+				if amount == 0:
+					if slot_datas[slot_data].quantity < 1:
+						slot_datas[slot_data] = null
+					inventory_updated.emit(self)
+					return
+				elif slot_datas[slot_data].quantity >= amount:
+					slot_datas[slot_data].quantity -= amount
+					if slot_datas[slot_data].quantity < 1:
+						slot_datas[slot_data] = null
+					inventory_updated.emit(self)
+					return
+				elif amount > 0:
+					inventory_updated.emit(self)
+					slot_datas[slot_data].quantity -= slot_datas[slot_data].quantity
+					amount -= slot_datas[slot_data].quantity

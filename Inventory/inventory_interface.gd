@@ -11,22 +11,32 @@ var external_inventory_owner: Node2D
 @onready var grabbed_slot: Slot = $GrabbedSlot
 @onready var external_inventory: Inventory = $ExternalInventory
 @onready var equip_inventory: PanelContainer = $EquipInventory
+@onready var crafting_inventory: CraftingInventory = $CraftingInventory
+
 
 func set_player_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_interact.connect(on_inventory_interact)
 	player_inventory.set_inventory_data(inventory_data)
+	crafting_inventory.connect_player_inventory_updated(inventory_data)
+
 
 func set_equip_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_interact.connect(on_inventory_interact)
 	equip_inventory.set_inventory_data(inventory_data)
 
+
+func set_crafting_inventory_data(inventory_data: InventoryData) -> void:
+	inventory_data.inventory_interact.connect(on_inventory_interact)
+	crafting_inventory.set_inventory_data(inventory_data)
+
+
 func _physics_process(_delta: float) -> void:
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
 
-	if external_inventory_owner \
-			and external_inventory_owner.global_position.distance_to(PlayerManager.get_global_position()) > 75:
+	if external_inventory_owner and external_inventory_owner.global_position.distance_to(PlayerManager.get_global_position()) > 75:
 		force_close.emit()
+
 
 func set_external_inventory(_external_inventory_owner: Node2D) -> void:
 	external_inventory_owner = _external_inventory_owner
@@ -37,6 +47,7 @@ func set_external_inventory(_external_inventory_owner: Node2D) -> void:
 
 	external_inventory.show()
 
+
 func clear_external_inventory() -> void:
 	if external_inventory_owner:
 		var inventory_data: InventoryData = external_inventory_owner.inventory_data
@@ -46,6 +57,7 @@ func clear_external_inventory() -> void:
 
 		external_inventory.hide()
 		external_inventory_owner = null
+
 
 func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) -> void:
 	match [grabbed_slot_data, button]:
@@ -60,6 +72,7 @@ func on_inventory_interact(inventory_data: InventoryData, index: int, button: in
 
 	update_grabbed_slot()
 
+
 func update_grabbed_slot() -> void:
 	if grabbed_slot_data:
 		grabbed_slot.show()
@@ -67,10 +80,9 @@ func update_grabbed_slot() -> void:
 	else:
 		grabbed_slot.hide()
 
+
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \
-			and event.is_pressed() \
-			and grabbed_slot_data:
+	if event is InputEventMouseButton and event.is_pressed() and grabbed_slot_data:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				drop_slot_data.emit(grabbed_slot_data)
@@ -80,6 +92,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				if grabbed_slot_data.quantity < 1:
 					grabbed_slot_data = null
 		update_grabbed_slot()
+
 
 func _on_visibility_changed() -> void:
 	if not visible and grabbed_slot_data:
