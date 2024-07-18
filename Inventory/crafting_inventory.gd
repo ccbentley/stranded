@@ -35,7 +35,7 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 				item_grid.add_child(slot)
 				var slot_data: SlotData = SlotData.new()
 				slot_data.item_data = load(recipe["output"])
-				slot_data.quantity = 1
+				slot_data.set_quantity(1)
 				slot.set_slot_data(slot_data)
 				inventory_data.slot_datas.append(slot_data)
 				slot.slot_clicked.connect(inventory_data.on_slot_clicked)

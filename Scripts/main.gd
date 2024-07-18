@@ -35,7 +35,7 @@ func load_inventory() -> void:
 	inventory_interface.set_player_inventory_data(player.inventory_data)
 	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
 	hot_bar_inventory.set_inventory_data(player.inventory_data)
-	inventory_interface.set_crafting_inventory_data(InventoryData.new())
+	inventory_interface.set_crafting_inventory_data(CraftingInventoryData.new())
 
 
 func toggle_inventory_interface(external_inventory_owner: Node2D = null) -> void:
