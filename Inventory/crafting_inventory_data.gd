@@ -10,3 +10,7 @@ func drop_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 			grabbed_slot_data.set_quantity(grabbed_slot_data.quantity + slot_data.quantity)
 	inventory_updated.emit(self)
 	return grabbed_slot_data
+
+
+func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
+	return grabbed_slot_data
