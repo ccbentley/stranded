@@ -20,7 +20,6 @@ boot_splash/show_image=false
 PlayerManager="*res://Player/player_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 Global="*res://Autoloads/global.gd"
-GlobalUi="*res://Scenes/global_ui.tscn"
 SettingsSaveManager="*res://Autoloads/settings_save_manager.gd"
 TaskManager="*res://Autoloads/task_manager.gd"
 WorldManager="*res://Autoloads/world_manager.gd"

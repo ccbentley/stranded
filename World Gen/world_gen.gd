@@ -51,8 +51,9 @@ var loaded_chunks: PackedVector2Array = []
 var view_distance: int = 1
 
 #Objects
-const TREE = preload ("res://Scenes/Objects/tree.tscn")
-const ROCK = preload ("res://Scenes/Objects/rock.tscn")
+const TREE = preload("res://Scenes/Objects/tree.tscn")
+const ROCK = preload("res://Scenes/Objects/rock.tscn")
+
 
 func _ready() -> void:
 	noise = noise_height_text.noise
@@ -60,6 +61,7 @@ func _ready() -> void:
 
 	noise.seed = Global.worldData.world_seed
 	decoration_noise.seed = Global.worldData.world_seed
+
 
 func find_spawn_location() -> void:
 	for x: int in range(500):
@@ -69,6 +71,7 @@ func find_spawn_location() -> void:
 				player.global_position = map_to_local(Vector2i(x, y))
 				return
 	push_error("Could not find a suitable spawn location.")
+
 
 func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 	var sand_tiles_arr: PackedVector2Array = []
@@ -81,8 +84,8 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 			var noise_val: float = noise.get_noise_2d(x, y)
 			var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 			if noise_val >= 0.65:
-				for dx in range( - 1, 2):
-					for dy in range( - 1, 2):
+				for dx in range(-1, 2):
+					for dy in range(-1, 2):
 						var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
 						if not grass_tiles_arr.has(adj_tile):
 							if is_in_chunk(chunk, adj_tile):
@@ -96,8 +99,8 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 				elif decoration_noise_val > 0.4:
 					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
 			elif noise_val >= 0.6:
-				for dx in range( - 2, 3):
-					for dy in range( - 2, 3):
+				for dx in range(-2, 3):
+					for dy in range(-2, 3):
 						var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
 						if not sand_tiles_arr.has(adj_tile):
 							if is_in_chunk(Vector2i(chunk), adj_tile):
@@ -121,8 +124,8 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 	for tile: Vector2i in sand_tiles_arr:
 		if not grass_tiles_arr.has(tile):
 			var valid_tile: bool = true
-			for dx in range( - 1, 2):
-				for dy in range( - 1, 2):
+			for dx in range(-1, 2):
+				for dy in range(-1, 2):
 					var adj_tile: Vector2i = Vector2i(tile.x + dx, tile.y + dy)
 					if not sand_tiles_arr.has(adj_tile):
 						valid_tile = false
@@ -134,6 +137,7 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, sand_decoration_atlas_arr.pick_random())
 	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
 
+
 func get_chunk_node(chunk: Vector2i) -> Node2D:
 	var chunk_node: Node2D = Node2D.new()
 	chunk_node.name = str(chunk)
@@ -142,21 +146,25 @@ func get_chunk_node(chunk: Vector2i) -> Node2D:
 	add_child(chunk_node)
 	return chunk_node
 
+
 func draw_tiles(_water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
 	for tile: Vector2i in _water_tiles_arr:
 		set_cell(water_layer, tile, source_id, water_atlas)
 	set_cells_terrain_connect(ground_1_layer, _sand_tiles_arr, terrain_sand_int, 0)
 	set_cells_terrain_connect(ground_2_layer, _grass_tiles_arr, terrain_grass_int, 0)
 
-func draw_object(OBJ: PackedScene, pos: Vector2=Vector2i(0, 0), child_node: Node2D=self) -> void:
+
+func draw_object(OBJ: PackedScene, pos: Vector2 = Vector2i(0, 0), child_node: Node2D = self) -> void:
 	var obj: Node2D = OBJ.instantiate()
 	child_node.add_child(obj)
 	obj.position = pos
+
 
 func is_in_chunk(chunk: Vector2i, tile_pos: Vector2i) -> bool:
 	chunk = chunk * 32
 	var chunk_end: Vector2i = chunk + Vector2i(32, 32)
 	return tile_pos.x >= chunk.x and tile_pos.x < chunk_end.x and tile_pos.y >= chunk.y and tile_pos.y < chunk_end.y
+
 
 func clear_chunk(chunk: Vector2i) -> void:
 	for _x: int in range(32):
@@ -164,8 +172,9 @@ func clear_chunk(chunk: Vector2i) -> void:
 			var x: int = _x + chunk.x * 32
 			var y: int = _y + chunk.y * 32
 			for layer: int in number_of_layers:
-				set_cell(layer, Vector2i(x, y), -1, Vector2i( - 1, -1))
+				set_cell(layer, Vector2i(x, y), -1, Vector2i(-1, -1))
 	get_node(str(chunk)).queue_free()
+
 
 func unload_distant_chunks() -> void:
 	var times_chunk_removed: int = 0
@@ -177,12 +186,14 @@ func unload_distant_chunks() -> void:
 			loaded_chunks.remove_at(_chunk)
 			times_chunk_removed += 1
 
+
 func _process(_delta: float) -> void:
 	player_chunk_pos = local_to_map(player.position) / 32
-	for dx in range( - view_distance, view_distance + 1):
-		for dy in range( - view_distance, view_distance + 1):
+	for dx in range(-view_distance, view_distance + 1):
+		for dy in range(-view_distance, view_distance + 1):
 			var adj_chunk: Vector2i = Vector2i(player_chunk_pos.x + dx, player_chunk_pos.y + dy)
 			try_to_generate_chunk(adj_chunk)
+
 
 func try_to_generate_chunk(chunk: Vector2i) -> void:
 	if loaded_chunks.has(chunk):
@@ -194,10 +205,11 @@ func try_to_generate_chunk(chunk: Vector2i) -> void:
 	task.is_completed()
 	unload_distant_chunks()
 
+
 func dist(p1: Vector2i, p2: Vector2i) -> Vector2i:
 	var distance: Vector2i = p1 - p2
 	if distance.x < 0:
-		distance.x = distance.x * - 1
+		distance.x = distance.x * -1
 	if distance.y < 0:
-		distance.y = distance.y * - 1
+		distance.y = distance.y * -1
 	return distance

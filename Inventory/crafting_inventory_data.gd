@@ -12,5 +12,5 @@ func drop_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	return grabbed_slot_data
 
 
-func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
+func drop_single_slot_data(grabbed_slot_data: SlotData, _index: int) -> SlotData:
 	return grabbed_slot_data
