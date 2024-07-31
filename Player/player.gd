@@ -47,6 +47,8 @@ var player_tile: Vector2i
 
 signal toggle_inventory
 
+var turn_tween: Tween
+
 
 func _physics_process(_delta: float) -> void:
 	player_tile = tile_map.local_to_map(global_position)
@@ -55,19 +57,18 @@ func _physics_process(_delta: float) -> void:
 var is_facing_right: bool = true:
 	set(value):
 		if value and is_facing_right != value:
-			animation_player.play("flip")
-			player_sprite.flip_h = false
+			turn_tween = get_tree().create_tween()
+			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = false
 			on_hand.position.x = 7
 			on_hand.offset.x = held_offset.x
-			is_facing_right = value
 		elif not value and is_facing_right != value:
-			animation_player.play("flip")
-			player_sprite.flip_h = true
+			turn_tween = get_tree().create_tween()
+			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = true
 			on_hand.position.x = -7
 			on_hand.offset.x = -held_offset.x
-			is_facing_right = value
+		is_facing_right = value
 
 
 func _unhandled_input(_event: InputEvent) -> void:
