@@ -7,11 +7,13 @@ const PickUp = preload("res://Item/Pickup/pickup.tscn")
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
 @onready var tile_map: TileMap = $TileMap
 
-const save_file_path: String = "user://save/"
-const player_save_file_name: String = "PlayerSave.tres"
-const world_save_file_name: String = "WorldData.tres"
-var world_save_file_path: String = save_file_path + Global.worldData.world_name + "/"
+const save_file_path: String = Global.save_file_path
+const player_save_file_name: String = Global.player_save_file_name
+const world_save_file_name: String = Global.world_save_file_name
+var world_save_file_path: String = Global.world_save_file_path
 var playerData: PlayerData = PlayerData.new()
+
+const PICKUP: PackedScene = preload("res://Item/Pickup/pickup.tscn")
 
 
 func _ready() -> void:
@@ -91,9 +93,6 @@ func zoom_out() -> void:
 	var new_zoom: Vector2 = $Camera2D.zoom - Vector2(0.5, 0.5)
 	if new_zoom > Vector2.ZERO:
 		$Camera2D.zoom = new_zoom
-
-
-const PICKUP: PackedScene = preload("res://Item/Pickup/pickup.tscn")
 
 
 func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:

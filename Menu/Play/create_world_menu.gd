@@ -9,16 +9,19 @@ class_name CreateWorldMenu
 
 signal exit_create_world_menu
 
-const save_file_path: String = "user://save/"
-const save_file_name: String = "WorldData.tres"
+var save_file_path: String = Global.save_file_path
+const save_file_name: String = Global.world_save_file_name
+
 
 func _ready() -> void:
 	handle_connecting_signals()
 	set_process(false)
 
+
 func handle_connecting_signals() -> void:
 	exit_button.button_down.connect(on_exit_pressed)
 	create_world_button.button_down.connect(on_create_world_pressed)
+
 
 func on_exit_pressed() -> void:
 	world_name.text = ""
@@ -26,6 +29,7 @@ func on_exit_pressed() -> void:
 	world_seed.text = ""
 	exit_create_world_menu.emit()
 	set_process(false)
+
 
 func on_create_world_pressed() -> void:
 	var worldData: WorldData = WorldData.new()
@@ -40,6 +44,7 @@ func on_create_world_pressed() -> void:
 		verify_save_directory(world_save_file_path)
 		ResourceSaver.save(worldData, world_save_file_path + save_file_name)
 		on_exit_pressed()
+
 
 func verify_save_directory(path: String) -> void:
 	DirAccess.make_dir_absolute(path)

@@ -11,22 +11,18 @@ const recipes: Dictionary = {
 }
 
 @export var player: CharacterBody2D
-var _inventory_data: InventoryData 
-
+var _inventory_data: InventoryData
 
 func set_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(populate_item_grid)
 	populate_item_grid(inventory_data)
 	_inventory_data = inventory_data
 
-
 func connect_player_inventory_updated(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(discard_inventory_data)
 
-
 func discard_inventory_data(__inventory_data: InventoryData) -> void:
 	populate_item_grid(_inventory_data)
-
 
 func populate_item_grid(inventory_data: InventoryData) -> void:
 	for child in item_grid.get_children():
@@ -52,6 +48,6 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 			slot.slot_clicked.connect(func(_index: int, button: int) -> void:
 				if button == MOUSE_BUTTON_LEFT:
 					for mat: String in recipe["materials"]:
-						var required_amount: int = recipe["materials"][mat]
+						var required_amount: int=recipe["materials"][mat]
 						player.inventory_data.remove_item(mat, required_amount)
 			)

@@ -103,7 +103,7 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 					for dy in range(-2, 3):
 						var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
 						if not sand_tiles_arr.has(adj_tile):
-							if is_in_chunk(Vector2i(chunk), adj_tile):
+							if is_in_chunk(chunk, adj_tile):
 								sand_tiles_arr.append(adj_tile)
 			else:
 				water_tiles_arr.append(Vector2i(x, y))

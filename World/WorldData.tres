@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WorldData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://SaveLoad/world_data.gd" id="1_l75ch"]
+
+[resource]
+script = ExtResource("1_l75ch")
+world_name = "World"
+character_name = "Bob"
+world_seed = 3885350785
