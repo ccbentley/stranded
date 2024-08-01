@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=32 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://wmnpabd1sxra" path="res://Player/Art/Swim/player_swim.png" id="4_n0w3n"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
+[ext_resource type="Script" path="res://Player/States/Movement States/player_sit_state.gd" id="6_fg33t"]
 [ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://Components/Attack/attack_component.tscn" id="6_in0ea"]
 [ext_resource type="Script" path="res://Player/States/movement_state_machine.gd" id="8_na4i2"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_idle_state.gd" id="9_0khh0"]
@@ -169,6 +170,11 @@ actor = NodePath("../../..")
 anim = NodePath("../../../AnimatedSprite2D")
 drown_bar = NodePath("../../../DrownBar")
 
+[node name="PlayerSitState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+script = ExtResource("6_fg33t")
+actor = NodePath("../../..")
+anim = NodePath("../../../AnimatedSprite2D")
+
 [node name="ActionStateMachine" type="Node" parent="StateMachines" node_paths=PackedStringArray("state")]
 script = ExtResource("11_epdro")
 state = NodePath("PlayerNoActionState")
@@ -180,7 +186,6 @@ script = ExtResource("11_76vsd")
 script = ExtResource("13_5c8o8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_vu2q5")
 animation = &"idle"
 

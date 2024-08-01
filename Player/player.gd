@@ -22,6 +22,7 @@ extends CharacterBody2D
 @onready var player_idle_state: PlayerIdleState = $StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
 @onready var player_moving_state: PlayerMovingState = $StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
 @onready var player_swim_state: PlayerSwimState = $StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
+@onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 #Action States
 @onready var player_no_action_state: PlayerNoActionState = $StateMachines/ActionStateMachine/PlayerNoActionState as PlayerNoActionState
@@ -100,6 +101,7 @@ func _ready() -> void:
 	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
 	player_moving_state.player_entered_water.connect(msm.change_state.bind(player_swim_state))
 	player_swim_state.player_exited_water.connect(msm.change_state.bind(player_moving_state))
+	player_sit_state.player_exited.connect(msm.change_state.bind(player_idle_state))
 
 
 #Returns move input as a Vector2
@@ -112,7 +114,7 @@ func get_input() -> Vector2:
 func interact() -> void:
 	for area in hitbox_component.get_overlapping_areas():
 		if area.is_in_group("interactable"):
-			area.get_parent().player_interact()
+			area.owner.player_interact(self)
 
 
 func get_drop_position() -> Vector2:

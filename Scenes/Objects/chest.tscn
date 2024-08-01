@@ -16,3 +16,5 @@ texture = SubResource("PlaceholderTexture2D_njviy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_k8tdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

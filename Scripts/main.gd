@@ -1,7 +1,5 @@
 extends Node2D
 
-const PickUp = preload("res://Item/Pickup/pickup.tscn")
-
 @onready var player: CharacterBody2D = $Player
 @onready var inventory_interface: InventoryInterface = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
@@ -55,7 +53,7 @@ func toggle_inventory_interface(external_inventory_owner: Node2D = null) -> void
 
 
 func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
-	var pick_up: Pickup = PickUp.instantiate()
+	var pick_up: Pickup = PICKUP.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = player.get_drop_position()
 	add_child(pick_up)

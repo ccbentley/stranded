@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="WorldData" load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://SaveLoad/world_data.gd" id="1_vxmgl"]
-
-[resource]
-script = ExtResource("1_vxmgl")
-world_name = "TestWorld"
-character_name = "Bob"
-world_seed = 1963797289
