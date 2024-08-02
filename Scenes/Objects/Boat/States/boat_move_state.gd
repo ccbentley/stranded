@@ -28,11 +28,12 @@ func _physics_process(delta: float) -> void:
 		actor.boat_speed = actor.water_boat_speed
 	var input: Vector2 = player.get_input()
 	if input == Vector2.ZERO:
-		if actor.velocity.length() > (actor.friction * delta):
-			actor.velocity -= actor.velocity.normalized() * (actor.friction * delta)
-			actor.move_and_slide()
-		else:
-			actor.velocity = Vector2.ZERO
+		if actor.velocity.length() > 0:
+			var friction_force: Vector2 = actor.velocity.normalized() * actor.friction * delta
+			if friction_force.length() > actor.velocity.length():
+				actor.velocity = Vector2.ZERO
+			else:
+				actor.velocity -= friction_force
 	else:
 		actor.velocity += (input * actor.accel * delta)
 		actor.velocity = actor.velocity.limit_length(actor.boat_speed)

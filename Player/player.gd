@@ -15,18 +15,13 @@ extends CharacterBody2D
 @export var equip_inventory_data: InventoryDataEquip
 
 #State Machines
-@onready var msm: MovementStateMachine = $StateMachines/MovementStateMachine as MovementStateMachine
-@onready var asm: ActionStateMachine = $StateMachines/ActionStateMachine as ActionStateMachine
+@onready var msm: FiniteStateMachine = $StateMachines/MovementStateMachine as FiniteStateMachine
 
 #Movement States
 @onready var player_idle_state: PlayerIdleState = $StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
 @onready var player_moving_state: PlayerMovingState = $StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
 @onready var player_swim_state: PlayerSwimState = $StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
 @onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
-
-#Action States
-@onready var player_no_action_state: PlayerNoActionState = $StateMachines/ActionStateMachine/PlayerNoActionState as PlayerNoActionState
-@onready var player_attack_state: PlayerAttackState = $StateMachines/ActionStateMachine/PlayerAttackState as PlayerAttackState
 
 @onready var on_hand: Sprite2D = $OnHand
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D

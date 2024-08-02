@@ -10,9 +10,9 @@ var dead: bool = false
 
 @export var drop_data: Array[LootData]
 var slot_datas: Array[SlotData]
-const WOOD = preload("res://Item/Items/Materials/wood.tres")
 
 signal damaged(prev_health: float, health: float)
+signal died
 
 
 func _ready() -> void:
@@ -39,6 +39,7 @@ func damage(attack: Attack) -> void:
 
 	if health <= 0 and not dead:
 		dead = true
+		died.emit()
 		if slot_datas:
 			for drop: LootData in slot_datas:
 				var roll: float = randf()

@@ -1,20 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=29 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qsibb"]
 [ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://Player/Art/player_idle.png" id="2_eh4ke"]
+[ext_resource type="Script" path="res://Scripts/FSM/finite_state_machine.gd" id="2_f4eej"]
 [ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://Player/Art/player_walk_cycle.png" id="3_p6gjd"]
 [ext_resource type="Texture2D" uid="uid://wmnpabd1sxra" path="res://Player/Art/Swim/player_swim.png" id="4_n0w3n"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Components/Hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Components/Health/health_component.tscn" id="5_q6e4e"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_sit_state.gd" id="6_fg33t"]
 [ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://Components/Attack/attack_component.tscn" id="6_in0ea"]
-[ext_resource type="Script" path="res://Player/States/movement_state_machine.gd" id="8_na4i2"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_idle_state.gd" id="9_0khh0"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_move_state.gd" id="9_02503"]
 [ext_resource type="Script" path="res://Player/States/Movement States/player_swim_state.gd" id="9_fa61r"]
-[ext_resource type="Script" path="res://Player/States/Action States/player_attack_state.gd" id="11_76vsd"]
-[ext_resource type="Script" path="res://Player/States/action_state_machine.gd" id="11_epdro"]
-[ext_resource type="Script" path="res://Player/States/Action States/player_no_action_state.gd" id="13_5c8o8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
 atlas = ExtResource("2_eh4ke")
@@ -151,7 +148,7 @@ script = ExtResource("1_qsibb")
 [node name="StateMachines" type="Node" parent="."]
 
 [node name="MovementStateMachine" type="Node" parent="StateMachines" node_paths=PackedStringArray("state")]
-script = ExtResource("8_na4i2")
+script = ExtResource("2_f4eej")
 state = NodePath("PlayerIdleState")
 
 [node name="PlayerIdleState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
@@ -174,16 +171,6 @@ drown_bar = NodePath("../../../DrownBar")
 script = ExtResource("6_fg33t")
 actor = NodePath("../../..")
 anim = NodePath("../../../AnimatedSprite2D")
-
-[node name="ActionStateMachine" type="Node" parent="StateMachines" node_paths=PackedStringArray("state")]
-script = ExtResource("11_epdro")
-state = NodePath("PlayerNoActionState")
-
-[node name="PlayerAttackState" type="Node" parent="StateMachines/ActionStateMachine"]
-script = ExtResource("11_76vsd")
-
-[node name="PlayerNoActionState" type="Node" parent="StateMachines/ActionStateMachine"]
-script = ExtResource("13_5c8o8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vu2q5")

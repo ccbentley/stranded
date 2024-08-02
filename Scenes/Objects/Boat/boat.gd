@@ -48,3 +48,8 @@ func is_in_water() -> bool:
 		return tile_data.get_custom_data("can_swim")
 	else:
 		return false
+
+
+func _on_health_component_died() -> void:
+	player.msm.change_state(player.player_idle_state)
+	player.z_index = 0
