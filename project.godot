@@ -12,18 +12,18 @@ config_version=5
 
 config/name="Stranded"
 config/version="0.0 Debug Build"
-run/main_scene="res://Menu/main_menu.tscn"
+run/main_scene="res://Common/Menu/Main/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 
 [autoload]
 
-PlayerManager="*res://Player/player_manager.gd"
+PlayerManager="*res://Entities/Player/player_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-Global="*res://Autoloads/global.gd"
-SettingsSaveManager="*res://Autoloads/settings_save_manager.gd"
-TaskManager="*res://Autoloads/task_manager.gd"
-WorldManager="*res://Autoloads/world_manager.gd"
+Global="*res://Common/global.gd"
+SettingsSaveManager="*res://Common/Menu/Options/settings_save_manager.gd"
+TaskManager="*res://Utilities/Task Manager/task_manager.gd"
+WorldManager="*res://Utilities/World Manager/world_manager.gd"
 
 [debug]
 
