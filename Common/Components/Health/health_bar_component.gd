@@ -1,4 +1,4 @@
-@icon("res://Assets/Art/Material Icons/call_to_action_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
+@icon("res://assets/art/material_icons/call_to_action_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
 extends Node2D
 class_name HealthBarComponent
 

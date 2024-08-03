@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://c86ycwq5bfkuc"]
 
-[ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://Assets/Art/Islands Tileset/islands_tileset_v2_byBrysia.png" id="1_1oaxa"]
-[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Common/Components/Health/health_component.tscn" id="2_77g8f"]
-[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://Entities/Items/Materials/wood.tres" id="3_np36s"]
-[ext_resource type="Script" path="res://Common/Inventory/loot_data.gd" id="4_eb6y3"]
-[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Common/Components/Hitbox/hitbox_component.tscn" id="5_m1pa8"]
-[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://Common/Components/Health/health_bar_component.tscn" id="6_obvgd"]
+[ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://assets/art/islands_tileset/islands_tileset_v2_byBrysia.png" id="1_1oaxa"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="2_77g8f"]
+[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood.tres" id="3_np36s"]
+[ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_eb6y3"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_m1pa8"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health/health_bar_component.tscn" id="6_obvgd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1syf"]
 size = Vector2(15, 6)

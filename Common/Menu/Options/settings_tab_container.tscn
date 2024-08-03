@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://buc2qdphxkss1"]
 
-[ext_resource type="PackedScene" uid="uid://dw0xqgypaptmo" path="res://Common/Menu/Options/window_mode_button.tscn" id="1_26qqw"]
-[ext_resource type="PackedScene" uid="uid://d2touiwvjn41j" path="res://Common/Menu/Options/hotkey_rebind_button.tscn" id="1_y531x"]
-[ext_resource type="PackedScene" uid="uid://h0y2kcol533v" path="res://Common/Menu/Options/resolution_mode_button.tscn" id="2_q71yv"]
-[ext_resource type="PackedScene" uid="uid://di2xg8x7whqo1" path="res://Common/Menu/Options/audio_slider_settings.tscn" id="3_iw73d"]
+[ext_resource type="PackedScene" uid="uid://dw0xqgypaptmo" path="res://common/menu/options/window_mode_button.tscn" id="1_26qqw"]
+[ext_resource type="PackedScene" uid="uid://d2touiwvjn41j" path="res://common/menu/options/hotkey_rebind_button.tscn" id="1_y531x"]
+[ext_resource type="PackedScene" uid="uid://h0y2kcol533v" path="res://common/menu/options/resolution_mode_button.tscn" id="2_q71yv"]
+[ext_resource type="PackedScene" uid="uid://di2xg8x7whqo1" path="res://common/menu/options/audio_slider_settings.tscn" id="3_iw73d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qdg0w"]
 

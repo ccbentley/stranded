@@ -11,5 +11,5 @@ var worldData: WorldData:
 		worldData = value
 		world_save_file_path = save_file_path + worldData.world_name + "/"
 
-var loading_screen: PackedScene = preload("res://Common/Menu/Loading/loading_screen.tscn")
+var loading_screen: PackedScene = preload("res://common/menu/loading/loading_screen.tscn")
 var next_scene: String

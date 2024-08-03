@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://madc445wb3oe"]
 
-[ext_resource type="Script" path="res://Entities/Chest/chest.gd" id="1_ueeyf"]
+[ext_resource type="Script" path="res://entities/chest/chest.gd" id="1_ueeyf"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_njviy"]
 

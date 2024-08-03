@@ -2,7 +2,7 @@ extends PanelContainer
 
 signal hot_bar_use(index: int)
 
-const SLOT = preload("res://Common/Inventory/slot.tscn")
+const SLOT = preload("res://common/inventory/slot.tscn")
 
 var selected_slot: int = 0
 var _slot_datas: Array[SlotData]

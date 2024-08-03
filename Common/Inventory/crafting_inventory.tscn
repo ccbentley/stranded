@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b1yv6c124r1k7"]
 
-[ext_resource type="Script" path="res://Common/Inventory/crafting_inventory.gd" id="1_joug6"]
+[ext_resource type="Script" path="res://common/inventory/crafting_inventory.gd" id="1_joug6"]
 
 [node name="Crafting" type="PanelContainer"]
 offset_right = 16.0

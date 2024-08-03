@@ -11,7 +11,7 @@ signal exit_save_selection_menu
 const save_file_path: String = Global.save_file_path
 const save_file_name: String = Global.world_save_file_name
 
-const SAVE_FILE_MENU: PackedScene = preload("res://Common/Menu/Play/save_file_menu.tscn")
+const SAVE_FILE_MENU: PackedScene = preload("res://common/menu/play/save_file_menu.tscn")
 
 @onready var save_selection_menu: SaveSelectionMenu = $"."
 @onready var create_world_menu: CreateWorldMenu = $"../CreateWorldMenu"

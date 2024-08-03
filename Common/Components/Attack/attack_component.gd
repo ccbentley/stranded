@@ -1,4 +1,4 @@
-@icon("res://Assets/Art/Material Icons/swords_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
+@icon("res://assets/art/material_icons/swords_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
 extends Area2D
 class_name AttackComponent
 

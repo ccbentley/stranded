@@ -11,7 +11,7 @@ const world_save_file_name: String = Global.world_save_file_name
 var world_save_file_path: String = Global.world_save_file_path
 var playerData: PlayerData = PlayerData.new()
 
-const PICKUP: PackedScene = preload("res://Common/Item/Pickup/pickup.tscn")
+const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
 
 
 func _ready() -> void:

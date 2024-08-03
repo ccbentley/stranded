@@ -1,7 +1,7 @@
 extends Node
 
 var settingsData: SettingsData
-@onready var default_keybindData: KeybindData = preload("res://Utilities/Save System/keybind_default.tres")
+@onready var default_keybindData: KeybindData = preload("res://utilities/save_system/keybind_default.tres")
 
 const save_file_path: String = Global.save_file_path
 const save_file_name: String = Global.settings_save_file_name

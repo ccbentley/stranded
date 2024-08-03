@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwiv31qfcgpp1"]
 
-[ext_resource type="Script" path="res://Common/Menu/Play/save_file_menu.gd" id="1_a35m4"]
-[ext_resource type="Texture2D" uid="uid://watkf0rmdoeq" path="res://Assets/Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/White-Icon/Play.png" id="2_fp543"]
-[ext_resource type="Texture2D" uid="uid://c7k2h4ux1sv4f" path="res://Assets/Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/Black-Icon/Play.png" id="3_kqxkh"]
-[ext_resource type="Texture2D" uid="uid://bedm8v7aw1buk" path="res://Assets/Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/White-Icon/Cross.png" id="3_vmyia"]
-[ext_resource type="Texture2D" uid="uid://b5sx8mwrcdoep" path="res://Assets/Art/Prinbles_YetAnotherIcons (beta) (9_7_2023)/png/Black-Icon/Cross.png" id="4_ol2dt"]
+[ext_resource type="Script" path="res://common/menu/play/save_file_menu.gd" id="1_a35m4"]
+[ext_resource type="Texture2D" uid="uid://watkf0rmdoeq" path="res://assets/art/prinbles_yet_another_icons/png/White-Icon/Play.png" id="2_fp543"]
+[ext_resource type="Texture2D" uid="uid://c7k2h4ux1sv4f" path="res://assets/art/prinbles_yet_another_icons/png/Black-Icon/Play.png" id="3_kqxkh"]
+[ext_resource type="Texture2D" uid="uid://bedm8v7aw1buk" path="res://assets/art/prinbles_yet_another_icons/png/White-Icon/Cross.png" id="3_vmyia"]
+[ext_resource type="Texture2D" uid="uid://b5sx8mwrcdoep" path="res://assets/art/prinbles_yet_another_icons/png/Black-Icon/Cross.png" id="4_ol2dt"]
 
 [node name="SaveFileMenu" type="Control"]
 layout_mode = 3

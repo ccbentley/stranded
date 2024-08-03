@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://cur8y0262ef01"]
 
-[ext_resource type="Script" path="res://Entities/Boats/Boat/boat.gd" id="1_vmfak"]
-[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://Entities/Boats/Boat/Boats.png" id="2_ailme"]
-[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://Common/Components/Health/health_component.tscn" id="3_07rrq"]
-[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://Common/Components/Hitbox/hitbox_component.tscn" id="4_8tpil"]
-[ext_resource type="Script" path="res://Utilities/Finite State Machine/finite_state_machine.gd" id="5_tj0i0"]
-[ext_resource type="Script" path="res://Entities/Boats/Boat/States/boat_idle_state.gd" id="6_6d107"]
-[ext_resource type="Script" path="res://Entities/Boats/Boat/States/boat_move_state.gd" id="7_0diah"]
+[ext_resource type="Script" path="res://entities/boats/boat/boat.gd" id="1_vmfak"]
+[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boats/boat/Boats.png" id="2_ailme"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_07rrq"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_8tpil"]
+[ext_resource type="Script" path="res://utilities/finite_state_machine/finite_state_machine.gd" id="5_tj0i0"]
+[ext_resource type="Script" path="res://entities/boats/boat/states/boat_idle_state.gd" id="6_6d107"]
+[ext_resource type="Script" path="res://entities/boats/boat/states/boat_move_state.gd" id="7_0diah"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0iukl"]
 atlas = ExtResource("2_ailme")

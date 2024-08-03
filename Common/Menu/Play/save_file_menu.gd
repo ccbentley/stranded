@@ -22,7 +22,7 @@ func handle_connecting_signals() -> void:
 
 func on_world_icon_pressed() -> void:
 	Global.worldData = worldData.duplicate()
-	Global.next_scene = "res://Stages/Main/world.tscn"
+	Global.next_scene = "res://stages/main/world.tscn"
 	get_tree().change_scene_to_packed(Global.loading_screen)
 
 

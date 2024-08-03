@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://sic3jewj25no"]
 
-[ext_resource type="Script" path="res://Common/Menu/Play/create_world_menu.gd" id="1_pytys"]
+[ext_resource type="Script" path="res://common/menu/play/create_world_menu.gd" id="1_pytys"]
 
 [sub_resource type="SystemFont" id="SystemFont_wwqun"]
 font_names = PackedStringArray("Impact")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=3 format=3 uid="uid://cnepkvwxe6frn"]
 
-[ext_resource type="Script" path="res://Common/Item/item_data_melee_weapon.gd" id="1_sg58d"]
-[ext_resource type="Texture2D" uid="uid://8y6tvsoheqdy" path="res://Assets/Art/Pixel Swords Assets 16x16/Assets/1.png" id="2_gr74u"]
+[ext_resource type="Script" path="res://common/item/item_data_melee_weapon.gd" id="1_sg58d"]
+[ext_resource type="Texture2D" uid="uid://8y6tvsoheqdy" path="res://assets/art/Pixel Swords Assets 16x16/Assets/1.png" id="2_gr74u"]
 
 [resource]
 script = ExtResource("1_sg58d")

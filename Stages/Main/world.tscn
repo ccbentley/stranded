@@ -1,30 +1,30 @@
 [gd_scene load_steps=22 format=3 uid="uid://d0p7eem5cnubx"]
 
-[ext_resource type="Script" path="res://Stages/Main/main.gd" id="1_uw73h"]
-[ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://Stages/Main/World Generation/noise.tres" id="2_iuy5t"]
-[ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://Entities/Player/player.tscn" id="2_rs7gc"]
-[ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://Stages/Main/World Generation/decoration_noise.tres" id="3_d1a5b"]
-[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://Entities/Player/player_inventory.tres" id="4_e8g6s"]
-[ext_resource type="PackedScene" uid="uid://cur8y0262ef01" path="res://Entities/Boats/Boat/boat.tscn" id="5_4ihfa"]
-[ext_resource type="Script" path="res://Common/Inventory/inventory_data_equip.gd" id="5_i2frv"]
-[ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://Entities/Chest/chest.tscn" id="7_5j5bh"]
-[ext_resource type="Script" path="res://Common/Inventory/inventory_data.gd" id="8_0i1ge"]
-[ext_resource type="PackedScene" uid="uid://b1yv6c124r1k7" path="res://Common/Inventory/crafting_inventory.tscn" id="8_8thps"]
-[ext_resource type="Script" path="res://Common/Inventory/inventory_interface.gd" id="12_5ileu"]
-[ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://Common/Inventory/inventory.tscn" id="13_utryv"]
-[ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://Assets/Art/Islands Tileset/islands_tileset_v2_byBrysia.png" id="14_1bycs"]
-[ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://Common/Inventory/slot.tscn" id="14_fq4si"]
-[ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://Common/Menu/Pause/pause_menu.tscn" id="15_fqub2"]
-[ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://Common/Inventory/hot_bar_inventory.tscn" id="15_sa7if"]
-[ext_resource type="Script" path="res://Stages/Main/World Generation/world_gen.gd" id="16_dsn1p"]
+[ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
+[ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
+[ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://entities/player/player.tscn" id="2_rs7gc"]
+[ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://stages/main/world_generation/decoration_noise.tres" id="3_d1a5b"]
+[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://entities/player/player_inventory.tres" id="4_e8g6s"]
+[ext_resource type="PackedScene" uid="uid://cur8y0262ef01" path="res://entities/boats/boat/boat.tscn" id="5_4ihfa"]
+[ext_resource type="Script" path="res://common/inventory/inventory_data_equip.gd" id="5_i2frv"]
+[ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://entities/chest/chest.tscn" id="7_5j5bh"]
+[ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="8_0i1ge"]
+[ext_resource type="PackedScene" uid="uid://b1yv6c124r1k7" path="res://common/inventory/crafting_inventory.tscn" id="8_8thps"]
+[ext_resource type="Script" path="res://common/inventory/inventory_interface.gd" id="12_5ileu"]
+[ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://common/inventory/inventory.tscn" id="13_utryv"]
+[ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://assets/art/islands_tileset/islands_tileset_v2_byBrysia.png" id="14_1bycs"]
+[ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://common/inventory/slot.tscn" id="14_fq4si"]
+[ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://common/menu/pause/pause_menu.tscn" id="15_fqub2"]
+[ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar_inventory.tscn" id="15_sa7if"]
+[ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 
 [sub_resource type="Resource" id="Resource_aiun2"]
 script = ExtResource("5_i2frv")
-slot_datas = Array[Resource("res://Common/Inventory/slot_data.gd")]([null, null, null])
+slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([])
 
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
-slot_datas = Array[Resource("res://Common/Inventory/slot_data.gd")]([null, null, null, null, null])
+slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsmls"]
 texture = ExtResource("14_1bycs")
@@ -831,7 +831,7 @@ noise_height_text = ExtResource("2_iuy5t")
 noise_decoration_text = ExtResource("3_d1a5b")
 
 [node name="Boat" parent="." instance=ExtResource("5_4ihfa")]
-position = Vector2(712, 1896)
+position = Vector2(40, 3800)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
