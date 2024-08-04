@@ -1,12 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=21 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
 [ext_resource type="PackedScene" uid="uid://b13j56wiy5bjp" path="res://entities/player/player.tscn" id="2_rs7gc"]
 [ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://stages/main/world_generation/decoration_noise.tres" id="3_d1a5b"]
-[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://entities/player/player_inventory.tres" id="4_e8g6s"]
+[ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://entities/player/inventory/player_inventory.tres" id="4_e8g6s"]
+[ext_resource type="Resource" uid="uid://23lixjooraln" path="res://entities/player/inventory/player_equip_inventory.tres" id="4_jkkiy"]
 [ext_resource type="PackedScene" uid="uid://cur8y0262ef01" path="res://entities/boats/boat/boat.tscn" id="5_4ihfa"]
-[ext_resource type="Script" path="res://common/inventory/inventory_data_equip.gd" id="5_i2frv"]
 [ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://entities/chest/chest.tscn" id="7_5j5bh"]
 [ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="8_0i1ge"]
 [ext_resource type="PackedScene" uid="uid://b1yv6c124r1k7" path="res://common/inventory/crafting_inventory.tscn" id="8_8thps"]
@@ -18,13 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 
-[sub_resource type="Resource" id="Resource_aiun2"]
-script = ExtResource("5_i2frv")
-slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([])
-
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
-slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([])
+slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsmls"]
 texture = ExtResource("14_1bycs")
@@ -733,7 +729,7 @@ script = ExtResource("1_uw73h")
 [node name="Player" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("2_rs7gc")]
 tile_map = NodePath("../TileMap")
 inventory_data = ExtResource("4_e8g6s")
-equip_inventory_data = SubResource("Resource_aiun2")
+equip_inventory_data = ExtResource("4_jkkiy")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -770,11 +766,15 @@ offset_bottom = 50.0
 
 [node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("13_utryv")]
 visible = false
-layout_mode = 0
-offset_left = 633.0
-offset_top = 170.0
-offset_right = 673.0
-offset_bottom = 210.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 76.0
+offset_right = 50.0
+offset_bottom = 116.0
+grow_vertical = 2
 
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("14_fq4si")]
 modulate = Color(1, 1, 1, 0.494118)
@@ -804,7 +804,7 @@ player = NodePath("../../Player")
 visible = false
 
 [node name="Chest" parent="." instance=ExtResource("7_5j5bh")]
-position = Vector2(-81, 41)
+position = Vector2(40, 3800)
 inventory_data = SubResource("Resource_csm5f")
 
 [node name="TileMap" type="TileMap" parent="."]
