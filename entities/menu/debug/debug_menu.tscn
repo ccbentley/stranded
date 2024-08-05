@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://brtyff5a5fflm"]
+
+[ext_resource type="Script" path="res://entities/menu/debug/debug_menu.gd" id="1_b8s0l"]
+
+[node name="DebugMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_b8s0l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="InfoButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Info"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpawnButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+text = "Spawn"
+
+[node name="Info" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Player Pos: (0, 0)
+Player Tile Pos: (0, 0)
+Player Chunk Pos: (0, 0)
+"
+
+[node name="Spawn" type="HBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="SpawnList" type="VBoxContainer" parent="MarginContainer/Spawn"]
+layout_mode = 2
+
+[node name="SpawnItem" type="Button" parent="MarginContainer/Spawn"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+text = "Item"
+
+[node name="SpawnObject" type="Button" parent="MarginContainer/Spawn"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+text = "Object"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SpawnButton" to="." method="_on_spawn_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Spawn/SpawnItem" to="." method="_on_spawn_item_pressed"]
+[connection signal="pressed" from="MarginContainer/Spawn/SpawnObject" to="." method="_on_spawn_object_pressed"]

@@ -6,6 +6,12 @@ class_name ItemDataRangedWeapon
 @export var attack_cooldown: float
 @export var attack_stun_time: float
 
+
 func use(target: Node2D) -> void:
 	if target.try_attack():
-		target.ranged_attack(attack_cooldown, attack_damage, attack_knockback, attack_stun_time)
+		var attack: Attack = Attack.new()
+		attack.attack_damage = attack_damage
+		attack.attack_knockback = attack_knockback
+		attack.attack_cooldown = attack_cooldown
+		attack.attack_stun_time = attack_stun_time
+		target.ranged_attack(attack)

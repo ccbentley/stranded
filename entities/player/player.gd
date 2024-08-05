@@ -88,6 +88,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 		#Clicked right side
 		else:
 			is_facing_right = true
+	if Input.is_action_just_pressed("debug_menu") and OS.has_feature("debug"):
+		main.toggle_debug_menu()
 
 
 func _ready() -> void:
@@ -130,25 +132,16 @@ func try_attack() -> bool:
 	return attack_cooldown_timer.time_left <= 0
 
 
-func melee_attack(attack_range: float, attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float, material_type: int) -> void:
-	attack_cooldown_timer.start(attack_cooldown)
-	var attack: Attack = Attack.new()
-	attack.attack_damage = attack_damage
-	attack.attack_knockback = attack_knockback
+func melee_attack(attack: Attack) -> void:
+	attack_cooldown_timer.start(attack.attack_cooldown)
 	attack.attack_position = global_position
-	attack.attack_stun_time = attack_stun_time
-	attack.material_type = material_type
-	attack_component.set_attack_range(attack_range, is_facing_right)
+	attack_component.set_attack_range(attack.attack_range, is_facing_right)
 	attack_component.attack(attack)
 	animation_player.play("melee_attack")
 
 
-func ranged_attack(attack_cooldown: float, attack_damage: float, attack_knockback: float, attack_stun_time: float) -> void:
-	attack_cooldown_timer.start(attack_cooldown)
-	var attack: Attack = Attack.new()
-	attack.attack_damage = attack_damage
-	attack.attack_knockback = attack_knockback
-	attack.attack_stun_time = attack_stun_time
+func ranged_attack(attack: Attack) -> void:
+	attack_cooldown_timer.start(attack.attack_cooldown)
 
 
 func place_object(object: PackedScene) -> void:

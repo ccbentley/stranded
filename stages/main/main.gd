@@ -93,6 +93,10 @@ func zoom_out() -> void:
 		$Camera2D.zoom = new_zoom
 
 
+func toggle_debug_menu() -> void:
+	$UI/DebugMenu.visible = !$UI/DebugMenu.visible
+
+
 func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
 	var pickup_instance: Pickup = PICKUP.instantiate()
 	pickup_instance.slot_data = slot_data
