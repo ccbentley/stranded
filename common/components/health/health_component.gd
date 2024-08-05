@@ -1,4 +1,4 @@
-@icon("res://assets/art/material_icons/favorite_24dp_E8EAED_FILL1_wght400_GRAD0_opsz24.svg")
+@icon("icon.svg")
 extends Node2D
 class_name HealthComponent
 

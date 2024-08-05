@@ -59,8 +59,8 @@ func _ready() -> void:
 	noise = noise_height_text.noise
 	decoration_noise = noise_decoration_text.noise
 
-	noise.seed = Global.worldData.world_seed
-	decoration_noise.seed = Global.worldData.world_seed
+	noise.seed = Global.world_data.world_seed
+	decoration_noise.seed = Global.world_data.world_seed
 
 
 func find_spawn_location() -> void:

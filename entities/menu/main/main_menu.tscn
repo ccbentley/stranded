@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://by4naatqr1mvd"]
+
+[ext_resource type="Script" path="res://entities/menu/main/main_menu.gd" id="1_a1l53"]
+[ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://assets/art/background/screenshot.png" id="2_h8a2m"]
+[ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://entities/menu/play/save_selection_menu.tscn" id="3_j43pa"]
+[ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://entities/menu/play/create_world_menu.tscn" id="4_bvifd"]
+[ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="5_gno6i"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a1l53")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.585062, 0.585062, 0.585062, 0.411765)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_h8a2m")
+expand_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 64
+text = "Stranded"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Seperator" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="SaveSelectionMenu" parent="." instance=ExtResource("3_j43pa")]
+visible = false
+layout_mode = 1
+
+[node name="CreateWorldMenu" parent="." instance=ExtResource("4_bvifd")]
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_gno6i")]
+visible = false
+layout_mode = 1
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

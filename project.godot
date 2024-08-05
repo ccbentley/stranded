@@ -11,8 +11,7 @@ config_version=5
 [application]
 
 config/name="Stranded"
-config/version="0.0 Debug Build"
-run/main_scene="res://common/menu/main/main_menu.tscn"
+run/main_scene="res://entities/menu/main/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 
@@ -20,9 +19,9 @@ boot_splash/show_image=false
 
 PlayerManager="*res://entities/player/player_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-Global="*res://common/global.gd"
-SettingsSaveManager="*res://common/menu/options/settings_save_manager.gd"
-TaskManager="*res://utilities/task_manager/task_manager.gd"
+Global="*res://utilities/global.gd"
+SettingsSaveManager="*res://entities/menu/options/settings_save_manager.gd"
+TaskManager="*res://common/task_manager/task_manager.gd"
 WorldManager="*res://utilities/world_manager/world_manager.gd"
 
 [debug]
@@ -37,6 +36,10 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gd
 
 import/blender/enabled=false
 import/fbx/enabled=false
+
+[gui]
+
+theme/custom="res://entities/menu/default_theme.tres"
 
 [input]
 
@@ -115,10 +118,6 @@ dismount={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
-
-[input_devices]
-
-pointing/emulate_mouse_from_touch=false
 
 [rendering]
 

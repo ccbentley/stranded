@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bex33uu0wd3eg"]
+
+[ext_resource type="Script" path="res://common/item/item_data.gd" id="1_7t42h"]
+[ext_resource type="Texture2D" uid="uid://w4ouojhfw3cr" path="res://assets/art/crafting/tile058.png" id="2_op0vt"]
+
+[resource]
+script = ExtResource("1_7t42h")
+name = "Wood"
+description = "wood from tree"
+stackable = true
+texture = ExtResource("2_op0vt")
+held_offset = Vector2(0, 0)

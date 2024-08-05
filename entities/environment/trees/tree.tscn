@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://dnj62ts5tdlcl"]
 
-[ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://assets/art/nature_pixels_v2/Remake/Trees/Tree2.png" id="1_vtvgx"]
+[ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://entities/environment/trees/art/tree.png" id="1_vtvgx"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
-[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood.tres" id="3_uts0b"]
+[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
-[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health/health_bar_component.tscn" id="6_kqkgg"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_kqkgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
 size = Vector2(19, 6)

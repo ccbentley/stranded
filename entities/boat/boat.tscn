@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://cur8y0262ef01"]
+
+[ext_resource type="Script" path="res://entities/boat/boat.gd" id="1_vmfak"]
+[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boat/art/boat.png" id="2_ailme"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_07rrq"]
+[ext_resource type="Resource" uid="uid://5vewugr6evja" path="res://entities/items/placeable/boat/boat.tres" id="4_7gy5b"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_8tpil"]
+[ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="5_tj0i0"]
+[ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="5_txje3"]
+[ext_resource type="Script" path="res://entities/boat/states/boat_idle_state.gd" id="6_6d107"]
+[ext_resource type="Script" path="res://entities/boat/states/boat_move_state.gd" id="7_0diah"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iukl"]
+atlas = ExtResource("2_ailme")
+region = Rect2(0, 0.083, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwry0"]
+size = Vector2(28, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl6ge"]
+radius = 30.0
+
+[sub_resource type="Resource" id="Resource_hr58c"]
+script = ExtResource("5_txje3")
+drop_chance = 1.0
+item_data = ExtResource("4_7gy5b")
+quantity = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7qgu"]
+size = Vector2(28, 10)
+
+[node name="Boat" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_vmfak")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 7)
+texture = SubResource("AtlasTexture_0iukl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 12.5)
+shape = SubResource("RectangleShape2D_wwry0")
+
+[node name="Area2D" type="Area2D" parent="." groups=["interactable"]]
+position = Vector2(0, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pl6ge")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_07rrq")]
+MAX_HEALTH = 5.0
+drop_data = Array[ExtResource("5_txje3")]([SubResource("Resource_hr58c")])
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_8tpil")]
+position = Vector2(0, 7)
+health_component = NodePath("../HealthComponent")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_l7qgu")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("5_tj0i0")
+state = NodePath("BoatIdleState")
+
+[node name="BoatIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "anim")]
+script = ExtResource("6_6d107")
+actor = NodePath("../..")
+anim = NodePath("../../Sprite2D")
+
+[node name="BoatMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "anim")]
+script = ExtResource("7_0diah")
+actor = NodePath("../..")
+anim = NodePath("../../Sprite2D")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

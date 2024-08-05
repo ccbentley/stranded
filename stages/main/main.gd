@@ -9,7 +9,7 @@ const save_file_path: String = Global.save_file_path
 const player_save_file_name: String = Global.player_save_file_name
 const world_save_file_name: String = Global.world_save_file_name
 var world_save_file_path: String = Global.world_save_file_path
-var playerData: PlayerData = PlayerData.new()
+var player_data: PlayerData = PlayerData.new()
 
 const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
 
@@ -64,20 +64,20 @@ func verify_save_directory(path: String) -> void:
 
 
 func save_game() -> void:
-	playerData.inventory_data = player.inventory_data.duplicate()
-	playerData.equip_inventory_data = player.equip_inventory_data.duplicate()
-	playerData.position = player.global_position
-	ResourceSaver.save(playerData, world_save_file_path + player_save_file_name)
+	player_data.inventory_data = player.inventory_data.duplicate()
+	player_data.equip_inventory_data = player.equip_inventory_data.duplicate()
+	player_data.position = player.global_position
+	ResourceSaver.save(player_data, world_save_file_path + player_save_file_name)
 
 
 func load_game() -> bool:
 	if not ResourceLoader.exists(world_save_file_path + player_save_file_name):
 		return false
-	playerData = ResourceLoader.load(world_save_file_path + player_save_file_name).duplicate(true)
-	player.inventory_data = playerData.inventory_data
-	player.equip_inventory_data = playerData.equip_inventory_data
+	player_data = ResourceLoader.load(world_save_file_path + player_save_file_name).duplicate(true)
+	player.inventory_data = player_data.inventory_data
+	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()
-	player.global_position = playerData.position
+	player.global_position = player_data.position
 	return true
 
 

@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://25v8rjkwdg57"]
+
+[ext_resource type="Script" path="res://entities/menu/pause/pause_menu.gd" id="1_05eyv"]
+[ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="2_4as8w"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_w8464"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_05eyv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 48
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save and Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_4as8w")]
+visible = false
+layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.270588)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_w8464")
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="exit_options_menu" from="OptionsMenu" to="." method="_on_options_menu_exit_options_menu"]

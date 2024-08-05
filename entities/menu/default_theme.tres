@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d2i3tlkgfdejo"]
+
+[ext_resource type="FontFile" uid="uid://b8nthqud4vlk6" path="res://assets/fonts/cozette/CozetteVectorBold.ttf" id="1_kkgdm"]
+
+[resource]
+default_font = ExtResource("1_kkgdm")

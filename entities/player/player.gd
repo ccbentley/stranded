@@ -151,6 +151,12 @@ func ranged_attack(attack_cooldown: float, attack_damage: float, attack_knockbac
 	attack.attack_stun_time = attack_stun_time
 
 
+func place_object(object: PackedScene) -> void:
+	var obj: Node2D = object.instantiate()
+	obj.position = get_global_mouse_position()
+	owner.add_child(obj)
+
+
 func set_speed(speed: int) -> void:
 	max_speed = speed
 
