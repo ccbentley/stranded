@@ -11,5 +11,11 @@ var world_data: WorldData:
 		world_data = value
 		world_save_file_path = save_file_path + world_data.world_name + "/"
 
-var loading_screen: PackedScene = preload("res://entities/menu/loading/loading_screen.tscn")
+const loading_screen: PackedScene = preload("res://entities/menu/loading/loading_screen.tscn")
 var next_scene: String
+var next_scene_name: String
+var next_scene_background: Texture2D
+
+
+func load_next_scene() -> void:
+	get_tree().change_scene_to_packed(loading_screen)

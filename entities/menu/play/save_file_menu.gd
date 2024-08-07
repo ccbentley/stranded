@@ -23,7 +23,9 @@ func handle_connecting_signals() -> void:
 func on_world_icon_pressed() -> void:
 	Global.world_data = world_data.duplicate()
 	Global.next_scene = "res://stages/main/world.tscn"
-	get_tree().change_scene_to_packed(Global.loading_screen)
+	Global.next_scene_name = "Main Land"
+	Global.next_scene_background = load("res://assets/art/background/screenshot.png")
+	Global.load_next_scene()
 
 
 func on_delete_pressed() -> void:

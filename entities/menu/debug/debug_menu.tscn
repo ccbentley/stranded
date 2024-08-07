@@ -50,10 +50,6 @@ text = "Spawn"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Player Pos: (0, 0)
-Player Tile Pos: (0, 0)
-Player Chunk Pos: (0, 0)
-"
 
 [node name="Spawn" type="HBoxContainer" parent="MarginContainer"]
 visible = false

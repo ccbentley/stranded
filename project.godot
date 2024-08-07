@@ -29,7 +29,7 @@ gdscript/warnings/untyped_declaration=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
 
 [filesystem]
 
