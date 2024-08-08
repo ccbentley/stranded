@@ -7,6 +7,7 @@ extends Control
 
 
 func _ready() -> void:
+	set_process(true)
 	ResourceLoader.load_threaded_request(Global.next_scene)
 	scene_name.text = Global.next_scene_name
 	background.texture = Global.next_scene_background
@@ -19,5 +20,7 @@ func _process(_delta: float) -> void:
 	progress_number.text = str(int(progress[0] * 100)) + "%"
 
 	if progress[0] == 1:
+		set_process(false)
 		var packed_scene: PackedScene = ResourceLoader.load_threaded_get(Global.next_scene)
+		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_packed(packed_scene)

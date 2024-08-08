@@ -2,7 +2,7 @@ class_name PlayerSwimState
 extends State
 
 @export var actor: Player
-@export var anim: AnimatedSprite2D
+@export var anim: AnimationPlayer
 @export var drown_bar: ProgressBar
 @onready var drown_bar_timer: Timer = drown_bar.get_child(0)
 

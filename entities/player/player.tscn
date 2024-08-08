@@ -1,94 +1,82 @@
-[gd_scene load_steps=29 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=30 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
-[ext_resource type="Texture2D" uid="uid://c7483k886upbw" path="res://entities/player/art/player_idle.png" id="2_eh4ke"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
-[ext_resource type="Texture2D" uid="uid://b64r3tq43ghh6" path="res://entities/player/art/player_walk_cycle.png" id="3_p6gjd"]
 [ext_resource type="Texture2D" uid="uid://wmnpabd1sxra" path="res://entities/player/art/swim/player_swim.png" id="4_n0w3n"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="5_q6e4e"]
 [ext_resource type="Script" path="res://entities/player/states/player_sit_state.gd" id="6_fg33t"]
 [ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://common/components/attack/attack_component.tscn" id="6_in0ea"]
+[ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/silhouette_sprite/silhouette_sprite.tscn" id="7_phdj8"]
+[ext_resource type="Texture2D" uid="uid://0mc6ux1v7fv6" path="res://entities/player/art/walk/player_walk_cycle.png" id="8_7dubk"]
 [ext_resource type="Script" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
 [ext_resource type="Script" path="res://entities/player/states/player_move_state.gd" id="9_02503"]
 [ext_resource type="Script" path="res://entities/player/states/player_swim_state.gd" id="9_fa61r"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tni6y"]
-atlas = ExtResource("2_eh4ke")
-region = Rect2(0, 0, 16, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hr3rr"]
-atlas = ExtResource("2_eh4ke")
-region = Rect2(16, 0, 16, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sigtv"]
-atlas = ExtResource("3_p6gjd")
-region = Rect2(0, 0, 16, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wiuyg"]
-atlas = ExtResource("3_p6gjd")
-region = Rect2(16, 0, 16, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_50fa7"]
-atlas = ExtResource("3_p6gjd")
-region = Rect2(32, 0, 16, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_50g36"]
-atlas = ExtResource("3_p6gjd")
-region = Rect2(48, 0, 16, 22)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_87cc2"]
-atlas = ExtResource("4_n0w3n")
-region = Rect2(0, 0, 16, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_inxlb"]
-atlas = ExtResource("4_n0w3n")
-region = Rect2(16, 0, 16, 20)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vu2q5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tni6y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hr3rr")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sigtv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wiuyg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_50fa7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_50g36")
-}],
-"loop": true,
-"name": &"move",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87cc2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_inxlb")
-}],
-"loop": true,
-"name": &"swim",
-"speed": 1.0
-}]
+[ext_resource type="Texture2D" uid="uid://51427gtgui3s" path="res://entities/player/art/idle/player_idle.png" id="9_yx3yv"]
+[ext_resource type="Texture2D" uid="uid://b1ssop3xdxtcq" path="res://entities/player/art/idle/player_idle1.png" id="10_fajtb"]
+[ext_resource type="Texture2D" uid="uid://h5m66vdnfeuk" path="res://entities/player/art/walk/player_walk_cycle1.png" id="11_hh0yg"]
+[ext_resource type="Texture2D" uid="uid://dmtd25nar6kww" path="res://entities/player/art/walk/player_walk_cycle2.png" id="12_j31d8"]
+[ext_resource type="Texture2D" uid="uid://dtjskiad21mrh" path="res://entities/player/art/walk/player_walk_cycle3.png" id="13_35ew1"]
+[ext_resource type="Texture2D" uid="uid://d00uquwx08e05" path="res://entities/player/art/swim/player_swim1.png" id="15_2scut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
+
+[sub_resource type="Animation" id="Animation_a5un6"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("9_yx3yv"), ExtResource("10_fajtb")]
+}
+
+[sub_resource type="Animation" id="Animation_yo6ve"]
+resource_name = "move"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_7dubk"), ExtResource("11_hh0yg"), ExtResource("12_j31d8"), ExtResource("13_35ew1")]
+}
+
+[sub_resource type="Animation" id="Animation_k7cy2"]
+resource_name = "swim"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_n0w3n"), ExtResource("15_2scut")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ankr7"]
+_data = {
+"idle": SubResource("Animation_a5un6"),
+"move": SubResource("Animation_yo6ve"),
+"swim": SubResource("Animation_k7cy2")
+}
 
 [sub_resource type="Animation" id="Animation_ltw5y"]
 length = 0.001
@@ -154,38 +142,42 @@ state = NodePath("PlayerIdleState")
 [node name="PlayerIdleState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("9_0khh0")
 actor = NodePath("../../..")
-anim = NodePath("../../../AnimatedSprite2D")
+anim = NodePath("../../../MovementAnimationPlayer")
 
 [node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("9_02503")
 actor = NodePath("../../..")
-anim = NodePath("../../../AnimatedSprite2D")
+anim = NodePath("../../../MovementAnimationPlayer")
 
 [node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar")]
 script = ExtResource("9_fa61r")
 actor = NodePath("../../..")
-anim = NodePath("../../../AnimatedSprite2D")
+anim = NodePath("../../../MovementAnimationPlayer")
 drown_bar = NodePath("../../../DrownBar")
 
 [node name="PlayerSitState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("6_fg33t")
 actor = NodePath("../../..")
-anim = NodePath("../../../AnimatedSprite2D")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_vu2q5")
-animation = &"idle"
+anim = NodePath("../../../MovementAnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4f3oy")
 
-[node name="OnHand" type="Sprite2D" parent="."]
+[node name="CharacterSprite" parent="." instance=ExtResource("7_phdj8")]
+texture = ExtResource("9_yx3yv")
+
+[node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ankr7")
+}
+
+[node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
 position = Vector2(7, 3)
 scale = Vector2(0.75, 0.75)
 offset = Vector2(7, -6.5)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="OnHandAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_66n73")
 }

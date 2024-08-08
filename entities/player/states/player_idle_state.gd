@@ -2,7 +2,7 @@ class_name PlayerIdleState
 extends State
 
 @export var actor: Player
-@export var anim: AnimatedSprite2D
+@export var anim: AnimationPlayer
 
 signal player_moved
 

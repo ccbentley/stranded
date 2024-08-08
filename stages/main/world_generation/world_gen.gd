@@ -68,8 +68,7 @@ func find_spawn_location() -> void:
 		for y: int in range(500):
 			var noise_val: float = noise.get_noise_2d(x, y)
 			if noise_val >= 0.7:
-				player.global_position = map_to_local(Vector2i(x, y))
-				print("Player Spawned At " + str(player.global_position))
+				player.main.teleport_player(map_to_local(Vector2i(x, y)))
 				return
 	push_error("Could not find a suitable spawn location.")
 

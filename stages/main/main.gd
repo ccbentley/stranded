@@ -4,6 +4,7 @@ extends Node2D
 @onready var inventory_interface: InventoryInterface = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
 @onready var tile_map: TileMap = $TileMap
+@onready var camera: Camera2D = $Camera2D
 
 const save_file_path: String = Global.save_file_path
 const player_save_file_name: String = Global.player_save_file_name
@@ -16,7 +17,6 @@ const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
 
 func _ready() -> void:
 	WorldManager.world = self
-
 	player.toggle_inventory.connect(toggle_inventory_interface)
 	inventory_interface.force_close.connect(toggle_inventory_interface)
 	load_inventory()
@@ -77,20 +77,27 @@ func load_game() -> bool:
 	player.inventory_data = player_data.inventory_data
 	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()
-	player.global_position = player_data.position
+	teleport_player(player_data.position)
 	return true
 
 
+func teleport_player(pos: Vector2, smooth_cam: bool = false) -> void:
+	player.global_position = pos
+	camera.position = pos
+	if not smooth_cam:
+		camera.reset_smoothing()
+
+
 func zoom_in() -> void:
-	var new_zoom: Vector2 = $Camera2D.zoom + Vector2(0.5, 0.5)
+	var new_zoom: Vector2 = camera.zoom + Vector2(0.5, 0.5)
 	if new_zoom > Vector2.ZERO:
-		$Camera2D.zoom = new_zoom
+		camera.zoom = new_zoom
 
 
 func zoom_out() -> void:
-	var new_zoom: Vector2 = $Camera2D.zoom - Vector2(0.5, 0.5)
+	var new_zoom: Vector2 = camera.zoom - Vector2(0.5, 0.5)
 	if new_zoom > Vector2.ZERO:
-		$Camera2D.zoom = new_zoom
+		camera.zoom = new_zoom
 
 
 func toggle_debug_menu() -> void:

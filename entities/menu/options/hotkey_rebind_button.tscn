@@ -36,6 +36,7 @@ theme_override_constants/separation = 200
 [node name="Button" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
+focus_mode = 0
 toggle_mode = true
 text = "ACTION_KEY"
 

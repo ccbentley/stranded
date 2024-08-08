@@ -2,5 +2,5 @@ extends ItemData
 class_name ItemDataFishingRod
 
 
-func use(Target: Node2D) -> void:
+func use(target: Node2D) -> void:
 	pass

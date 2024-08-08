@@ -4,7 +4,8 @@ extends CharacterBody2D
 @export var tile_map: TileMap
 @onready var main: Node2D = $".."
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var on_hand_animation_player: AnimationPlayer = $OnHandAnimationPlayer
+@onready var movement_animation_player: AnimationPlayer = $MovementAnimationPlayer
 
 #Custom Components
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
@@ -24,7 +25,8 @@ extends CharacterBody2D
 @onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 @onready var on_hand: Sprite2D = $OnHand
-@onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_sprite: Sprite2D = $CharacterSprite
+
 var held_offset: Vector2 = Vector2.ZERO
 
 #Timers
@@ -137,7 +139,7 @@ func melee_attack(attack: Attack) -> void:
 	attack.attack_position = global_position
 	attack_component.set_attack_range(attack.attack_range, is_facing_right)
 	attack_component.attack(attack)
-	animation_player.play("melee_attack")
+	on_hand_animation_player.play("melee_attack")
 
 
 func ranged_attack(attack: Attack) -> void:
