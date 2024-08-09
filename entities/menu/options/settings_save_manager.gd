@@ -49,6 +49,8 @@ func set_keybind(action: String, event: InputEventKey) -> void:
 			settings_data.keybind_data.inventory_key = event
 		settings_data.keybind_data.INTERACT:
 			settings_data.keybind_data.interact_key = event
+		settings_data.keybind_data.DISMOUNT:
+			settings_data.keybind_data.dismount_key = event
 
 
 func get_window_mode_index() -> int:
@@ -85,6 +87,8 @@ func get_keybind(action: String) -> InputEventKey:
 			return settings_data.keybind_data.inventory_key
 		settings_data.keybind_data.INTERACT:
 			return settings_data.keybind_data.interact_key
+		settings_data.keybind_data.DISMOUNT:
+			return settings_data.keybind_data.dismount_key
 	return
 
 

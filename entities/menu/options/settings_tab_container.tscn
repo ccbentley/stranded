@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_vertical_guides_ = [765.0]
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -144,6 +145,10 @@ action_name = "inventory"
 [node name="HotkeyRebindButton7" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_y531x")]
 layout_mode = 2
 action_name = "interact"
+
+[node name="HotkeyRebindButton8" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_y531x")]
+layout_mode = 2
+action_name = "dismount"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
