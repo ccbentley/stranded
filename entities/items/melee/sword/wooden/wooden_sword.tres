@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDataMeleeWeapon" load_steps=3 format=3 uid="uid://cnepkvwxe6frn"]
+
+[ext_resource type="Script" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_4t0wq"]
+[ext_resource type="Texture2D" uid="uid://b3t2r8ndigig6" path="res://entities/items/melee/sword/wooden/art/wooden_sword.png" id="2_t2bdw"]
+
+[resource]
+script = ExtResource("1_4t0wq")
+attack_damage = 3.0
+attack_knockback = 2.0
+attack_cooldown = 0.5
+attack_range = 5.0
+attack_stun_time = 0.5
+material_type = 1
+name = "Wooden Sword"
+description = "Just a normal sword"
+stackable = false
+texture = ExtResource("2_t2bdw")
+held_offset = Vector2(5, -5)

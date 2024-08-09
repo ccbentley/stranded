@@ -3,7 +3,7 @@ class_name CraftingInventory
 
 const recipes: Dictionary = {
 	"Stick": {
-		"output": "res://entities/items/consumable/health_potion/health_potion.tres",
+		"output": "res://entities/items/materials/stick/stick.tres",
 		"materials": {
 			"Wood": 1,
 		}

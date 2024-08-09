@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=32 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dmtd25nar6kww" path="res://entities/player/art/walk/player_walk_cycle2.png" id="12_j31d8"]
 [ext_resource type="Texture2D" uid="uid://dtjskiad21mrh" path="res://entities/player/art/walk/player_walk_cycle3.png" id="13_35ew1"]
 [ext_resource type="Texture2D" uid="uid://d00uquwx08e05" path="res://entities/player/art/swim/player_swim1.png" id="15_2scut"]
+[ext_resource type="Shader" path="res://common/shaders/sprite_outline.gdshader" id="16_ylx78"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
@@ -77,6 +78,10 @@ _data = {
 "move": SubResource("Animation_yo6ve"),
 "swim": SubResource("Animation_k7cy2")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5bsv"]
+shader = ExtResource("16_ylx78")
+shader_parameter/outline_color = null
 
 [sub_resource type="Animation" id="Animation_ltw5y"]
 length = 0.001
@@ -173,6 +178,7 @@ libraries = {
 }
 
 [node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
+material = SubResource("ShaderMaterial_f5bsv")
 position = Vector2(7, 3)
 scale = Vector2(0.75, 0.75)
 offset = Vector2(7, -6.5)

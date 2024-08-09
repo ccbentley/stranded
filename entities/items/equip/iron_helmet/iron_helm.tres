@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataEquip" load_steps=3 format=3 uid="uid://dgkg6ipudlxov"]
 
 [ext_resource type="Script" path="res://entities/items/equip/item_data_equip.gd" id="1_kxs5m"]
-[ext_resource type="Texture2D" uid="uid://byctr5kq3opmp" path="res://assets/art/icon_pack/helmet_02b.png" id="2_yxgmr"]
+[ext_resource type="Texture2D" uid="uid://cbrp76jxxf3fj" path="res://entities/items/equip/iron_helmet/art/iron_helmet.png" id="2_mxxfc"]
 
 [resource]
 script = ExtResource("1_kxs5m")
@@ -9,5 +9,5 @@ defence = 0
 name = "Iron Helmet"
 description = "Protect noggin"
 stackable = false
-texture = ExtResource("2_yxgmr")
+texture = ExtResource("2_mxxfc")
 held_offset = Vector2(0, 0)

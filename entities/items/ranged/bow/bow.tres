@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataRangedWeapon" load_steps=3 format=3 uid="uid://b5sltenfhjkok"]
 
 [ext_resource type="Script" path="res://entities/items/ranged/item_data_ranged_weapon.gd" id="1_fl4kq"]
-[ext_resource type="Texture2D" uid="uid://574h45iyvygm" path="res://assets/art/icon_pack/bow_01a.png" id="2_yimlr"]
+[ext_resource type="Texture2D" uid="uid://8240dv4uj31" path="res://entities/items/ranged/bow/art/bow.png" id="2_dmror"]
 
 [resource]
 script = ExtResource("1_fl4kq")
@@ -12,5 +12,5 @@ attack_stun_time = 0.5
 name = "Bow"
 description = "pew pew"
 stackable = false
-texture = ExtResource("2_yimlr")
-held_offset = Vector2(0, 0)
+texture = ExtResource("2_dmror")
+held_offset = Vector2(5, -5)

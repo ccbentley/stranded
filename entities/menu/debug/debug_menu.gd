@@ -9,8 +9,9 @@ var item_list: PackedStringArray = [
 	"res://entities/items/consumable/health_potion/health_potion.tres",
 	"res://entities/items/equip/iron_helmet/iron_helm.tres",
 	"res://entities/items/materials/wood/wood.tres",
-	"res://entities/items/melee/axe/axe.tres",
-	"res://entities/items/melee/sword/sword.tres",
+	"res://entities/items/materials/stick/stick.tres",
+	"res://entities/items/melee/axe/wooden/wooden_axe.tres",
+	"res://entities/items/melee/sword/wooden/wooden_sword.tres",
 	"res://entities/items/placeable/boat/boat.tres",
 	"res://entities/items/ranged/bow/bow.tres",
 ]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwiv31qfcgpp1"]
 
 [ext_resource type="Script" path="res://entities/menu/play/save_file_menu.gd" id="1_a35m4"]
-[ext_resource type="Texture2D" uid="uid://watkf0rmdoeq" path="res://assets/art/prinbles_yet_another_icons/png/White-Icon/Play.png" id="2_fp543"]
-[ext_resource type="Texture2D" uid="uid://c7k2h4ux1sv4f" path="res://assets/art/prinbles_yet_another_icons/png/Black-Icon/Play.png" id="3_kqxkh"]
-[ext_resource type="Texture2D" uid="uid://bedm8v7aw1buk" path="res://assets/art/prinbles_yet_another_icons/png/White-Icon/Cross.png" id="3_vmyia"]
-[ext_resource type="Texture2D" uid="uid://b5sx8mwrcdoep" path="res://assets/art/prinbles_yet_another_icons/png/Black-Icon/Cross.png" id="4_ol2dt"]
+[ext_resource type="Texture2D" uid="uid://dmsgomoeeclw1" path="res://entities/menu/play/art/white_play.svg" id="2_i0wkr"]
+[ext_resource type="Texture2D" uid="uid://bowq6s24cnkgv" path="res://entities/menu/play/art/black_play.svg" id="3_lo5lr"]
+[ext_resource type="Texture2D" uid="uid://caopx2brtk1jg" path="res://entities/menu/play/art/white_cross.svg" id="4_5mt5s"]
+[ext_resource type="Texture2D" uid="uid://cguu1bwu0gpkw" path="res://entities/menu/play/art/black_cross.svg" id="5_fsriu"]
 
 [node name="SaveFileMenu" type="Control"]
 layout_mode = 3
@@ -24,9 +24,9 @@ offset_bottom = 50.0
 [node name="WorldIcon" type="TextureButton" parent="BoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("2_fp543")
-texture_pressed = ExtResource("3_kqxkh")
-texture_hover = ExtResource("3_kqxkh")
+texture_normal = ExtResource("2_i0wkr")
+texture_pressed = ExtResource("3_lo5lr")
+texture_hover = ExtResource("3_lo5lr")
 stretch_mode = 0
 
 [node name="WorldNameButton" type="RichTextLabel" parent="BoxContainer"]
@@ -39,7 +39,7 @@ autowrap_mode = 0
 [node name="DeleteWorldButton" type="TextureButton" parent="BoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("3_vmyia")
-texture_pressed = ExtResource("4_ol2dt")
-texture_hover = ExtResource("4_ol2dt")
+texture_normal = ExtResource("4_5mt5s")
+texture_pressed = ExtResource("5_fsriu")
+texture_hover = ExtResource("5_fsriu")
 stretch_mode = 0
