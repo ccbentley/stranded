@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_0ayca"]
 _data = {
-"points": PackedVector2Array(0, 0, 50, -50, 0, 0, -50, -50, 0, 0, 200, 0)
+"points": PackedVector2Array(0, 0, 50, -50, 0, 0, -50, -50, 0, 0, 0, 0)
 }
 point_count = 2
 
@@ -17,9 +17,6 @@ texture = ExtResource("2_2ssnh")
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 2.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_0ayca")

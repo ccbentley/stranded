@@ -3,20 +3,46 @@ class_name FishingRodHook
 
 @onready var line_2d: Line2D = $Line2D
 @onready var path_2d: Path2D = $Path2D
+@onready var tween: Tween
+@onready var player: Player = PlayerManager.player
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+var animated: bool = false
 
 
 func draw_curve() -> void:
-	path_2d.curve.set_point_position(0, Vector2(0, 0))
-	var outX: float = get_mouse_pos().x / 4
+	var hand_pos: Vector2 = player.on_hand.global_position - self.position
+	path_2d.curve.set_point_position(1, Vector2(0, 0))
+	var outX: float = hand_pos.x / 4
 	path_2d.curve.set_point_out(0, Vector2(outX, -outX))
-	path_2d.curve.set_point_position(1, get_mouse_pos())
+	path_2d.curve.set_point_position(0, hand_pos)
 	path_2d.curve.set_point_in(1, Vector2(-outX, -outX))
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact"):
+func draw_fish_line() -> void:
+	line_2d.clear_points()
+	for point in path_2d.curve.get_baked_points():
+		line_2d.add_point(point + path_2d.position)
+
+
+func animate_fish_line() -> void:
+	tween = get_tree().create_tween()
+	var points: PackedVector2Array = path_2d.curve.get_baked_points()
+	line_2d.clear_points()
+	for i in range(points.size()):
+		tween.tween_property(line_2d, "points", points.slice(0, i + 1), 0.01).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	sprite_2d.visible = true
+	animated = true
+
+
+func _ready() -> void:
+	sprite_2d.visible = false
+	draw_curve()
+	animate_fish_line()
+
+
+func _physics_process(_delta: float) -> void:
+	if animated:
 		draw_curve()
-
-
-func get_mouse_pos() -> Vector2:
-	return get_global_mouse_position() - self.position
+		draw_fish_line()
