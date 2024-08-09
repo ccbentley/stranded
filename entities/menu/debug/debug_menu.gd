@@ -14,6 +14,7 @@ var item_list: PackedStringArray = [
 	"res://entities/items/melee/sword/wooden/wooden_sword.tres",
 	"res://entities/items/placeable/boat/boat.tres",
 	"res://entities/items/ranged/bow/bow.tres",
+	"res://entities/items/fishing_rod/fishing_rod.tres",
 ]
 
 var object_list: PackedStringArray = [

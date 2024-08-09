@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDataFishingRod" load_steps=3 format=3 uid="uid://g1of54mpgbou"]
+
+[ext_resource type="Script" path="res://entities/items/fishing_rod/item_data_fishing_rod.gd" id="1_nw1oy"]
+[ext_resource type="Texture2D" uid="uid://bm5plc2gkway3" path="res://entities/items/fishing_rod/art/fishing_rod.png" id="2_yc8e6"]
+
+[resource]
+script = ExtResource("1_nw1oy")
+name = "Fishing Rod"
+description = "Used to catch fish"
+stackable = false
+texture = ExtResource("2_yc8e6")
+held_offset = Vector2(5, -5)

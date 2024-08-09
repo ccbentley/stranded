@@ -23,6 +23,11 @@ func handle_connecting_signals() -> void:
 	create_world_button.button_down.connect(on_create_world_pressed)
 
 
+func _unhandled_key_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("menu_back"):
+		on_exit_pressed()
+
+
 func on_exit_pressed() -> void:
 	world_name.text = ""
 	character_name.text = ""
