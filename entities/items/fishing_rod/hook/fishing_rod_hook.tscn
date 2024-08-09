@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://fisfihybphct"]
+
+[ext_resource type="Script" path="res://entities/items/fishing_rod/hook/fishing_rod_hook.gd" id="1_dl0gs"]
+[ext_resource type="Texture2D" uid="uid://c16vc01fyu1kv" path="res://entities/items/fishing_rod/art/fishing_rod_hook.png" id="2_2ssnh"]
+
+[sub_resource type="Curve2D" id="Curve2D_0ayca"]
+_data = {
+"points": PackedVector2Array(0, 0, 50, -50, 0, 0, -50, -50, 0, 0, 200, 0)
+}
+point_count = 2
+
+[node name="FishingRodHook" type="Node2D"]
+script = ExtResource("1_dl0gs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2ssnh")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_0ayca")
