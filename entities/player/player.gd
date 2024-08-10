@@ -55,12 +55,14 @@ func _physics_process(_delta: float) -> void:
 var is_facing_right: bool = true:
 	set(value):
 		if value and is_facing_right != value:
+			# Turn right
 			turn_tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = false
 			on_hand.position.x = 7
 			on_hand.offset.x = held_offset.x
 		elif not value and is_facing_right != value:
+			# Turn left
 			turn_tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = true
@@ -139,7 +141,10 @@ func melee_attack(attack: Attack) -> void:
 	attack.attack_position = global_position
 	attack_component.set_attack_range(attack.attack_range, is_facing_right)
 	attack_component.attack(attack)
-	on_hand_animation_player.play("melee_attack")
+	if is_facing_right:
+		on_hand_animation_player.play("melee_attack_right")
+	else:
+		on_hand_animation_player.play("melee_attack_left")
 
 
 func ranged_attack(attack: Attack) -> void:
@@ -160,6 +165,8 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 	on_hand.texture = texture
 	held_offset = _held_offset
 	on_hand.offset = held_offset
+	if not is_facing_right:
+		on_hand.offset.x = -held_offset.x
 
 
 func is_in_water() -> bool:

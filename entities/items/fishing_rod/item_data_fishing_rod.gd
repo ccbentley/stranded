@@ -3,11 +3,12 @@ class_name ItemDataFishingRod
 
 const FISHING_ROD_HOOK = preload("res://entities/items/fishing_rod/hook/fishing_rod_hook.tscn")
 var fishing_rod_hook: FishingRodHook = null
-@export var max_line_cast_distance: float = 100
+var max_line_cast_distance: float = 100
 
 
 func use(target: Node2D) -> void:
 	if fishing_rod_hook and not is_instance_valid(fishing_rod_hook):
+		# Instance was previously freed
 		target.main.hot_bar_inventory.hot_bar_slot_changed.disconnect(on_hot_bar_slot_changed)
 		fishing_rod_hook = null
 	if fishing_rod_hook:
@@ -28,6 +29,11 @@ func use(target: Node2D) -> void:
 
 
 func on_hot_bar_slot_changed(target: Node2D) -> void:
+	if fishing_rod_hook and not is_instance_valid(fishing_rod_hook):
+		# Instance was previously freed
+		target.main.hot_bar_inventory.hot_bar_slot_changed.disconnect(on_hot_bar_slot_changed)
+		fishing_rod_hook = null
+		return
 	fishing_rod_hook.animate_fish_line_in()
 	fishing_rod_hook = null
 	target.main.hot_bar_inventory.hot_bar_slot_changed.disconnect(on_hot_bar_slot_changed)
