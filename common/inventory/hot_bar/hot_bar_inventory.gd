@@ -1,6 +1,7 @@
 extends PanelContainer
 
 signal hot_bar_use(index: int)
+signal hot_bar_slot_changed
 
 const SLOT = preload("res://common/inventory/slot.tscn")
 
@@ -34,9 +35,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("scroll_down"):
 		selected_slot += 1
+		hot_bar_slot_changed.emit()
 		set_selected()
 	elif event.is_action_pressed("scroll_up"):
 		selected_slot -= 1
+		hot_bar_slot_changed.emit()
 		set_selected()
 
 

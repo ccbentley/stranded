@@ -16,7 +16,8 @@ script = ExtResource("1_dl0gs")
 texture = ExtResource("2_2ssnh")
 
 [node name="Line2D" type="Line2D" parent="."]
-width = 2.0
+width = 1.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_0ayca")
