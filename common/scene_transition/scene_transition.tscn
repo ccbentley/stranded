@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6pg5oyuksgwp"]
+
+[ext_resource type="Script" path="res://common/scene_transition/scene_transition.gd" id="1_fhhjm"]
+
+[sub_resource type="Animation" id="Animation_kpmy3"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xltkc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nw8v"]
+_data = {
+"RESET": SubResource("Animation_xltkc"),
+"fade": SubResource("Animation_kpmy3")
+}
+
+[node name="SceneTransition" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_fhhjm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ColorRect"]
+custom_minimum_size = Vector2(1152, 0)
+size_flags_horizontal = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1nw8v")
+}
