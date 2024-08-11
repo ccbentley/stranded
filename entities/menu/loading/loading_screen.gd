@@ -22,5 +22,5 @@ func _process(_delta: float) -> void:
 	if progress[0] == 1:
 		set_process(false)
 		var packed_scene: PackedScene = ResourceLoader.load_threaded_get(Global.next_scene)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(2).timeout
 		SceneTransition.change_scene(packed_scene, "fade")
