@@ -1,14 +1,12 @@
 extends Node
 
 var settings_data: SettingsData
-@onready var default_keybind_data: KeybindData = preload("res://utilities/save_system/keybind_default.tres")
-
-const save_file_path: String = Global.save_file_path
-const save_file_name: String = Global.settings_save_file_name
+@onready
+var default_keybind_data: KeybindData = preload("res://utilities/save_system/keybind_default.tres")
 
 
 func _ready() -> void:
-	if ResourceLoader.exists(save_file_path + save_file_name):
+	if ResourceLoader.exists(Global.save_file_path + Global.settings_save_file_name):
 		load_settings()
 	else:
 		settings_data = SettingsData.new()
@@ -93,13 +91,11 @@ func get_keybind(action: String) -> InputEventKey:
 
 
 func save_settings() -> void:
-	verify_save_directory(save_file_path)
-	ResourceSaver.save(settings_data, save_file_path + save_file_name)
+	Global.verify_save_directory(Global.save_file_path)
+	ResourceSaver.save(settings_data, Global.save_file_path + Global.settings_save_file_name)
 
 
 func load_settings() -> void:
-	settings_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-
-
-func verify_save_directory(path: String) -> void:
-	DirAccess.make_dir_absolute(path)
+	settings_data = (
+		ResourceLoader.load(Global.save_file_path + Global.settings_save_file_name).duplicate()
+	)

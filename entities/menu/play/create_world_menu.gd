@@ -9,9 +9,6 @@ class_name CreateWorldMenu
 
 signal exit_create_world_menu
 
-var save_file_path: String = Global.save_file_path
-const save_file_name: String = Global.world_save_file_name
-
 
 func _ready() -> void:
 	handle_connecting_signals()
@@ -45,11 +42,7 @@ func on_create_world_pressed() -> void:
 			world_data.world_seed = randi()
 		else:
 			world_data.world_seed = int(world_seed.text)
-		var world_save_file_path: String = save_file_path + world_data.world_name + "/"
-		verify_save_directory(world_save_file_path)
-		ResourceSaver.save(world_data, world_save_file_path + save_file_name)
+		var world_save_file_path: String = Global.save_file_path + world_data.world_name + "/"
+		Global.verify_save_directory(world_save_file_path)
+		ResourceSaver.save(world_data, world_save_file_path + Global.world_save_file_name)
 		on_exit_pressed()
-
-
-func verify_save_directory(path: String) -> void:
-	DirAccess.make_dir_absolute(path)

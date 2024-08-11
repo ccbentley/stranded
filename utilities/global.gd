@@ -6,6 +6,11 @@ const settings_save_file_name: String = "settings_data.tres"
 const world_save_file_name: String = "world_data.tres"
 var world_save_file_path: String
 
+
+func verify_save_directory(path: String) -> void:
+	DirAccess.make_dir_absolute(path)
+
+
 var world_data: WorldData:
 	set(value):
 		world_data = value

@@ -34,7 +34,15 @@ func _physics_process(_delta: float) -> void:
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
 
-	if external_inventory_owner and external_inventory_owner.global_position.distance_to(PlayerManager.get_global_position()) > 75:
+	if (
+		external_inventory_owner
+		and (
+			external_inventory_owner.global_position.distance_to(
+				PlayerManager.get_global_position()
+			)
+			> 75
+		)
+	):
 		force_close.emit()
 
 

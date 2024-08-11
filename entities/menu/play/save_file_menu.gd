@@ -6,9 +6,6 @@ class_name SaveFileMenu
 @onready var world_icon: TextureButton = $BoxContainer/WorldIcon
 
 @export var world_data: WorldData
-const save_file_path: String = Global.save_file_path
-const world_save_file_name: String = Global.world_save_file_name
-const player_save_file_name: String = Global.player_save_file_name
 
 
 func _ready() -> void:
@@ -29,8 +26,8 @@ func on_world_icon_pressed() -> void:
 
 
 func on_delete_pressed() -> void:
-	var world_save_file_path: String = save_file_path + world_data.world_name
-	DirAccess.remove_absolute(world_save_file_path + "/" + world_save_file_name)
-	DirAccess.remove_absolute(world_save_file_path + "/" + player_save_file_name)
+	var world_save_file_path: String = Global.save_file_path + world_data.world_name
+	DirAccess.remove_absolute(world_save_file_path + "/" + Global.world_save_file_name)
+	DirAccess.remove_absolute(world_save_file_path + "/" + Global.player_save_file_name)
 	DirAccess.remove_absolute(world_save_file_path)
-	get_parent().get_parent().get_parent().get_parent().get_parent().check_for_worlds()
+	queue_free()

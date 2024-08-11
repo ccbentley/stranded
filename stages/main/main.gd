@@ -6,10 +6,6 @@ extends Node2D
 @onready var tile_map: TileMap = $TileMap
 @onready var camera: Camera2D = $Camera2D
 
-const save_file_path: String = Global.save_file_path
-const player_save_file_name: String = Global.player_save_file_name
-const world_save_file_name: String = Global.world_save_file_name
-var world_save_file_path: String = Global.world_save_file_path
 var player_data: PlayerData = PlayerData.new()
 
 const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
@@ -24,7 +20,7 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("external_inventory"):
 		node.toggle_inventory.connect(toggle_inventory_interface)
 
-	verify_save_directory(world_save_file_path)
+	Global.verify_save_directory(Global.world_save_file_path)
 
 	if not load_game():
 		tile_map.find_spawn_location()
@@ -59,21 +55,19 @@ func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
 	add_child(pick_up)
 
 
-func verify_save_directory(path: String) -> void:
-	DirAccess.make_dir_absolute(path)
-
-
 func save_game() -> void:
 	player_data.inventory_data = player.inventory_data.duplicate()
 	player_data.equip_inventory_data = player.equip_inventory_data.duplicate()
 	player_data.position = player.global_position
-	ResourceSaver.save(player_data, world_save_file_path + player_save_file_name)
+	ResourceSaver.save(player_data, Global.world_save_file_path + Global.player_save_file_name)
 
 
 func load_game() -> bool:
-	if not ResourceLoader.exists(world_save_file_path + player_save_file_name):
+	if not ResourceLoader.exists(Global.world_save_file_path + Global.player_save_file_name):
 		return false
-	player_data = ResourceLoader.load(world_save_file_path + player_save_file_name).duplicate(true)
+	player_data = (
+		ResourceLoader.load(Global.world_save_file_path + Global.player_save_file_name).duplicate()
+	)
 	player.inventory_data = player_data.inventory_data
 	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()

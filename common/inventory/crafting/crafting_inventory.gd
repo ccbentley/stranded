@@ -35,8 +35,8 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 		child.queue_free()
 		inventory_data.slot_datas.clear()
 
-	for resipe_name: String in recipes:
-		var recipe: Dictionary = recipes[resipe_name]
+	for recipe_name: String in recipes:
+		var recipe: Dictionary = recipes[recipe_name]
 		var can_craft: bool = true
 		for mat: String in recipe["materials"]:
 			var required_amount: int = recipe["materials"][mat]

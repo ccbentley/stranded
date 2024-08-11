@@ -22,8 +22,12 @@ var environment_layer: int = 4
 
 #Tiles
 var water_atlas: Vector2i = Vector2i(8, 4)
-var water_bubble_atlas_arr: Array = [Vector2i(28, 2), Vector2i(29, 2), Vector2i(30, 2), Vector2i(31, 2)]
-var grass_blade_atlas_arr: Array = [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)]
+var water_bubble_atlas_arr: Array = [
+	Vector2i(28, 2), Vector2i(29, 2), Vector2i(30, 2), Vector2i(31, 2)
+]
+var grass_blade_atlas_arr: Array = [
+	Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)
+]
 var flower_atlas_arr: Array = [Vector2i(0, 12), Vector2i(4, 12), Vector2i(8, 12)]
 var sand_decoration_atlas_arr: Array = [
 	Vector2i(14, 10),
@@ -95,9 +99,21 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 				elif decoration_noise_val > 0.6:
 					call_deferred("draw_object", ROCK, map_to_local(Vector2i(x, y)), chunk_node)
 				elif decoration_noise_val > 0.5:
-					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
+					call_deferred(
+						"set_cell",
+						environment_layer,
+						Vector2i(x, y),
+						source_id,
+						flower_atlas_arr.pick_random()
+					)
 				elif decoration_noise_val > 0.4:
-					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
+					call_deferred(
+						"set_cell",
+						environment_layer,
+						Vector2i(x, y),
+						source_id,
+						grass_blade_atlas_arr.pick_random()
+					)
 			elif noise_val >= 0.6:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
@@ -114,12 +130,24 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 		var x: int = int(water_tiles_arr[_tile].x)
 		var y: int = int(water_tiles_arr[_tile].y)
 		var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
-		if (sand_tiles_arr.has(water_tiles_arr[_tile]) or grass_tiles_arr.has(water_tiles_arr[_tile])) and _tile <= water_tiles_arr.size():
+		if (
+			(
+				sand_tiles_arr.has(water_tiles_arr[_tile])
+				or grass_tiles_arr.has(water_tiles_arr[_tile])
+			)
+			and _tile <= water_tiles_arr.size()
+		):
 			water_tiles_arr.remove_at(_tile)
 			times_water_removed += 1
 		else:
 			if decoration_noise_val > 0.8:
-				call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
+				call_deferred(
+					"set_cell",
+					environment_layer,
+					Vector2i(x, y),
+					source_id,
+					water_bubble_atlas_arr.pick_random()
+				)
 	#Checks if sand tiles are overlapping grass tiles
 	for tile: Vector2i in sand_tiles_arr:
 		if not grass_tiles_arr.has(tile):
@@ -134,7 +162,13 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 				var y: int = tile.y
 				var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 				if decoration_noise_val > 0.5:
-					call_deferred("set_cell", environment_layer, Vector2i(x, y), source_id, sand_decoration_atlas_arr.pick_random())
+					call_deferred(
+						"set_cell",
+						environment_layer,
+						Vector2i(x, y),
+						source_id,
+						sand_decoration_atlas_arr.pick_random()
+					)
 	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
 
 
@@ -147,14 +181,20 @@ func get_chunk_node(chunk: Vector2i) -> Node2D:
 	return chunk_node
 
 
-func draw_tiles(_water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
+func draw_tiles(
+	_water_tiles_arr: PackedVector2Array,
+	_sand_tiles_arr: PackedVector2Array,
+	_grass_tiles_arr: PackedVector2Array
+) -> void:
 	for tile: Vector2i in _water_tiles_arr:
 		set_cell(water_layer, tile, source_id, water_atlas)
 	set_cells_terrain_connect(ground_1_layer, _sand_tiles_arr, terrain_sand_int, 0)
 	set_cells_terrain_connect(ground_2_layer, _grass_tiles_arr, terrain_grass_int, 0)
 
 
-func draw_object(OBJ: PackedScene, pos: Vector2 = Vector2i(0, 0), child_node: Node2D = self) -> void:
+func draw_object(
+	OBJ: PackedScene, pos: Vector2 = Vector2i(0, 0), child_node: Node2D = self
+) -> void:
 	var obj: Node2D = OBJ.instantiate()
 	child_node.add_child(obj)
 	obj.position = pos
@@ -163,7 +203,12 @@ func draw_object(OBJ: PackedScene, pos: Vector2 = Vector2i(0, 0), child_node: No
 func is_in_chunk(chunk: Vector2i, tile_pos: Vector2i) -> bool:
 	chunk = chunk * 32
 	var chunk_end: Vector2i = chunk + Vector2i(32, 32)
-	return tile_pos.x >= chunk.x and tile_pos.x < chunk_end.x and tile_pos.y >= chunk.y and tile_pos.y < chunk_end.y
+	return (
+		tile_pos.x >= chunk.x
+		and tile_pos.x < chunk_end.x
+		and tile_pos.y >= chunk.y
+		and tile_pos.y < chunk_end.y
+	)
 
 
 func clear_chunk(chunk: Vector2i) -> void:
@@ -181,7 +226,10 @@ func unload_distant_chunks() -> void:
 	for chunk: int in loaded_chunks.size():
 		var _chunk: int = chunk - times_chunk_removed
 		var dist_to_player: Vector2i = dist(Vector2i(loaded_chunks[_chunk]), player_chunk_pos)
-		if (dist_to_player.x > view_distance or dist_to_player.y > view_distance) and _chunk <= loaded_chunks.size():
+		if (
+			(dist_to_player.x > view_distance or dist_to_player.y > view_distance)
+			and _chunk <= loaded_chunks.size()
+		):
 			clear_chunk(loaded_chunks[_chunk])
 			loaded_chunks.remove_at(_chunk)
 			times_chunk_removed += 1

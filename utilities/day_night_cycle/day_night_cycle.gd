@@ -31,6 +31,7 @@ func _on_timer_timeout() -> void:
 		NIGHT:
 			change_to_day()
 			state = DAY
+			Global.world_data.day_count += 1
 
 
 func change_to_night() -> void:

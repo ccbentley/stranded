@@ -13,7 +13,9 @@ var max_player_distance: float = 200
 var player_out_of_range: bool = false
 
 const FISHING_ROD_ART_NORMAL = preload("res://entities/items/fishing_rod/art/fishing_rod.png")
-const FISHING_ROD_ART_CASTED = preload("res://entities/items/fishing_rod/art/fishing_rod_casted.png")
+const FISHING_ROD_ART_CASTED = preload(
+	"res://entities/items/fishing_rod/art/fishing_rod_casted.png"
+)
 
 
 func draw_curve() -> void:
@@ -40,7 +42,12 @@ func animate_fish_line_out() -> void:
 	var points: PackedVector2Array = path_2d.curve.get_baked_points()
 	line_2d.clear_points()
 	for point in points.size():
-		tween.tween_property(line_2d, "points", points.slice(0, point + 1), 0.015).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		(
+			tween
+			. tween_property(line_2d, "points", points.slice(0, point + 1), 0.015)
+			. set_trans(Tween.TRANS_LINEAR)
+			. set_ease(Tween.EASE_IN_OUT)
+		)
 	await tween.finished
 	sprite_2d.visible = true
 	animated = true
@@ -52,7 +59,12 @@ func animate_fish_line_in() -> void:
 	animated = false
 	sprite_2d.visible = false
 	for point in points.size():
-		tween.tween_property(line_2d, "points", points.slice(0, -point), 0.01).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+		(
+			tween
+			. tween_property(line_2d, "points", points.slice(0, -point), 0.01)
+			. set_trans(Tween.TRANS_LINEAR)
+			. set_ease(Tween.EASE_IN_OUT)
+		)
 	await tween.finished
 	queue_free()
 
@@ -68,7 +80,10 @@ func _physics_process(_delta: float) -> void:
 	if animated:
 		draw_fish_line()
 	if not player_out_of_range:
-		if abs(player.global_position.x - self.global_position.x) > max_player_distance or abs(player.global_position.y - self.global_position.y) > max_player_distance:
+		if (
+			abs(player.global_position.x - self.global_position.x) > max_player_distance
+			or abs(player.global_position.y - self.global_position.y) > max_player_distance
+		):
 			player_out_of_range = true
 			player.on_hand.texture = FISHING_ROD_ART_NORMAL
 			animate_fish_line_in()

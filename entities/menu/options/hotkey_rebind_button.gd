@@ -41,7 +41,9 @@ func set_action_name() -> void:
 
 
 func set_text_for_key() -> void:
-	var action_keycode: String = OS.get_keycode_string(SettingsSaveManager.get_keybind(action_name).physical_keycode)
+	var action_keycode: String = OS.get_keycode_string(
+		SettingsSaveManager.get_keybind(action_name).physical_keycode
+	)
 	button.text = "%s" % action_keycode
 
 

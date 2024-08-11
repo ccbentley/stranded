@@ -22,10 +22,20 @@ var is_facing_right: bool = true:
 	set(value):
 		if value and is_facing_right != value:
 			turn_tween = get_tree().create_tween()
-			turn_tween.tween_property(sprite_2d, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			(
+				turn_tween
+				. tween_property(sprite_2d, "scale", Vector2(1, 1), 0.5)
+				. set_trans(Tween.TRANS_CUBIC)
+				. set_ease(Tween.EASE_OUT)
+			)
 		elif not value and is_facing_right != value:
 			turn_tween = get_tree().create_tween()
-			turn_tween.tween_property(sprite_2d, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			(
+				turn_tween
+				. tween_property(sprite_2d, "scale", Vector2(-1, 1), 0.5)
+				. set_trans(Tween.TRANS_CUBIC)
+				. set_ease(Tween.EASE_OUT)
+			)
 		is_facing_right = value
 
 
@@ -43,7 +53,9 @@ func player_interact(_player: Player) -> void:
 
 
 func is_in_water() -> bool:
-	var tile_data: TileData = player.tile_map.get_cell_tile_data(0, player.tile_map.local_to_map(global_position))
+	var tile_data: TileData = player.tile_map.get_cell_tile_data(
+		0, player.tile_map.local_to_map(global_position)
+	)
 	if tile_data:
 		return tile_data.get_custom_data("can_swim")
 	else:
