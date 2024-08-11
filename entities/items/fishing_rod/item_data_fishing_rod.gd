@@ -1,10 +1,9 @@
 extends ItemData
 class_name ItemDataFishingRod
 
-const FISHING_ROD_HOOK = preload("res://entities/items/fishing_rod/hook/fishing_rod_hook.tscn")
+const FISHING_ROD_HOOK: PackedScene  = preload("res://entities/items/fishing_rod/hook/fishing_rod_hook.tscn")
 var fishing_rod_hook: FishingRodHook = null
-var max_line_cast_distance: float = 150
-
+var max_line_cast_distance: float    = 150
 const FISHING_ROD_ART_NORMAL = preload("res://entities/items/fishing_rod/art/fishing_rod.png")
 const FISHING_ROD_ART_CASTED = preload("res://entities/items/fishing_rod/art/fishing_rod_casted.png")
 
@@ -21,6 +20,10 @@ func use(target: Node2D) -> void:
 			target.main.hot_bar_inventory.hot_bar_slot_changed.disconnect(on_hot_bar_slot_changed)
 			target.display_on_hand(FISHING_ROD_ART_NORMAL, held_offset)
 			fishing_rod_hook = null
+			return
+		else:
+			await Engine.get_main_loop().process_frame
+			target.display_on_hand(FISHING_ROD_ART_CASTED, held_offset)
 			return
 	else:
 		var distance: Vector2 = target.get_global_mouse_position() - target.global_position

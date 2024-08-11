@@ -40,7 +40,7 @@ var sand_decoration_atlas_arr: Array = [
 	Vector2i(15, 0),
 	Vector2i(15, 1),
 	Vector2i(15, 2),
-	Vector2i(15, 3)
+	Vector2i(15, 3),
 ]
 var terrain_sand_int: int = 0
 var terrain_grass_int: int = 1
@@ -51,8 +51,8 @@ var loaded_chunks: PackedVector2Array = []
 var view_distance: int = 1
 
 #Objects
-const TREE = preload("res://entities/environment/trees/tree.tscn")
-const ROCK = preload("res://entities/environment/rocks/rock.tscn")
+const TREE: PackedScene = preload("res://entities/environment/trees/tree.tscn")
+const ROCK: PackedScene = preload("res://entities/environment/rocks/rock.tscn")
 
 
 func _ready() -> void:
