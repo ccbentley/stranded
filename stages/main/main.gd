@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player: CharacterBody2D = $Player
+@onready var player: Player = $Player
 @onready var inventory_interface: InventoryInterface = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
 @onready var tile_map: TileMap = $TileMap

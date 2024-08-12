@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=17 format=3 uid="uid://dnj62ts5tdlcl"]
 
-[ext_resource type="Texture2D" uid="uid://bc6tlagk6nlr5" path="res://entities/environment/trees/art/tree.png" id="1_vtvgx"]
+[ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
+[ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
@@ -123,6 +124,7 @@ _data = {
 
 [node name="Tree" type="StaticBody2D"]
 y_sort_enabled = true
+script = ExtResource("1_ltc28")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -132,7 +134,7 @@ shape = SubResource("RectangleShape2D_q7wl3")
 y_sort_enabled = true
 position = Vector2(0, -2)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_vtvgx")
+texture = ExtResource("1_udmqk")
 offset = Vector2(-0.666666, -7.33333)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_pl3hv")]

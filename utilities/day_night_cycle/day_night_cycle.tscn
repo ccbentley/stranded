@@ -62,7 +62,7 @@ mouse_filter = 2
 [node name="ColorRect" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.588235)
+color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

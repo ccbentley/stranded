@@ -48,6 +48,7 @@ func update_info() -> void:
 	info.text += "\n \n World Info: "
 	info.text += "\n World Name: " + str(Global.world_data.world_name)
 	info.text += "\n World Seed: " + str(Global.world_data.world_seed)
+	info.text += "\n Day Count: " + str(Global.world_data.day_count)
 
 
 func clear_spawn_list() -> void:

@@ -17,12 +17,12 @@ boot_splash/show_image=false
 
 [autoload]
 
-PlayerManager="*res://entities/player/player_manager.gd"
 Global="*res://utilities/global.gd"
-SettingsSaveManager="*res://entities/menu/options/settings_save_manager.gd"
 TaskManager="*res://common/task_manager/task_manager.gd"
-WorldManager="*res://utilities/world_manager/world_manager.gd"
 SceneTransition="*res://common/scene_transition/scene_transition.tscn"
+SettingsSaveManager="*res://entities/menu/options/settings_save_manager.gd"
+WorldManager="*res://utilities/world_manager/world_manager.gd"
+PlayerManager="*res://entities/player/player_manager.gd"
 
 [debug]
 
