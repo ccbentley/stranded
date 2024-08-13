@@ -95,6 +95,3 @@ layout_mode = 1
 [node name="OptionsMenu" parent="." instance=ExtResource("5_gno6i")]
 visible = false
 layout_mode = 1
-
-[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Music"

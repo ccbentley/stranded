@@ -13,10 +13,13 @@ const SAVE_FILE_MENU: PackedScene = preload("res://entities/menu/play/save_file_
 @onready var save_selection_menu: SaveSelectionMenu = $"."
 @onready var create_world_menu: CreateWorldMenu = $"../CreateWorldMenu"
 
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+
 
 func _ready() -> void:
 	handle_connecting_signals()
 	set_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func handle_connecting_signals() -> void:
@@ -32,18 +35,23 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 func on_exit_pressed() -> void:
 	exit_save_selection_menu.emit()
 	set_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func on_create_world_pressed() -> void:
 	self.visible = false
 	create_world_menu.set_process(true)
+	create_world_menu.set_process_unhandled_key_input(true)
 	create_world_menu.visible = true
+	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
 func on_exit_create_world_menu() -> void:
 	self.visible = true
 	save_selection_menu.set_process(false)
+	save_selection_menu.set_process_unhandled_key_input(false)
 	save_selection_menu.visible = false
+	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
 func check_for_worlds() -> void:

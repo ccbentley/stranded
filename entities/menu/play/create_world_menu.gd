@@ -9,10 +9,13 @@ class_name CreateWorldMenu
 
 signal exit_create_world_menu
 
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+
 
 func _ready() -> void:
 	handle_connecting_signals()
 	set_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func handle_connecting_signals() -> void:
@@ -31,9 +34,11 @@ func on_exit_pressed() -> void:
 	world_seed.text = ""
 	exit_create_world_menu.emit()
 	set_process(false)
+	set_process_unhandled_key_input(false)
 
 
 func on_create_world_pressed() -> void:
+	AudioManager.play_sound(UI_CLICK_SOUND)
 	var world_data: WorldData = WorldData.new()
 	if world_name.text != "" and character_name.text != "":
 		world_data.world_name = world_name.text

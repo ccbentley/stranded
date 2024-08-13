@@ -10,6 +10,8 @@ class_name MainMenu
 @onready var create_world_menu: CreateWorldMenu = $CreateWorldMenu
 @onready var options_menu: OptionsMenu = $OptionsMenu
 
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+
 
 func _ready() -> void:
 	handle_connecting_signals()
@@ -27,34 +29,45 @@ func handle_connecting_signals() -> void:
 func on_play_pressed() -> void:
 	margin_container.visible = false
 	save_selection_menu.set_process(true)
+	save_selection_menu.set_process_unhandled_key_input(true)
 	save_selection_menu.visible = true
+	AudioManager.play_sound(UI_CLICK_SOUND)
 	save_selection_menu.check_for_worlds()
 
 
 func on_quit_pressed() -> void:
+	AudioManager.play_sound(UI_CLICK_SOUND)
 	get_tree().quit()
 
 
 func on_options_pressed() -> void:
 	margin_container.visible = false
 	options_menu.set_process(true)
+	options_menu.set_process_unhandled_key_input(true)
 	options_menu.visible = true
+	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
 func on_exit_options_menu() -> void:
 	margin_container.visible = true
 	options_menu.set_process(false)
+	options_menu.set_process_unhandled_key_input(false)
 	options_menu.visible = false
+	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
 func on_exit_save_selection_menu() -> void:
 	margin_container.visible = true
 	save_selection_menu.set_process(false)
+	save_selection_menu.set_process_unhandled_key_input(false)
 	save_selection_menu.visible = false
+	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
 func on_exit_create_world_menu() -> void:
 	create_world_menu.visible = false
 	save_selection_menu.set_process(true)
+	save_selection_menu.set_process_unhandled_key_input(true)
 	save_selection_menu.visible = true
 	save_selection_menu.check_for_worlds()
+	AudioManager.play_sound(UI_CLICK_SOUND)

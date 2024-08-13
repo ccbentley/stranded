@@ -11,6 +11,9 @@ var dead: bool = false
 @export var drop_data: Array[LootData]
 var slot_datas: Array[SlotData]
 
+@export var hit_sfx: AudioStream
+@export var death_sfx: AudioStream
+
 signal damaged(prev_health: float, health: float)
 signal died
 
@@ -37,9 +40,14 @@ func damage(attack: Attack) -> void:
 	if anim and anim.has_animation("hit"):
 		anim.play("hit")
 
+	if hit_sfx:
+		AudioManager.play_sound_2d(hit_sfx, 0, global_position)
+
 	if health <= 0 and not dead:
 		dead = true
 		died.emit()
+		if death_sfx:
+			AudioManager.play_sound_2d(death_sfx, 0, global_position)
 		if slot_datas:
 			for drop: LootData in slot_datas:
 				var roll: float = randf()

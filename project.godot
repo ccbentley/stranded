@@ -23,6 +23,7 @@ SceneTransition="*res://common/scene_transition/scene_transition.tscn"
 SettingsSaveManager="*res://entities/menu/options/settings_save_manager.gd"
 WorldManager="*res://utilities/world_manager/world_manager.gd"
 PlayerManager="*res://entities/player/player_manager.gd"
+AudioManager="*res://utilities/audio_manager/audio_manager.gd"
 
 [debug]
 

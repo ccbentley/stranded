@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=18 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
 [ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
+[ext_resource type="AudioStream" uid="uid://7umwy5tjdtmc" path="res://assets/sounds/opengameart/rustle19.ogg" id="6_8tw3c"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_kqkgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
@@ -135,11 +136,12 @@ y_sort_enabled = true
 position = Vector2(0, -2)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_udmqk")
-offset = Vector2(-0.666666, -7.33333)
+offset = Vector2(0, -15)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_pl3hv")]
 anim = NodePath("../AnimationPlayer")
 drop_data = Array[ExtResource("4_kpk1k")]([SubResource("Resource_6p6ry"), SubResource("Resource_dhdlh"), SubResource("Resource_bu2b3")])
+death_sfx = ExtResource("6_8tw3c")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_2jwj5")]
 health_component = NodePath("../HealthComponent")

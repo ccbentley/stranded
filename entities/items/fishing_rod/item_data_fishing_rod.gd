@@ -41,6 +41,7 @@ func use(target: Node2D) -> void:
 		)
 		await Engine.get_main_loop().process_frame
 		target.display_on_hand(FISHING_ROD_ART_CASTED, held_offset)
+		AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"))
 		return
 
 
