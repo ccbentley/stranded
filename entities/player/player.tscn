@@ -23,6 +23,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
+size = Vector2(10, 19)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5bsv"]
+shader = ExtResource("16_ylx78")
+shader_parameter/outline_color = null
+
 [sub_resource type="Animation" id="Animation_a5un6"]
 resource_name = "idle"
 loop_mode = 1
@@ -103,10 +110,6 @@ _data = {
 "swim": SubResource("Animation_k7cy2")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5bsv"]
-shader = ExtResource("16_ylx78")
-shader_parameter/outline_color = null
-
 [sub_resource type="Animation" id="Animation_ltw5y"]
 length = 0.001
 tracks/0/type = "value"
@@ -171,9 +174,6 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdnxj"]
 bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
-size = Vector2(10, 19)
-
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -190,10 +190,12 @@ script = ExtResource("9_0khh0")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
 
-[node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
+[node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "footstep_audio_player", "footstep_sound_timer")]
 script = ExtResource("9_02503")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
+footstep_audio_player = NodePath("../../../FootStepSound")
+footstep_sound_timer = NodePath("../../../FootStepSoundTimer")
 
 [node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar")]
 script = ExtResource("9_fa61r")
@@ -206,17 +208,28 @@ script = ExtResource("6_fg33t")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
 
+[node name="CharacterSprite" parent="." instance=ExtResource("7_phdj8")]
+texture = ExtResource("9_yx3yv")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4f3oy")
 
-[node name="CharacterSprite" parent="." instance=ExtResource("7_phdj8")]
-texture = ExtResource("9_yx3yv")
+[node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
+MAX_HEALTH = 1e+10
 
-[node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ankr7")
-}
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_q3ebq")]
+health_component = NodePath("../HealthComponent")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hgslm")
+
+[node name="AttackComponent" parent="." instance=ExtResource("6_in0ea")]
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
 material = SubResource("ShaderMaterial_f5bsv")
@@ -224,13 +237,15 @@ position = Vector2(7, 3)
 scale = Vector2(0.75, 0.75)
 offset = Vector2(7, -5.5)
 
+[node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ankr7")
+}
+
 [node name="OnHandAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_66n73")
 }
-
-[node name="AttackCooldown" type="Timer" parent="."]
-one_shot = true
 
 [node name="DrownBar" type="ProgressBar" parent="."]
 visible = false
@@ -249,15 +264,10 @@ show_percentage = false
 [node name="Timer" type="Timer" parent="DrownBar"]
 wait_time = 0.5
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_q3ebq")]
-health_component = NodePath("../HealthComponent")
-type = 1
+[node name="FootStepSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+bus = &"Sfx"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_hgslm")
-
-[node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
-MAX_HEALTH = 1e+10
-
-[node name="AttackComponent" parent="." instance=ExtResource("6_in0ea")]
+[node name="FootStepSoundTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

@@ -194,3 +194,19 @@ func is_in_water() -> bool:
 		return tile_data.get_custom_data("can_swim")
 	else:
 		return false
+
+
+func is_on_sand() -> bool:
+	var tile_data: TileData = tile_map.get_cell_tile_data(1, player_tile)
+	if tile_data:
+		return true
+	else:
+		return false
+
+
+func is_on_grass() -> bool:
+	var tile_data: TileData = tile_map.get_cell_tile_data(2, player_tile)
+	if tile_data:
+		return true
+	else:
+		return false
