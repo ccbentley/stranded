@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://25v8rjkwdg57"]
+[gd_scene load_steps=6 format=3 uid="uid://25v8rjkwdg57"]
 
 [ext_resource type="Script" path="res://entities/menu/pause/pause_menu.gd" id="1_05eyv"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="2_4as8w"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uo4xg"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0sbsw"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_w8464"]
 
@@ -27,21 +31,13 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+modulate = Color(0, 0, 0, 0.392157)
+custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
-theme_override_constants/separation = 60
-
-[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 48
-text = "PAUSED"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("CanvasTexture_uo4xg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(140, 40)
@@ -51,15 +47,31 @@ size_flags_vertical = 4
 theme_override_constants/separation = 25
 alignment = 1
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 52
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineSeperator" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+texture = SubResource("CanvasTexture_0sbsw")
+
 [node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Resume"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Save and Quit"
 
@@ -68,7 +80,7 @@ visible = false
 layout_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0, 0, 0, 0.270588)
+modulate = Color(0, 0, 0, 0.27451)
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
