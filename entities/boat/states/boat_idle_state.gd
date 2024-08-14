@@ -21,7 +21,6 @@ func _exit_state() -> void:
 
 func _physics_process(delta: float) -> void:
 	#Slows the boat down from moving
-	print("yes")
 	if actor.velocity.length() > 0:
 		var friction_force: Vector2 = actor.velocity.normalized() * actor.friction * delta
 		if friction_force.length() > actor.velocity.length():
