@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://entities/menu/loading/loading_screen.gd" id="1_s2fly"]
 [ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://assets/art/background/screenshot.png" id="2_t7hnq"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_r1atl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od63h"]
+bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3
@@ -28,12 +29,11 @@ layout_mode = 2
 texture = ExtResource("2_t7hnq")
 expand_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
-modulate = Color(0, 0, 0, 0.392157)
+[node name="Panel" type="Panel" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 8
-texture = SubResource("CanvasTexture_r1atl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_od63h")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

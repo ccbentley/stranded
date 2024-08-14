@@ -41,6 +41,7 @@ _data = {
 }
 
 [node name="DayNightCycle" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_7dv4r")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

@@ -3,7 +3,12 @@
 [ext_resource type="Script" path="res://entities/menu/pause/pause_menu.gd" id="1_05eyv"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="2_4as8w"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_uo4xg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vejfw"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_0sbsw"]
 
@@ -31,13 +36,12 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
-modulate = Color(0, 0, 0, 0.392157)
+[node name="Panel" type="Panel" parent="MarginContainer"]
 custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("CanvasTexture_uo4xg")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vejfw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(140, 40)
