@@ -19,18 +19,10 @@ extends CharacterBody2D
 @onready var msm: FiniteStateMachine = $StateMachines/MovementStateMachine as FiniteStateMachine
 
 #Movement States
-@onready var player_idle_state: PlayerIdleState = (
-	$StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
-)
-@onready var player_moving_state: PlayerMovingState = (
-	$StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
-)
-@onready var player_swim_state: PlayerSwimState = (
-	$StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
-)
-@onready var player_sit_state: PlayerSitState = (
-	$StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
-)
+@onready var player_idle_state: PlayerIdleState = $StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
+@onready var player_moving_state: PlayerMovingState = $StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
+@onready var player_swim_state: PlayerSwimState = $StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
+@onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 @onready var on_hand: Sprite2D = $OnHand
 @onready var player_sprite: Sprite2D = $CharacterSprite
@@ -65,24 +57,14 @@ var is_facing_right: bool = true:
 		if value and is_facing_right != value:
 			# Turn right
 			turn_tween = get_tree().create_tween()
-			(
-				turn_tween
-				. tween_property(player_sprite, "scale", Vector2(1, 1), 0.5)
-				. set_trans(Tween.TRANS_CUBIC)
-				. set_ease(Tween.EASE_OUT)
-			)
+			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = false
 			on_hand.position.x = 7
 			on_hand.offset.x = held_offset.x
 		elif not value and is_facing_right != value:
 			# Turn left
 			turn_tween = get_tree().create_tween()
-			(
-				turn_tween
-				. tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5)
-				. set_trans(Tween.TRANS_CUBIC)
-				. set_ease(Tween.EASE_OUT)
-			)
+			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = true
 			on_hand.position.x = -7
 			on_hand.offset.x = -held_offset.x
@@ -94,10 +76,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		toggle_inventory.emit()
 	if Input.is_action_just_pressed("interact"):
 		interact()
-	if Input.is_action_just_pressed("save"):
-		main.save_game()
-	if Input.is_action_just_pressed("load"):
-		main.load_game()
 	if Input.is_action_just_pressed("zoom_in"):
 		main.zoom_in()
 	if Input.is_action_just_pressed("zoom_out"):

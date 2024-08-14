@@ -107,7 +107,8 @@ visible = false
 [node name="DebugMenu" parent="UI" instance=ExtResource("11_f00c6")]
 visible = false
 
-[node name="DayNightCycle" parent="UI" instance=ExtResource("12_dx3ki")]
+[node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
+layer = 0
 
 [node name="Chest" parent="." instance=ExtResource("7_5j5bh")]
 position = Vector2(40, 3800)
