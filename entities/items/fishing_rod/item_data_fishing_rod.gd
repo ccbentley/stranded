@@ -1,18 +1,14 @@
 extends ItemData
 class_name ItemDataFishingRod
 
-const FISHING_ROD_HOOK: PackedScene = preload(
-	"res://entities/items/fishing_rod/hook/fishing_rod_hook.tscn"
-)
+const FISHING_ROD_HOOK: PackedScene = preload("res://entities/items/fishing_rod/hook/fishing_rod_hook.tscn")
 var fishing_rod_hook: FishingRodHook = null
 var max_line_cast_distance: float = 150
 const FISHING_ROD_ART_NORMAL = preload("res://entities/items/fishing_rod/art/fishing_rod.png")
-const FISHING_ROD_ART_CASTED = preload(
-	"res://entities/items/fishing_rod/art/fishing_rod_casted.png"
-)
+const FISHING_ROD_ART_CASTED = preload("res://entities/items/fishing_rod/art/fishing_rod_casted.png")
 
 
-func use(target: Node2D) -> void:
+func use(target: Node2D, _index: int) -> void:
 	if fishing_rod_hook and not is_instance_valid(fishing_rod_hook):
 		# Instance was previously freed
 		target.main.hot_bar_inventory.hot_bar_slot_changed.disconnect(on_hot_bar_slot_changed)
@@ -36,9 +32,7 @@ func use(target: Node2D) -> void:
 		fishing_rod_hook = FISHING_ROD_HOOK.instantiate()
 		fishing_rod_hook.global_position = distance + target.global_position
 		target.main.add_child(fishing_rod_hook)
-		target.main.hot_bar_inventory.hot_bar_slot_changed.connect(
-			on_hot_bar_slot_changed.bind(target)
-		)
+		target.main.hot_bar_inventory.hot_bar_slot_changed.connect(on_hot_bar_slot_changed.bind(target))
 		await Engine.get_main_loop().process_frame
 		target.display_on_hand(FISHING_ROD_ART_CASTED, held_offset)
 		AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"))

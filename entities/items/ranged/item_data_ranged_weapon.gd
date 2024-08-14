@@ -7,7 +7,7 @@ class_name ItemDataRangedWeapon
 @export var attack_stun_time: float
 
 
-func use(target: Node2D) -> void:
+func use(target: Node2D, _index: int) -> void:
 	if target.try_attack():
 		var attack: Attack = Attack.new()
 		attack.attack_damage = attack_damage

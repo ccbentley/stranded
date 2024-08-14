@@ -116,7 +116,7 @@ func _ready() -> void:
 	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
 	player_moving_state.player_entered_water.connect(msm.change_state.bind(player_swim_state))
 	player_swim_state.player_exited_water.connect(msm.change_state.bind(player_moving_state))
-	player_sit_state.player_exited.connect(msm.change_state.bind(player_idle_state))
+	player_sit_state.player_exited.connect(msm.change_state.bind(player_moving_state))
 
 
 #Returns move input as a Vector2
@@ -166,9 +166,9 @@ func ranged_attack(attack: Attack) -> void:
 	attack_cooldown_timer.start(attack.attack_cooldown)
 
 
-func place_object(object: PackedScene) -> void:
+func place_object(object: PackedScene, pos: Vector2) -> void:
 	var obj: Node2D = object.instantiate()
-	obj.position = get_global_mouse_position()
+	obj.position = pos
 	owner.add_child(obj)
 
 

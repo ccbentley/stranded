@@ -8,5 +8,5 @@ class_name ItemData
 @export var held_offset: Vector2 = Vector2(0, 0)
 
 
-func use(_target: Node2D) -> void:
+func use(_target: Node2D, _index: int) -> void:
 	pass

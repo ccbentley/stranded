@@ -45,7 +45,6 @@ func _ready() -> void:
 
 
 func player_interact(_player: Player) -> void:
-	player = _player
 	player.msm.change_state(player.player_sit_state)
 	state_machine.change_state(boat_move_state)
 	player.is_facing_right = true
