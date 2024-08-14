@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=20 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
 [ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
+[ext_resource type="Shader" path="res://common/shaders/wind_sway.gdshader" id="2_evma0"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
@@ -11,6 +12,18 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
 size = Vector2(19, 6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drjcf"]
+shader = ExtResource("2_evma0")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
 
 [sub_resource type="Resource" id="Resource_6p6ry"]
 script = ExtResource("4_kpk1k")
@@ -133,6 +146,7 @@ shape = SubResource("RectangleShape2D_q7wl3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_drjcf")
 position = Vector2(0, -2)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_udmqk")

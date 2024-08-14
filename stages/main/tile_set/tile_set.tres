@@ -1,6 +1,19 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bcy0q2dkwpmny"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bcy0q2dkwpmny"]
 
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_bmy77"]
+[ext_resource type="Shader" path="res://common/shaders/wind_sway.gdshader" id="1_ls1ek"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yfd1"]
+shader = ExtResource("1_ls1ek")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsmls"]
 texture = ExtResource("1_bmy77")
@@ -432,14 +445,17 @@ texture = ExtResource("1_bmy77")
 26:11/0 = 0
 27:11/0 = 0
 0:12/0 = 0
+0:12/0/material = SubResource("ShaderMaterial_3yfd1")
 1:12/0 = 0
 2:12/0 = 0
 3:12/0 = 0
 4:12/0 = 0
+4:12/0/material = SubResource("ShaderMaterial_3yfd1")
 5:12/0 = 0
 6:12/0 = 0
 7:12/0 = 0
 8:12/0 = 0
+8:12/0/material = SubResource("ShaderMaterial_3yfd1")
 9:12/0 = 0
 10:12/0 = 0
 11:12/0 = 0
@@ -488,9 +504,13 @@ texture = ExtResource("1_bmy77")
 26:13/0 = 0
 27:13/0 = 0
 0:14/0 = 0
+0:14/0/material = SubResource("ShaderMaterial_3yfd1")
 1:14/0 = 0
+1:14/0/material = SubResource("ShaderMaterial_3yfd1")
 2:14/0 = 0
+2:14/0/material = SubResource("ShaderMaterial_3yfd1")
 3:14/0 = 0
+3:14/0/material = SubResource("ShaderMaterial_3yfd1")
 4:14/0 = 0
 5:14/0 = 0
 6:14/0 = 0
