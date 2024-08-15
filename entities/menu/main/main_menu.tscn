@@ -1,17 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://by4naatqr1mvd"]
+[gd_scene load_steps=6 format=3 uid="uid://by4naatqr1mvd"]
 
 [ext_resource type="Script" path="res://entities/menu/main/main_menu.gd" id="1_a1l53"]
 [ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://assets/art/background/screenshot.png" id="2_h8a2m"]
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://entities/menu/play/save_selection_menu.tscn" id="3_j43pa"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://entities/menu/play/create_world_menu.tscn" id="4_bvifd"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="5_gno6i"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kbu0"]
-bg_color = Color(0, 0, 0, 0.392157)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -61,13 +54,6 @@ text = "Stranded"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_1kbu0")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
@@ -78,19 +64,19 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 40)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 40)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 40)
+custom_minimum_size = Vector2(160, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Quit"
