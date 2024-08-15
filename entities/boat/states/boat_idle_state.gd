@@ -4,8 +4,6 @@ extends State
 @export var actor: Boat
 @export var anim: Sprite2D
 
-signal player_entered
-
 
 func _ready() -> void:
 	set_physics_process(false)

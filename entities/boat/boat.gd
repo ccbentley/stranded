@@ -32,7 +32,6 @@ var is_facing_right: bool = true:
 
 func _ready() -> void:
 	animation_player.play("spawn")
-	boat_idle_state.player_entered.connect(state_machine.change_state.bind(boat_move_state))
 	boat_move_state.player_exited.connect(state_machine.change_state.bind(boat_idle_state))
 
 

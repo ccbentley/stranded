@@ -109,9 +109,11 @@ func get_input() -> Vector2:
 
 
 func interact() -> void:
-	for area in hitbox_component.get_overlapping_areas():
-		if area.is_in_group("interactable"):
-			area.owner.player_interact(self)
+	if not msm.state == player_sit_state:
+		for area in hitbox_component.get_overlapping_areas():
+			if area.is_in_group("interactable"):
+				area.owner.player_interact(self)
+				return
 
 
 func get_drop_position() -> Vector2:
