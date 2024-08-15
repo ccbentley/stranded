@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@export var tile_map: TileMap
+@export var tile_map: Node2D
 @onready var main: Node2D = $".."
 
 @onready var on_hand_animation_player: AnimationPlayer = $OnHandAnimationPlayer
@@ -19,18 +19,10 @@ extends CharacterBody2D
 @onready var msm: FiniteStateMachine = $StateMachines/MovementStateMachine as FiniteStateMachine
 
 #Movement States
-@onready var player_idle_state: PlayerIdleState = (
-	$StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
-)
-@onready var player_moving_state: PlayerMovingState = (
-	$StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
-)
-@onready var player_swim_state: PlayerSwimState = (
-	$StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
-)
-@onready var player_sit_state: PlayerSitState = (
-	$StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
-)
+@onready var player_idle_state: PlayerIdleState = $StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
+@onready var player_moving_state: PlayerMovingState = $StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
+@onready var player_swim_state: PlayerSwimState = $StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
+@onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 @onready var on_hand: Sprite2D = $OnHand
 @onready var player_sprite: Sprite2D = $CharacterSprite
@@ -57,7 +49,7 @@ var turn_tween: Tween
 
 
 func _physics_process(_delta: float) -> void:
-	player_tile = tile_map.local_to_map(global_position)
+	player_tile = tile_map.local_to_map(position)
 
 
 var is_facing_right: bool = true:
@@ -65,24 +57,14 @@ var is_facing_right: bool = true:
 		if value and is_facing_right != value:
 			# Turn right
 			turn_tween = get_tree().create_tween()
-			(
-				turn_tween
-				. tween_property(player_sprite, "scale", Vector2(1, 1), 0.5)
-				. set_trans(Tween.TRANS_CUBIC)
-				. set_ease(Tween.EASE_OUT)
-			)
+			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = false
 			on_hand.position.x = 7
 			on_hand.offset.x = held_offset.x
 		elif not value and is_facing_right != value:
 			# Turn left
 			turn_tween = get_tree().create_tween()
-			(
-				turn_tween
-				. tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5)
-				. set_trans(Tween.TRANS_CUBIC)
-				. set_ease(Tween.EASE_OUT)
-			)
+			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.flip_h = true
 			on_hand.position.x = -7
 			on_hand.offset.x = -held_offset.x
@@ -185,7 +167,7 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 
 
 func is_in_water() -> bool:
-	var tile_data: TileData = tile_map.get_cell_tile_data(0, player_tile)
+	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile)
 	if tile_data:
 		return tile_data.get_custom_data("can_swim")
 	else:
@@ -193,7 +175,7 @@ func is_in_water() -> bool:
 
 
 func is_on_sand() -> bool:
-	var tile_data: TileData = tile_map.get_cell_tile_data(1, player_tile)
+	var tile_data: TileData = tile_map.ground_1_layer.get_cell_tile_data(player_tile)
 	if tile_data:
 		return true
 	else:
@@ -201,7 +183,7 @@ func is_on_sand() -> bool:
 
 
 func is_on_grass() -> bool:
-	var tile_data: TileData = tile_map.get_cell_tile_data(2, player_tile)
+	var tile_data: TileData = tile_map.ground_2_layer.get_cell_tile_data(player_tile)
 	if tile_data:
 		return true
 	else:

@@ -12,9 +12,7 @@ func play_sound(sound: AudioStream, volume: float = 0) -> void:
 	audio_stream_player.queue_free()
 
 
-func play_sound_2d(
-	sound: AudioStream, volume: float = 0, pos: Vector2 = Vector2.ZERO, max_distance: int = 2000
-) -> void:
+func play_sound_2d(sound: AudioStream, volume: float = 0, pos: Vector2 = Vector2.ZERO, max_distance: int = 2000) -> void:
 	var audio_stream_player_2d: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	add_child(audio_stream_player_2d)
 	audio_stream_player_2d.stream = sound

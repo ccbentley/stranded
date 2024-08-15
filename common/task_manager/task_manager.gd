@@ -42,13 +42,7 @@ func create_task(action: Callable, high_priority: bool = false, description: Str
 	return task
 
 
-func create_group_task(
-	action: Callable,
-	elements: int,
-	tasks_needed: int = -1,
-	high_priority: bool = false,
-	description: String = ""
-) -> GroupTask:
+func create_group_task(action: Callable, elements: int, tasks_needed: int = -1, high_priority: bool = false, description: String = "") -> GroupTask:
 	var group_task_id: int = (
 		WorkerThreadPool
 		. add_group_task(
@@ -65,9 +59,7 @@ func create_group_task(
 
 
 func _process(_delta: float) -> void:
-	var completed_tasks: Array = tasks.filter(
-		func completed(task: Task) -> bool: return task.is_completed()
-	)
+	var completed_tasks: Array = tasks.filter(func completed(task: Task) -> bool: return task.is_completed())
 
 	for completed_task: Task in completed_tasks:
 		var task: Task = completed_task

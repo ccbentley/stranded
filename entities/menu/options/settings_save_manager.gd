@@ -1,8 +1,7 @@
 extends Node
 
 var settings_data: SettingsData
-@onready
-var default_keybind_data: KeybindData = preload("res://utilities/save_system/keybind_default.tres")
+@onready var default_keybind_data: KeybindData = preload("res://utilities/save_system/keybind_default.tres")
 
 
 func _ready() -> void:
@@ -96,6 +95,4 @@ func save_settings() -> void:
 
 
 func load_settings() -> void:
-	settings_data = (
-		ResourceLoader.load(Global.save_file_path + Global.settings_save_file_name).duplicate()
-	)
+	settings_data = (ResourceLoader.load(Global.save_file_path + Global.settings_save_file_name).duplicate())

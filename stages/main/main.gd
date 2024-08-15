@@ -3,7 +3,7 @@ extends Node2D
 @onready var player: Player = $Player
 @onready var inventory_interface: InventoryInterface = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
-@onready var tile_map: TileMap = $TileMap
+@onready var tile_map: Node2D = $TileMap
 @onready var camera: Camera2D = $Camera2D
 
 var player_data: PlayerData = PlayerData.new()
@@ -65,9 +65,7 @@ func save_game() -> void:
 func load_game() -> bool:
 	if not ResourceLoader.exists(Global.world_save_file_path + Global.player_save_file_name):
 		return false
-	player_data = (
-		ResourceLoader.load(Global.world_save_file_path + Global.player_save_file_name).duplicate()
-	)
+	player_data = (ResourceLoader.load(Global.world_save_file_path + Global.player_save_file_name).duplicate())
 	player.inventory_data = player_data.inventory_data
 	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()

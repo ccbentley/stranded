@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=21 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -17,11 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://common/inventory/slot.tscn" id="14_fq4si"]
 [ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://entities/menu/pause/pause_menu.tscn" id="15_fqub2"]
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
+[ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="15_ynty6"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
-slot_datas = Array[Resource("res://common/inventory/slot_data.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("15_ynty6")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -113,28 +114,41 @@ visible = false
 position = Vector2(40, 3800)
 inventory_data = SubResource("Resource_csm5f")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="Node2D" parent="."]
 z_index = -1
 y_sort_enabled = true
-tile_set = ExtResource("13_xl4hy")
-format = 2
-layer_0/name = "water"
-layer_0/y_sort_enabled = true
-layer_1/name = "ground1"
-layer_1/y_sort_enabled = true
-layer_1/tile_data = PackedInt32Array()
-layer_2/name = "ground2"
-layer_2/y_sort_enabled = true
-layer_2/tile_data = PackedInt32Array()
-layer_3/name = "cliff"
-layer_3/y_sort_enabled = true
-layer_3/tile_data = PackedInt32Array()
-layer_4/name = "environment"
-layer_4/y_sort_enabled = true
-layer_4/tile_data = PackedInt32Array()
 script = ExtResource("16_dsn1p")
 noise_height_text = ExtResource("2_iuy5t")
 noise_decoration_text = ExtResource("3_d1a5b")
+
+[node name="Chunks" type="Node2D" parent="TileMap"]
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="water" type="TileMapLayer" parent="TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("13_xl4hy")
+
+[node name="ground1" type="TileMapLayer" parent="TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("13_xl4hy")
+
+[node name="ground2" type="TileMapLayer" parent="TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("13_xl4hy")
+
+[node name="cliff" type="TileMapLayer" parent="TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("13_xl4hy")
+
+[node name="environment" type="TileMapLayer" parent="TileMap"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("13_xl4hy")
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

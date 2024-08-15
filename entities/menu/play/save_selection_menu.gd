@@ -72,9 +72,7 @@ func check_for_worlds() -> void:
 
 func add_world(file_name: String) -> void:
 	var world_data: WorldData = WorldData.new()
-	var world_save_file_path: String = (
-		Global.save_file_path + file_name + "/" + Global.world_save_file_name
-	)
+	var world_save_file_path: String = Global.save_file_path + file_name + "/" + Global.world_save_file_name
 	world_data = ResourceLoader.load(world_save_file_path).duplicate()
 	var save_file_menu: SaveFileMenu = SAVE_FILE_MENU.instantiate()
 	v_box_container.add_child(save_file_menu)
