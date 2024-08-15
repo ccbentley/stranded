@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Boat
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var state_machine: FiniteStateMachine = $StateMachine
 @onready var boat_idle_state: BoatIdleState = $StateMachine/BoatIdleState as BoatIdleState
@@ -40,6 +41,7 @@ var is_facing_right: bool = true:
 
 
 func _ready() -> void:
+	animation_player.play("spawn")
 	boat_idle_state.player_entered.connect(state_machine.change_state.bind(boat_move_state))
 	boat_move_state.player_exited.connect(state_machine.change_state.bind(boat_idle_state))
 

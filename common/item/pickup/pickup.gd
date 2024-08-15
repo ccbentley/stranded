@@ -9,6 +9,8 @@ class_name Pickup
 
 func _ready() -> void:
 	sprite_2d.texture = slot_data.item_data.texture
+	animation_player.play("item_spawn")
+	await animation_player.animation_finished
 	animation_player.play("item_bob")
 
 

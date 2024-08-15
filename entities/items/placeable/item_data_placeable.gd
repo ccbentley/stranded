@@ -7,7 +7,10 @@ class_name ItemDataPlaceable
 
 func use(target: Node2D, index: int) -> void:
 	var place_position: Vector2 = target.get_global_mouse_position()
-	if abs(place_position.x - target.global_position.x) < max_placeable_distance and abs(place_position.y - target.global_position.y) < max_placeable_distance:
+	if (
+		abs(place_position.x - target.global_position.x) < max_placeable_distance
+		and abs(place_position.y - target.global_position.y) < max_placeable_distance
+	):
 		var placeable_object: PackedScene = load(placeable_object_path)
 		target.place_object(placeable_object, place_position)
 
