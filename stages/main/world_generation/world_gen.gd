@@ -137,7 +137,14 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 				var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 				if decoration_noise_val > 0.5:
 					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, sand_decoration_atlas_arr.pick_random())
-	call_deferred("draw_tiles", water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
+	for tile: Vector2i in grass_tiles_arr:
+		for dx in range(-1, 2):
+			for dy in range(-1, 2):
+				var adj_tile: Vector2i = Vector2i(tile.x + dx, tile.y + dy)
+				if not grass_tiles_arr.has(adj_tile) and not sand_tiles_arr.has(adj_tile):
+					if not is_in_chunk(chunk, adj_tile):
+						sand_tiles_arr.append(adj_tile)
+	call_deferred("draw_tiles", chunk, water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
 
 
 func get_chunk_node(chunk: Vector2i) -> Node2D:
@@ -149,7 +156,7 @@ func get_chunk_node(chunk: Vector2i) -> Node2D:
 	return chunk_node
 
 
-func draw_tiles(_water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
+func draw_tiles(_chunk: Vector2i, _water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
 	for tile: Vector2i in _water_tiles_arr:
 		water_layer.set_cell(tile, source_id, water_atlas)
 	ground_1_layer.set_cells_terrain_connect(_sand_tiles_arr, terrain_sand_int, 0)
