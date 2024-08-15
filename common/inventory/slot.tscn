@@ -27,8 +27,7 @@ z_index = 3
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 20
 text = "x99"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
