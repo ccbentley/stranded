@@ -14,11 +14,11 @@ var source_id: int = 0
 const tile_size: int = 16
 
 #Layers
-@onready var water_layer: TileMapLayer = $water
-@onready var ground_1_layer: TileMapLayer = $ground1
-@onready var ground_2_layer: TileMapLayer = $ground2
-@onready var cliff_layer: TileMapLayer = $cliff
-@onready var environment_layer: TileMapLayer = $environment
+@onready var water_layer: TileMapLayer = $Water
+@onready var ground_1_layer: TileMapLayer = $Ground1
+@onready var ground_2_layer: TileMapLayer = $Ground2
+@onready var cliff_layer: TileMapLayer = $Cliff
+@onready var environment_layer: TileMapLayer = $Environment
 
 #Tiles
 var water_atlas: Vector2i = Vector2i(8, 4)

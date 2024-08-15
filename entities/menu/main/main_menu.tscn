@@ -64,19 +64,19 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 35)
+custom_minimum_size = Vector2(140, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 35)
+custom_minimum_size = Vector2(140, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(160, 35)
+custom_minimum_size = Vector2(140, 35)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Quit"

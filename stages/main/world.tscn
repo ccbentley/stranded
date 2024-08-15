@@ -125,27 +125,27 @@ noise_decoration_text = ExtResource("3_d1a5b")
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="water" type="TileMapLayer" parent="TileMap"]
+[node name="Water" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
 
-[node name="ground1" type="TileMapLayer" parent="TileMap"]
+[node name="Ground1" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
 
-[node name="ground2" type="TileMapLayer" parent="TileMap"]
+[node name="Ground2" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
 
-[node name="cliff" type="TileMapLayer" parent="TileMap"]
+[node name="Cliff" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
 
-[node name="environment" type="TileMapLayer" parent="TileMap"]
+[node name="Environment" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
