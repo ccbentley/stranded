@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=34 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dtjskiad21mrh" path="res://entities/player/art/walk/player_walk_cycle3.png" id="13_35ew1"]
 [ext_resource type="Texture2D" uid="uid://d00uquwx08e05" path="res://entities/player/art/swim/player_swim1.png" id="15_2scut"]
 [ext_resource type="Shader" path="res://common/shaders/sprite_outline.gdshader" id="16_ylx78"]
+[ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="20_11rme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
@@ -197,11 +198,12 @@ anim = NodePath("../../../MovementAnimationPlayer")
 footstep_audio_player = NodePath("../../../FootStepSound")
 footstep_sound_timer = NodePath("../../../FootStepSoundTimer")
 
-[node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar")]
+[node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar", "water_trail")]
 script = ExtResource("9_fa61r")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
 drown_bar = NodePath("../../../DrownBar")
+water_trail = NodePath("../../../WaterTrail")
 
 [node name="PlayerSitState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim")]
 script = ExtResource("6_fg33t")
@@ -273,3 +275,7 @@ bus = &"Sfx"
 [node name="FootStepSoundTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="WaterTrail" parent="." instance=ExtResource("20_11rme")]
+visible = false
+z_index = -1

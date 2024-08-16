@@ -4,6 +4,7 @@ extends State
 @export var actor: Player
 @export var anim: AnimationPlayer
 @export var drown_bar: ProgressBar
+@export var water_trail: Node2D
 @onready var drown_bar_timer: Timer = drown_bar.get_child(0)
 @onready var player_hurt_timer: Timer = drown_bar.get_child(1)
 
@@ -23,6 +24,7 @@ func _enter_state() -> void:
 	drown_bar.visible = true
 	drown_bar.value = 100
 	drown_bar_timer.start()
+	water_trail.visible = true
 
 
 func _exit_state() -> void:
@@ -31,6 +33,7 @@ func _exit_state() -> void:
 	drown_bar.visible = false
 	drown_bar_timer.stop()
 	player_hurt_timer.stop()
+	water_trail.visible = false
 
 
 func _physics_process(delta: float) -> void:

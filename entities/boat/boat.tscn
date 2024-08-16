@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cur8y0262ef01"]
+[gd_scene load_steps=21 format=3 uid="uid://cur8y0262ef01"]
 
 [ext_resource type="Script" path="res://entities/boat/boat.gd" id="1_vmfak"]
 [ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boat/art/boat.png" id="2_ailme"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="5_txje3"]
 [ext_resource type="Script" path="res://entities/boat/states/boat_idle_state.gd" id="6_6d107"]
 [ext_resource type="Script" path="res://entities/boat/states/boat_move_state.gd" id="7_0diah"]
+[ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="10_f17jx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0iukl"]
 atlas = ExtResource("2_ailme")
@@ -41,6 +42,21 @@ quantity = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7qgu"]
 size = Vector2(28, 10)
 
+[sub_resource type="Animation" id="Animation_8hdvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_lr1rj"]
 resource_name = "spawn"
 length = 0.4
@@ -55,21 +71,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8hdvd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4usjp"]
@@ -127,5 +128,10 @@ anim = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_4usjp")
 }
+
+[node name="WaterTrail" parent="." instance=ExtResource("10_f17jx")]
+visible = false
+z_index = -1
+position = Vector2(0, 9)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbvxi8hlunflt"]
+
+[ext_resource type="Shader" uid="uid://jp3xp1h2twdk" path="res://common/shaders/water_trail/ripple_shader.tres" id="1_2688h"]
+[ext_resource type="Texture2D" uid="uid://c2o58keoomthg" path="res://common/shaders/water_trail/water_trail_gradient.png" id="2_6qigx"]
+[ext_resource type="Script" path="res://common/shaders/water_trail/trail.gd" id="3_0uwfu"]
+[ext_resource type="Texture2D" uid="uid://dh5mkhwaisgy3" path="res://common/shaders/water_trail/circle_blur64x64.png" id="4_rfxw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mx7hg"]
+shader = ExtResource("1_2688h")
+shader_parameter/InitialAlpha = 0.6
+shader_parameter/Speed = 0.09
+shader_parameter/QuantizeColourAmount = 3.0
+shader_parameter/BrightnessOffset = null
+shader_parameter/UpperCutoff = 0.5
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h58cs"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve" id="Curve_omywp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.996337, 0.521053), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rq7o8"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="WaterTrail" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mx7hg")
+texture = SubResource("ViewportTexture_h58cs")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="Line2D" type="Line2D" parent="SubViewport" node_paths=PackedStringArray("sub_viewport")]
+width = 28.0
+width_curve = SubResource("Curve_omywp")
+gradient = SubResource("Gradient_rq7o8")
+texture = ExtResource("2_6qigx")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_0uwfu")
+MAX_LENGTH = 30
+sub_viewport = NodePath("..")
+smallest_tip_width = 0.5
+largest_tip_width = 1.0
+
+[node name="Circle" type="Sprite2D" parent="SubViewport"]
+position = Vector2(128, 128)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_rfxw6")

@@ -3,6 +3,7 @@ class_name Boat
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var water_trail: Node2D = $WaterTrail
 
 @onready var state_machine: FiniteStateMachine = $StateMachine
 @onready var boat_idle_state: BoatIdleState = $StateMachine/BoatIdleState as BoatIdleState
@@ -45,8 +46,10 @@ func player_interact(_player: Player) -> void:
 func is_in_water() -> bool:
 	var tile_data: TileData = player.tile_map.water_layer.get_cell_tile_data(player.tile_map.local_to_map(position))
 	if tile_data:
+		water_trail.visible = true
 		return tile_data.get_custom_data("can_swim")
 	else:
+		water_trail.visible = false
 		return false
 
 
