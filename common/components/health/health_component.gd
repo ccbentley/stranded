@@ -56,4 +56,7 @@ func damage(attack: Attack) -> void:
 		if anim and anim.has_animation("death"):
 			anim.play("death")
 			await anim.animation_finished
-		owner.call_deferred("queue_free")
+		if owner is not Player:
+			owner.call_deferred("queue_free")
+		else:
+			Global.load_next_scene()

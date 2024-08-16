@@ -20,7 +20,8 @@ func attack(attack_stats: Attack) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent and area.type & _attack.material_type:
-		area.damage(_attack)
+		if not area.owner == self.owner:
+			area.damage(_attack)
 
 
 func set_attack_range(attack_range: float, facing_right: bool) -> void:

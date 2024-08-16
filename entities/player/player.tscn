@@ -216,7 +216,7 @@ position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4f3oy")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_q6e4e")]
-MAX_HEALTH = 1e+10
+MAX_HEALTH = 20.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_q3ebq")]
 health_component = NodePath("../HealthComponent")
@@ -263,6 +263,8 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="DrownBar"]
 wait_time = 0.5
+
+[node name="PlayerHurtTimer" type="Timer" parent="DrownBar"]
 
 [node name="FootStepSound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.0

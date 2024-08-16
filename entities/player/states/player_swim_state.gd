@@ -5,6 +5,7 @@ extends State
 @export var anim: AnimationPlayer
 @export var drown_bar: ProgressBar
 @onready var drown_bar_timer: Timer = drown_bar.get_child(0)
+@onready var player_hurt_timer: Timer = drown_bar.get_child(1)
 
 signal player_exited_water
 
@@ -12,6 +13,7 @@ signal player_exited_water
 func _ready() -> void:
 	set_physics_process(false)
 	drown_bar_timer.timeout.connect(self.on_drown_bar_timer_timeout)
+	player_hurt_timer.timeout.connect(self.on_player_hurt_timer_timeout)
 
 
 func _enter_state() -> void:
@@ -28,6 +30,7 @@ func _exit_state() -> void:
 	actor.set_speed(actor.MAX_SPEED)
 	drown_bar.visible = false
 	drown_bar_timer.stop()
+	player_hurt_timer.stop()
 
 
 func _physics_process(delta: float) -> void:
@@ -56,3 +59,12 @@ func _physics_process(delta: float) -> void:
 func on_drown_bar_timer_timeout() -> void:
 	if drown_bar.value > 0:
 		drown_bar.value -= 10
+	else:
+		if player_hurt_timer.is_stopped():
+			player_hurt_timer.start()
+
+
+func on_player_hurt_timer_timeout() -> void:
+	var attack: Attack = Attack.new()
+	attack.attack_damage = 2
+	actor.health_component.damage(attack)

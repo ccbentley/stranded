@@ -7,6 +7,7 @@ class_name HealthBarComponent
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var damage_bar: ProgressBar = $HealthBar/DamageBar
 @onready var timer: Timer = $HealthBar/Timer
+var damage_bar_tween: Tween
 
 
 func _ready() -> void:
@@ -32,4 +33,5 @@ func damaged(prev_health: float, health: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	damage_bar.value = health_component.health
+	damage_bar_tween = get_tree().create_tween()
+	damage_bar_tween.tween_property(damage_bar, "value", health_component.health, 0.2)
