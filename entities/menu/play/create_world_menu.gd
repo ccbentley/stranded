@@ -36,6 +36,8 @@ func on_exit_pressed() -> void:
 	world_name.text = ""
 	character_name.text = ""
 	world_seed.text = ""
+	world_name.modulate = Color.WHITE
+	character_name.modulate = Color.WHITE
 	exit_create_world_menu.emit()
 	set_process(false)
 	set_process_unhandled_key_input(false)
