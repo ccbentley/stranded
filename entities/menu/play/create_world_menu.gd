@@ -11,6 +11,8 @@ signal exit_create_world_menu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
 
+var cached_world_names: PackedStringArray = []
+
 
 func _ready() -> void:
 	handle_connecting_signals()
@@ -21,6 +23,8 @@ func _ready() -> void:
 func handle_connecting_signals() -> void:
 	exit_button.button_down.connect(on_exit_pressed)
 	create_world_button.button_down.connect(on_create_world_pressed)
+	world_name.text_changed.connect(func(_new_text: String) -> void: world_name.modulate = Color.WHITE)
+	character_name.text_changed.connect(func(_new_text: String) -> void: character_name.modulate = Color.WHITE)
 
 
 func _unhandled_key_input(_event: InputEvent) -> void:
@@ -41,6 +45,11 @@ func on_create_world_pressed() -> void:
 	AudioManager.play_sound(UI_CLICK_SOUND)
 	var world_data: WorldData = WorldData.new()
 	if world_name.text != "" and character_name.text != "":
+		cache_world_names()
+		for file_name: String in cached_world_names:
+			if world_name.text == file_name:
+				world_name.modulate = Color.RED
+				return
 		world_data.world_name = world_name.text
 		world_data.character_name = character_name.text
 		if int(world_seed.text) == 0:
@@ -51,3 +60,21 @@ func on_create_world_pressed() -> void:
 		Global.verify_save_directory(world_save_file_path)
 		ResourceSaver.save(world_data, world_save_file_path + Global.world_save_file_name)
 		on_exit_pressed()
+	else:
+		if world_name.text == "":
+			world_name.modulate = Color.RED
+		if character_name.text == "":
+			character_name.modulate = Color.RED
+
+
+func cache_world_names() -> void:
+	cached_world_names.clear()
+	var dir := DirAccess.open(Global.save_file_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			if file_name != "." and file_name != ".." and dir.current_is_dir():
+				cached_world_names.append(file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
