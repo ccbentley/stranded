@@ -42,71 +42,72 @@ position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="InventoryInterface" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="InventoryInterface" type="Control" parent="UI/MarginContainer"]
+visible = false
+layout_mode = 2
 script = ExtResource("12_5ileu")
 
-[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("13_utryv")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="EquipInventory" parent="UI/InventoryInterface" instance=ExtResource("13_utryv")]
-layout_mode = 0
-offset_left = 450.0
-offset_top = 10.0
-offset_right = 490.0
-offset_bottom = 50.0
+[node name="PlayerInventoryContainer" type="HBoxContainer" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+layout_mode = 2
 
-[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("13_utryv")]
+[node name="PlayerInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventoryContainer" instance=ExtResource("13_utryv")]
+layout_mode = 2
+
+[node name="EquipInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventoryContainer" instance=ExtResource("13_utryv")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ExternalInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" instance=ExtResource("13_utryv")]
 visible = false
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = 76.0
-offset_right = 50.0
-offset_bottom = 116.0
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("14_fq4si")]
+[node name="CraftingInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("8_8thps")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+player = NodePath("../../../../../Player")
+
+[node name="GrabbedSlot" parent="UI/MarginContainer/InventoryInterface" instance=ExtResource("14_fq4si")]
 modulate = Color(1, 1, 1, 0.494118)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="CraftingInventory" parent="UI/InventoryInterface" node_paths=PackedStringArray("player") instance=ExtResource("8_8thps")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -16.0
-offset_right = 0.0
-grow_horizontal = 0
+[node name="HotBarInventory" parent="UI/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("15_sa7if")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 player = NodePath("../../../Player")
-
-[node name="HotBarInventory" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("15_sa7if")]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 430.0
-offset_bottom = 91.0
-player = NodePath("../../Player")
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
 visible = false
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="DebugMenu" parent="UI" instance=ExtResource("11_f00c6")]
 visible = false
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
 
@@ -150,6 +151,6 @@ y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
 
-[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
-[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
-[connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_visibility_changed"]
+[connection signal="drop_slot_data" from="UI/MarginContainer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_gui_input"]
+[connection signal="visibility_changed" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_visibility_changed"]

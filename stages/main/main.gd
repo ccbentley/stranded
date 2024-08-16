@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var player: Player = $Player
-@onready var inventory_interface: InventoryInterface = $UI/InventoryInterface
-@onready var hot_bar_inventory: PanelContainer = $UI/HotBarInventory
+@onready var inventory_interface: InventoryInterface = $UI/MarginContainer/InventoryInterface
+@onready var hot_bar_inventory: PanelContainer = $UI/MarginContainer/HotBarInventory
 @onready var tile_map: Node2D = $TileMap
 @onready var camera: Camera2D = $Camera2D
 
@@ -70,6 +70,7 @@ func load_game() -> bool:
 	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()
 	teleport_player(player_data.position)
+	$Chest.global_position = player_data.position
 	return true
 
 

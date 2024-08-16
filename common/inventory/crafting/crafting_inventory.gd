@@ -46,6 +46,8 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 		child.queue_free()
 		inventory_data.slot_datas.clear()
 
+	var crafts_visible: bool = false
+
 	for recipe_name: String in recipes:
 		var recipe: Dictionary = recipes[recipe_name]
 		var can_craft: bool = true
@@ -54,6 +56,7 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 			if not player.inventory_data.get_amount(mat) >= required_amount:
 				can_craft = false
 		if can_craft:
+			crafts_visible = true
 			var slot: Slot = SLOT.instantiate()
 			item_grid.add_child(slot)
 			var slot_data: SlotData = SlotData.new()
@@ -70,3 +73,7 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 							player.inventory_data.remove_item(mat, required_amount)
 						AudioManager.play_sound(load("res://assets/sounds/opengameart/pop.ogg"))
 			)
+	if crafts_visible:
+		self.visible = true
+	else:
+		self.visible = false

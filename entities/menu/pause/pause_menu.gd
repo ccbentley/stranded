@@ -3,7 +3,7 @@ class_name PauseMenu
 
 var game_paused: bool = false
 
-@onready var main: Node2D = $"../.."
+@onready var main: Node2D = get_tree().current_scene
 @onready var options_menu: OptionsMenu = $OptionsMenu
 @onready var margin_container: MarginContainer = $MarginContainer
 
