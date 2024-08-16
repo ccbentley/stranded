@@ -38,6 +38,11 @@ enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
 import/blender/enabled=false
 import/fbx/enabled=false
 
+[global_group]
+
+interactable=""
+external_inventory=""
+
 [gui]
 
 theme/custom="res://entities/menu/default_theme.tres"

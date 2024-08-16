@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtkxfyq8k8b6m"]
+
+[ext_resource type="PackedScene" uid="uid://cti2ie4qr0q21" path="res://entities/menu/options/options_display_button.tscn" id="1_vdck0"]
+[ext_resource type="Script" path="res://entities/menu/options/vsync_mode_button.gd" id="2_1niil"]
+
+[node name="VSyncModeButton" instance=ExtResource("1_vdck0")]
+script = ExtResource("2_1niil")
+
+[node name="Label" parent="HBoxContainer" index="0"]
+text = "VSync Mode"

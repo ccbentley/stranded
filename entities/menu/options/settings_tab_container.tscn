@@ -1,20 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://buc2qdphxkss1"]
+[gd_scene load_steps=11 format=3 uid="uid://buc2qdphxkss1"]
 
 [ext_resource type="PackedScene" uid="uid://dw0xqgypaptmo" path="res://entities/menu/options/window_mode_button.tscn" id="1_26qqw"]
 [ext_resource type="Script" path="res://entities/menu/options/settings_tab_container.gd" id="1_nolaf"]
 [ext_resource type="PackedScene" uid="uid://d2touiwvjn41j" path="res://entities/menu/options/hotkey_rebind_button.tscn" id="1_y531x"]
 [ext_resource type="PackedScene" uid="uid://h0y2kcol533v" path="res://entities/menu/options/resolution_mode_button.tscn" id="2_q71yv"]
 [ext_resource type="PackedScene" uid="uid://di2xg8x7whqo1" path="res://entities/menu/options/audio_slider_settings.tscn" id="3_iw73d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7244n"]
-bg_color = Color(0, 0, 0, 0.392157)
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="PackedScene" uid="uid://dtkxfyq8k8b6m" path="res://entities/menu/options/vsync_mode_button.tscn" id="4_5vq8c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dt1n"]
 bg_color = Color(0, 0, 0, 0.470588)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7244n"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qdg0w"]
 
@@ -41,12 +42,14 @@ offset_right = -100.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7244n")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_7dt1n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7244n")
 tab_alignment = 1
+current_tab = 0
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Graphics"]
 layout_mode = 1
@@ -73,9 +76,13 @@ layout_mode = 2
 [node name="ResolutionModeButton" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_q71yv")]
 layout_mode = 2
 
+[node name="VSyncModeButton" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_5vq8c")]
+layout_mode = 2
+
 [node name="Sound" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
 layout_mode = 1
@@ -111,6 +118,7 @@ bus_name = "Sfx"
 [node name="Controls" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
 layout_mode = 1
@@ -172,6 +180,7 @@ theme_override_styles/separator = SubResource("StyleBoxTexture_5c68e")
 [node name="Accessibility" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Accessibility"]
 layout_mode = 1

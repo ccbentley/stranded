@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -19,6 +19,51 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="15_ynty6"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxka0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bad01"]
+bg_color = Color(0.288615, 0.696691, 0.406897, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cut7m"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ucky"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxe1i"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc0tg"]
+bg_color = Color(0, 0.684327, 0.702619, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
@@ -98,6 +143,49 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 player = NodePath("../../../Player")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_uxka0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bad01")
+max_value = 20.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="DamageBar" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/HealthBar"]
+z_index = -1
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 30.0
+size_flags_horizontal = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_cut7m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2ucky")
+max_value = 20.0
+step = 1.0
+value = 14.0
+show_percentage = false
+
+[node name="Seperator" type="Control" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="DrownBar" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_gxe1i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mc0tg")
+max_value = 20.0
+step = 1.0
+value = 20.0
+show_percentage = false
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
 visible = false

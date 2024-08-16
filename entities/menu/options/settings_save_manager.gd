@@ -20,6 +20,10 @@ func on_resolution_selected(index: int) -> void:
 	settings_data.resolution_index = index
 
 
+func on_vsync_mode_selected(index: int) -> void:
+	settings_data.vsync_mode_index = index
+
+
 func on_master_sound_set(index: float) -> void:
 	settings_data.master_volume = index
 
@@ -56,6 +60,10 @@ func get_window_mode_index() -> int:
 
 func get_resolution_index() -> int:
 	return settings_data.resolution_index
+
+
+func get_vsync_mode_index() -> int:
+	return settings_data.vsync_mode_index
 
 
 func get_master_volume() -> float:
