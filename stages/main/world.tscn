@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=25 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://brtyff5a5fflm" path="res://entities/menu/debug/debug_menu.tscn" id="11_f00c6"]
 [ext_resource type="Script" path="res://common/inventory/inventory_interface.gd" id="12_5ileu"]
 [ext_resource type="PackedScene" uid="uid://c05qpfqg6xjd7" path="res://utilities/day_night_cycle/day_night_cycle.tscn" id="12_dx3ki"]
+[ext_resource type="Shader" path="res://common/shaders/vignette.gdshader" id="13_lk73g"]
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://common/inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="TileSet" uid="uid://bcy0q2dkwpmny" path="res://stages/main/tile_set/tile_set.tres" id="13_xl4hy"]
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://common/inventory/slot.tscn" id="14_fq4si"]
@@ -20,6 +21,15 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="15_ynty6"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktrdo"]
+shader = ExtResource("13_lk73g")
+shader_parameter/alpha = 0.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 0.7
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pdnfu"]
 
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
@@ -116,6 +126,16 @@ size_flags_vertical = 4
 visible = false
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="Vignette" type="TextureRect" parent="UI"]
+z_index = -1
+material = SubResource("ShaderMaterial_ktrdo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_pdnfu")
 
 [node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
 

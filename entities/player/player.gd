@@ -168,11 +168,20 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 		on_hand.offset.x = -held_offset.x
 
 
+var test: bool = false
+
+
 func is_in_water() -> bool:
 	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile)
 	if tile_data:
+		if not test:
+			main.display_vignette(Color.SKY_BLUE)
+		test = true
 		return tile_data.get_custom_data("can_swim")
 	else:
+		if test:
+			main.remove_vignette()
+		test = false
 		return false
 
 
@@ -190,3 +199,7 @@ func is_on_grass() -> bool:
 		return true
 	else:
 		return false
+
+
+func _on_health_component_damaged(_prev_health: float, _health: float) -> void:
+	main.pulse_vignette(Color.RED)

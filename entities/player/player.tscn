@@ -279,3 +279,5 @@ one_shot = true
 [node name="WaterTrail" parent="." instance=ExtResource("20_11rme")]
 visible = false
 z_index = -1
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
