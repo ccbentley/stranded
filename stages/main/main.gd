@@ -7,6 +7,10 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var vignette: TextureRect = $UI/Vignette
 
+var vignette_displayed: bool = false
+var vignette_displayed_color: Color
+var vignette_pulsing: bool = false
+
 var player_data: PlayerData = PlayerData.new()
 
 const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
@@ -105,35 +109,36 @@ func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
 	pickup_instance.global_position = pos
 
 
-var vignette_displayed: bool = false
-var vignette_displayed_color: Color
-
-
 func display_vignette(color: Color) -> void:
-	vignette.material.set_shader_parameter("color", color)
-	var vignette_tween: Tween
-	vignette_tween = get_tree().create_tween()
-	vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
-	vignette_displayed = true
-	vignette_displayed_color = color
+	if not vignette_displayed:
+		vignette.material.set_shader_parameter("color", color)
+		var vignette_tween: Tween
+		vignette_tween = get_tree().create_tween()
+		vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
+		vignette_displayed = true
+		vignette_displayed_color = color
 
 
 func remove_vignette() -> void:
-	var vignette_tween: Tween
-	vignette_tween = get_tree().create_tween()
-	vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
-	vignette_displayed = false
+	if vignette_displayed:
+		var vignette_tween: Tween
+		vignette_tween = get_tree().create_tween()
+		vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
+		vignette_displayed = false
 
 
 func pulse_vignette(color: Color) -> void:
-	vignette.material.set_shader_parameter("color", color)
-	var pulse_vignette_tween: Tween
-	pulse_vignette_tween = get_tree().create_tween()
-	pulse_vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
-	pulse_vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
-	await pulse_vignette_tween.finished
-	if vignette_displayed:
-		display_vignette(vignette_displayed_color)
+	if not vignette_pulsing:
+		vignette_pulsing = true
+		vignette.material.set_shader_parameter("color", color)
+		var pulse_vignette_tween: Tween
+		pulse_vignette_tween = get_tree().create_tween()
+		pulse_vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
+		pulse_vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
+		await pulse_vignette_tween.finished
+		vignette_pulsing = false
+		if vignette_displayed:
+			display_vignette(vignette_displayed_color)
 
 
 func set_vignette_alpha(value: float) -> void:
