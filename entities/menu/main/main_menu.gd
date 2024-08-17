@@ -4,11 +4,13 @@ class_name MainMenu
 @onready var play_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/PlayButton
 @onready var options_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/OptionsButton
 @onready var quit_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/QuitButton
+@onready var credits_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/CreditsButton
 
 @onready var margin_container: MarginContainer = $MarginContainer
 @onready var save_selection_menu: SaveSelectionMenu = $SaveSelectionMenu
 @onready var create_world_menu: CreateWorldMenu = $CreateWorldMenu
 @onready var options_menu: OptionsMenu = $OptionsMenu
+@onready var credits_menu: CreditsMenu = $CreditsMenu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
 
@@ -20,10 +22,12 @@ func _ready() -> void:
 func handle_connecting_signals() -> void:
 	play_button.button_down.connect(on_play_pressed)
 	options_button.button_down.connect(on_options_pressed)
+	credits_button.button_down.connect(on_credits_pressed)
 	quit_button.button_down.connect(on_quit_pressed)
 	save_selection_menu.exit_save_selection_menu.connect(on_exit_save_selection_menu)
 	create_world_menu.exit_create_world_menu.connect(on_exit_create_world_menu)
 	options_menu.exit_options_menu.connect(on_exit_options_menu)
+	credits_menu.exit_credits_menu.connect(on_exit_credits_menu)
 
 
 func on_play_pressed() -> void:
@@ -45,6 +49,14 @@ func on_options_pressed() -> void:
 	options_menu.set_process(true)
 	options_menu.set_process_unhandled_key_input(true)
 	options_menu.visible = true
+	AudioManager.play_sound(UI_CLICK_SOUND)
+
+
+func on_credits_pressed() -> void:
+	margin_container.visible = false
+	credits_menu.set_process(true)
+	credits_menu.set_process_unhandled_key_input(true)
+	credits_menu.visible = true
 	AudioManager.play_sound(UI_CLICK_SOUND)
 
 
@@ -70,4 +82,12 @@ func on_exit_create_world_menu() -> void:
 	save_selection_menu.set_process_unhandled_key_input(true)
 	save_selection_menu.visible = true
 	save_selection_menu.check_for_worlds()
+	AudioManager.play_sound(UI_CLICK_SOUND)
+
+
+func on_exit_credits_menu() -> void:
+	margin_container.visible = true
+	credits_menu.set_process(false)
+	credits_menu.set_process_unhandled_key_input(false)
+	credits_menu.visible = false
 	AudioManager.play_sound(UI_CLICK_SOUND)

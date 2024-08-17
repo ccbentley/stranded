@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://nngdwr1wtlfp"]
+
+[ext_resource type="FontFile" uid="uid://b8nthqud4vlk6" path="res://assets/fonts/cozette/CozetteVectorBold.ttf" id="1_cwl3s"]
+[ext_resource type="Script" path="res://entities/menu/credits/credits_item.gd" id="1_yyp6t"]
+[ext_resource type="FontFile" uid="uid://bkn7fxdgr81rt" path="res://assets/fonts/cozette/CozetteVector.ttf" id="2_ravsq"]
+
+[node name="CreditsItem" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_yyp6t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.5
+offset_right = 115.5
+offset_bottom = 51.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_cwl3s")
+theme_override_font_sizes/font_size = 25
+text = "Title"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seperator" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Author" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_ravsq")
+theme_override_font_sizes/font_size = 25
+text = "Author"
+vertical_alignment = 1

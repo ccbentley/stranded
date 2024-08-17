@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb5q6m2gc0ngs"]
+
+[ext_resource type="Script" path="res://entities/menu/credits/credits_header.gd" id="1_ptwns"]
+[ext_resource type="FontFile" uid="uid://b8nthqud4vlk6" path="res://assets/fonts/cozette/CozetteVectorBold.ttf" id="2_mtjqf"]
+
+[node name="CreditsHeader" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ptwns")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.5
+offset_right = 60.5
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_mtjqf")
+theme_override_font_sizes/font_size = 30
+text = "Header"
+horizontal_alignment = 1
+vertical_alignment = 1

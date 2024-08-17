@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://by4naatqr1mvd"]
+[gd_scene load_steps=7 format=3 uid="uid://by4naatqr1mvd"]
 
 [ext_resource type="Script" path="res://entities/menu/main/main_menu.gd" id="1_a1l53"]
 [ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://assets/art/background/screenshot.png" id="2_h8a2m"]
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://entities/menu/play/save_selection_menu.tscn" id="3_j43pa"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://entities/menu/play/create_world_menu.tscn" id="4_bvifd"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="5_gno6i"]
+[ext_resource type="PackedScene" uid="uid://cilrudgemt8kl" path="res://entities/menu/credits/credits_menu.tscn" id="6_2h86t"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -75,6 +76,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Options"
 
+[node name="CreditsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 35)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(140, 35)
 layout_mode = 2
@@ -90,5 +97,9 @@ visible = false
 layout_mode = 1
 
 [node name="OptionsMenu" parent="." instance=ExtResource("5_gno6i")]
+visible = false
+layout_mode = 1
+
+[node name="CreditsMenu" parent="." instance=ExtResource("6_2h86t")]
 visible = false
 layout_mode = 1

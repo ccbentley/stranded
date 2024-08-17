@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://cilrudgemt8kl"]
+
+[ext_resource type="Script" path="res://entities/menu/credits/credits_menu.gd" id="1_ee0k8"]
+[ext_resource type="PackedScene" uid="uid://bb5q6m2gc0ngs" path="res://entities/menu/credits/credits_header.tscn" id="2_b7qtu"]
+[ext_resource type="PackedScene" uid="uid://nngdwr1wtlfp" path="res://entities/menu/credits/credits_item.tscn" id="2_dt74b"]
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ee0k8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 32
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+text = "Back"
+
+[node name="Credits" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 65
+
+[node name="SelectionMenu" type="ScrollContainer" parent="MarginContainer/Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Credits/SelectionMenu"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 60
+
+[node name="Developer" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Developer"
+author = "ccbentley"
+
+[node name="GameEngine" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Game Engine"
+author = "Godot Engine"
+
+[node name="Art" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
+layout_mode = 2
+header = "Art Assets"
+
+[node name="TileSet" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Island Tile Set"
+author = "Brysiaa - https://brysiaa.itch.io/"
+
+[node name="ItemPack" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Item Pack"
+author = "RunninBlood - https://runninblood.itch.io/"
+
+[node name="Shaders" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
+layout_mode = 2
+header = "Shaders"
+
+[node name="WaterTrail" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Water Trail"
+author = "Jess Hammer - https://github.com/jess-hammer"
+
+[node name="SoundEffects" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
+layout_mode = 2
+header = "Sound Effects"
+
+[node name="Music" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
+layout_mode = 2
+header = "Music"
