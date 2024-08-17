@@ -22,7 +22,7 @@ func _exit_state() -> void:
 func _physics_process(delta: float) -> void:
 	var player: Player = actor.player
 	player.global_position = actor.global_position
-	if !actor.is_in_water():
+	if not actor.tile_type == actor.TileType.WATER:
 		actor.boat_speed = actor.land_boat_speed
 	else:
 		actor.boat_speed = actor.water_boat_speed
