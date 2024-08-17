@@ -68,11 +68,13 @@ theme_override_constants/separation = 60
 layout_mode = 2
 title = "Developer"
 author = "ccbentley"
+link = "https://ccbentley.itch.io/"
 
 [node name="GameEngine" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Game Engine"
 author = "Godot Engine"
+link = "https://godotengine.org/"
 
 [node name="Art" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
@@ -81,12 +83,14 @@ header = "Art Assets"
 [node name="TileSet" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Island Tile Set"
-author = "Brysiaa - https://brysiaa.itch.io"
+author = "Brysiaa"
+link = "https://brysiaa.itch.io/"
 
 [node name="ItemPack" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Item Pack"
-author = "RunninBlood - https://runninblood.itch.io"
+author = "RunninBlood"
+link = "https://runninblood.itch.io/"
 
 [node name="Shaders" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
@@ -95,7 +99,8 @@ header = "Shaders"
 [node name="WaterTrail" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Water Trail"
-author = "Jess Hammer - https://github.com/jess-hammer"
+author = "Jess Hammer"
+link = "https://github.com/jess-hammer/"
 
 [node name="SoundEffects" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
@@ -112,9 +117,11 @@ header = "Fonts"
 [node name="Cozette" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Cozette"
-author = "Slavfox - https://github.com/slavfox/"
+author = "Slavfox"
+link = "https://github.com/slavfox/"
 
 [node name="End" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = ""
 author = ""
+link = ""

@@ -18,36 +18,54 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_yyp6t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -115.5
-offset_right = 115.5
-offset_bottom = 51.0
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 26.0
 grow_horizontal = 2
-alignment = 1
 
-[node name="Title" type="Label" parent="HBoxContainer"]
+[node name="Title" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="MarginContainer/Title"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_cwl3s")
 theme_override_font_sizes/font_size = 25
 text = "Title"
-horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Seperator" type="Control" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
+[node name="Author" type="HBoxContainer" parent="MarginContainer/Title"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="Author" type="Label" parent="HBoxContainer"]
+[node name="Author" type="Label" parent="MarginContainer/Title/Author"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_ravsq")
 theme_override_font_sizes/font_size = 25
 text = "Author"
 vertical_alignment = 1
+
+[node name="Dash" type="Label" parent="MarginContainer/Title/Author"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_ravsq")
+theme_override_font_sizes/font_size = 25
+text = " - "
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/Title/Author"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_ravsq")
+theme_override_font_sizes/font_size = 25
+text = "Link"
