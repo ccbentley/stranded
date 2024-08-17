@@ -110,21 +110,19 @@ func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
 
 
 func display_vignette(color: Color) -> void:
-	if not vignette_displayed:
-		vignette.material.set_shader_parameter("color", color)
-		var vignette_tween: Tween
-		vignette_tween = get_tree().create_tween()
-		vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
-		vignette_displayed = true
-		vignette_displayed_color = color
+	vignette.material.set_shader_parameter("color", color)
+	var vignette_tween: Tween
+	vignette_tween = get_tree().create_tween()
+	vignette_tween.tween_method(set_vignette_alpha, 0.0, 0.2, 0.3)
+	vignette_displayed = true
+	vignette_displayed_color = color
 
 
 func remove_vignette() -> void:
-	if vignette_displayed:
-		var vignette_tween: Tween
-		vignette_tween = get_tree().create_tween()
-		vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
-		vignette_displayed = false
+	var vignette_tween: Tween
+	vignette_tween = get_tree().create_tween()
+	vignette_tween.tween_method(set_vignette_alpha, 0.2, 0.0, 0.3)
+	vignette_displayed = false
 
 
 func pulse_vignette(color: Color) -> void:

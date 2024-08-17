@@ -171,10 +171,12 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 func is_in_water() -> bool:
 	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile)
 	if tile_data:
-		main.display_vignette(Color.SKY_BLUE)
+		if not main.vignette_displayed:
+			main.display_vignette(Color.SKY_BLUE)
 		return tile_data.get_custom_data("can_swim")
 	else:
-		main.remove_vignette()
+		if main.vignette_displayed:
+			main.remove_vignette()
 		return false
 
 
