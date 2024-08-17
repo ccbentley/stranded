@@ -25,6 +25,7 @@ func _enter_state() -> void:
 	drown_bar.value = 100
 	drown_bar_timer.start()
 	water_trail.visible = true
+	actor.main.display_vignette(Color.SKY_BLUE)
 
 
 func _exit_state() -> void:
@@ -34,10 +35,11 @@ func _exit_state() -> void:
 	drown_bar_timer.stop()
 	player_hurt_timer.stop()
 	water_trail.visible = false
+	actor.main.remove_vignette()
 
 
 func _physics_process(delta: float) -> void:
-	if !actor.is_in_water():
+	if not actor.player_tile_type == actor.PlayerTile.WATER:
 		player_exited_water.emit()
 
 	var input: Vector2 = actor.get_input()

@@ -109,34 +109,25 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 								sand_tiles_arr.append(adj_tile)
 			else:
 				water_tiles_arr.append(Vector2i(x, y))
-	#Checks if water tiles are overlapping grass or sand tiles
-	var times_water_removed: int = 0
-	for tile: int in water_tiles_arr.size():
-		var _tile: int = tile - times_water_removed
-		var x: int = int(water_tiles_arr[_tile].x)
-		var y: int = int(water_tiles_arr[_tile].y)
-		var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
-		if (sand_tiles_arr.has(water_tiles_arr[_tile]) or grass_tiles_arr.has(water_tiles_arr[_tile])) and _tile <= water_tiles_arr.size():
-			water_tiles_arr.remove_at(_tile)
-			times_water_removed += 1
-		else:
-			if decoration_noise_val > 0.8:
-				environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
-	#Checks if sand tiles are overlapping grass tiles
+				if noise_val < 0.5 and decoration_noise_val > 0.8:
+					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
+	# Places sand decoration tiles
 	for tile: Vector2i in sand_tiles_arr:
+		# Checks if sand tiles are overlapping grass tiles
 		if not grass_tiles_arr.has(tile):
 			var valid_tile: bool = true
+			# Checks the edges
 			for dx in range(-1, 2):
 				for dy in range(-1, 2):
 					var adj_tile: Vector2i = Vector2i(tile.x + dx, tile.y + dy)
 					if not sand_tiles_arr.has(adj_tile):
 						valid_tile = false
 			if valid_tile:
-				var x: int = tile.x
-				var y: int = tile.y
-				var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
+				var decoration_noise_val: float = decoration_noise.get_noise_2d(tile.x, tile.y)
 				if decoration_noise_val > 0.5:
-					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, sand_decoration_atlas_arr.pick_random())
+					environment_layer.call_deferred("set_cell", Vector2i(tile.x, tile.y), source_id, sand_decoration_atlas_arr.pick_random())
+	# Fixes issue of grass tiles out of place and not next to sand
+	# Causes some tile to be rendered outside of the chunk
 	for tile: Vector2i in grass_tiles_arr:
 		for dx in range(-1, 2):
 			for dy in range(-1, 2):

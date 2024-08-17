@@ -41,7 +41,15 @@ const friction: int = 1000
 
 var input: Vector2 = Vector2.ZERO
 
-var player_tile: Vector2i
+var player_tile_pos: Vector2i
+
+enum PlayerTile {
+	WATER,
+	SAND,
+	GRASS,
+}
+
+var player_tile_type: int = PlayerTile.GRASS
 
 signal toggle_inventory
 
@@ -49,7 +57,13 @@ var turn_tween: Tween
 
 
 func _physics_process(_delta: float) -> void:
-	player_tile = tile_map.local_to_map(position)
+	player_tile_pos = tile_map.local_to_map(position)
+	if is_on_grass():
+		player_tile_type = PlayerTile.GRASS
+	elif is_on_sand():
+		player_tile_type = PlayerTile.SAND
+	elif is_in_water():
+		player_tile_type = PlayerTile.WATER
 
 
 var is_facing_right: bool = true:
@@ -169,19 +183,15 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 
 
 func is_in_water() -> bool:
-	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile)
+	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile_pos)
 	if tile_data:
-		if not main.vignette_displayed:
-			main.display_vignette(Color.SKY_BLUE)
 		return tile_data.get_custom_data("can_swim")
 	else:
-		if main.vignette_displayed:
-			main.remove_vignette()
 		return false
 
 
 func is_on_sand() -> bool:
-	var tile_data: TileData = tile_map.ground_1_layer.get_cell_tile_data(player_tile)
+	var tile_data: TileData = tile_map.ground_1_layer.get_cell_tile_data(player_tile_pos)
 	if tile_data:
 		return true
 	else:
@@ -189,7 +199,7 @@ func is_on_sand() -> bool:
 
 
 func is_on_grass() -> bool:
-	var tile_data: TileData = tile_map.ground_2_layer.get_cell_tile_data(player_tile)
+	var tile_data: TileData = tile_map.ground_2_layer.get_cell_tile_data(player_tile_pos)
 	if tile_data:
 		return true
 	else:

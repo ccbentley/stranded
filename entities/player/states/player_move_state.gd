@@ -83,11 +83,11 @@ func _physics_process(delta: float) -> void:
 	elif input.x > 0:
 		actor.is_facing_right = true
 
-	if actor.is_in_water():
+	if actor.player_tile_type == actor.PlayerTile.WATER:
 		player_entered_water.emit()
 
 	# Footsteps
-	if actor.is_on_grass():
+	if actor.player_tile_type == actor.PlayerTile.GRASS:
 		footstep_sound = FootStepSound.GRASS
-	elif actor.is_on_sand():
+	elif actor.player_tile_type == actor.PlayerTile.SAND:
 		footstep_sound = FootStepSound.SAND

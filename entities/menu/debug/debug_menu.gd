@@ -43,8 +43,9 @@ func update_info() -> void:
 	info.text = ""
 	info.text += " Player Info: "
 	info.text += "\n Player Pos: " + str(player.global_position)
-	info.text += "\n Player Tile Pos: " + str(player.player_tile)
-	info.text += "\n Player Chunk Pos: " + str(player.player_tile / 32)
+	info.text += "\n Player Tile Type: " + str(player.player_tile_type)
+	info.text += "\n Player Tile Pos: " + str(player.player_tile_pos)
+	info.text += "\n Player Chunk Pos: " + str(player.player_tile_pos / 32)
 	info.text += "\n \n World Info: "
 	info.text += "\n World Name: " + str(Global.world_data.world_name)
 	info.text += "\n World Seed: " + str(Global.world_data.world_seed)
