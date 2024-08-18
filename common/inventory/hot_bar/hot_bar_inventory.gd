@@ -49,7 +49,7 @@ func set_selected() -> void:
 		selected_slot = 0
 	elif selected_slot < 0:
 		selected_slot = slots.size() - 1
-	selected.position = slots[selected_slot].position + Vector2(40, 40)
+	selected.position = Vector2(68 * selected_slot, 0) + Vector2(40, 40)
 
 	if _slot_datas[selected_slot]:
 		player.display_on_hand(_slot_datas[selected_slot].item_data.texture, _slot_datas[selected_slot].item_data.held_offset)
