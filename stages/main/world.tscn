@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=28 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="15_ynty6"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
+[ext_resource type="AudioStream" uid="uid://b1y4v0hp65ila" path="res://assets/sounds/opengameart/amb_forest.ogg" id="22_sf8v1"]
+[ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/opengameart/amb_river.ogg" id="23_jql4u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ktrdo"]
 shader = ExtResource("13_lk73g")
@@ -34,6 +36,13 @@ shader_parameter/color = Color(0, 0, 0, 1)
 [sub_resource type="Resource" id="Resource_csm5f"]
 script = ExtResource("8_0i1ge")
 slot_datas = Array[ExtResource("15_ynty6")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
+stream_count = 2
+stream_0/stream = ExtResource("22_sf8v1")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("23_jql4u")
+stream_1/volume = -20.0
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -179,6 +188,10 @@ tile_set = ExtResource("13_xl4hy")
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
+
+[node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamSynchronized_q67av")
+autoplay = true
 
 [connection signal="drop_slot_data" from="UI/MarginContainer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_gui_input"]

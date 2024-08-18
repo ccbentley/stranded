@@ -5,6 +5,7 @@ class_name MainMenu
 @onready var options_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/OptionsButton
 @onready var quit_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/QuitButton
 @onready var credits_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/CreditsButton
+@onready var version_label: Label = $MarginContainer/Label
 
 @onready var margin_container: MarginContainer = $MarginContainer
 @onready var save_selection_menu: SaveSelectionMenu = $SaveSelectionMenu
@@ -13,10 +14,17 @@ class_name MainMenu
 @onready var credits_menu: CreditsMenu = $CreditsMenu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const MENU_MUSIC = preload("res://assets/music/Path to Lake Land.ogg")
 
 
 func _ready() -> void:
 	handle_connecting_signals()
+	AudioManager.play_music(MENU_MUSIC, -15)
+	version_label.text += ProjectSettings.get_setting("application/config/version") + "."
+	if OS.has_feature("debug"):
+		version_label.text += "debug"
+	else:
+		version_label.text += "release"
 
 
 func handle_connecting_signals() -> void:

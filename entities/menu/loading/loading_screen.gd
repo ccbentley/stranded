@@ -24,3 +24,4 @@ func _process(_delta: float) -> void:
 		var packed_scene: PackedScene = ResourceLoader.load_threaded_get(Global.next_scene)
 		await get_tree().create_timer(2).timeout
 		SceneTransition.change_scene(packed_scene, "fade")
+		AudioManager.play_music(null)

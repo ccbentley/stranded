@@ -121,9 +121,27 @@ link = "https://github.com/jess-hammer/"
 layout_mode = 2
 header = "Sound Effects"
 
+[node name="AmbientSounds" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Ambient Sounds"
+author = "Lamoot"
+link = "https://opengameart.org/"
+
+[node name="FootSteps" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Footsteps"
+author = "congusbongus"
+link = "https://opengameart.org/"
+
 [node name="Music" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
 header = "Music"
+
+[node name="MenuMusic" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Menu Music"
+author = "Alexandr Zhelanov"
+link = "https://opengameart.org/"
 
 [node name="Fonts" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
