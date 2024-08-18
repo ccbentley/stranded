@@ -43,7 +43,7 @@ vertical_alignment = 1
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 45)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_aawpg")
