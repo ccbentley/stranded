@@ -46,6 +46,7 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_7dt1n")
 theme_override_styles/panel = SubResource("StyleBoxFlat_7244n")
 tab_alignment = 1
 current_tab = 0
+tab_focus_mode = 0
 
 [node name="Graphics" type="TabBar" parent="TabContainer"]
 layout_mode = 2

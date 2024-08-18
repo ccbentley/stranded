@@ -27,3 +27,4 @@ layout_mode = 2
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
+focus_mode = 0

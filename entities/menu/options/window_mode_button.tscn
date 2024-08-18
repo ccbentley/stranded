@@ -8,3 +8,6 @@ script = ExtResource("2_thkpq")
 
 [node name="Label" parent="HBoxContainer" index="0"]
 text = "Window Mode"
+
+[node name="OptionButton" parent="HBoxContainer" index="2"]
+focus_mode = 0
