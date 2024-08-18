@@ -49,6 +49,7 @@ custom_minimum_size = Vector2(150, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("3_nowfw")
 theme_override_styles/pressed = ExtResource("3_nowfw")
 theme_override_styles/normal = ExtResource("3_1pf04")

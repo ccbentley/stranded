@@ -42,7 +42,7 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(250, 350)
+custom_minimum_size = Vector2(275, 350)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -70,8 +70,9 @@ layout_mode = 2
 texture = SubResource("CanvasTexture_0sbsw")
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(165, 45)
+custom_minimum_size = Vector2(225, 45)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_33is1")
 theme_override_styles/pressed = ExtResource("2_33is1")
 theme_override_styles/normal = ExtResource("2_1nu56")
@@ -80,8 +81,9 @@ icon = ExtResource("3_jcjpf")
 expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(165, 45)
+custom_minimum_size = Vector2(225, 45)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_33is1")
 theme_override_styles/pressed = ExtResource("2_33is1")
 theme_override_styles/normal = ExtResource("2_1nu56")
@@ -90,8 +92,9 @@ icon = ExtResource("4_kwcw1")
 expand_icon = true
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(165, 45)
+custom_minimum_size = Vector2(225, 45)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_33is1")
 theme_override_styles/pressed = ExtResource("2_33is1")
 theme_override_styles/normal = ExtResource("2_1nu56")
