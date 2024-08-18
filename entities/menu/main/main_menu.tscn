@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://by4naatqr1mvd"]
+[gd_scene load_steps=13 format=3 uid="uid://by4naatqr1mvd"]
 
 [ext_resource type="Script" path="res://entities/menu/main/main_menu.gd" id="1_a1l53"]
 [ext_resource type="Texture2D" uid="uid://rcrlf7n3pcuu" path="res://assets/art/background/screenshot.png" id="2_h8a2m"]
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://entities/menu/play/save_selection_menu.tscn" id="3_j43pa"]
+[ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="3_kwjga"]
+[ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="3_m7shi"]
+[ext_resource type="Texture2D" uid="uid://cgbc5cdb1dvqo" path="res://assets/art/icons/Play.svg" id="3_w4y2p"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://entities/menu/play/create_world_menu.tscn" id="4_bvifd"]
+[ext_resource type="Texture2D" uid="uid://blo76bq87band" path="res://assets/art/icons/Gear.svg" id="4_mqjnq"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="5_gno6i"]
+[ext_resource type="Texture2D" uid="uid://b5cayglfa2isp" path="res://assets/art/icons/List.svg" id="5_w5vu7"]
 [ext_resource type="PackedScene" uid="uid://cilrudgemt8kl" path="res://entities/menu/credits/credits_menu.tscn" id="6_2h86t"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="6_v7hc1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -47,6 +53,7 @@ theme_override_constants/separation = 60
 layout_mode = 2
 
 [node name="GameTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
@@ -57,7 +64,10 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-alignment = 1
+
+[node name="Seperator" type="Control" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -65,28 +75,48 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 35)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_kwjga")
+theme_override_styles/pressed = ExtResource("3_kwjga")
+theme_override_styles/normal = ExtResource("3_m7shi")
 text = "Play"
+icon = ExtResource("3_w4y2p")
+expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 35)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_kwjga")
+theme_override_styles/pressed = ExtResource("3_kwjga")
+theme_override_styles/normal = ExtResource("3_m7shi")
 text = "Options"
+icon = ExtResource("4_mqjnq")
+expand_icon = true
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 35)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_kwjga")
+theme_override_styles/pressed = ExtResource("3_kwjga")
+theme_override_styles/normal = ExtResource("3_m7shi")
 text = "Credits"
+icon = ExtResource("5_w5vu7")
+expand_icon = true
 
 [node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 35)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("3_kwjga")
+theme_override_styles/pressed = ExtResource("3_kwjga")
+theme_override_styles/normal = ExtResource("3_m7shi")
 text = "Quit"
+icon = ExtResource("6_v7hc1")
+expand_icon = true
 
 [node name="SaveSelectionMenu" parent="." instance=ExtResource("3_j43pa")]
 visible = false

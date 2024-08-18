@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://25v8rjkwdg57"]
+[gd_scene load_steps=11 format=3 uid="uid://25v8rjkwdg57"]
 
 [ext_resource type="Script" path="res://entities/menu/pause/pause_menu.gd" id="1_05eyv"]
+[ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="2_1nu56"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="2_4as8w"]
+[ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_33is1"]
+[ext_resource type="Texture2D" uid="uid://cgbc5cdb1dvqo" path="res://assets/art/icons/Play.svg" id="3_jcjpf"]
+[ext_resource type="Texture2D" uid="uid://blo76bq87band" path="res://assets/art/icons/Gear.svg" id="4_kwcw1"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="5_744qc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vejfw"]
-bg_color = Color(0, 0, 0, 0.392157)
+bg_color = Color(0, 0, 0, 0.588235)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -37,7 +42,7 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(250, 300)
+custom_minimum_size = Vector2(250, 350)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -65,19 +70,34 @@ layout_mode = 2
 texture = SubResource("CanvasTexture_0sbsw")
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
+custom_minimum_size = Vector2(165, 45)
 layout_mode = 2
+theme_override_styles/hover = ExtResource("2_33is1")
+theme_override_styles/pressed = ExtResource("2_33is1")
+theme_override_styles/normal = ExtResource("2_1nu56")
 text = "Resume"
+icon = ExtResource("3_jcjpf")
+expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
+custom_minimum_size = Vector2(165, 45)
 layout_mode = 2
+theme_override_styles/hover = ExtResource("2_33is1")
+theme_override_styles/pressed = ExtResource("2_33is1")
+theme_override_styles/normal = ExtResource("2_1nu56")
 text = "Options"
+icon = ExtResource("4_kwcw1")
+expand_icon = true
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
+custom_minimum_size = Vector2(165, 45)
 layout_mode = 2
+theme_override_styles/hover = ExtResource("2_33is1")
+theme_override_styles/pressed = ExtResource("2_33is1")
+theme_override_styles/normal = ExtResource("2_1nu56")
 text = "Save and Quit"
+icon = ExtResource("5_744qc")
+expand_icon = true
 
 [node name="OptionsMenu" parent="." instance=ExtResource("2_4as8w")]
 visible = false

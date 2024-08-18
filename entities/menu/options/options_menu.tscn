@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://drwrt7b3b4c0e"]
+[gd_scene load_steps=6 format=3 uid="uid://drwrt7b3b4c0e"]
 
 [ext_resource type="Script" path="res://entities/menu/options/options_menu.gd" id="1_v8w2i"]
 [ext_resource type="PackedScene" uid="uid://buc2qdphxkss1" path="res://entities/menu/options/settings_tab_container.tscn" id="2_fog8h"]
+[ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="3_1pf04"]
+[ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="3_nowfw"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="4_gahkj"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -32,7 +35,7 @@ theme_override_constants/separation = -48
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -42,8 +45,13 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 40)
+custom_minimum_size = Vector2(150, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_styles/hover = ExtResource("3_nowfw")
+theme_override_styles/pressed = ExtResource("3_nowfw")
+theme_override_styles/normal = ExtResource("3_1pf04")
 text = "Back"
+icon = ExtResource("4_gahkj")
+expand_icon = true
