@@ -111,23 +111,23 @@ vec4 foam(vec2 pixelizedCoordinates, vec4 mainTexColor)
 // ------------------------------------------------------------------------------------
 // Fragment Shader code
 
-void fragment() 
+void fragment()
 {
 	vec2 pixelizedCoordinates = pixelizeCoordinates(applyAspectRatio(UV));
 	vec4 mainTex = texture(TEXTURE, UV);
 	vec4 depthBasedWaterColor = texture(waterDepthGradient, vec2(1.0f - mainTex.b, 1.0f));
-	
-	vec4 finalCaustics = caustics(pixelizedCoordinates);	
+
+	vec4 finalCaustics = caustics(pixelizedCoordinates);
 	vec4 finalSpecular = specular(pixelizedCoordinates);
 	vec4 finalFoam = foam(pixelizedCoordinates, mainTex);
-	
+
 	vec4 waterWithCausticLayer = mix(depthBasedWaterColor, finalCaustics, finalCaustics.a);
 	vec4 waterWithCausticAndSpecularLayer = mix(waterWithCausticLayer, finalSpecular, ceil(finalCaustics.a) * finalSpecular.a);
 	vec4 waterWithCausticAndSpecularAndFoamLayer = mix(waterWithCausticAndSpecularLayer, finalFoam, finalFoam.a);
-	
+
 	float outline = mainTex.a * mainTex.r;
 	vec4 finalOutlineColor = outline * outlineColor;
-	
+
 	vec4 finalRGBColor = mix(waterWithCausticAndSpecularAndFoamLayer, finalOutlineColor, outline);
 	COLOR = vec4(finalRGBColor.r, finalRGBColor.g, finalRGBColor.b, mainTex.b * generalTransparency);
 }

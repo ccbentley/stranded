@@ -23,18 +23,19 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -400.0
-offset_right = 400.0
+offset_left = -500.0
+offset_right = 500.0
 offset_bottom = 26.0
 grow_horizontal = 2
 
 [node name="Title" type="HBoxContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Title" type="Label" parent="MarginContainer/Title"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_cwl3s")
