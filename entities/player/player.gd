@@ -62,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 		player_tile_type = PlayerTile.GRASS
 	elif is_on_sand():
 		player_tile_type = PlayerTile.SAND
-	elif is_in_water():
+	else:
 		player_tile_type = PlayerTile.WATER
 
 
@@ -180,14 +180,6 @@ func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
 	on_hand.offset = held_offset
 	if not is_facing_right:
 		on_hand.offset.x = -held_offset.x
-
-
-func is_in_water() -> bool:
-	var tile_data: TileData = tile_map.water_layer.get_cell_tile_data(player_tile_pos)
-	if tile_data:
-		return tile_data.get_custom_data("can_swim")
-	else:
-		return false
 
 
 func is_on_sand() -> bool:

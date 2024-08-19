@@ -14,7 +14,6 @@ var source_id: int = 0
 const tile_size: int = 16
 
 #Layers
-@onready var water_layer: TileMapLayer = $Water
 @onready var ground_1_layer: TileMapLayer = $Ground1
 @onready var ground_2_layer: TileMapLayer = $Ground2
 @onready var cliff_layer: TileMapLayer = $Cliff
@@ -78,7 +77,6 @@ func find_spawn_location() -> void:
 func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 	var sand_tiles_arr: PackedVector2Array = []
 	var grass_tiles_arr: PackedVector2Array = []
-	var water_tiles_arr: PackedVector2Array = []
 	for _x: int in range(32):
 		for _y: int in range(32):
 			var x: int = _x + chunk.x * 32
@@ -107,10 +105,6 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 						if not sand_tiles_arr.has(adj_tile):
 							if is_in_chunk(chunk, adj_tile):
 								sand_tiles_arr.append(adj_tile)
-			else:
-				water_tiles_arr.append(Vector2i(x, y))
-				if noise_val < 0.5 and decoration_noise_val > 0.8:
-					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, water_bubble_atlas_arr.pick_random())
 	# Places sand decoration tiles
 	for tile: Vector2i in sand_tiles_arr:
 		# Checks if sand tiles are overlapping grass tiles
@@ -135,7 +129,10 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 				if not grass_tiles_arr.has(adj_tile) and not sand_tiles_arr.has(adj_tile):
 					if not is_in_chunk(chunk, adj_tile):
 						sand_tiles_arr.append(adj_tile)
-	call_deferred("draw_tiles", chunk, water_tiles_arr, sand_tiles_arr, grass_tiles_arr)
+	call_deferred("draw_tiles", chunk, sand_tiles_arr, grass_tiles_arr)
+
+
+const WATER_TEXTURE = preload("res://common/shaders/water_texture/water_texture.tscn")
 
 
 func get_chunk_node(chunk: Vector2i) -> Node2D:
@@ -144,12 +141,13 @@ func get_chunk_node(chunk: Vector2i) -> Node2D:
 	chunk_node.y_sort_enabled = true
 	chunk_node.z_as_relative = false
 	chunks_node.add_child(chunk_node)
+	var water_texture: Node2D = WATER_TEXTURE.instantiate()
+	chunk_node.add_child(water_texture)
+	water_texture.position = map_to_local(chunk * 32)
 	return chunk_node
 
 
-func draw_tiles(_chunk: Vector2i, _water_tiles_arr: PackedVector2Array, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
-	for tile: Vector2i in _water_tiles_arr:
-		water_layer.set_cell(tile, source_id, water_atlas)
+func draw_tiles(_chunk: Vector2i, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
 	ground_1_layer.set_cells_terrain_connect(_sand_tiles_arr, terrain_sand_int, 0)
 	ground_2_layer.set_cells_terrain_connect(_grass_tiles_arr, terrain_grass_int, 0)
 
@@ -171,7 +169,6 @@ func clear_chunk(chunk: Vector2i) -> void:
 		for _y: int in range(32):
 			var x: int = _x + chunk.x * 32
 			var y: int = _y + chunk.y * 32
-			water_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
 			ground_1_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
 			ground_2_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
 			cliff_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))

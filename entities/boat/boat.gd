@@ -51,21 +51,13 @@ func _physics_process(_delta: float) -> void:
 		tile_type = TileType.GRASS
 	elif is_on_sand():
 		tile_type = TileType.SAND
-	elif is_in_water():
+	else:
 		tile_type = TileType.WATER
 
 	if tile_type == TileType.WATER:
 		water_trail.visible = true
 	else:
 		water_trail.visible = false
-
-
-func is_in_water() -> bool:
-	var tile_data: TileData = player.tile_map.water_layer.get_cell_tile_data(player.tile_map.local_to_map(position))
-	if tile_data:
-		return true
-	else:
-		return false
 
 
 func is_on_sand() -> bool:
