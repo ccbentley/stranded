@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clyy1pmd8vy3x"
-path="res://.godot/imported/CausticTextureHighlights.png-c3b9f5003b17f3b37abaee2481543433.ctex"
+uid="uid://ddmo2gb2enuvn"
+path="res://.godot/imported/cloud_noise_1.webp-ae63e17dcb956e2a490239d7e30931b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/shaders/water_texture/CausticTextureHighlights.png"
-dest_files=["res://.godot/imported/CausticTextureHighlights.png-c3b9f5003b17f3b37abaee2481543433.ctex"]
+source_file="res://common/shaders/water_texture/cloud_noise_1.webp"
+dest_files=["res://.godot/imported/cloud_noise_1.webp-ae63e17dcb956e2a490239d7e30931b3.ctex"]
 
 [params]
 

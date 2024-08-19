@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddmo2gb2enuvn"
-path="res://.godot/imported/cloudnoise_1.webp-c9a45f2c9bea0899457555fe680b2a3e.ctex"
+uid="uid://dt8yolobg21pk"
+path="res://.godot/imported/voro_noise_3.webp-b9e614da2a3e6dbdb184648a2874abf8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/shaders/water_texture/cloudnoise_1.webp"
-dest_files=["res://.godot/imported/cloudnoise_1.webp-c9a45f2c9bea0899457555fe680b2a3e.ctex"]
+source_file="res://common/shaders/water_texture/voro_noise_3.webp"
+dest_files=["res://.godot/imported/voro_noise_3.webp-b9e614da2a3e6dbdb184648a2874abf8.ctex"]
 
 [params]
 
