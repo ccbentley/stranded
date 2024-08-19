@@ -64,6 +64,7 @@ func save_game() -> void:
 	player_data.inventory_data = player.inventory_data.duplicate()
 	player_data.equip_inventory_data = player.equip_inventory_data.duplicate()
 	player_data.position = player.global_position
+	player_data.health = player.health_component.health
 	ResourceSaver.save(player_data, Global.world_save_file_path + Global.player_save_file_name)
 
 
@@ -75,6 +76,8 @@ func load_game() -> bool:
 	player.equip_inventory_data = player_data.equip_inventory_data
 	load_inventory()
 	teleport_player(player_data.position)
+	player.health_component.set_health(player_data.health)
+	player.health_component.damage(Attack.new())
 	$Chest.global_position = player_data.position
 	return true
 

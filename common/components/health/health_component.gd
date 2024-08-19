@@ -16,6 +16,7 @@ var slot_datas: Array[SlotData]
 
 signal damaged(prev_health: float, health: float)
 signal died
+signal health_updated
 
 
 func _ready() -> void:
@@ -29,6 +30,9 @@ func _ready() -> void:
 			slot_data.drop_chance = drop.drop_chance
 			slot_datas.append(slot_data)
 
+func set_health(value: float) -> void:
+	health = value
+	health_updated.emit()
 
 func damage(attack: Attack) -> void:
 	var prev_health: float = health

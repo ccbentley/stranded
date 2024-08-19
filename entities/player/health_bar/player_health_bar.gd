@@ -11,6 +11,7 @@ var damage_bar_tween: Tween
 
 func _ready() -> void:
 	health_component.damaged.connect(self.damaged)
+	health_component.health_updated.connect(self.damaged.bind(health_component.health, health_component.health))
 	health_bar.max_value = health_component.MAX_HEALTH
 	health_bar.value = health_component.health
 	damage_bar.max_value = health_component.MAX_HEALTH
