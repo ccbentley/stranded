@@ -14,7 +14,7 @@ func verify_save_directory(path: String) -> void:
 var world_data: WorldData:
 	set(value):
 		world_data = value
-		world_save_file_path = save_file_path + world_data.world_name + "/"
+		world_save_file_path = save_file_path + str(world_data.save_slot) + "/"
 
 const loading_screen: PackedScene = preload("res://entities/menu/loading/loading_screen.tscn")
 var next_scene: String

@@ -44,7 +44,7 @@ func on_play_pressed() -> void:
 	save_selection_menu.set_process_unhandled_key_input(true)
 	save_selection_menu.visible = true
 	AudioManager.play_sound(UI_CLICK_SOUND)
-	save_selection_menu.check_for_worlds()
+	save_selection_menu.check_for_saves()
 
 
 func on_quit_pressed() -> void:
@@ -89,7 +89,7 @@ func on_exit_create_world_menu() -> void:
 	save_selection_menu.set_process(true)
 	save_selection_menu.set_process_unhandled_key_input(true)
 	save_selection_menu.visible = true
-	save_selection_menu.check_for_worlds()
+	save_selection_menu.check_for_saves()
 	AudioManager.play_sound(UI_CLICK_SOUND)
 
 

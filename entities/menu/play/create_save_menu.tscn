@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://sic3jewj25no"]
 
-[ext_resource type="Script" path="res://entities/menu/play/create_world_menu.gd" id="1_pytys"]
+[ext_resource type="Script" path="res://entities/menu/play/create_save_menu.gd" id="1_pytys"]
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="2_2gu6j"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_xrlxj"]
 [ext_resource type="Texture2D" uid="uid://dyrk2gnhkwd5f" path="res://assets/art/icons/Plus.svg" id="3_0b5cr"]
@@ -13,7 +13,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="CreateWorldMenu" type="Control"]
+[node name="CreateSaveMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +44,7 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 40
-text = "Create World"
+text = "Create New Save"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -80,7 +80,7 @@ icon = ExtResource("3_0b5cr")
 expand_icon = true
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(300, 250)
+custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -93,15 +93,6 @@ mouse_filter = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-
-[node name="WorldName" type="LineEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 45)
-layout_mode = 2
-theme_override_styles/focus = ExtResource("2_xrlxj")
-theme_override_styles/normal = ExtResource("2_2gu6j")
-placeholder_text = "World Name"
-max_length = 20
-expand_to_text_length = true
 
 [node name="CharacterName" type="LineEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)

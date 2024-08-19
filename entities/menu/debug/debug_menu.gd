@@ -47,7 +47,7 @@ func update_info() -> void:
 	info.text += "\n Player Tile Pos: " + str(player.player_tile_pos)
 	info.text += "\n Player Chunk Pos: " + str(player.player_tile_pos / 32)
 	info.text += "\n \n World Info: "
-	info.text += "\n World Name: " + str(Global.world_data.world_name)
+	info.text += "\n Save Slot: " + str(Global.world_data.save_slot)
 	info.text += "\n World Seed: " + str(Global.world_data.world_seed)
 	info.text += "\n Day Count: " + str(Global.world_data.day_count)
 

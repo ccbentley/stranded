@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm75c0m4fkq0j"]
+[gd_scene load_steps=7 format=3 uid="uid://cm75c0m4fkq0j"]
 
 [ext_resource type="Script" path="res://entities/menu/play/save_selection_menu.gd" id="1_hh8c2"]
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="2_0j2k8"]
+[ext_resource type="PackedScene" uid="uid://cwiv31qfcgpp1" path="res://entities/menu/play/save_file_menu.tscn" id="2_cykb1"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_kvtqw"]
 [ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="3_jgqbj"]
-[ext_resource type="Texture2D" uid="uid://dyrk2gnhkwd5f" path="res://assets/art/icons/Plus.svg" id="4_7snco"]
+[ext_resource type="Texture2D" uid="uid://chg3tvcycxqee" path="res://assets/art/icons/File.svg" id="6_385um"]
 
 [node name="SaveSelectionMenu" type="Control"]
 layout_mode = 3
@@ -34,17 +35,32 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 100
 
-[node name="SelectionMenu" type="ScrollContainer" parent="MarginContainer/SaveMenu"]
-layout_mode = 2
-size_flags_horizontal = 4
-horizontal_scroll_mode = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SaveMenu/SelectionMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SaveMenu"]
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 60
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 85
+
+[node name="SaveFileMenu" parent="MarginContainer/SaveMenu/VBoxContainer" instance=ExtResource("2_cykb1")]
+layout_mode = 2
+slot_number = 1
+
+[node name="SaveFileMenu2" parent="MarginContainer/SaveMenu/VBoxContainer" instance=ExtResource("2_cykb1")]
+layout_mode = 2
+slot_number = 2
+
+[node name="SaveFileMenu3" parent="MarginContainer/SaveMenu/VBoxContainer" instance=ExtResource("2_cykb1")]
+layout_mode = 2
+slot_number = 3
+
+[node name="SaveFileMenu4" parent="MarginContainer/SaveMenu/VBoxContainer" instance=ExtResource("2_cykb1")]
+layout_mode = 2
+slot_number = 4
+
+[node name="SaveFileMenu5" parent="MarginContainer/SaveMenu/VBoxContainer" instance=ExtResource("2_cykb1")]
+layout_mode = 2
+slot_number = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -63,7 +79,7 @@ vertical_alignment = 1
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 45)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_kvtqw")
@@ -73,20 +89,16 @@ text = "Back"
 icon = ExtResource("3_jgqbj")
 expand_icon = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+[node name="DeleteButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(150, 45)
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = -48
-
-[node name="CreateWorldButton" type="Button" parent="MarginContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(275, 45)
-layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 10
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = ExtResource("2_kvtqw")
 theme_override_styles/pressed = ExtResource("2_kvtqw")
 theme_override_styles/normal = ExtResource("2_0j2k8")
-text = "Create New  World"
-icon = ExtResource("4_7snco")
+text = "Erase"
+icon = ExtResource("6_385um")
 expand_icon = true

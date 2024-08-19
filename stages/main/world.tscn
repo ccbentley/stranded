@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -169,7 +169,6 @@ tile_set = ExtResource("13_xl4hy")
 [node name="Ground2" type="TileMapLayer" parent="TileMap"]
 y_sort_enabled = true
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAABAAAAAAABAAEAAAACAAAAAAABAAEAAAADAAAAAAABAAEAAAAEAAAAAAABAAEAAAAFAAAAAAABAAEAAAAGAAAAAAABAAEAAAAHAAAAAAABAAEAAAAIAAAAAAABAAEAAAAJAAAAAAABAAEAAAAKAAAAAAABAAEAAAALAAAAAAABAAEAAAAMAAAAAAABAAEAAAANAAAAAAABAAEAAAAOAAAAAAABAAEAAAAPAAAAAAABAAEAAAA=")
 tile_set = ExtResource("13_xl4hy")
 
 [node name="Cliff" type="TileMapLayer" parent="TileMap"]

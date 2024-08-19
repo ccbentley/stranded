@@ -2,11 +2,11 @@ extends Control
 class_name SaveSelectionMenu
 
 @onready var exit_button: Button = $MarginContainer/VBoxContainer/ExitButton
-@onready var create_world_button: Button = $MarginContainer/VBoxContainer2/CreateWorldButton
+@onready var delete_button: Button = $MarginContainer/DeleteButton
 
 signal exit_save_selection_menu
 
-@onready var v_box_container: VBoxContainer = $MarginContainer/SaveMenu/SelectionMenu/VBoxContainer
+@onready var v_box_container: VBoxContainer = $MarginContainer/SaveMenu/VBoxContainer
 
 const SAVE_FILE_MENU: PackedScene = preload("res://entities/menu/play/save_file_menu.tscn")
 
@@ -15,16 +15,33 @@ const SAVE_FILE_MENU: PackedScene = preload("res://entities/menu/play/save_file_
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
 
+var save_file_arr: Array = []
+
+enum { PLAY, DELETE }
+var mode: int = PLAY:
+	set(value):
+		mode = value
+		if mode == DELETE:
+			delete_button.text = "Cancel"
+			for child: Control in save_file_arr:
+				child.modulate = Color.RED
+		else:
+			delete_button.text = "Erase"
+			for child: Control in save_file_arr:
+				child.modulate = Color.WHITE
+
 
 func _ready() -> void:
 	handle_connecting_signals()
 	set_process(false)
 	set_process_unhandled_key_input(false)
+	for child in $MarginContainer/SaveMenu/VBoxContainer.get_children():
+		save_file_arr.append(child)
 
 
 func handle_connecting_signals() -> void:
 	exit_button.button_down.connect(on_exit_pressed)
-	create_world_button.button_down.connect(on_create_world_pressed)
+	delete_button.button_down.connect(on_delete_pressed)
 
 
 func _unhandled_key_input(_event: InputEvent) -> void:
@@ -33,48 +50,49 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 
 
 func on_exit_pressed() -> void:
+	mode = PLAY
 	exit_save_selection_menu.emit()
 	set_process(false)
 	set_process_unhandled_key_input(false)
 
 
-func on_create_world_pressed() -> void:
+func on_delete_pressed() -> void:
+	AudioManager.play_sound(UI_CLICK_SOUND)
+	if mode == PLAY:
+		mode = DELETE
+	else:
+		mode = PLAY
+
+
+func create_save(save_slot: int) -> void:
 	self.visible = false
 	create_world_menu.set_process(true)
 	create_world_menu.set_process_unhandled_key_input(true)
 	create_world_menu.visible = true
-	AudioManager.play_sound(UI_CLICK_SOUND)
+	create_world_menu.save_slot = save_slot
 
 
-func on_exit_create_world_menu() -> void:
-	self.visible = true
-	save_selection_menu.set_process(false)
-	save_selection_menu.set_process_unhandled_key_input(false)
-	save_selection_menu.visible = false
-	AudioManager.play_sound(UI_CLICK_SOUND)
-
-
-func check_for_worlds() -> void:
-	for child in v_box_container.get_children():
-		child.queue_free()
+func check_for_saves() -> void:
+	for child: Control in save_file_arr:
+		child.world_data = null
+		child.slot_info.text = "<Empty>"
 	var dir := DirAccess.open(Global.save_file_path)
 	if dir:
 		dir.list_dir_begin()
 		var file_name: String = dir.get_next()
 		while file_name != "":
 			if file_name != "." and file_name != ".." and dir.current_is_dir():
-				add_world(file_name)
+				if int(file_name) >= 1 and int(file_name) <= save_file_arr.size():
+					set_save(int(file_name))
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	else:
 		push_error("Failed to open directory: ", Global.save_file_path)
 
 
-func add_world(file_name: String) -> void:
-	var world_data: WorldData = WorldData.new()
-	var world_save_file_path: String = Global.save_file_path + file_name + "/" + Global.world_save_file_name
-	world_data = ResourceLoader.load(world_save_file_path).duplicate()
-	var save_file_menu: SaveFileMenu = SAVE_FILE_MENU.instantiate()
-	v_box_container.add_child(save_file_menu)
-	save_file_menu.world_data = world_data.duplicate()
-	save_file_menu.world_name.text = world_data.world_name + "\n" + str(world_data.world_seed)
+func set_save(save_slot: int) -> void:
+	var save_file: Control = save_file_arr[save_slot - 1]
+	var world_save_file_path: String = Global.save_file_path + str(save_slot) + "/" + Global.world_save_file_name
+	var world_data: WorldData = ResourceLoader.load(world_save_file_path).duplicate()
+	save_file.world_data = world_data.duplicate()
+	save_file.slot_info.text = world_data.character_name
