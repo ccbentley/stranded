@@ -1,10 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://7n3kvnhu76wv"]
+[gd_scene load_steps=3 format=3 uid="uid://7n3kvnhu76wv"]
 
 [ext_resource type="Script" path="res://common/inventory/inventory.gd" id="1_31u1r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umiq6"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Inventory" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_umiq6")
 script = ExtResource("1_31u1r")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

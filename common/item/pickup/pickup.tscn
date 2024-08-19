@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqfpj7wumfjvp"]
+[gd_scene load_steps=10 format=3 uid="uid://cqfpj7wumfjvp"]
 
 [ext_resource type="Script" path="res://common/item/pickup/pickup.gd" id="1_hgpy1"]
-[ext_resource type="Texture2D" uid="uid://bm5plc2gkway3" path="res://entities/items/fishing_rod/art/fishing_rod.png" id="2_au0ja"]
+[ext_resource type="Shader" path="res://common/shaders/sprite_outline.gdshader" id="2_frwrd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rttm"]
+shader = ExtResource("2_frwrd")
+shader_parameter/outline_color = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1eyn"]
 
@@ -79,8 +83,8 @@ collision_layer = 0
 script = ExtResource("1_hgpy1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4rttm")
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_au0ja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_r1eyn")
