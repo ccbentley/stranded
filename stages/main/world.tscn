@@ -91,11 +91,22 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
+[node name="ExternalInventoryLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "External Inventory"
+
 [node name="ExternalInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" instance=ExtResource("13_utryv")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="CraftingLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Crafting"
 
 [node name="CraftingInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("8_8thps")]
 layout_mode = 2

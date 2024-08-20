@@ -10,6 +10,7 @@ var external_inventory_owner: Node2D
 @onready var player_inventory: PanelContainer = $VBoxContainer/PlayerInventoryContainer/PlayerInventory
 @onready var grabbed_slot: Slot = $GrabbedSlot
 @onready var external_inventory: Inventory = $VBoxContainer/ExternalInventory
+@onready var external_inventory_label: Label = $VBoxContainer/ExternalInventoryLabel
 @onready var equip_inventory: PanelContainer = $VBoxContainer/PlayerInventoryContainer/EquipInventory
 @onready var crafting_inventory: CraftingInventory = $VBoxContainer/CraftingInventory
 
@@ -47,6 +48,9 @@ func set_external_inventory(_external_inventory_owner: Node2D) -> void:
 
 	external_inventory.show()
 
+	external_inventory_label.text = external_inventory_owner.name
+	external_inventory_label.show()
+
 
 func clear_external_inventory() -> void:
 	if external_inventory_owner:
@@ -57,6 +61,8 @@ func clear_external_inventory() -> void:
 
 		external_inventory.hide()
 		external_inventory_owner = null
+
+		external_inventory_label.hide()
 
 
 func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) -> void:

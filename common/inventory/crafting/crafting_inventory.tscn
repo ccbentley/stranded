@@ -1,10 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1yv6c124r1k7"]
+[gd_scene load_steps=3 format=3 uid="uid://b1yv6c124r1k7"]
 
 [ext_resource type="Script" path="res://common/inventory/crafting/crafting_inventory.gd" id="1_joug6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3eoeg"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Crafting" type="PanelContainer"]
 offset_right = 16.0
 offset_bottom = 16.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3eoeg")
 script = ExtResource("1_joug6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

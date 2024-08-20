@@ -4,7 +4,7 @@ class_name CreateWorldMenu
 @onready var exit_button: Button = $MarginContainer/VBoxContainer/ExitButton
 @onready var character_name: LineEdit = $MarginContainer/CenterContainer/VBoxContainer/CharacterName
 @onready var world_seed: LineEdit = $MarginContainer/CenterContainer/VBoxContainer/Seed
-@onready var create_world_button: Button = $MarginContainer/VBoxContainer2/CreateWorldButton
+@onready var create_save_button: Button = $MarginContainer/VBoxContainer2/CreateSaveButton
 
 signal exit_create_world_menu
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func handle_connecting_signals() -> void:
 	exit_button.button_down.connect(on_exit_pressed)
-	create_world_button.button_down.connect(on_create_world_pressed)
+	create_save_button.button_down.connect(on_create_save_pressed)
 	character_name.text_changed.connect(func(_new_text: String) -> void: character_name.modulate = Color.WHITE)
 
 
@@ -39,7 +39,7 @@ func on_exit_pressed() -> void:
 	set_process_unhandled_key_input(false)
 
 
-func on_create_world_pressed() -> void:
+func on_create_save_pressed() -> void:
 	var world_data: WorldData = WorldData.new()
 	world_data.save_slot = save_slot
 	if character_name.text != "":
