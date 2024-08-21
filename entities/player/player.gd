@@ -91,6 +91,11 @@ func _unhandled_input(_event: InputEvent) -> void:
 		main.zoom_in()
 	if Input.is_action_just_pressed("zoom_out"):
 		main.zoom_out()
+	if Input.is_action_just_pressed("debug_menu") and OS.has_feature("debug"):
+		main.toggle_debug_menu()
+
+
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("use"):
 		var mouse_position: Vector2 = get_viewport().get_mouse_position()
 		#Clicked left side
@@ -99,8 +104,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		#Clicked right side
 		else:
 			is_facing_right = true
-	if Input.is_action_just_pressed("debug_menu") and OS.has_feature("debug"):
-		main.toggle_debug_menu()
 
 
 func _ready() -> void:

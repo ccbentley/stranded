@@ -10,8 +10,9 @@ region = Rect2(0, 0, 32, 32)
 [resource]
 script = ExtResource("1_xhkrv")
 placeable_object_path = "res://entities/boat/boat.tscn"
+max_placeable_distance = 50.0
+useable = true
 name = "Boat"
 description = "Vroom"
 stackable = false
 texture = SubResource("AtlasTexture_k60ky")
-held_offset = Vector2(0, 0)

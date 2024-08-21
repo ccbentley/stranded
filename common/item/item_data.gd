@@ -2,6 +2,7 @@ extends Resource
 class_name ItemData
 
 @export var scene: PackedScene
+@export var useable: bool = false
 
 @export var name: String = ""
 @export_multiline var description: String = ""
@@ -10,4 +11,5 @@ class_name ItemData
 
 
 func use(target: Node2D, index: int) -> void:
-	target.use_item(index)
+	if useable:
+		target.use_item(index)
