@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3fxwleqfl20s"]
+
+[ext_resource type="Texture2D" uid="uid://c16vc01fyu1kv" path="res://entities/items/fishing_rod/art/fishing_rod_hook.png" id="1_ar5ie"]
+
+[node name="FishingRodHook" type="Sprite2D"]
+texture = ExtResource("1_ar5ie")
+offset = Vector2(0, 5)

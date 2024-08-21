@@ -1,12 +1,13 @@
 extends Resource
 class_name ItemData
 
+@export var scene: PackedScene
+
 @export var name: String = ""
 @export_multiline var description: String = ""
 @export var stackable: bool = false
 @export var texture: Texture2D
-@export var held_offset: Vector2 = Vector2(0, 0)
 
 
-func use(_target: Node2D, _index: int) -> void:
-	pass
+func use(target: Node2D, index: int) -> void:
+	target.use_item(index)

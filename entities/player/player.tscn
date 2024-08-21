@@ -238,7 +238,6 @@ one_shot = true
 material = SubResource("ShaderMaterial_f5bsv")
 position = Vector2(7, 3)
 scale = Vector2(0.75, 0.75)
-offset = Vector2(7, -5.5)
 
 [node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

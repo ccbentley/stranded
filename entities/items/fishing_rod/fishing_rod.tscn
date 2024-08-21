@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba121m7i7tanp"]
+
+[ext_resource type="Script" path="res://entities/items/fishing_rod/fishing_rod.gd" id="1_80ck0"]
+[ext_resource type="Texture2D" uid="uid://bm5plc2gkway3" path="res://entities/items/fishing_rod/art/fishing_rod.png" id="2_44jfs"]
+
+[sub_resource type="Curve2D" id="Curve2D_tkxdr"]
+_data = {
+"points": PackedVector2Array(-38.6745, 34.7459, 50, -50, 0, 0, -50, -50, 35.408, 34.4653, 0, 0)
+}
+point_count = 2
+
+[node name="FishingRod" type="Node2D"]
+use_parent_material = true
+script = ExtResource("1_80ck0")
+
+[node name="RodSprite" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(6, -6)
+texture = ExtResource("2_44jfs")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_tkxdr")
+
+[node name="CastPoint" type="Node2D" parent="."]
+position = Vector2(12, -12)
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

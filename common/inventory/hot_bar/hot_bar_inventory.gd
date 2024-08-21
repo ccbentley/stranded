@@ -5,7 +5,21 @@ signal hot_bar_slot_changed
 
 const SLOT = preload("res://common/inventory/slot.tscn")
 
-var selected_slot: int = 0
+var selected_slot: int = 0:
+	set(value):
+		if selected_slot != value:
+			selected_slot = value
+			var slots: Array = h_box_container.get_children()
+			if selected_slot > slots.size() - 1:
+				selected_slot = 0
+			elif selected_slot < 0:
+				selected_slot = slots.size() - 1
+			selected.position = Vector2(68 * selected_slot, 0) + Vector2(40, 40)
+			if _slot_datas[selected_slot]:
+				player.hold_item(_slot_datas[selected_slot].item_data.scene)
+			else:
+				player.hold_item(null)
+
 var _slot_datas: Array[SlotData]
 
 @export var player: CharacterBody2D
@@ -26,7 +40,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 	if range(KEY_1, KEY_7).has(event.keycode):
 		selected_slot = event.keycode - KEY_1
-		set_selected()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,25 +49,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("scroll_down"):
 		selected_slot += 1
 		hot_bar_slot_changed.emit()
-		set_selected()
 	elif event.is_action_pressed("scroll_up"):
 		selected_slot -= 1
 		hot_bar_slot_changed.emit()
-		set_selected()
-
-
-func set_selected() -> void:
-	var slots: Array = h_box_container.get_children()
-	if selected_slot > slots.size() - 1:
-		selected_slot = 0
-	elif selected_slot < 0:
-		selected_slot = slots.size() - 1
-	selected.position = Vector2(68 * selected_slot, 0) + Vector2(40, 40)
-
-	if _slot_datas[selected_slot]:
-		player.display_on_hand(_slot_datas[selected_slot].item_data.texture, _slot_datas[selected_slot].item_data.held_offset)
-	else:
-		player.display_on_hand(null, Vector2.ZERO)
 
 
 func populate_hot_bar(inventory_data: InventoryData) -> void:
@@ -69,4 +66,3 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 			slot.set_slot_data(slot_data)
 
 	_slot_datas = inventory_data.slot_datas.slice(0, 6)
-	set_selected()

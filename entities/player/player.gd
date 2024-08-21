@@ -25,9 +25,8 @@ extends CharacterBody2D
 @onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 @onready var on_hand: Sprite2D = $OnHand
+var held_item: Node2D = null
 @onready var player_sprite: Sprite2D = $CharacterSprite
-
-var held_offset: Vector2 = Vector2.ZERO
 
 #Timers
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
@@ -72,16 +71,14 @@ var is_facing_right: bool = true:
 			# Turn right
 			turn_tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			on_hand.flip_h = false
-			on_hand.position.x = 7
-			on_hand.offset.x = held_offset.x
+			on_hand.scale.x = abs(on_hand.scale.x)
+			on_hand.position.x = abs(on_hand.position.x)
 		elif not value and is_facing_right != value:
 			# Turn left
 			turn_tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			on_hand.flip_h = true
-			on_hand.position.x = -7
-			on_hand.offset.x = -held_offset.x
+			on_hand.scale.x = -abs(on_hand.scale.x)
+			on_hand.position.x = -abs(on_hand.position.x)
 		is_facing_right = value
 
 
@@ -174,12 +171,13 @@ func set_speed(speed: int) -> void:
 	max_speed = speed
 
 
-func display_on_hand(texture: Texture2D, _held_offset: Vector2) -> void:
-	on_hand.texture = texture
-	held_offset = _held_offset
-	on_hand.offset = held_offset
-	if not is_facing_right:
-		on_hand.offset.x = -held_offset.x
+func hold_item(item_scene: PackedScene) -> void:
+	for child: Node2D in on_hand.get_children():
+		child.queue_free()
+	if item_scene:
+		var item_node: Node2D = item_scene.instantiate()
+		on_hand.add_child(item_node)
+		held_item = item_node
 
 
 func is_on_sand() -> bool:
@@ -196,6 +194,10 @@ func is_on_grass() -> bool:
 		return true
 	else:
 		return false
+
+
+func use_item(index: int) -> void:
+	held_item.use(index)
 
 
 func _on_health_component_damaged(_prev_health: float, _health: float) -> void:
