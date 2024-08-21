@@ -28,6 +28,12 @@ var _slot_datas: Array[SlotData]
 @onready var selected: Sprite2D = $MarginContainer/Selected
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	selected_slot = -1
+	selected_slot = 0
+
+
 func set_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(populate_hot_bar)
 	populate_hot_bar(inventory_data)

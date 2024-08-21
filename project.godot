@@ -31,6 +31,11 @@ GlobalUi="*res://utilities/global_ui.tscn"
 
 gdscript/warnings/untyped_declaration=1
 
+[display]
+
+mouse_cursor/custom_image="res://assets/art/cursors/pointer.png"
+mouse_cursor/custom_image_hotspot=Vector2(12, 12)
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")

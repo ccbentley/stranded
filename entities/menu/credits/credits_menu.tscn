@@ -108,6 +108,12 @@ title = "UI Icon Pack"
 author = "Leo Red"
 link = "https://leo-red.itch.io/"
 
+[node name="Cursors" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
+layout_mode = 2
+title = "Cursors"
+author = "SHMORGUS"
+link = "https://shmorgus.itch.io/"
+
 [node name="Shaders" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]
 layout_mode = 2
 header = "Shaders"
