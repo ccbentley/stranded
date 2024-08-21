@@ -49,6 +49,7 @@ func draw_fish_line() -> void:
 
 func cast_line() -> void:
 	state = State.CASTING
+	Input.set_custom_mouse_cursor(POINTER, Input.CURSOR_ARROW, Vector2(12, 12))
 	rod_sprite.texture = FISHING_ROD_ART_CASTED
 	var distance: Vector2 = get_global_mouse_position() - player.global_position
 	distance.x = clamp(distance.x, -max_line_cast_distance, max_line_cast_distance)
@@ -72,10 +73,19 @@ func reel_in() -> void:
 	state = State.REELING
 	await hook.reeled_in
 	state = State.NONE
+	Input.set_custom_mouse_cursor(ARROW_DOWN, Input.CURSOR_ARROW, Vector2(12, 12))
 	hook.queue_free()
 	rod_sprite.texture = FISHING_ROD_ART_NORMAL
 	line_2d.clear_points()
 	player_out_of_range = false
+
+
+const ARROW_DOWN = preload("res://assets/art/cursors/arrow_down.png")
+const POINTER = preload("res://assets/art/cursors/pointer.png")
+
+
+func _ready() -> void:
+	Input.set_custom_mouse_cursor(ARROW_DOWN, Input.CURSOR_ARROW, Vector2(12, 12))
 
 
 func _physics_process(_delta: float) -> void:
@@ -91,3 +101,4 @@ func _physics_process(_delta: float) -> void:
 func _on_tree_exiting() -> void:
 	if is_instance_valid(hook):
 		hook.queue_free()
+	Input.set_custom_mouse_cursor(POINTER, Input.CURSOR_ARROW, Vector2(12, 12))

@@ -33,8 +33,7 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
-mouse_cursor/custom_image="res://assets/art/cursors/pointer.png"
-mouse_cursor/custom_image_hotspot=Vector2(12, 12)
+mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 [editor_plugins]
 

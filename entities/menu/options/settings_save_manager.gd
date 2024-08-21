@@ -10,6 +10,7 @@ func _ready() -> void:
 	else:
 		settings_data = SettingsData.new()
 		settings_data.keybind_data = default_keybind_data.duplicate()
+	set_custom_cursors()
 
 
 func on_window_mode_selected(index: int) -> void:
@@ -95,6 +96,22 @@ func get_keybind(action: String) -> InputEventKey:
 		settings_data.keybind_data.DISMOUNT:
 			return settings_data.keybind_data.dismount_key
 	return
+
+
+# Mouse cursors
+const CANCEL = preload("res://assets/art/cursors/cancel.png")
+const HAND_POINTER = preload("res://assets/art/cursors/hand_pointer.png")
+const MOVE = preload("res://assets/art/cursors/move.png")
+const POINTER = preload("res://assets/art/cursors/pointer.png")
+const TYPE = preload("res://assets/art/cursors/type.png")
+
+
+func set_custom_cursors() -> void:
+	Input.set_custom_mouse_cursor(POINTER, Input.CURSOR_ARROW, Vector2(12, 12))
+	Input.set_custom_mouse_cursor(HAND_POINTER, Input.CURSOR_POINTING_HAND, Vector2(12, 12))
+	Input.set_custom_mouse_cursor(TYPE, Input.CURSOR_IBEAM, Vector2(12, 12))
+	Input.set_custom_mouse_cursor(CANCEL, Input.CURSOR_FORBIDDEN, Vector2(12, 12))
+	Input.set_custom_mouse_cursor(MOVE, Input.CURSOR_MOVE, Vector2(12, 12))
 
 
 func save_settings() -> void:
