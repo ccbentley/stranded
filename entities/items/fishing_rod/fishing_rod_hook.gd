@@ -71,6 +71,8 @@ func cast(target_position: Vector2) -> void:
 
 
 func reel_in(start_position: Vector2) -> void:
+	fish_minigame.visible = false
+	fish_minigame.end_minigame()
 	var max_parabola_height: int = 10
 	var control_point: Vector2 = (position + start_position) / 2
 	control_point.y -= 10  # Adjust this value to change the height of the parabola
