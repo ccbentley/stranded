@@ -4,6 +4,8 @@ class_name FishingRodHook
 @onready var area_2d: Area2D = $Area2D
 @onready var catch_timer: Timer = $CatchTimer
 @onready var fish_minigame: CanvasLayer = $FishMinigame
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite2D = $Sprite2D
 
 var fishing_rod: Node2D = null
 
@@ -21,8 +23,14 @@ var state: int = State.NONE:
 		if value != state:
 			state = value
 			if state == State.IDLE:
+				animation_player.play("idle")
 				catch_timer.wait_time = randi_range(10, 20)
 				catch_timer.start()
+			elif state == State.CAUGHT:
+				animation_player.play("caught")
+			else:
+				animation_player.play("RESET")
+				animation_player.stop()
 
 enum TileType {
 	WATER,

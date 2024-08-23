@@ -34,7 +34,7 @@ func use(_index: int) -> void:
 
 func draw_curve() -> void:
 	var rod_pos: Vector2 = cast_point.position
-	path_2d.curve.set_point_position(1, to_local(hook.position))
+	path_2d.curve.set_point_position(1, to_local(hook.sprite.global_position))
 	var outX: float = rod_pos.x / 0.75
 	path_2d.curve.set_point_out(0, Vector2(outX, -outX))
 	path_2d.curve.set_point_position(0, rod_pos)

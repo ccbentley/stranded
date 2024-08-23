@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://3fxwleqfl20s"]
+[gd_scene load_steps=9 format=3 uid="uid://3fxwleqfl20s"]
 
 [ext_resource type="Texture2D" uid="uid://c16vc01fyu1kv" path="res://entities/items/fishing_rod/art/fishing_rod_hook.png" id="1_ar5ie"]
 [ext_resource type="Script" path="res://entities/items/fishing_rod/fishing_rod_hook.gd" id="1_yyj31"]
@@ -6,6 +6,62 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvkna"]
 radius = 5.0
+
+[sub_resource type="Animation" id="Animation_m6keb"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4h6dg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hn13p"]
+resource_name = "caught"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0.5), Vector2(0, 3), Vector2(0, 0), Vector2(0, -0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lqv7"]
+_data = {
+"RESET": SubResource("Animation_4h6dg"),
+"caught": SubResource("Animation_hn13p"),
+"idle": SubResource("Animation_m6keb")
+}
 
 [node name="FishingRodHook" type="Node2D"]
 z_index = 1
@@ -26,5 +82,10 @@ one_shot = true
 
 [node name="FishMinigame" parent="." instance=ExtResource("3_nnxh0")]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0lqv7")
+}
 
 [connection signal="timeout" from="CatchTimer" to="." method="_on_catch_timer_timeout"]
