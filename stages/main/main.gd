@@ -6,6 +6,7 @@ extends Node2D
 @onready var tile_map: Node2D = $TileMap
 @onready var camera: Camera2D = $Camera2D
 @onready var vignette: TextureRect = $UI/Vignette
+@onready var entities: Node2D = $Entities
 
 var vignette_displayed: bool = false
 var vignette_displayed_color: Color
@@ -78,7 +79,6 @@ func load_game() -> bool:
 	teleport_player(player_data.position)
 	player.health_component.set_health(player_data.health)
 	player.health_component.damage(Attack.new())
-	$Chest.global_position = player_data.position
 	return true
 
 

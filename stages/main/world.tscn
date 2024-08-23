@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=23 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bkgd462mpdf67" path="res://stages/main/world_generation/decoration_noise.tres" id="3_d1a5b"]
 [ext_resource type="Resource" uid="uid://bnxpj0puqauvh" path="res://entities/player/inventory/player_inventory.tres" id="4_e8g6s"]
 [ext_resource type="Resource" uid="uid://23lixjooraln" path="res://entities/player/inventory/player_equip_inventory.tres" id="4_jkkiy"]
-[ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://entities/chest/chest.tscn" id="7_5j5bh"]
-[ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="8_0i1ge"]
 [ext_resource type="PackedScene" uid="uid://b1yv6c124r1k7" path="res://common/inventory/crafting/crafting_inventory.tscn" id="8_8thps"]
 [ext_resource type="PackedScene" uid="uid://cw6w20chfrgev" path="res://entities/player/health_bar/player_health_bar.tscn" id="10_7p1pw"]
 [ext_resource type="PackedScene" uid="uid://brtyff5a5fflm" path="res://entities/menu/debug/debug_menu.tscn" id="11_f00c6"]
@@ -19,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://common/inventory/slot.tscn" id="14_fq4si"]
 [ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://entities/menu/pause/pause_menu.tscn" id="15_fqub2"]
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
-[ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="15_ynty6"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/opengameart/amb_river.ogg" id="23_jql4u"]
 
@@ -31,10 +28,6 @@ shader_parameter/outer_radius = 0.7
 shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pdnfu"]
-
-[sub_resource type="Resource" id="Resource_csm5f"]
-script = ExtResource("8_0i1ge")
-slot_datas = Array[ExtResource("15_ynty6")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
 stream_count = 1
@@ -157,10 +150,6 @@ texture = SubResource("CanvasTexture_pdnfu")
 
 [node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
 
-[node name="Chest" parent="." instance=ExtResource("7_5j5bh")]
-position = Vector2(40, 3800)
-inventory_data = SubResource("Resource_csm5f")
-
 [node name="TileMap" type="Node2D" parent="."]
 z_index = -2
 y_sort_enabled = true
@@ -191,6 +180,8 @@ tile_set = ExtResource("13_xl4hy")
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("13_xl4hy")
+
+[node name="Entities" type="Node2D" parent="."]
 
 [node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_q67av")
