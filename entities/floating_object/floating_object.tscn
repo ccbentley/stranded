@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg4imc5jw4gav"]
+
+[ext_resource type="Texture2D" uid="uid://cxrbn5hlkmy8y" path="res://entities/items/materials/wood/art/wood.png" id="1_2h5gp"]
+[ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="2_7yiw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvkc"]
+size = Vector2(70, 70)
+
+[node name="FloatingObject" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_2h5gp")
+
+[node name="HitboxComponent" type="Area2D" parent="." groups=["fishable"]]
+script = ExtResource("2_7yiw2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_pgvkc")

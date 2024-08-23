@@ -49,6 +49,7 @@ import/fbx/enabled=false
 
 interactable=""
 external_inventory=""
+fishable=""
 
 [gui]
 
