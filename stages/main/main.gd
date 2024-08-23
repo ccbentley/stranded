@@ -14,8 +14,6 @@ var vignette_pulsing: bool = false
 
 var player_data: PlayerData = PlayerData.new()
 
-const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
-
 
 func _ready() -> void:
 	WorldManager.world = self
@@ -55,10 +53,7 @@ func toggle_inventory_interface(external_inventory_owner: Node2D = null) -> void
 
 
 func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
-	var pick_up: Pickup = PICKUP.instantiate()
-	pick_up.slot_data = slot_data
-	pick_up.position = player.get_drop_position()
-	add_child(pick_up)
+	WorldManager.spawn_pickup(slot_data, player.get_drop_position())
 
 
 func save_game() -> void:
@@ -103,13 +98,6 @@ func zoom_out() -> void:
 
 func toggle_debug_menu() -> void:
 	$UI/DebugMenu.visible = !$UI/DebugMenu.visible
-
-
-func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
-	var pickup_instance: Pickup = PICKUP.instantiate()
-	pickup_instance.slot_data = slot_data
-	call_deferred("add_child", pickup_instance)
-	pickup_instance.global_position = pos
 
 
 func display_vignette(color: Color) -> void:
