@@ -1,25 +1,30 @@
 extends Node
 
 
-func play_sound(sound: AudioStream, volume: float = 0) -> void:
+func play_sound(sound: AudioStream, volume: float = 0, random_pitch: bool = false) -> void:
 	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
 	add_child(audio_stream_player)
 	audio_stream_player.stream = sound
 	audio_stream_player.volume_db = volume
 	audio_stream_player.bus = "Sfx"
+	if random_pitch:
+		randomize()
+		audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
 	audio_stream_player.play()
 	await audio_stream_player.finished
 	audio_stream_player.queue_free()
 
 
-func play_sound_2d(sound: AudioStream, volume: float = 0, pos: Vector2 = Vector2.ZERO, max_distance: int = 2000) -> void:
+func play_sound_2d(sound: AudioStream, volume: float = 0, pos: Vector2 = Vector2.ZERO, random_pitch: bool = false) -> void:
 	var audio_stream_player_2d: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	add_child(audio_stream_player_2d)
 	audio_stream_player_2d.stream = sound
 	audio_stream_player_2d.volume_db = volume
 	audio_stream_player_2d.global_position = pos
-	audio_stream_player_2d.max_distance = max_distance
 	audio_stream_player_2d.bus = "Sfx"
+	if random_pitch:
+		randomize()
+		audio_stream_player_2d.pitch_scale = randf_range(0.8, 1.2)
 	audio_stream_player_2d.play()
 	await audio_stream_player_2d.finished
 	audio_stream_player_2d.queue_free()

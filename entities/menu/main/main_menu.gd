@@ -14,12 +14,12 @@ class_name MainMenu
 @onready var credits_menu: CreditsMenu = $CreditsMenu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
-const MENU_MUSIC = preload("res://assets/music/Path to Lake Land.ogg")
+const MENU_MUSIC = preload("res://assets/music/Cleyton RX - Underwater.wav")
 
 
 func _ready() -> void:
 	handle_connecting_signals()
-	AudioManager.play_music(MENU_MUSIC, -15)
+	AudioManager.play_music(MENU_MUSIC)
 	version_label.text += ProjectSettings.get_setting("application/config/version") + "."
 	if OS.has_feature("debug"):
 		version_label.text += "debug"

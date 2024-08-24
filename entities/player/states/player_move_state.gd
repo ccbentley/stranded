@@ -43,14 +43,12 @@ var footstep_sound: int:
 	set(value):
 		footstep_sound = value
 		if value == FootStepSound.GRASS:
-			if not footstep_audio_player.playing and footstep_sound_timer.time_left <= 0:
-				footstep_audio_player.stream = grass_footstep_sfx.pick_random()
-				footstep_audio_player.play()
+			if footstep_sound_timer.time_left <= 0:
+				AudioManager.play_sound_2d(grass_footstep_sfx.pick_random(), -10, actor.global_position, true)
 				footstep_sound_timer.start()
 		elif value == FootStepSound.SAND:
-			if not footstep_audio_player.playing and footstep_sound_timer.time_left <= 0:
-				footstep_audio_player.stream = sand_footstep_sfx.pick_random()
-				footstep_audio_player.play()
+			if footstep_sound_timer.time_left <= 0:
+				AudioManager.play_sound_2d(sand_footstep_sfx.pick_random(), -10, actor.global_position, true)
 				footstep_sound_timer.start()
 
 

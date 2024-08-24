@@ -196,7 +196,7 @@ anim = NodePath("../../../MovementAnimationPlayer")
 script = ExtResource("9_02503")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
-footstep_audio_player = NodePath("../../../FootStepSound")
+footstep_audio_player = NodePath("")
 footstep_sound_timer = NodePath("../../../FootStepSoundTimer")
 
 [node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar", "water_trail")]
@@ -267,10 +267,6 @@ show_percentage = false
 wait_time = 0.5
 
 [node name="PlayerHurtTimer" type="Timer" parent="DrownBar"]
-
-[node name="FootStepSound" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0
-bus = &"Sfx"
 
 [node name="FootStepSoundTimer" type="Timer" parent="."]
 wait_time = 0.3

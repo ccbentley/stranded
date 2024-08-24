@@ -7,23 +7,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvkna"]
 radius = 5.0
 
-[sub_resource type="Animation" id="Animation_m6keb"]
-resource_name = "idle"
-length = 1.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_4h6dg"]
 length = 0.001
 tracks/0/type = "value"
@@ -56,6 +39,23 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0.5), Vector2(0, 3), Vector2(0, 0), Vector2(0, -0.5)]
 }
 
+[sub_resource type="Animation" id="Animation_m6keb"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0lqv7"]
 _data = {
 "RESET": SubResource("Animation_4h6dg"),
@@ -64,7 +64,6 @@ _data = {
 }
 
 [node name="FishingRodHook" type="Node2D"]
-z_index = 1
 script = ExtResource("1_yyj31")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

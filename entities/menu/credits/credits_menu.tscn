@@ -153,7 +153,7 @@ header = "Music"
 [node name="MenuMusic" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_dt74b")]
 layout_mode = 2
 title = "Menu Music"
-author = "Alexandr Zhelanov"
+author = "CleytonKauffman"
 link = "https://opengameart.org/"
 
 [node name="Fonts" parent="MarginContainer/Credits/SelectionMenu/VBoxContainer" instance=ExtResource("2_b7qtu")]

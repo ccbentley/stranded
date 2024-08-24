@@ -157,7 +157,7 @@ func melee_attack(attack: Attack) -> void:
 		on_hand_animation_player.play("melee_attack_right")
 	else:
 		on_hand_animation_player.play("melee_attack_left")
-	AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"))
+	AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"), 0, true)
 
 
 func ranged_attack(attack: Attack) -> void:

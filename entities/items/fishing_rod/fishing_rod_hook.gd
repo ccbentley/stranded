@@ -23,9 +23,10 @@ var state: int = State.NONE:
 		if value != state:
 			state = value
 			if state == State.IDLE:
-				animation_player.play("idle")
-				catch_timer.wait_time = randi_range(10, 20)
-				catch_timer.start()
+				if tile_type == TileType.WATER:
+					animation_player.play("idle")
+					catch_timer.wait_time = randi_range(10, 20)
+					catch_timer.start()
 			elif state == State.CAUGHT:
 				animation_player.play("caught")
 			else:

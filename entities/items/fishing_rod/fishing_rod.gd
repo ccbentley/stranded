@@ -62,7 +62,7 @@ func cast_line() -> void:
 	hook = WorldManager.spawn_entity(FISHING_ROD_HOOK, cast_point.global_position)
 	hook.fishing_rod = self
 	hook.cast(to_global(distance))
-	AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"))
+	AudioManager.play_sound(load("res://assets/sounds/freesound/fastwoosh.wav"), 0, true)
 	await hook.casted
 	state = State.CASTED
 

@@ -45,13 +45,13 @@ func damage(attack: Attack) -> void:
 		anim.play("hit")
 
 	if hit_sfx:
-		AudioManager.play_sound_2d(hit_sfx, 0, global_position)
+		AudioManager.play_sound_2d(hit_sfx, 0, global_position, true)
 
 	if health <= 0 and not dead:
 		dead = true
 		died.emit()
 		if death_sfx:
-			AudioManager.play_sound_2d(death_sfx, 0, global_position)
+			AudioManager.play_sound_2d(death_sfx, 0, global_position, true)
 		if slot_datas:
 			for drop: LootData in slot_datas:
 				var roll: float = randf()
