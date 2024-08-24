@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://tem24a8vh5dt"]
 
-[ext_resource type="Script" path="res://utilities/fps.gd" id="1_3o1fp"]
+[ext_resource type="Script" path="res://utilities/global_ui/fps.gd" id="1_3o1fp"]
 
 [node name="GlobalUi" type="CanvasLayer"]
 
