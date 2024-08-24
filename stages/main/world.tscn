@@ -184,13 +184,13 @@ tile_set = ExtResource("13_xl4hy")
 
 [node name="Entities" type="Node2D" parent="."]
 
+[node name="FloatingObject" parent="Entities" instance=ExtResource("20_oor4f")]
+position = Vector2(600, 4965)
+
 [node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_q67av")
 autoplay = true
 bus = &"Sfx"
-
-[node name="FloatingObject" parent="." instance=ExtResource("20_oor4f")]
-position = Vector2(600, 4965)
 
 [connection signal="drop_slot_data" from="UI/MarginContainer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_gui_input"]

@@ -36,10 +36,6 @@ gdscript/warnings/untyped_declaration=1
 
 mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
-
 [filesystem]
 
 import/blender/enabled=false
