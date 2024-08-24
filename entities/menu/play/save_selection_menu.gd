@@ -13,7 +13,7 @@ const SAVE_FILE_MENU: PackedScene = preload("res://entities/menu/play/save_file_
 @onready var save_selection_menu: SaveSelectionMenu = $"."
 @onready var create_world_menu: CreateWorldMenu = $"../CreateWorldMenu"
 
-const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 
 var save_file_arr: Array = []
 

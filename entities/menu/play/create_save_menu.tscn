@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://entities/menu/play/create_save_menu.gd" id="1_pytys"]
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="2_2gu6j"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_xrlxj"]
-[ext_resource type="Texture2D" uid="uid://dyrk2gnhkwd5f" path="res://assets/art/icons/Plus.svg" id="3_0b5cr"]
-[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="3_qloc6"]
+[ext_resource type="Texture2D" uid="uid://dyrk2gnhkwd5f" path="res://assets/art/icons/plus.svg" id="3_0b5cr"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/exit.svg" id="3_qloc6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0evhb"]
 bg_color = Color(0, 0, 0, 0.392157)

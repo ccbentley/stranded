@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0f3vl5yg2od1"
-path="res://.godot/imported/Redo.svg-21521e6990064114a891f67d1b2bddb4.ctex"
+path="res://.godot/imported/redo.svg-81efed911e6b7c3b72f735b755754102.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/icons/Redo.svg"
-dest_files=["res://.godot/imported/Redo.svg-21521e6990064114a891f67d1b2bddb4.ctex"]
+source_file="res://assets/art/icons/redo.svg"
+dest_files=["res://.godot/imported/redo.svg-81efed911e6b7c3b72f735b755754102.ctex"]
 
 [params]
 

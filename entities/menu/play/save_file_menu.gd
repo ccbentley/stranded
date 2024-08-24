@@ -4,7 +4,7 @@ class_name SaveFileMenu
 @export var slot_number: int
 @export var world_data: WorldData
 
-const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 @onready var slot_number_label: Label = $Button/HBoxContainer/SlotNumber
 @onready var button: Button = $Button
 @onready var slot_info: Label = $Button/SlotInfo

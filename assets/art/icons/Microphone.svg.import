@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1xm1aa0ynp4"
-path="res://.godot/imported/Microphone.svg-b08e2e4259b25f6f93ba85beb74f1338.ctex"
+path="res://.godot/imported/microphone.svg-0b163bfc5144af884247d684a814eb2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/icons/Microphone.svg"
-dest_files=["res://.godot/imported/Microphone.svg-b08e2e4259b25f6f93ba85beb74f1338.ctex"]
+source_file="res://assets/art/icons/microphone.svg"
+dest_files=["res://.godot/imported/microphone.svg-0b163bfc5144af884247d684a814eb2b.ctex"]
 
 [params]
 

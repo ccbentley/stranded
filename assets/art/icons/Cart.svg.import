@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blexteic1fd2r"
-path="res://.godot/imported/Cart.svg-747f787cf29ac0c104d98c6a4af1cd6f.ctex"
+path="res://.godot/imported/cart.svg-cb9c54b6be522c6bd7a217e238d3b2c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/icons/Cart.svg"
-dest_files=["res://.godot/imported/Cart.svg-747f787cf29ac0c104d98c6a4af1cd6f.ctex"]
+source_file="res://assets/art/icons/cart.svg"
+dest_files=["res://.godot/imported/cart.svg-cb9c54b6be522c6bd7a217e238d3b2c1.ctex"]
 
 [params]
 

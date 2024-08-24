@@ -7,7 +7,7 @@ var game_paused: bool = false
 @onready var options_menu: OptionsMenu = $OptionsMenu
 @onready var margin_container: MarginContainer = $MarginContainer
 
-const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 
 
 func _ready() -> void:

@@ -4,8 +4,8 @@
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="2_0j2k8"]
 [ext_resource type="PackedScene" uid="uid://cwiv31qfcgpp1" path="res://entities/menu/play/save_file_menu.tscn" id="2_cykb1"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_kvtqw"]
-[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="3_jgqbj"]
-[ext_resource type="Texture2D" uid="uid://chg3tvcycxqee" path="res://assets/art/icons/File.svg" id="6_385um"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/exit.svg" id="3_jgqbj"]
+[ext_resource type="Texture2D" uid="uid://chg3tvcycxqee" path="res://assets/art/icons/file.svg" id="6_385um"]
 
 [node name="SaveSelectionMenu" type="Control"]
 layout_mode = 3

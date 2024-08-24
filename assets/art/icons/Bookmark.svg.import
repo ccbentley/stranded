@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dffasgdgrpp2r"
-path="res://.godot/imported/Bookmark.svg-ed555fb8acc2d08c6578593ad27cc351.ctex"
+path="res://.godot/imported/bookmark.svg-ee14195822dd727896d9b03e9c3e4490.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/icons/Bookmark.svg"
-dest_files=["res://.godot/imported/Bookmark.svg-ed555fb8acc2d08c6578593ad27cc351.ctex"]
+source_file="res://assets/art/icons/bookmark.svg"
+dest_files=["res://.godot/imported/bookmark.svg-ee14195822dd727896d9b03e9c3e4490.ctex"]
 
 [params]
 

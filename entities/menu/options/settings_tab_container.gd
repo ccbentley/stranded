@@ -1,7 +1,7 @@
 extends Control
 
 @onready var tab_container: TabContainer = $TabContainer
-const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 
 
 func _ready() -> void:

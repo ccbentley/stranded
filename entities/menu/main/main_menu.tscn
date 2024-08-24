@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cm75c0m4fkq0j" path="res://entities/menu/play/save_selection_menu.tscn" id="3_j43pa"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="3_kwjga"]
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="3_m7shi"]
-[ext_resource type="Texture2D" uid="uid://cgbc5cdb1dvqo" path="res://assets/art/icons/Play.svg" id="3_w4y2p"]
+[ext_resource type="Texture2D" uid="uid://cgbc5cdb1dvqo" path="res://assets/art/icons/play.svg" id="3_w4y2p"]
 [ext_resource type="PackedScene" uid="uid://sic3jewj25no" path="res://entities/menu/play/create_save_menu.tscn" id="4_bvifd"]
-[ext_resource type="Texture2D" uid="uid://blo76bq87band" path="res://assets/art/icons/Gear.svg" id="4_mqjnq"]
+[ext_resource type="Texture2D" uid="uid://blo76bq87band" path="res://assets/art/icons/gear.svg" id="4_mqjnq"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="5_gno6i"]
-[ext_resource type="Texture2D" uid="uid://b5cayglfa2isp" path="res://assets/art/icons/List.svg" id="5_w5vu7"]
+[ext_resource type="Texture2D" uid="uid://b5cayglfa2isp" path="res://assets/art/icons/list.svg" id="5_w5vu7"]
 [ext_resource type="PackedScene" uid="uid://cilrudgemt8kl" path="res://entities/menu/credits/credits_menu.tscn" id="6_2h86t"]
-[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="6_v7hc1"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/exit.svg" id="6_v7hc1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

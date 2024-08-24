@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
-[ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/opengameart/amb_river.ogg" id="23_jql4u"]
+[ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ktrdo"]
 shader = ExtResource("13_lk73g")

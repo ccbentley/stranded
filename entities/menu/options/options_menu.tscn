@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://buc2qdphxkss1" path="res://entities/menu/options/settings_tab_container.tscn" id="2_fog8h"]
 [ext_resource type="StyleBox" uid="uid://cctkf4pugncdx" path="res://entities/menu/default_button_style.tres" id="3_1pf04"]
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="3_nowfw"]
-[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="4_gahkj"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/exit.svg" id="4_gahkj"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3

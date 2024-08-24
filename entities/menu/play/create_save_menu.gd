@@ -8,7 +8,7 @@ class_name CreateWorldMenu
 
 signal exit_create_world_menu
 
-const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
+const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 
 var save_slot: int
 

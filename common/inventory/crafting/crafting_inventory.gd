@@ -71,7 +71,7 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 						for mat: String in recipe["materials"]:
 							var required_amount: int =recipe ["materials"][mat]
 							player.inventory_data.remove_item(mat, required_amount)
-						AudioManager.play_sound(load("res://assets/sounds/opengameart/pop.ogg"), 0, true)
+						AudioManager.play_sound(load("res://assets/sounds/pop.ogg"), 0, true)
 			)
 	if crafts_visible:
 		self.visible = true

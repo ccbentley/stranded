@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://d05lhiqyvpmwy" path="res://entities/menu/default_button_selected.tres" id="2_aawpg"]
 [ext_resource type="PackedScene" uid="uid://bb5q6m2gc0ngs" path="res://entities/menu/credits/credits_header.tscn" id="2_b7qtu"]
 [ext_resource type="PackedScene" uid="uid://nngdwr1wtlfp" path="res://entities/menu/credits/credits_item.tscn" id="2_dt74b"]
-[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/Exit.svg" id="3_byrto"]
+[ext_resource type="Texture2D" uid="uid://c6t8fe4n3q5j0" path="res://assets/art/icons/exit.svg" id="3_byrto"]
 
 [node name="CreditsMenu" type="Control"]
 layout_mode = 3
