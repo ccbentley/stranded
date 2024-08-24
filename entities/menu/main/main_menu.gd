@@ -14,7 +14,7 @@ class_name MainMenu
 @onready var credits_menu: CreditsMenu = $CreditsMenu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui_soundpack/WAV/Minimalist7.wav")
-const MENU_MUSIC = preload("res://assets/music/Cleyton RX - Underwater.wav")
+const MENU_MUSIC = preload("res://assets/music/Cleyton RX - Underwater.mp3")
 
 
 func _ready() -> void:
