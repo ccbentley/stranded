@@ -1,5 +1,4 @@
 extends Control
-class_name DebugMenu
 
 @onready var info: Label = $MarginContainer/Info
 @onready var spawn: HBoxContainer = $MarginContainer/Spawn

@@ -1,5 +1,4 @@
 extends Control
-class_name CreateWorldMenu
 
 @onready var exit_button: Button = $MarginContainer/VBoxContainer/ExitButton
 @onready var character_name: LineEdit = $MarginContainer/CenterContainer/VBoxContainer/CharacterName

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bquf3ojo5sfi3"]
+
+[ext_resource type="Texture2D" uid="uid://b3t2r8ndigig6" path="res://entities/items/melee/sword/wooden/art/wooden_sword.png" id="1_apypm"]
+
+[node name="WoodenSword" type="Node2D"]
+use_parent_material = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(5, -5)
+texture = ExtResource("1_apypm")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
 [ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
-[ext_resource type="Shader" path="res://common/shaders/wind_sway.gdshader" id="2_evma0"]
+[ext_resource type="Shader" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="2_evma0"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]

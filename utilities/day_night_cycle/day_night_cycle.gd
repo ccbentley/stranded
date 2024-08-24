@@ -1,5 +1,4 @@
 extends CanvasLayer
-class_name DayNightCycle
 
 @onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

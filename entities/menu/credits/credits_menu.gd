@@ -1,5 +1,4 @@
 extends Control
-class_name CreditsMenu
 
 @onready var exit_button: Button = $MarginContainer/VBoxContainer/ExitButton
 

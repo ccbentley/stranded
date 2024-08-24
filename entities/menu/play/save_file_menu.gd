@@ -1,5 +1,4 @@
 extends Control
-class_name SaveFileMenu
 
 @export var slot_number: int
 @export var world_data: WorldData

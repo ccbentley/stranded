@@ -1,5 +1,4 @@
 extends Control
-class_name MainMenu
 
 @onready var play_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/PlayButton
 @onready var options_button: Button = $MarginContainer/HBoxContainer/VBoxContainer/OptionsButton
@@ -8,10 +7,10 @@ class_name MainMenu
 @onready var version_label: Label = $MarginContainer/Label
 
 @onready var margin_container: MarginContainer = $MarginContainer
-@onready var save_selection_menu: SaveSelectionMenu = $SaveSelectionMenu
-@onready var create_world_menu: CreateWorldMenu = $CreateWorldMenu
-@onready var options_menu: OptionsMenu = $OptionsMenu
-@onready var credits_menu: CreditsMenu = $CreditsMenu
+@onready var save_selection_menu: Control = $SaveSelectionMenu
+@onready var create_world_menu: Control = $CreateWorldMenu
+@onready var options_menu: Control = $OptionsMenu
+@onready var credits_menu: Control = $CreditsMenu
 
 const UI_CLICK_SOUND = preload("res://assets/sounds/ui/button_click.wav")
 const MENU_MUSIC = preload("res://assets/music/cleyton_rx_underwater.mp3")

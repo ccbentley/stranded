@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="2_7yiw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvkc"]
-size = Vector2(70, 70)
+size = Vector2(30, 30)
 
 [node name="FloatingObject" type="Node2D"]
 

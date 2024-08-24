@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bcy0q2dkwpmny"]
 
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_bmy77"]
-[ext_resource type="Shader" path="res://common/shaders/wind_sway.gdshader" id="1_ls1ek"]
+[ext_resource type="Shader" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="1_ls1ek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3yfd1"]
 shader = ExtResource("1_ls1ek")

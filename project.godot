@@ -34,6 +34,7 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
+window/size/always_on_top=true
 mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 [filesystem]

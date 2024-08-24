@@ -204,4 +204,4 @@ func use_item(index: int) -> void:
 
 
 func _on_health_component_damaged(_prev_health: float, _health: float) -> void:
-	main.pulse_vignette(Color.RED)
+	main.vignette.pulse_vignette(Color.RED)

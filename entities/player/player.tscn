@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dmtd25nar6kww" path="res://entities/player/art/walk/player_walk_cycle2.png" id="12_j31d8"]
 [ext_resource type="Texture2D" uid="uid://dtjskiad21mrh" path="res://entities/player/art/walk/player_walk_cycle3.png" id="13_35ew1"]
 [ext_resource type="Texture2D" uid="uid://d00uquwx08e05" path="res://entities/player/art/swim/player_swim1.png" id="15_2scut"]
-[ext_resource type="Shader" path="res://common/shaders/sprite_outline.gdshader" id="16_ylx78"]
+[ext_resource type="Shader" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="16_ylx78"]
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="20_11rme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
@@ -140,7 +140,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.523599, 0.0]
+"values": [0.0, -0.698132, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_jnbma"]
@@ -156,7 +156,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.523599, 0.0]
+"values": [0.0, 0.698132, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66n73"]
@@ -192,11 +192,10 @@ script = ExtResource("9_0khh0")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
 
-[node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "footstep_audio_player", "footstep_sound_timer")]
+[node name="PlayerMovingState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "footstep_sound_timer")]
 script = ExtResource("9_02503")
 actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
-footstep_audio_player = NodePath("")
 footstep_sound_timer = NodePath("../../../FootStepSoundTimer")
 
 [node name="PlayerSwimState" type="Node" parent="StateMachines/MovementStateMachine" node_paths=PackedStringArray("actor", "anim", "drown_bar", "water_trail")]

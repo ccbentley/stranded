@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmfumnest4jlg"]
+
+[ext_resource type="Shader" path="res://common/shaders/vignette/vignette.gdshader" id="1_4wjd3"]
+[ext_resource type="Script" path="res://common/shaders/vignette/vignette.gd" id="2_r0sdd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktrdo"]
+shader = ExtResource("1_4wjd3")
+shader_parameter/alpha = 0.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 0.7
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pdnfu"]
+
+[node name="Vignette" type="TextureRect"]
+z_index = -1
+material = SubResource("ShaderMaterial_ktrdo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_pdnfu")
+script = ExtResource("2_r0sdd")

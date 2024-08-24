@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cqfpj7wumfjvp"]
 
 [ext_resource type="Script" path="res://common/item/pickup/pickup.gd" id="1_hgpy1"]
-[ext_resource type="Shader" path="res://common/shaders/sprite_outline.gdshader" id="2_frwrd"]
+[ext_resource type="Shader" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="2_frwrd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rttm"]
 shader = ExtResource("2_frwrd")
