@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=23 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
+[ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
@@ -174,6 +175,11 @@ position = Vector2(600, 4965)
 stream = SubResource("AudioStreamSynchronized_q67av")
 autoplay = true
 bus = &"Sfx"
+
+[node name="Utilities" type="Node" parent="."]
+
+[node name="SaverLoader" type="Node" parent="Utilities"]
+script = ExtResource("21_irevq")
 
 [connection signal="drop_slot_data" from="UI/MarginContainer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_gui_input"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cur8y0262ef01"]
+[gd_scene load_steps=22 format=3 uid="uid://cur8y0262ef01"]
 
 [ext_resource type="Script" path="res://entities/boat/boat.gd" id="1_vmfak"]
 [ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boat/art/boat.png" id="2_ailme"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://entities/boat/states/boat_idle_state.gd" id="6_6d107"]
 [ext_resource type="Script" path="res://entities/boat/states/boat_move_state.gd" id="7_0diah"]
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="10_f17jx"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="11_3cdyk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0iukl"]
 atlas = ExtResource("2_ailme")
@@ -133,5 +134,7 @@ libraries = {
 visible = false
 z_index = -1
 position = Vector2(0, 9)
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("11_3cdyk")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

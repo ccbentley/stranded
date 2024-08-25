@@ -7,6 +7,7 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var vignette: TextureRect = $UI/Vignette
 @onready var entities: Node2D = $Entities
+@onready var saver_loader: Node = $Utilities/SaverLoader
 
 var player_data: PlayerData = PlayerData.new()
 
@@ -22,9 +23,9 @@ func _ready() -> void:
 
 	Global.verify_save_directory(Global.world_save_file_path)
 
-	if not load_game():
+	if not saver_loader.load_game():
 		tile_map.find_spawn_location()
-		save_game()
+		saver_loader.save_game()
 
 
 func load_inventory() -> void:
@@ -50,27 +51,6 @@ func toggle_inventory_interface(external_inventory_owner: Node2D = null) -> void
 
 func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
 	WorldManager.spawn_pickup(slot_data, player.get_drop_position())
-
-
-func save_game() -> void:
-	player_data.inventory_data = player.inventory_data.duplicate()
-	player_data.equip_inventory_data = player.equip_inventory_data.duplicate()
-	player_data.position = player.global_position
-	player_data.health = player.health_component.health
-	ResourceSaver.save(player_data, Global.world_save_file_path + Global.player_save_file_name)
-
-
-func load_game() -> bool:
-	if not ResourceLoader.exists(Global.world_save_file_path + Global.player_save_file_name):
-		return false
-	player_data = (ResourceLoader.load(Global.world_save_file_path + Global.player_save_file_name).duplicate())
-	player.inventory_data = player_data.inventory_data
-	player.equip_inventory_data = player_data.equip_inventory_data
-	load_inventory()
-	teleport_player(player_data.position)
-	player.health_component.set_health(player_data.health)
-	player.health_component.damage(Attack.new())
-	return true
 
 
 func teleport_player(pos: Vector2, smooth_cam: bool = false) -> void:

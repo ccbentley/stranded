@@ -38,7 +38,7 @@ func _on_options_button_button_down() -> void:
 
 func _on_quit_button_button_down() -> void:
 	get_tree().paused = false
-	main.save_game()
+	main.saver_loader.save_game()
 	AudioManager.play_sound(UI_CLICK_SOUND)
 	SceneTransition.change_scene(load("res://entities/menu/main/main_menu.tscn"), "fade")
 

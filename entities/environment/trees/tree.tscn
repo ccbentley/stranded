@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=21 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
 [ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
 [ext_resource type="AudioStream" uid="uid://7umwy5tjdtmc" path="res://entities/environment/trees/sounds/rustle.ogg" id="6_8tw3c"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_kqkgg"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="10_qgqc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
 size = Vector2(19, 6)
@@ -174,3 +175,5 @@ health_component = NodePath("../HealthComponent")
 libraries = {
 "": SubResource("AnimationLibrary_v0qbr")
 }
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("10_qgqc0")]

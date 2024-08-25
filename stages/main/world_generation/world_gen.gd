@@ -74,7 +74,7 @@ func find_spawn_location() -> void:
 	push_error("Could not find a suitable spawn location.")
 
 
-func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
+func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated: bool) -> void:
 	var sand_tiles_arr: PackedVector2Array = []
 	var grass_tiles_arr: PackedVector2Array = []
 	for _x: int in range(32):
@@ -90,9 +90,9 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D) -> void:
 						if not grass_tiles_arr.has(adj_tile):
 							if is_in_chunk(chunk, adj_tile):
 								grass_tiles_arr.append(adj_tile)
-				if decoration_noise_val > 0.7:
+				if decoration_noise_val > 0.7 and not chunk_entites_generated:
 					call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)
-				elif decoration_noise_val > 0.6:
+				elif decoration_noise_val > 0.6 and not chunk_entites_generated:
 					call_deferred("draw_object", ROCK, map_to_local(Vector2i(x, y)), chunk_node)
 				elif decoration_noise_val > 0.5:
 					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
@@ -164,6 +164,36 @@ func is_in_chunk(chunk: Vector2i, tile_pos: Vector2i) -> bool:
 	return tile_pos.x >= chunk.x and tile_pos.x < chunk_end.x and tile_pos.y >= chunk.y and tile_pos.y < chunk_end.y
 
 
+func save_chunk_entities(chunk: Vector2i) -> void:
+	Global.verify_save_directory(Global.world_save_file_path + "chunk_data/")
+	var saved_chunk: SavedChunk = SavedChunk.new()
+	var chunk_node: Node2D = chunks_node.get_node(str(chunk))
+	var saved_data: Array[SavedData] = []
+
+	for child: Node2D in chunk_node.get_children():
+		if child.has_method("on_save_chunk"):
+			child.on_save_chunk(saved_data)
+	saved_chunk.saved_data = saved_data
+	ResourceSaver.save(saved_chunk, Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres")
+
+func chunk_save_exisits(chunk: Vector2i) -> bool:
+	if not ResourceLoader.exists(Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres"):
+		return false
+	else:
+		return true
+
+func load_chunk_entities(chunk: Vector2i) -> bool:
+	var saved_chunk: SavedChunk = ResourceLoader.load(Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres")
+	var chunk_node: Node2D = get_chunk_node(chunk)
+	for entity in saved_chunk.saved_data:
+		var scene: PackedScene = load(entity.scene_path) as PackedScene
+		var loaded_node: Node2D = scene.instantiate()
+		if loaded_node.has_method("on_load_chunk"):
+			loaded_node.on_load_chunk(entity)
+		chunk_node.add_child(loaded_node)
+	return true
+
+
 func clear_chunk(chunk: Vector2i) -> void:
 	for _x: int in range(32):
 		for _y: int in range(32):
@@ -173,6 +203,7 @@ func clear_chunk(chunk: Vector2i) -> void:
 			ground_2_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
 			cliff_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
 			environment_layer.set_cell(Vector2i(x, y), -1, Vector2i(-1, -1))
+	save_chunk_entities(chunk)
 	chunks_node.get_node(str(chunk)).queue_free()
 
 
@@ -199,8 +230,15 @@ func try_to_generate_chunk(chunk: Vector2i) -> void:
 	if loaded_chunks.has(chunk):
 		return
 	loaded_chunks.append(chunk)
-	var chunk_node: Node2D = get_chunk_node(chunk)
-	var task: TaskManager.Task = TaskManager.create_task(generate_chunk.bind(chunk, chunk_node))
+	var chunk_entites_generated: bool = false
+	var chunk_node: Node2D
+	if chunk_save_exisits(chunk):
+		chunk_entites_generated = true
+		load_chunk_entities(chunk)
+		chunk_node = chunks_node.get_node(str(chunk))
+	else:
+		chunk_node = get_chunk_node(chunk)
+	var task: TaskManager.Task = TaskManager.create_task(generate_chunk.bind(chunk, chunk_node, chunk_entites_generated))
 	await task.completed
 	task.is_completed()
 	unload_distant_chunks()

@@ -4,6 +4,7 @@ var vignette_displayed: bool = false
 var vignette_displayed_color: Color
 var vignette_pulsing: bool = false
 
+
 func display_vignette(color: Color) -> void:
 	material.set_shader_parameter("color", color)
 	var vignette_tween: Tween

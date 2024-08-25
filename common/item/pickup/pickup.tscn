@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqfpj7wumfjvp"]
+[gd_scene load_steps=11 format=3 uid="uid://cqfpj7wumfjvp"]
 
 [ext_resource type="Script" path="res://common/item/pickup/pickup.gd" id="1_hgpy1"]
 [ext_resource type="Shader" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="2_frwrd"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="3_cd6uq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rttm"]
 shader = ExtResource("2_frwrd")
@@ -100,5 +101,7 @@ shape = SubResource("CircleShape2D_nu3ip")
 libraries = {
 "": SubResource("AnimationLibrary_wtx4s")
 }
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("3_cd6uq")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
