@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="5_q6e4e"]
 [ext_resource type="Script" path="res://entities/player/states/player_sit_state.gd" id="6_fg33t"]
 [ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://common/components/attack/attack_component.tscn" id="6_in0ea"]
-[ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/silhouette_sprite/silhouette_sprite.tscn" id="7_phdj8"]
+[ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="7_phdj8"]
 [ext_resource type="Texture2D" uid="uid://0mc6ux1v7fv6" path="res://entities/player/art/walk/player_walk_cycle.png" id="8_7dubk"]
 [ext_resource type="Script" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
 [ext_resource type="Script" path="res://entities/player/states/player_move_state.gd" id="9_02503"]
