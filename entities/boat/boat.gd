@@ -80,6 +80,7 @@ func _on_health_component_died() -> void:
 	player.msm.change_state(player.player_idle_state)
 	player.z_index = 0
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if $HealthComponent.health <= 0:
 		return

@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if $HealthComponent.health <= 0:
 		return

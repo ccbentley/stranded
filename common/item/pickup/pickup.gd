@@ -19,6 +19,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		AudioManager.play_sound(load("res://assets/sounds/pop.ogg"), 0, true)
 		queue_free()
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	var entity_data: SavedPickupData = SavedPickupData.new()
 	entity_data.position = global_position
@@ -26,6 +27,7 @@ func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	entity_data.slot_data = slot_data
 
 	saved_data.append(entity_data)
+
 
 func on_load_chunk(saved_data: SavedData) -> void:
 	var entity_data: SavedPickupData = saved_data as SavedPickupData

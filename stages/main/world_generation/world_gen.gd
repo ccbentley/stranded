@@ -165,7 +165,7 @@ func is_in_chunk(chunk: Vector2i, tile_pos: Vector2i) -> bool:
 
 
 func save_chunk_entities(chunk: Vector2i) -> void:
-	Global.verify_save_directory(Global.world_save_file_path + "chunk_data/")
+	Global.verify_save_directory(Global.world_save_file_path + Global.chunk_data_save_file_path)
 	var saved_chunk: SavedChunk = SavedChunk.new()
 	var chunk_node: Node2D = chunks_node.get_node(str(chunk))
 	var saved_data: Array[SavedData] = []
@@ -174,16 +174,18 @@ func save_chunk_entities(chunk: Vector2i) -> void:
 		if child.has_method("on_save_chunk"):
 			child.on_save_chunk(saved_data)
 	saved_chunk.saved_data = saved_data
-	ResourceSaver.save(saved_chunk, Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres")
+	ResourceSaver.save(saved_chunk, Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res")
+
 
 func chunk_save_exisits(chunk: Vector2i) -> bool:
-	if not ResourceLoader.exists(Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres"):
+	if not ResourceLoader.exists(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res"):
 		return false
 	else:
 		return true
 
+
 func load_chunk_entities(chunk: Vector2i) -> bool:
-	var saved_chunk: SavedChunk = ResourceLoader.load(Global.world_save_file_path + "chunk_data/" + str(chunk) + ".tres")
+	var saved_chunk: SavedChunk = ResourceLoader.load(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res")
 	var chunk_node: Node2D = get_chunk_node(chunk)
 	for entity in saved_chunk.saved_data:
 		var scene: PackedScene = load(entity.scene_path) as PackedScene

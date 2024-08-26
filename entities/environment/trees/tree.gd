@@ -25,6 +25,7 @@ func _ready() -> void:
 	else:
 		sprite_2d.texture = load(orange_tree_textures.pick_random())
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if $HealthComponent.health <= 0:
 		return

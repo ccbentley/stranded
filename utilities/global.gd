@@ -1,10 +1,11 @@
 extends Node
 
 const save_file_path: String = "user://save/"
-const player_save_file_name: String = "player_save.tres"
-const settings_save_file_name: String = "settings_data.tres"
-const world_save_file_name: String = "world_data.tres"
+const player_save_file_name: String = "player_save.res"
+const settings_save_file_name: String = "settings_data.res"
+const world_save_file_name: String = "world_data.res"
 var world_save_file_path: String
+const chunk_data_save_file_path: String = "chunk_data/"
 
 
 func verify_save_directory(path: String) -> void:

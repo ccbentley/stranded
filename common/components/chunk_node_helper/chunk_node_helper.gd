@@ -10,5 +10,6 @@ var chunk_position: Vector2i:
 			chunk_position = value
 			actor.reparent(tile_map.chunks_node.get_node(str(chunk_position)))
 
+
 func _process(_delta: float) -> void:
 	chunk_position = tile_map.local_to_map(global_position) / 32

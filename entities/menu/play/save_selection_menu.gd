@@ -75,18 +75,10 @@ func check_for_saves() -> void:
 	for child: Control in save_file_arr:
 		child.world_data = null
 		child.slot_info.text = "<Empty>"
-	var dir := DirAccess.open(Global.save_file_path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name: String = dir.get_next()
-		while file_name != "":
-			if file_name != "." and file_name != ".." and dir.current_is_dir():
-				if int(file_name) >= 1 and int(file_name) <= save_file_arr.size():
-					set_save(int(file_name))
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	else:
-		push_error("Failed to open directory: ", Global.save_file_path)
+	var dir: DirAccess = DirAccess.open(Global.save_file_path)
+	for directory in dir.get_directories():
+		if int(directory) >= 1 and int(directory) <= save_file_arr.size():
+			set_save(int(directory))
 
 
 func set_save(save_slot: int) -> void:

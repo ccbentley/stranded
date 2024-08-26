@@ -34,13 +34,18 @@ func on_button_pressed() -> void:
 			get_parent().owner.create_save(slot_number)
 	elif save_selection_menu.mode == save_selection_menu.DELETE:
 		if world_data:
-			delete_save()
+			delete_save(Global.save_file_path + str(world_data.save_slot))
 		save_selection_menu.mode = save_selection_menu.PLAY
 
 
-func delete_save() -> void:
-	var world_save_file_path: String = Global.save_file_path + str(world_data.save_slot)
-	DirAccess.remove_absolute(world_save_file_path + "/" + Global.world_save_file_name)
-	DirAccess.remove_absolute(world_save_file_path + "/" + Global.player_save_file_name)
-	DirAccess.remove_absolute(world_save_file_path)
+func delete_save(path: String) -> void:
+	var save_dir: DirAccess = DirAccess.open(path)
+	for directory in save_dir.get_directories():
+		var directory_dir: DirAccess = DirAccess.open(path + "/" + directory)
+		for file in directory_dir.get_files():
+			directory_dir.remove(file)
+		directory_dir.remove(path + "/" + directory)
+	for file in save_dir.get_files():
+		save_dir.remove(file)
+	save_dir.remove(path)
 	save_selection_menu.check_for_saves()
