@@ -56,7 +56,10 @@ func damage(attack: Attack) -> void:
 			for drop: LootData in slot_datas:
 				var roll: float = randf()
 				if roll < drop.drop_chance:
-					WorldManager.spawn_pickup(drop, global_position)
+					var slot_data: SlotData = SlotData.new()
+					slot_data.item_data = drop.item_data
+					slot_data.quantity = drop.quantity
+					WorldManager.spawn_pickup(slot_data, global_position)
 		if anim and anim.has_animation("death"):
 			anim.play("death")
 			await anim.animation_finished
