@@ -34,6 +34,9 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 [filesystem]
