@@ -40,7 +40,7 @@ equip_inventory_data = ExtResource("4_jkkiy")
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(6, 6)
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 

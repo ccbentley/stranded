@@ -52,7 +52,7 @@ func update_info() -> void:
 	info.text += "\n Save Slot: " + str(Global.world_data.save_slot)
 	info.text += "\n World Seed: " + str(Global.world_data.world_seed)
 	info.text += "\n Day Count: " + str(main.day_night_cycle.day_counter)
-	info.text += "\n Time: " + str(int(main.day_night_cycle.minute_passed / 60) % 12)  + " : " + str(int(main.day_night_cycle.minute_passed) % 60)
+	info.text += "\n Time: " + str(int(main.day_night_cycle.minute_passed / 60) % 12) + " : " + str(int(main.day_night_cycle.minute_passed) % 60)
 
 
 func clear_spawn_list() -> void:

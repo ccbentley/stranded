@@ -7,6 +7,7 @@
 script = ExtResource("1_d8cye")
 placeable_object_path = "res://entities/items/placeable/campfire/object/campfire.tscn"
 max_placeable_distance = 50.0
+placeable_tile_types = 6
 useable = true
 name = "Campfire"
 description = "Provices warmth and light"

@@ -10,6 +10,7 @@ func _ready() -> void:
 	animation_player.play("spawn")
 	animated_sprite_2d.play("default")
 
+
 func _on_hurt_timer_timeout() -> void:
 	for area in area_2d.get_overlapping_areas():
 		if area is HitboxComponent and area.owner != self:

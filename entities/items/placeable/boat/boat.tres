@@ -11,6 +11,7 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("1_xhkrv")
 placeable_object_path = "res://entities/items/placeable/boat/object/boat.tscn"
 max_placeable_distance = 50.0
+placeable_tile_types = 7
 useable = true
 name = "Boat"
 description = "Vroom"

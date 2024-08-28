@@ -170,6 +170,17 @@ func place_object(object: PackedScene, pos: Vector2) -> void:
 	owner.add_child(obj)
 
 
+func get_tile_data(pos: Vector2i) -> int:
+	var grass_tile_data: TileData = tile_map.ground_2_layer.get_cell_tile_data(pos)
+	var sand_tile_data: TileData = tile_map.ground_1_layer.get_cell_tile_data(pos)
+	if grass_tile_data:
+		return PlayerTile.GRASS
+	elif sand_tile_data:
+		return PlayerTile.SAND
+	else:
+		return PlayerTile.WATER
+
+
 func set_speed(speed: int) -> void:
 	max_speed = speed
 
