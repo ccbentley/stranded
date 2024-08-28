@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc8rpjf64504b"
-path="res://.godot/imported/boat.png-63d1e324b82058037d8e5ecd65f9c4ea.ctex"
+uid="uid://bit4fvdg640j1"
+path="res://.godot/imported/campfire_1.png-d14792c14a0cfb438feae2a76fb495bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/boat/art/boat.png"
-dest_files=["res://.godot/imported/boat.png-63d1e324b82058037d8e5ecd65f9c4ea.ctex"]
+source_file="res://entities/items/placeable/campfire/object/art/campfire_1.png"
+dest_files=["res://.godot/imported/campfire_1.png-d14792c14a0cfb438feae2a76fb495bc.ctex"]
 
 [params]
 

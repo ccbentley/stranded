@@ -1,45 +1,25 @@
-extends CanvasLayer
+extends Node2D
 
-@onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var color_rect: ColorRect = $MarginContainer/ColorRect
 
-enum { DAY, NIGHT }
-var state: int = DAY
+var day_counter: int = 0:
+	set(value):
+		day_counter = value
 
-var length_of_day: float = 120  # Seconds
-var length_of_night: float = 120  # Seconds
+var current_time: float
+var total_time: float
+var minute_passed: float
 
+func _physics_process(_delta: float) -> void:
+	current_time = animation_player.current_animation_position
+	total_time = animation_player.current_animation_length
 
-func _ready() -> void:
-	match state:
-		DAY:
-			timer.wait_time = length_of_day
-			color_rect.color.a = 0
-		NIGHT:
-			timer.wait_time = length_of_night
-			color_rect.color.a = 150
-	timer.start()
+	minute_passed = (current_time / total_time) * (24 * 60)
 
+func next_day() -> void:
+	day_counter += 1
 
-func _on_timer_timeout() -> void:
-	match state:
-		DAY:
-			change_to_night()
-			state = NIGHT
-		NIGHT:
-			change_to_day()
-			state = DAY
-			Global.world_data.day_count += 1
-
-
-func change_to_night() -> void:
-	animation_player.play("day_to_night")
-	timer.wait_time = length_of_night
-	timer.start()
-
-
-func change_to_day() -> void:
-	animation_player.play("night_to_day")
-	timer.wait_time = length_of_day
-	timer.start()
+func set_current_time(new_time: float) -> void:
+	animation_player.advance(new_time / animation_player.speed_scale)
+	if new_time >= total_time / 2:
+		day_counter -= 1

@@ -8,6 +8,7 @@ extends Node2D
 @onready var vignette: TextureRect = $UI/Vignette
 @onready var entities: Node2D = $Entities
 @onready var saver_loader: Node = $Utilities/SaverLoader
+@onready var day_night_cycle: Node2D = $DayNightCycle
 
 var player_data: PlayerData = PlayerData.new()
 

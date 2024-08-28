@@ -1,14 +1,14 @@
 [gd_scene load_steps=22 format=3 uid="uid://cur8y0262ef01"]
 
-[ext_resource type="Script" path="res://entities/boat/boat.gd" id="1_vmfak"]
-[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boat/art/boat.png" id="2_ailme"]
+[ext_resource type="Script" path="res://entities/items/placeable/boat/object/boat.gd" id="1_vmfak"]
+[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/items/placeable/boat/object/art/boat.png" id="2_ailme"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_07rrq"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_8tpil"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="4_gsol3"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="5_tj0i0"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="5_txje3"]
-[ext_resource type="Script" path="res://entities/boat/states/boat_idle_state.gd" id="6_6d107"]
-[ext_resource type="Script" path="res://entities/boat/states/boat_move_state.gd" id="7_0diah"]
+[ext_resource type="Script" path="res://entities/items/placeable/boat/object/states/boat_idle_state.gd" id="6_6d107"]
+[ext_resource type="Script" path="res://entities/items/placeable/boat/object/states/boat_move_state.gd" id="7_0diah"]
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="10_f17jx"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="11_3cdyk"]
 

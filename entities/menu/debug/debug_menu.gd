@@ -4,6 +4,9 @@ extends Control
 @onready var spawn: HBoxContainer = $MarginContainer/Spawn
 @onready var spawn_list: VBoxContainer = $MarginContainer/Spawn/SpawnList
 
+@onready var player: Player = PlayerManager.player
+@onready var main: Node2D = player.main
+
 var item_list: PackedStringArray = [
 	"res://entities/items/consumable/health_potion/health_potion.tres",
 	"res://entities/items/equip/iron_helmet/iron_helm.tres",
@@ -14,6 +17,7 @@ var item_list: PackedStringArray = [
 	"res://entities/items/placeable/boat/boat.tres",
 	"res://entities/items/ranged/bow/bow.tres",
 	"res://entities/items/fishing_rod/fishing_rod.tres",
+	"res://entities/items/placeable/campfire/campfire.tres",
 ]
 
 var object_list: PackedStringArray = [
@@ -38,7 +42,6 @@ func _process(_delta: float) -> void:
 
 
 func update_info() -> void:
-	var player: Player = PlayerManager.player
 	info.text = ""
 	info.text += " Player Info: "
 	info.text += "\n Player Pos: " + str(player.global_position)
@@ -48,7 +51,8 @@ func update_info() -> void:
 	info.text += "\n \n World Info: "
 	info.text += "\n Save Slot: " + str(Global.world_data.save_slot)
 	info.text += "\n World Seed: " + str(Global.world_data.world_seed)
-	info.text += "\n Day Count: " + str(Global.world_data.day_count)
+	info.text += "\n Day Count: " + str(main.day_night_cycle.day_counter)
+	info.text += "\n Time: " + str(int(main.day_night_cycle.minute_passed / 60) % 12)  + " : " + str(int(main.day_night_cycle.minute_passed) % 60)
 
 
 func clear_spawn_list() -> void:

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataPlaceable" load_steps=4 format=3 uid="uid://5vewugr6evja"]
 
 [ext_resource type="Script" path="res://entities/items/placeable/item_data_placeable.gd" id="1_xhkrv"]
-[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/boat/art/boat.png" id="2_1o5c1"]
+[ext_resource type="Texture2D" uid="uid://dc8rpjf64504b" path="res://entities/items/placeable/boat/object/art/boat.png" id="2_1o5c1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k60ky"]
 atlas = ExtResource("2_1o5c1")
@@ -9,7 +9,7 @@ region = Rect2(0, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_xhkrv")
-placeable_object_path = "res://entities/boat/boat.tscn"
+placeable_object_path = "res://entities/items/placeable/boat/object/boat.tscn"
 max_placeable_distance = 50.0
 useable = true
 name = "Boat"
