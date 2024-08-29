@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=22 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
 [ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
 [ext_resource type="AudioStream" uid="uid://7umwy5tjdtmc" path="res://entities/environment/trees/sounds/rustle.ogg" id="6_8tw3c"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_kqkgg"]
+[ext_resource type="AudioStream" uid="uid://857x3e7prira" path="res://entities/environment/trees/sounds/impact_1.ogg" id="7_nmeq5"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="10_qgqc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wl3"]
@@ -156,7 +157,7 @@ offset = Vector2(0, -15)
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_pl3hv")]
 anim = NodePath("../AnimationPlayer")
 drop_data = Array[ExtResource("4_kpk1k")]([SubResource("Resource_6p6ry"), SubResource("Resource_dhdlh"), SubResource("Resource_bu2b3")])
-hit_sfx = ExtResource("6_8tw3c")
+hit_sfx = ExtResource("7_nmeq5")
 death_sfx = ExtResource("6_8tw3c")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_2jwj5")]
