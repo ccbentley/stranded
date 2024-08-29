@@ -15,12 +15,17 @@ var selected_slot: int = 0:
 			elif selected_slot < 0:
 				selected_slot = slots.size() - 1
 			selected.position = Vector2(68 * selected_slot, 0) + Vector2(40, 40)
+			cached_slot_data = _slot_datas[selected_slot]
+
+var cached_slot_data: SlotData = null:
+	set(value):
+		if not value or cached_slot_data != value:
+			cached_slot_data = value
+			player.hold_item(null)
 			if _slot_datas[selected_slot]:
 				player.hold_item(_slot_datas[selected_slot].item_data.scene)
-			else:
-				player.hold_item(null)
 
-var _slot_datas: Array[SlotData]
+var _slot_datas: Array[SlotData] = []
 
 @export var player: CharacterBody2D
 
@@ -72,3 +77,5 @@ func populate_hot_bar(inventory_data: InventoryData) -> void:
 			slot.set_slot_data(slot_data)
 
 	_slot_datas = inventory_data.slot_datas.slice(0, 6)
+
+	cached_slot_data = _slot_datas[selected_slot]
