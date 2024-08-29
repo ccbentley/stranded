@@ -158,7 +158,16 @@ func melee_attack(attack: Attack) -> void:
 	else:
 		on_hand_animation_player.play("melee_attack_left")
 	AudioManager.play_sound(load("res://assets/sounds/woosh.wav"), 0, true)
-
+	max_speed = 0
+	if msm.state == player_moving_state:
+		movement_animation_player.play("idle")
+	await get_tree().create_timer(0.4).timeout
+	if msm.state == player_moving_state:
+		movement_animation_player.play("move")
+	if msm.state == player_swim_state:
+		max_speed = SWIM_SPEED
+	else:
+		max_speed = MAX_SPEED
 
 func ranged_attack(attack: Attack) -> void:
 	attack_cooldown_timer.start(attack.attack_cooldown)
