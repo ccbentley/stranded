@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataPlaceable" load_steps=3 format=3 uid="uid://cgy1oy28id7ge"]
 
 [ext_resource type="Script" path="res://entities/items/placeable/item_data_placeable.gd" id="1_d8cye"]
-[ext_resource type="Texture2D" uid="uid://7ta515dnr072" path="res://entities/items/placeable/campfire/art/campfire.png" id="2_5eu2q"]
+[ext_resource type="Texture2D" uid="uid://bamkxifb0612c" path="res://entities/items/placeable/campfire/art/fire1.png" id="2_yiwdl"]
 
 [resource]
 script = ExtResource("1_d8cye")
@@ -12,4 +12,4 @@ useable = true
 name = "Campfire"
 description = "Provices warmth and light"
 stackable = false
-texture = ExtResource("2_5eu2q")
+texture = ExtResource("2_yiwdl")
