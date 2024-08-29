@@ -11,16 +11,23 @@ const recipes: Dictionary = {
 	"Boat": {
 		"output": "res://entities/items/placeable/boat/boat.tres",
 		"materials": {
-			"Wood": 5
+			"Wood": 5,
 		}
 	},
 	"Fishing Rod": {
 		"output": "res://entities/items/fishing_rod/fishing_rod.tres",
 		"materials": {
 			"Stick": 2,
-			"Wood": 2
+			"Wood": 2,
 		}
 	},
+	"Wooden Pickaxe": {
+		"output": "res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tres",
+		"materials": {
+			"Wood": 3,
+			"Stick": 1,
+		}
+	}
 }
 
 @export var player: Player

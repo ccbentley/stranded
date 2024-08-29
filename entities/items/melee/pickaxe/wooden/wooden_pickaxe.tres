@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDataMeleeWeapon" load_steps=4 format=3 uid="uid://drh8lx722macr"]
+
+[ext_resource type="PackedScene" uid="uid://cxg8yp0u12n02" path="res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tscn" id="1_fh0b8"]
+[ext_resource type="Script" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_wkedh"]
+[ext_resource type="Texture2D" uid="uid://cayuyk7fwsmg7" path="res://entities/items/melee/pickaxe/wooden/art/wooden_pickaxe.png" id="3_qgdho"]
+
+[resource]
+script = ExtResource("1_wkedh")
+attack_damage = 3.0
+attack_knockback = 0.0
+attack_cooldown = 0.5
+attack_range = 10.0
+attack_stun_time = 0.0
+material_type = 4
+scene = ExtResource("1_fh0b8")
+useable = true
+name = "Wooden Pickaxe"
+description = "Mine"
+stackable = false
+texture = ExtResource("3_qgdho")

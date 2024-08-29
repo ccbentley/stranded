@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://c86ycwq5bfkuc"]
+[gd_scene load_steps=20 format=3 uid="uid://c86ycwq5bfkuc"]
 
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_1oaxa"]
 [ext_resource type="Script" path="res://entities/environment/rocks/rock.gd" id="1_yr6ch"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="2_77g8f"]
-[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_np36s"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_eb6y3"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_m1pa8"]
+[ext_resource type="Resource" uid="uid://bs5nfhubmellu" path="res://entities/items/materials/stone/stone.tres" id="5_t66ti"]
+[ext_resource type="AudioStream" uid="uid://c7fosy7760s7l" path="res://entities/environment/rocks/sounds/impact_4.ogg" id="6_n6611"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_obvgd"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="7_x4j51"]
 
@@ -19,8 +20,20 @@ region = Rect2(288, 145, 16, 16)
 [sub_resource type="Resource" id="Resource_ksb6a"]
 script = ExtResource("4_eb6y3")
 drop_chance = 1.0
-item_data = ExtResource("3_np36s")
-quantity = 8
+item_data = ExtResource("5_t66ti")
+quantity = 2
+
+[sub_resource type="Resource" id="Resource_h3yiv"]
+script = ExtResource("4_eb6y3")
+drop_chance = 0.5
+item_data = ExtResource("5_t66ti")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_6ivwd"]
+script = ExtResource("4_eb6y3")
+drop_chance = 0.5
+item_data = ExtResource("5_t66ti")
+quantity = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caeht"]
 size = Vector2(15, 13)
@@ -107,7 +120,8 @@ offset = Vector2(-0.666666, -1.33333)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("2_77g8f")]
 anim = NodePath("../AnimationPlayer")
-drop_data = Array[ExtResource("4_eb6y3")]([SubResource("Resource_ksb6a")])
+drop_data = Array[ExtResource("4_eb6y3")]([SubResource("Resource_ksb6a"), SubResource("Resource_h3yiv"), SubResource("Resource_6ivwd")])
+hit_sfx = ExtResource("6_n6611")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_m1pa8")]
 health_component = NodePath("../HealthComponent")
