@@ -2,18 +2,17 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var day_counter: int = 0:
-	set(value):
-		day_counter = value
+var day_counter: int = 0
 
 var current_time: float
 var total_time: float
 var minute_passed: float
 
+func _ready() -> void:
+	total_time = animation_player.current_animation_length
 
 func _physics_process(_delta: float) -> void:
 	current_time = animation_player.current_animation_position
-	total_time = animation_player.current_animation_length
 
 	minute_passed = (current_time / total_time) * (24 * 60)
 

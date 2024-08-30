@@ -6,3 +6,5 @@ class_name WorldData
 @export var world_seed: int
 @export var day_count: int
 @export var current_time: float
+@export var weather: int
+@export var weather_timer: float

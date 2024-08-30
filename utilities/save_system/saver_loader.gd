@@ -15,6 +15,8 @@ func save_game() -> void:
 
 	Global.world_data.day_count = main.day_night_cycle.day_counter
 	Global.world_data.current_time = main.day_night_cycle.current_time
+	Global.world_data.weather = main.weather_manager.state
+	Global.world_data.weather_timer = main.weather_manager.timer.time_left
 	ResourceSaver.save(Global.world_data, Global.world_save_file_path + Global.world_save_file_name)
 
 	for loaded_chunk: Vector2i in main.tile_map.loaded_chunks:
@@ -35,5 +37,7 @@ func load_game() -> bool:
 
 	main.day_night_cycle.day_counter = Global.world_data.day_count
 	main.day_night_cycle.set_current_time(Global.world_data.current_time)
+	main.weather_manager.state = Global.world_data.weather
+	main.weather_manager.set_timer(Global.world_data.weather_timer)
 
 	return true
