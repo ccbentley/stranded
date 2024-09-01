@@ -1,45 +1,61 @@
 class_name Player
 extends CharacterBody2D
 
-@export var tile_map: Node2D
+@onready var player_sprite: Sprite2D = $CharacterSprite
+
 @onready var main: Node2D = $".."
+@export var tile_map: Node2D
 
 @onready var on_hand_animation_player: AnimationPlayer = $OnHandAnimationPlayer
 @onready var movement_animation_player: AnimationPlayer = $MovementAnimationPlayer
 
-#Custom Components
+# Custom Components
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var attack_component: AttackComponent = $AttackComponent
 
+# Inventory
 @export var inventory_data: InventoryData
 @export var equip_inventory_data: InventoryDataEquip
+signal toggle_inventory
 
-#State Machines
-@onready var msm: FiniteStateMachine = $StateMachines/MovementStateMachine as FiniteStateMachine
+# State Machine
+@onready var player_state: FiniteStateMachine = $StateMachines/MovementStateMachine as FiniteStateMachine
 
-#Movement States
+# States
 @onready var player_idle_state: PlayerIdleState = $StateMachines/MovementStateMachine/PlayerIdleState as PlayerIdleState
 @onready var player_moving_state: PlayerMovingState = $StateMachines/MovementStateMachine/PlayerMovingState as PlayerMovingState
 @onready var player_swim_state: PlayerSwimState = $StateMachines/MovementStateMachine/PlayerSwimState as PlayerSwimState
 @onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
+# On hand
 @onready var on_hand: Sprite2D = $OnHand
 var held_item: Node2D = null
-@onready var player_sprite: Sprite2D = $CharacterSprite
 
 #Timers
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
 
-#Player stats
-const MAX_SPEED: int = 90
-const SWIM_SPEED: int = 50
-var max_speed: int = MAX_SPEED
+# Movement
+var input: Vector2 = Vector2.ZERO
+
+var can_move: bool = true
+
 const accel: int = 1500
 const friction: int = 1000
 
-var input: Vector2 = Vector2.ZERO
+const MOVE_SPEED: int = 90
+const SWIM_SPEED: int = 50
 
+var move_speed: int:
+	get:
+		if can_move:
+			if player_state.state == player_swim_state:
+				return SWIM_SPEED
+			else:
+				return MOVE_SPEED
+		return 0
+
+# Tiles
 var player_tile_pos: Vector2i
 
 enum PlayerTile {
@@ -49,10 +65,6 @@ enum PlayerTile {
 }
 
 var player_tile_type: int = PlayerTile.GRASS
-
-signal toggle_inventory
-
-var turn_tween: Tween
 
 
 func _physics_process(_delta: float) -> void:
@@ -69,13 +81,13 @@ var is_facing_right: bool = true:
 	set(value):
 		if value and is_facing_right != value:
 			# Turn right
-			turn_tween = get_tree().create_tween()
+			var turn_tween: Tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.scale.x = abs(on_hand.scale.x)
 			on_hand.position.x = abs(on_hand.position.x)
 		elif not value and is_facing_right != value:
 			# Turn left
-			turn_tween = get_tree().create_tween()
+			var turn_tween: Tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			on_hand.scale.x = -abs(on_hand.scale.x)
 			on_hand.position.x = -abs(on_hand.position.x)
@@ -108,11 +120,11 @@ func _input(_event: InputEvent) -> void:
 
 func _ready() -> void:
 	PlayerManager.player = self
-	player_idle_state.player_moved.connect(msm.change_state.bind(player_moving_state))
-	player_moving_state.player_stopped_moving.connect(msm.change_state.bind(player_idle_state))
-	player_moving_state.player_entered_water.connect(msm.change_state.bind(player_swim_state))
-	player_swim_state.player_exited_water.connect(msm.change_state.bind(player_moving_state))
-	player_sit_state.player_exited.connect(msm.change_state.bind(player_moving_state))
+	player_idle_state.player_moved.connect(player_state.change_state.bind(player_moving_state))
+	player_moving_state.player_stopped_moving.connect(player_state.change_state.bind(player_idle_state))
+	player_moving_state.player_entered_water.connect(player_state.change_state.bind(player_swim_state))
+	player_swim_state.player_exited_water.connect(player_state.change_state.bind(player_moving_state))
+	player_sit_state.player_exited.connect(player_state.change_state.bind(player_moving_state))
 
 
 #Returns move input as a Vector2
@@ -123,7 +135,7 @@ func get_input() -> Vector2:
 
 
 func interact() -> void:
-	if not msm.state == player_sit_state:
+	if not player_state.state == player_sit_state:
 		for area in hitbox_component.get_overlapping_areas():
 			if area.is_in_group("interactable"):
 				area.owner.player_interact(self)
@@ -158,16 +170,14 @@ func melee_attack(attack: Attack) -> void:
 	else:
 		on_hand_animation_player.play("melee_attack_left")
 	AudioManager.play_sound(load("res://assets/sounds/woosh.wav"), 0, true)
-	max_speed = 0
-	if msm.state == player_moving_state:
+	can_move = false
+	if player_state.state == player_moving_state:
 		movement_animation_player.play("idle")
 	await get_tree().create_timer(0.4).timeout
-	if msm.state == player_moving_state:
+	if player_state.state == player_moving_state:
 		movement_animation_player.play("move")
-	if msm.state == player_swim_state:
-		max_speed = SWIM_SPEED
-	else:
-		max_speed = MAX_SPEED
+	can_move = true
+
 
 func ranged_attack(attack: Attack) -> void:
 	attack_cooldown_timer.start(attack.attack_cooldown)
@@ -188,10 +198,6 @@ func get_tile_data(pos: Vector2i) -> int:
 		return PlayerTile.SAND
 	else:
 		return PlayerTile.WATER
-
-
-func set_speed(speed: int) -> void:
-	max_speed = speed
 
 
 func hold_item(item_scene: PackedScene) -> void:

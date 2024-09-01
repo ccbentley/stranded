@@ -8,8 +8,10 @@ var current_time: float
 var total_time: float
 var minute_passed: float
 
+
 func _ready() -> void:
 	total_time = animation_player.current_animation_length
+
 
 func _physics_process(_delta: float) -> void:
 	current_time = animation_player.current_animation_position

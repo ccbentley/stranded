@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-enum State {CLEAR, RAIN, STORM}
+enum State { CLEAR, RAIN, STORM }
 
 var state: int = State.CLEAR:
 	set(value):
@@ -17,7 +17,7 @@ var state: int = State.CLEAR:
 				rain.visible = false
 				audio_stream_player.stop()
 			elif state == State.RAIN:
-				rain.material.set_shader_parameter("rain_color", Color(105,255,235,0))
+				rain.material.set_shader_parameter("rain_color", Color(105, 255, 235, 0))
 				rain.visible = true
 				animation_player.play("rain")
 				audio_stream_player.play()
@@ -26,15 +26,18 @@ var state: int = State.CLEAR:
 				animation_player.play("rain")
 				audio_stream_player.play()
 
+
 func _ready() -> void:
 	set_timer()
+
 
 func set_timer(time: float = randi_range(60, 120)) -> void:
 	timer.wait_time = time
 	timer.start()
 
+
 func _on_timer_timeout() -> void:
-	var rand: int = randi_range(1,6)
+	var rand: int = randi_range(1, 6)
 	if rand == 1:
 		state = State.RAIN
 	elif rand == 2:

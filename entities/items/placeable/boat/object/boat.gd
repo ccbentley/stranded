@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func player_interact(_player: Player) -> void:
-	player.msm.change_state(player.player_sit_state)
+	player.player_state.change_state(player.player_sit_state)
 	state_machine.change_state(boat_move_state)
 	player.is_facing_right = true
 	player.z_index = 1
@@ -77,7 +77,7 @@ func is_on_grass() -> bool:
 
 
 func _on_health_component_died() -> void:
-	player.msm.change_state(player.player_idle_state)
+	player.player_state.change_state(player.player_idle_state)
 	player.z_index = 0
 
 

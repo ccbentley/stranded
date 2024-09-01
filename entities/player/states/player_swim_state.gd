@@ -20,7 +20,6 @@ func _ready() -> void:
 func _enter_state() -> void:
 	set_physics_process(true)
 	anim.play("swim")
-	actor.set_speed(actor.SWIM_SPEED)
 	drown_bar.visible = true
 	drown_bar.value = 100
 	drown_bar_timer.start()
@@ -30,7 +29,6 @@ func _enter_state() -> void:
 
 func _exit_state() -> void:
 	set_physics_process(false)
-	actor.set_speed(actor.MAX_SPEED)
 	drown_bar.visible = false
 	drown_bar_timer.stop()
 	player_hurt_timer.stop()
@@ -52,7 +50,7 @@ func _physics_process(delta: float) -> void:
 				actor.velocity -= friction_force
 	else:
 		actor.velocity += (input * actor.accel * delta)
-		actor.velocity = actor.velocity.limit_length(actor.max_speed)
+		actor.velocity = actor.velocity.limit_length(actor.move_speed)
 	actor.move_and_slide()
 	#Changes player facing direction
 	if input.x < 0:
