@@ -255,6 +255,17 @@ func dist(p1: Vector2i, p2: Vector2i) -> Vector2i:
 	return distance
 
 
+func get_tile_type(pos: Vector2i) -> int:
+	pos = local_to_map(pos)
+	var grass_tile_data: TileData = ground_2_layer.get_cell_tile_data(pos)
+	var sand_tile_data: TileData = ground_1_layer.get_cell_tile_data(pos)
+	if grass_tile_data:
+		return 2
+	elif sand_tile_data:
+		return 1
+	else:
+		return 0
+
 func map_to_local(tile_pos: Vector2i) -> Vector2:
 	return tile_pos * tile_size
 

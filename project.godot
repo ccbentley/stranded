@@ -132,6 +132,10 @@ menu_back={
 ]
 }
 
+[limbo_ai]
+
+behavior_tree/user_task_dir_1="res://common/ai/tasks"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

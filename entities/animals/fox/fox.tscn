@@ -1,0 +1,203 @@
+[gd_scene load_steps=37 format=3 uid="uid://cfxii1odrfjfd"]
+
+[ext_resource type="Script" path="res://entities/animals/fox/fox.gd" id="1_ibfqn"]
+[ext_resource type="BehaviorTree" uid="uid://d1sjt7t68y5nt" path="res://entities/animals/fox/trees/fox_1.tres" id="3_1chn7"]
+[ext_resource type="Texture2D" uid="uid://mileqvi7yqgg" path="res://entities/animals/fox/art/idle/fox_idle_1.png" id="3_iu4yu"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="4_yh6o6"]
+[ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="5_0gsrf"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_dv1mg"]
+[ext_resource type="Texture2D" uid="uid://b0sp5ijg720rj" path="res://entities/animals/fox/art/idle/fox_idle_2.png" id="7_4cgw1"]
+[ext_resource type="Texture2D" uid="uid://cha7cyqrqa67b" path="res://entities/animals/fox/art/idle/fox_idle_3.png" id="8_13bv2"]
+[ext_resource type="Texture2D" uid="uid://darhu17alv0mv" path="res://entities/animals/fox/art/idle/fox_idle_4.png" id="9_inj3g"]
+[ext_resource type="Texture2D" uid="uid://bel4yvmsow8cv" path="res://entities/animals/fox/art/walk/fox_walk_1.png" id="10_7tdrr"]
+[ext_resource type="Texture2D" uid="uid://dd7ot3wmxage5" path="res://entities/animals/fox/art/walk/fox_walk_2.png" id="11_1ujps"]
+[ext_resource type="Texture2D" uid="uid://bhscgcjb4mci5" path="res://entities/animals/fox/art/walk/fox_walk_3.png" id="12_ictiw"]
+[ext_resource type="Texture2D" uid="uid://ioimm7fvov82" path="res://entities/animals/fox/art/walk/fox_walk_4.png" id="13_glfmr"]
+[ext_resource type="Texture2D" uid="uid://bcb2ftgkyswyq" path="res://entities/animals/fox/art/hit/fox_hit_1.png" id="14_n3ggo"]
+[ext_resource type="Texture2D" uid="uid://cjddo5s2f6e8o" path="res://entities/animals/fox/art/hit/fox_hit_2.png" id="15_t3mle"]
+[ext_resource type="Texture2D" uid="uid://d4iwftlxlp7xl" path="res://entities/animals/fox/art/death/fox_death_1.png" id="16_6t7js"]
+[ext_resource type="Texture2D" uid="uid://ktbe4bfyyi78" path="res://entities/animals/fox/art/death/fox_death_2.png" id="17_rueyo"]
+[ext_resource type="Texture2D" uid="uid://c4sqojnxg4eh0" path="res://entities/animals/fox/art/death/fox_death_3.png" id="18_67t32"]
+[ext_resource type="Texture2D" uid="uid://cv73nua1j6xs7" path="res://entities/animals/fox/art/death/fox_death_4.png" id="19_kcpps"]
+[ext_resource type="Texture2D" uid="uid://8rsjxd3hr73y" path="res://entities/animals/fox/art/attack/fox_attack_1.png" id="20_gvk3w"]
+[ext_resource type="Texture2D" uid="uid://djlvj17dq6qha" path="res://entities/animals/fox/art/attack/fox_attack_2.png" id="21_gneje"]
+[ext_resource type="Texture2D" uid="uid://cfj04a4k80nad" path="res://entities/animals/fox/art/attack/fox_attack_3.png" id="22_1j51h"]
+[ext_resource type="Texture2D" uid="uid://btmon8cm27hry" path="res://entities/animals/fox/art/attack/fox_attack_4.png" id="23_q3j53"]
+[ext_resource type="Texture2D" uid="uid://dv3c8rftfptw4" path="res://entities/animals/fox/art/attack/fox_attack_5.png" id="24_1wh7y"]
+[ext_resource type="Texture2D" uid="uid://q3yyik0km5gk" path="res://entities/animals/fox/art/attack/fox_attack_6.png" id="25_ahpb7"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="26_sfx40"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_jxkq5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sqtx"]
+size = Vector2(11, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnnh8"]
+size = Vector2(11, 5)
+
+[sub_resource type="Animation" id="Animation_w7xgm"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_iu4yu"), ExtResource("7_4cgw1"), ExtResource("8_13bv2"), ExtResource("9_inj3g")]
+}
+
+[sub_resource type="Animation" id="Animation_q5640"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_7tdrr"), ExtResource("11_1ujps"), ExtResource("12_ictiw"), ExtResource("13_glfmr")]
+}
+
+[sub_resource type="Animation" id="Animation_b4dkm"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("14_n3ggo"), ExtResource("15_t3mle")]
+}
+
+[sub_resource type="Animation" id="Animation_26o6j"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_6t7js"), ExtResource("17_rueyo"), ExtResource("18_67t32"), ExtResource("19_kcpps")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.733333, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ijohq"]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("20_gvk3w"), ExtResource("21_gneje"), ExtResource("22_1j51h"), ExtResource("23_q3j53"), ExtResource("24_1wh7y"), ExtResource("25_ahpb7")]
+}
+
+[sub_resource type="Animation" id="Animation_tmtn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_iu4yu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rb2sn"]
+_data = {
+"RESET": SubResource("Animation_tmtn4"),
+"attack": SubResource("Animation_ijohq"),
+"death": SubResource("Animation_26o6j"),
+"hit": SubResource("Animation_b4dkm"),
+"idle": SubResource("Animation_w7xgm"),
+"walk": SubResource("Animation_q5640")
+}
+
+[node name="Fox" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_ibfqn")
+
+[node name="CharacterSprite" parent="." instance=ExtResource("5_0gsrf")]
+position = Vector2(0, -11)
+texture = ExtResource("3_iu4yu")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_1chn7")
+blackboard_plan = SubResource("BlackboardPlan_jxkq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_4sqtx")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("4_yh6o6")]
+anim = NodePath("../AnimationPlayer")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_dv1mg")]
+health_component = NodePath("../HealthComponent")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_dnnh8")
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("26_sfx40")]
+position = Vector2(0, 8)
+health_component = NodePath("../HealthComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rb2sn")
+}

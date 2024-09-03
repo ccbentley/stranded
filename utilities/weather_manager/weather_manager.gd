@@ -28,6 +28,7 @@ var state: int = State.CLEAR:
 
 
 func _ready() -> void:
+	randomize()
 	set_timer()
 
 
@@ -37,7 +38,7 @@ func set_timer(time: float = randi_range(60, 120)) -> void:
 
 
 func _on_timer_timeout() -> void:
-	var rand: int = randi_range(1, 6)
+	var rand: int = randi_range(1, 10)
 	if rand == 1:
 		state = State.RAIN
 	elif rand == 2:
