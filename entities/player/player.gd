@@ -32,7 +32,7 @@ signal toggle_inventory
 @onready var on_hand: Sprite2D = $OnHand
 var held_item: Node2D = null
 
-#Timers
+# Timers
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
 
 # Movement
@@ -43,8 +43,8 @@ var can_move: bool = true
 const accel: int = 1500
 const friction: int = 1000
 
-const MOVE_SPEED: int = 90
-const SWIM_SPEED: int = 50
+const MOVE_SPEED: int = 70
+const SWIM_SPEED: int = 40
 
 var move_speed: int:
 	get:
@@ -68,6 +68,7 @@ var player_tile_type: int = PlayerTile.GRASS
 
 
 func _physics_process(_delta: float) -> void:
+	move_and_slide()
 	player_tile_pos = tile_map.local_to_map(position)
 	if is_on_grass():
 		player_tile_type = PlayerTile.GRASS

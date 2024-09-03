@@ -21,6 +21,7 @@ func play_sound_2d(sound: AudioStream, volume: float = 0, pos: Vector2 = Vector2
 	audio_stream_player_2d.stream = sound
 	audio_stream_player_2d.volume_db = volume
 	audio_stream_player_2d.global_position = pos
+	audio_stream_player_2d.max_distance = 200
 	audio_stream_player_2d.bus = "Sfx"
 	if random_pitch:
 		randomize()

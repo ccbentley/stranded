@@ -1,0 +1,180 @@
+[gd_scene load_steps=30 format=3 uid="uid://btg8kocs0wld7"]
+
+[ext_resource type="Script" path="res://entities/animals/bunny/bunny.gd" id="1_gs4y4"]
+[ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="1_lc0nb"]
+[ext_resource type="Texture2D" uid="uid://dgwfhpekox8ee" path="res://entities/animals/bunny/art/idle/bunny_idle_1.png" id="2_lx3qf"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_psk1s"]
+[ext_resource type="BehaviorTree" uid="uid://dnc6mxdyv8gvj" path="res://entities/animals/bunny/trees/bunny.tres" id="3_x608w"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_k7psp"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="5_8oxt8"]
+[ext_resource type="Texture2D" uid="uid://dvnj0uhyes8lc" path="res://entities/animals/bunny/art/idle/bunny_idle_2.png" id="6_42iqc"]
+[ext_resource type="Texture2D" uid="uid://cgc33w1g6tqfe" path="res://entities/animals/bunny/art/idle/bunny_idle_3.png" id="7_s5y2e"]
+[ext_resource type="Texture2D" uid="uid://8kt4eek5qvyq" path="res://entities/animals/bunny/art/idle/bunny_idle_4.png" id="8_6v62a"]
+[ext_resource type="Texture2D" uid="uid://cguplapbnvlhu" path="res://entities/animals/bunny/art/walk/bunny_walk_1.png" id="9_xd8ni"]
+[ext_resource type="Texture2D" uid="uid://bb0xocugvxlq7" path="res://entities/animals/bunny/art/walk/bunny_walk_2.png" id="10_riwpr"]
+[ext_resource type="Texture2D" uid="uid://ckawu5sc4x57o" path="res://entities/animals/bunny/art/walk/bunny_walk_3.png" id="11_n4svq"]
+[ext_resource type="Texture2D" uid="uid://coy4lsj7eypca" path="res://entities/animals/bunny/art/walk/bunny_walk_4.png" id="12_cpgg4"]
+[ext_resource type="Texture2D" uid="uid://c22dbxe3j5whe" path="res://entities/animals/bunny/art/hit/bunny_hit_1.png" id="13_jswrj"]
+[ext_resource type="Texture2D" uid="uid://ds4qb15t1bv7y" path="res://entities/animals/bunny/art/hit/bunny_hit_2.png" id="14_h76bo"]
+[ext_resource type="Texture2D" uid="uid://buwp74h3t7jhe" path="res://entities/animals/bunny/art/death/bunny_death_1.png" id="15_2n86j"]
+[ext_resource type="Texture2D" uid="uid://iojh4o7v4f8e" path="res://entities/animals/bunny/art/death/bunny_death_2.png" id="16_8s6ts"]
+[ext_resource type="Texture2D" uid="uid://ctjvq34gdb7d6" path="res://entities/animals/bunny/art/death/bunny_death_3.png" id="17_731j0"]
+[ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="20_1uwnk"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_rdlch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2siy5"]
+size = Vector2(8, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6yjp"]
+size = Vector2(8, 5)
+
+[sub_resource type="Animation" id="Animation_uk3hm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lx3qf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7umdj"]
+resource_name = "death"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("15_2n86j"), ExtResource("16_8s6ts"), ExtResource("17_731j0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4agme"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("13_jswrj"), ExtResource("14_h76bo")]
+}
+
+[sub_resource type="Animation" id="Animation_knjo8"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_lx3qf"), ExtResource("6_42iqc"), ExtResource("7_s5y2e"), ExtResource("8_6v62a")]
+}
+
+[sub_resource type="Animation" id="Animation_lk5y3"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("9_xd8ni"), ExtResource("10_riwpr"), ExtResource("11_n4svq"), ExtResource("12_cpgg4")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6r4qi"]
+_data = {
+"RESET": SubResource("Animation_uk3hm"),
+"death": SubResource("Animation_7umdj"),
+"hit": SubResource("Animation_4agme"),
+"idle": SubResource("Animation_knjo8"),
+"walk": SubResource("Animation_lk5y3")
+}
+
+[node name="Bunny" type="CharacterBody2D"]
+script = ExtResource("1_gs4y4")
+
+[node name="CharacterSprite" parent="." instance=ExtResource("1_lc0nb")]
+position = Vector2(0, -12)
+texture = ExtResource("2_lx3qf")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_x608w")
+blackboard_plan = SubResource("BlackboardPlan_rdlch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_2siy5")
+disabled = true
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_psk1s")]
+anim = NodePath("../AnimationPlayer")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_k7psp")]
+health_component = NodePath("../HealthComponent")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_w6yjp")
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_8oxt8")]
+position = Vector2(0, 8)
+health_component = NodePath("../HealthComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6r4qi")
+}
+
+[node name="FootstepComponent" parent="." instance=ExtResource("20_1uwnk")]
+volume_db = -15.0

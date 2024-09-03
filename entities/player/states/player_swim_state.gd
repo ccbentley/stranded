@@ -51,7 +51,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		actor.velocity += (input * actor.accel * delta)
 		actor.velocity = actor.velocity.limit_length(actor.move_speed)
-	actor.move_and_slide()
 	#Changes player facing direction
 	if input.x < 0:
 		actor.is_facing_right = false

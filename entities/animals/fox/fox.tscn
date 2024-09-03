@@ -1,7 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://cfxii1odrfjfd"]
+[gd_scene load_steps=38 format=3 uid="uid://cfxii1odrfjfd"]
 
 [ext_resource type="Script" path="res://entities/animals/fox/fox.gd" id="1_ibfqn"]
-[ext_resource type="BehaviorTree" uid="uid://d1sjt7t68y5nt" path="res://entities/animals/fox/trees/fox_1.tres" id="3_1chn7"]
+[ext_resource type="BehaviorTree" uid="uid://d1sjt7t68y5nt" path="res://entities/animals/fox/trees/fox.tres" id="3_1chn7"]
 [ext_resource type="Texture2D" uid="uid://mileqvi7yqgg" path="res://entities/animals/fox/art/idle/fox_idle_1.png" id="3_iu4yu"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="4_yh6o6"]
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="5_0gsrf"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dv3c8rftfptw4" path="res://entities/animals/fox/art/attack/fox_attack_5.png" id="24_1wh7y"]
 [ext_resource type="Texture2D" uid="uid://q3yyik0km5gk" path="res://entities/animals/fox/art/attack/fox_attack_6.png" id="25_ahpb7"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="26_sfx40"]
+[ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="27_dbq3i"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jxkq5"]
 
@@ -34,6 +35,93 @@ size = Vector2(11, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnnh8"]
 size = Vector2(11, 5)
+
+[sub_resource type="Animation" id="Animation_tmtn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_iu4yu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ijohq"]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("20_gvk3w"), ExtResource("21_gneje"), ExtResource("22_1j51h"), ExtResource("23_q3j53"), ExtResource("24_1wh7y"), ExtResource("25_ahpb7")]
+}
+
+[sub_resource type="Animation" id="Animation_26o6j"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_6t7js"), ExtResource("17_rueyo"), ExtResource("18_67t32"), ExtResource("19_kcpps")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.733333, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b4dkm"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("14_n3ggo"), ExtResource("15_t3mle")]
+}
 
 [sub_resource type="Animation" id="Animation_w7xgm"]
 resource_name = "idle"
@@ -69,93 +157,6 @@ tracks/0/keys = {
 "values": [ExtResource("10_7tdrr"), ExtResource("11_1ujps"), ExtResource("12_ictiw"), ExtResource("13_glfmr")]
 }
 
-[sub_resource type="Animation" id="Animation_b4dkm"]
-resource_name = "hit"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("14_n3ggo"), ExtResource("15_t3mle")]
-}
-
-[sub_resource type="Animation" id="Animation_26o6j"]
-resource_name = "death"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("16_6t7js"), ExtResource("17_rueyo"), ExtResource("18_67t32"), ExtResource("19_kcpps")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.733333, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_ijohq"]
-resource_name = "attack"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("20_gvk3w"), ExtResource("21_gneje"), ExtResource("22_1j51h"), ExtResource("23_q3j53"), ExtResource("24_1wh7y"), ExtResource("25_ahpb7")]
-}
-
-[sub_resource type="Animation" id="Animation_tmtn4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterSprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_iu4yu")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rb2sn"]
 _data = {
 "RESET": SubResource("Animation_tmtn4"),
@@ -181,6 +182,7 @@ blackboard_plan = SubResource("BlackboardPlan_jxkq5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_4sqtx")
+disabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("4_yh6o6")]
 anim = NodePath("../AnimationPlayer")
@@ -201,3 +203,6 @@ health_component = NodePath("../HealthComponent")
 libraries = {
 "": SubResource("AnimationLibrary_rb2sn")
 }
+
+[node name="FootstepComponent" parent="." instance=ExtResource("27_dbq3i")]
+volume_db = -15.0
