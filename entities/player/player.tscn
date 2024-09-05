@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=37 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -205,6 +205,9 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdnxj"]
 bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bw1d"]
+polygon = PackedVector2Array(-3, 10, 3, 10, 4, 9, 4, 8, 3, 7, -3, 7, -4, 8, -4, 9)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -301,5 +304,8 @@ visible = false
 z_index = -1
 
 [node name="FootstepComponent" parent="." instance=ExtResource("21_0wihk")]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_1bw1d")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]

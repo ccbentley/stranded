@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdjuusey0phyl"]
+
+[ext_resource type="Shader" path="res://common/shaders/shadows/shadows.gdshader" id="1_ub6s8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bp2ls"]
+shader = ExtResource("1_ub6s8")
+shader_parameter/shadow_color = Color(0.117647, 0.117647, 0.117647, 1)
+shader_parameter/shadow_angle = 0.0
+shader_parameter/shadow_length = 1.0
+
+[node name="ShadowCaster" type="ColorRect"]
+material = SubResource("ShaderMaterial_bp2ls")
+offset_left = -2500.0
+offset_top = -2500.0
+offset_right = 2500.0
+offset_bottom = 2500.0
+color = Color(1, 1, 1, 0)
