@@ -152,9 +152,8 @@ behavior_tree = ExtResource("3_x608w")
 blackboard_plan = SubResource("BlackboardPlan_rdlch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_2siy5")
-disabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_psk1s")]
 anim = NodePath("../AnimationPlayer")

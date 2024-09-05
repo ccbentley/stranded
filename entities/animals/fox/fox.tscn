@@ -31,7 +31,7 @@
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jxkq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sqtx"]
-size = Vector2(11, 4)
+size = Vector2(11, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnnh8"]
 size = Vector2(11, 5)
@@ -180,9 +180,8 @@ behavior_tree = ExtResource("3_1chn7")
 blackboard_plan = SubResource("BlackboardPlan_jxkq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
+position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_4sqtx")
-disabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("4_yh6o6")]
 anim = NodePath("../AnimationPlayer")
