@@ -1,6 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://cfxii1odrfjfd"]
+[gd_scene load_steps=39 format=3 uid="uid://cfxii1odrfjfd"]
 
-[ext_resource type="Script" path="res://entities/animals/fox/fox.gd" id="1_ibfqn"]
+[ext_resource type="Script" path="res://entities/animals/animal.gd" id="1_83ssm"]
 [ext_resource type="BehaviorTree" uid="uid://d1sjt7t68y5nt" path="res://entities/animals/fox/trees/fox.tres" id="3_1chn7"]
 [ext_resource type="Texture2D" uid="uid://mileqvi7yqgg" path="res://entities/animals/fox/art/idle/fox_idle_1.png" id="3_iu4yu"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="4_yh6o6"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://q3yyik0km5gk" path="res://entities/animals/fox/art/attack/fox_attack_6.png" id="25_ahpb7"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="26_sfx40"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="27_dbq3i"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="28_atywo"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jxkq5"]
 
@@ -169,7 +170,7 @@ _data = {
 
 [node name="Fox" type="CharacterBody2D"]
 y_sort_enabled = true
-script = ExtResource("1_ibfqn")
+script = ExtResource("1_83ssm")
 
 [node name="CharacterSprite" parent="." instance=ExtResource("5_0gsrf")]
 position = Vector2(0, -11)
@@ -205,3 +206,5 @@ libraries = {
 
 [node name="FootstepComponent" parent="." instance=ExtResource("27_dbq3i")]
 volume_db = -15.0
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("28_atywo")]

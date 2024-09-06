@@ -1,7 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://btg8kocs0wld7"]
+[gd_scene load_steps=32 format=3 uid="uid://btg8kocs0wld7"]
 
-[ext_resource type="Script" path="res://entities/animals/bunny/bunny.gd" id="1_gs4y4"]
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="1_lc0nb"]
+[ext_resource type="Script" path="res://entities/animals/animal.gd" id="1_op87p"]
 [ext_resource type="Texture2D" uid="uid://dgwfhpekox8ee" path="res://entities/animals/bunny/art/idle/bunny_idle_1.png" id="2_lx3qf"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_psk1s"]
 [ext_resource type="BehaviorTree" uid="uid://dnc6mxdyv8gvj" path="res://entities/animals/bunny/trees/bunny.tres" id="3_x608w"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://iojh4o7v4f8e" path="res://entities/animals/bunny/art/death/bunny_death_2.png" id="16_8s6ts"]
 [ext_resource type="Texture2D" uid="uid://ctjvq34gdb7d6" path="res://entities/animals/bunny/art/death/bunny_death_3.png" id="17_731j0"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="20_1uwnk"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="21_jwioc"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rdlch"]
 
@@ -140,8 +141,11 @@ _data = {
 "walk": SubResource("Animation_lk5y3")
 }
 
+[sub_resource type="Environment" id="Environment_wa0rq"]
+background_mode = 3
+
 [node name="Bunny" type="CharacterBody2D"]
-script = ExtResource("1_gs4y4")
+script = ExtResource("1_op87p")
 
 [node name="CharacterSprite" parent="." instance=ExtResource("1_lc0nb")]
 position = Vector2(0, -12)
@@ -177,3 +181,8 @@ libraries = {
 
 [node name="FootstepComponent" parent="." instance=ExtResource("20_1uwnk")]
 volume_db = -15.0
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("21_jwioc")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wa0rq")

@@ -15,6 +15,19 @@ var is_facing_right: bool = true:
 			turn_tween.tween_property(sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		is_facing_right = value
 
+func on_save_chunk(saved_data: Array[SavedData]) -> void:
+	if $HealthComponent.health <= 0:
+		return
+	var entity_data: SavedData = SavedData.new()
+	entity_data.position = global_position
+	entity_data.scene_path = scene_file_path
+
+	saved_data.append(entity_data)
+
+
+func on_load_chunk(saved_data: SavedData) -> void:
+	global_position = saved_data.position
+
 
 func move(dir: Vector2, speed: float) -> void:
 	velocity = (dir.normalized() * speed)

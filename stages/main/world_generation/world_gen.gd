@@ -55,6 +55,11 @@ var view_distance: int = 1
 const TREE: PackedScene = preload("res://entities/environment/trees/tree.tscn")
 const ROCK: PackedScene = preload("res://entities/environment/rocks/rock.tscn")
 
+#Animals
+var animal_arr: Array = [BUNNY, FOX]
+const BUNNY = preload("res://entities/animals/bunny/bunny.tscn")
+const FOX = preload("res://entities/animals/fox/fox.tscn")
+
 
 func _ready() -> void:
 	noise = noise_height_text.noise
@@ -98,6 +103,9 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated
 					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
 				elif decoration_noise_val > 0.4:
 					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
+
+				if decoration_noise_val > 0.8 and not chunk_entites_generated:
+					call_deferred("draw_object", animal_arr.pick_random(), map_to_local(Vector2i(x, y)), chunk_node)
 			elif noise_val >= 0.6:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):

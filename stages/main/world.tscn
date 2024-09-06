@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=24 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -20,9 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ce30hjwcituiy" path="res://common/inventory/hot_bar/hot_bar_inventory.tscn" id="15_sa7if"]
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
-[ext_resource type="PackedScene" uid="uid://cfxii1odrfjfd" path="res://entities/animals/fox/fox.tscn" id="21_brih4"]
 [ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
-[ext_resource type="PackedScene" uid="uid://btg8kocs0wld7" path="res://entities/animals/bunny/bunny.tscn" id="22_evqse"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
@@ -139,6 +137,7 @@ size_flags_vertical = 8
 [node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
 
 [node name="WeatherManager" parent="." instance=ExtResource("15_4r43r")]
+visible = false
 
 [node name="TileMap" type="Node2D" parent="."]
 z_index = -2
@@ -175,12 +174,6 @@ tile_set = ExtResource("13_xl4hy")
 
 [node name="FloatingObject" parent="Entities" instance=ExtResource("20_oor4f")]
 position = Vector2(600, 4965)
-
-[node name="Fox" parent="Entities" instance=ExtResource("21_brih4")]
-position = Vector2(1, 5448)
-
-[node name="Bunny" parent="Entities" instance=ExtResource("22_evqse")]
-position = Vector2(70, 5422)
 
 [node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_q67av")
