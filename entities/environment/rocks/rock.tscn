@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://c86ycwq5bfkuc"]
+[gd_scene load_steps=20 format=3 uid="uid://c86ycwq5bfkuc"]
 
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_1oaxa"]
 [ext_resource type="Script" path="res://entities/environment/rocks/rock.gd" id="1_yr6ch"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="2_77g8f"]
-[ext_resource type="PackedScene" uid="uid://bdjuusey0phyl" path="res://common/shaders/shadows/shadow_caster.tscn" id="2_waw4b"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_eb6y3"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_m1pa8"]
 [ext_resource type="Resource" uid="uid://bs5nfhubmellu" path="res://entities/items/materials/stone/stone.tres" id="5_t66ti"]
@@ -105,14 +104,9 @@ _data = {
 "hit": SubResource("Animation_fle8r")
 }
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fohyr"]
-polygon = PackedVector2Array(-7, -3, 6, -3, 7, -5, 7, -9, 2, -14, -1, -14, -4, -11, -4, -8, -7, -8, -8, -6, -8, -4)
-
 [node name="Rock" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_yr6ch")
-
-[node name="ShadowCaster" parent="." instance=ExtResource("2_waw4b")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -2.5)
@@ -147,6 +141,3 @@ libraries = {
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("7_x4j51")]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_fohyr")

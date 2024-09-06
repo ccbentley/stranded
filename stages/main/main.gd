@@ -27,7 +27,6 @@ func _ready() -> void:
 
 	if not saver_loader.load_game():
 		tile_map.find_spawn_location()
-		day_night_cycle.set_current_time(day_night_cycle.total_time / 2)
 		saver_loader.save_game()
 
 
