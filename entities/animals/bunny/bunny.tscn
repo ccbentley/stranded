@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://btg8kocs0wld7"]
+[gd_scene load_steps=31 format=3 uid="uid://btg8kocs0wld7"]
 
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="1_lc0nb"]
 [ext_resource type="Script" path="res://entities/animals/animal.gd" id="1_op87p"]
@@ -141,9 +141,6 @@ _data = {
 "walk": SubResource("Animation_lk5y3")
 }
 
-[sub_resource type="Environment" id="Environment_wa0rq"]
-background_mode = 3
-
 [node name="Bunny" type="CharacterBody2D"]
 script = ExtResource("1_op87p")
 
@@ -183,6 +180,3 @@ libraries = {
 volume_db = -15.0
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("21_jwioc")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wa0rq")
