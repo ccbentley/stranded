@@ -4,8 +4,9 @@ extends DialogicEditor
 ## Editor that holds both the visual and the text timeline editors.
 
 # references
-var current_editor_mode: int = 0 # 0 = visal, 1 = text
-var play_timeline_button : Button = null
+var current_editor_mode: int = 0  # 0 = visal, 1 = text
+var play_timeline_button: Button = null
+
 
 ## Overwrite. Register to the editor manager in here.
 func _register() -> void:
@@ -13,22 +14,16 @@ func _register() -> void:
 	resource_saved.connect(_on_resource_saved)
 
 	# register editor
-	editors_manager.register_resource_editor('dtl', self)
+	editors_manager.register_resource_editor("dtl", self)
 	# add timeline button
-	var add_timeline_button: Button = editors_manager.add_icon_button(
-		load("res://addons/dialogic/Editor/Images/Toolbar/add-timeline.svg"),
-		"Add Timeline",
-		self)
+	var add_timeline_button: Button = editors_manager.add_icon_button(load("res://addons/dialogic/Editor/Images/Toolbar/add-timeline.svg"), "Add Timeline", self)
 	add_timeline_button.pressed.connect(_on_create_timeline_button_pressed)
 	add_timeline_button.shortcut = Shortcut.new()
 	add_timeline_button.shortcut.events.append(InputEventKey.new())
 	add_timeline_button.shortcut.events[0].keycode = KEY_1
 	add_timeline_button.shortcut.events[0].ctrl_pressed = true
 	# play timeline button
-	play_timeline_button = editors_manager.add_custom_button(
-		"Play Timeline",
-		get_theme_icon("PlayScene", "EditorIcons"),
-		self)
+	play_timeline_button = editors_manager.add_custom_button("Play Timeline", get_theme_icon("PlayScene", "EditorIcons"), self)
 	play_timeline_button.pressed.connect(play_timeline)
 	play_timeline_button.tooltip_text = "Play the current timeline (CTRL+F5)"
 	if OS.get_name() == "macOS":
@@ -36,7 +31,7 @@ func _register() -> void:
 
 	%VisualEditor.load_event_buttons()
 
-	current_editor_mode = DialogicUtil.get_editor_setting('timeline_editor_mode', 0)
+	current_editor_mode = DialogicUtil.get_editor_setting("timeline_editor_mode", 0)
 
 	match current_editor_mode:
 		0:
@@ -61,7 +56,7 @@ func _get_icon() -> Texture:
 
 
 ## If this editor supports editing resources, load them here (overwrite in subclass)
-func _open_resource(resource:Resource) -> void:
+func _open_resource(resource: Resource) -> void:
 	current_resource = resource
 	current_resource_state = ResourceStates.SAVED
 	match current_editor_mode:
@@ -99,7 +94,7 @@ func play_timeline():
 	var dialogic_plugin = DialogicUtil.get_dialogic_plugin()
 
 	# Save the current opened timeline
-	DialogicUtil.set_editor_setting('current_timeline_path', current_resource.resource_path)
+	DialogicUtil.set_editor_setting("current_timeline_path", current_resource.resource_path)
 
 	DialogicUtil.get_dialogic_plugin().get_editor_interface().play_custom_scene("res://addons/dialogic/Editor/TimelineEditor/test_timeline_scene.tscn")
 
@@ -122,7 +117,7 @@ func toggle_editor_mode():
 			%VisualEditor.show()
 			%SwitchEditorMode.text = "Text Editor"
 
-	DialogicUtil.set_editor_setting('timeline_editor_mode', current_editor_mode)
+	DialogicUtil.set_editor_setting("timeline_editor_mode", current_editor_mode)
 
 
 func _on_resource_unsaved():
@@ -135,13 +130,13 @@ func _on_resource_saved():
 		current_resource.set_meta("timeline_not_saved", false)
 
 
-func new_timeline(path:String) -> void:
+func new_timeline(path: String) -> void:
 	_save()
 	var new_timeline := DialogicTimeline.new()
 	new_timeline.resource_path = path
-	new_timeline.set_meta('timeline_not_saved', true)
+	new_timeline.set_meta("timeline_not_saved", true)
 	var err := ResourceSaver.save(new_timeline)
-	DialogicResourceUtil.update_directory('dtl')
+	DialogicResourceUtil.update_directory("dtl")
 	editors_manager.edit_resource(new_timeline)
 
 
@@ -155,16 +150,16 @@ func _ready():
 	%SwitchEditorMode.custom_minimum_size.x = 200 * DialogicUtil.get_editor_scale()
 
 
-
-
-
 func _on_create_timeline_button_pressed():
-	editors_manager.show_add_resource_dialog(
+	(
+		editors_manager
+		. show_add_resource_dialog(
 			new_timeline,
-			'*.dtl; DialogicTimeline',
-			'Create new timeline',
-			'timeline',
-			)
+			"*.dtl; DialogicTimeline",
+			"Create new timeline",
+			"timeline",
+		)
+	)
 
 
 func _clear():

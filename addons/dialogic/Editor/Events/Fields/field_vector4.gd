@@ -16,10 +16,14 @@ func get_value() -> Vector4:
 
 func _on_sub_value_changed(sub_component: String, value: float) -> void:
 	match sub_component:
-		'X': current_value.x = value
-		'Y': current_value.y = value
-		'Z': current_value.z = value
-		'W': current_value.w = value
+		"X":
+			current_value.x = value
+		"Y":
+			current_value.y = value
+		"Z":
+			current_value.z = value
+		"W":
+			current_value.w = value
 	_on_value_changed(current_value)
 
 

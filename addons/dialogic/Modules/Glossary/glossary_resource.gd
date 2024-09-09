@@ -37,7 +37,6 @@ const REGEX_OPTION_PROPERTY := "regex_options"
 ## Ignored when entries are translated.
 const PRIVATE_PROPERTY_PREFIX := "_"
 
-
 ## Private ID assigned when this glossary is translated.
 @export var _translation_id: String = ""
 
@@ -46,7 +45,6 @@ const PRIVATE_PROPERTY_PREFIX := "_"
 ## be shown.
 ## The values (String) are the translation ID.
 @export var _translation_keys: Dictionary = {}
-
 
 
 ## Removes an entry and all its aliases (alternative property) from
@@ -93,6 +91,7 @@ func _remove_entry_alias(entry_key: String) -> bool:
 ## The [param new_entry_key] is the new unique name of the entry.
 ##
 ## This method fails if the [param old_entry_key] does not exist.
+
 
 ## Do not use this to update alternative names.
 ## In order to update alternative names, delete all with
@@ -224,6 +223,7 @@ func get_set_regex_option(entry_key: String) -> String:
 
 #region ADD AND CLEAR TRANSLATION KEYS
 
+
 ## This is automatically called, no need to use this.
 func add_translation_id() -> String:
 	_translation_id = DialogicUtil.get_next_translation_id()
@@ -238,7 +238,6 @@ func remove_translation_id() -> void:
 ## Removes the translation ID of all glossary entries.
 func remove_entry_translation_ids() -> void:
 	for entry: Variant in entries.values():
-
 		# Ignore aliases.
 		if entry is String:
 			continue
@@ -252,16 +251,16 @@ func clear_translation_keys() -> void:
 	const RESOURCE_NAME_KEY := RESOURCE_NAME + "/"
 
 	for translation_key: String in entries.keys():
-
 		if translation_key.begins_with(RESOURCE_NAME_KEY):
 			entries.erase(translation_key)
 
 	_translation_keys.clear()
 
+
 #endregion
 
-
 #region GET AND SET TRANSLATION IDS AND KEYS
+
 
 ## Returns a key used to reference this glossary in the translation CSV file.
 ##
@@ -277,23 +276,16 @@ func get_property_translation_key(entry_key: String, property: String) -> String
 	if entry_translation_key.is_empty() or _translation_id.is_empty():
 		return ""
 
-	var glossary_csv_key := (RESOURCE_NAME
-		.path_join(_translation_id)
-		.path_join(entry_translation_key)
-		.path_join(property))
+	var glossary_csv_key := RESOURCE_NAME.path_join(_translation_id).path_join(entry_translation_key).path_join(property)
 
 	return glossary_csv_key
-
 
 
 ## Returns the translation key prefix for this glossary.
 ## The resulting format will look like this: Glossary/a2/
 ## This prefix can be used to find translations for this glossary.
 func _get_glossary_translation_id_prefix() -> String:
-	return (
-		DialogicGlossary.RESOURCE_NAME
-			.path_join(_translation_id)
-	)
+	return DialogicGlossary.RESOURCE_NAME.path_join(_translation_id)
 
 
 ## Returns the translation key for the given [param glossary_translation_id] and
@@ -303,12 +295,7 @@ func _get_glossary_translation_id_prefix() -> String:
 ##
 ## The resulting format will look like this: Glossary/a2/b4/name
 func _get_glossary_translation_key(entry_translation_id: String, property: String) -> String:
-	return (
-		DialogicGlossary.RESOURCE_NAME
-			.path_join(_translation_id)
-			.path_join(entry_translation_id)
-			.path_join(property)
-	)
+	return DialogicGlossary.RESOURCE_NAME.path_join(_translation_id).path_join(entry_translation_id).path_join(property)
 
 
 ## Tries to get the glossary entry's translation ID.

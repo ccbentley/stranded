@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=8 format=3 uid="uid://d4jlcuue57j2r"]
+
+[ext_resource type="Resource" uid="uid://drh8lx722macr" path="res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tres" id="1_uihll"]
+[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_ybamv"]
+[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_ivjkl"]
+[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_yj7b3"]
+[ext_resource type="Resource" uid="uid://bxdidjyuncfqv" path="res://entities/items/materials/stick/stick.tres" id="4_t6ltl"]
+
+[sub_resource type="Resource" id="Resource_oo3ip"]
+script = ExtResource("1_ybamv")
+item = ExtResource("3_yj7b3")
+quantity = 3
+
+[sub_resource type="Resource" id="Resource_5c87b"]
+script = ExtResource("1_ybamv")
+item = ExtResource("4_t6ltl")
+quantity = 1
+
+[resource]
+script = ExtResource("2_ivjkl")
+item = ExtResource("1_uihll")
+requirements = Array[ExtResource("1_ybamv")]([SubResource("Resource_oo3ip"), SubResource("Resource_5c87b")])

@@ -19,26 +19,24 @@ func _recognize(resource: Resource) -> bool:
 
 
 # Save the resource
-func _save(resource: Resource, path: String = '', flags: int = 0) -> Error:
+func _save(resource: Resource, path: String = "", flags: int = 0) -> Error:
 	if resource.get_meta("timeline_not_saved", false):
-
-		var timeline_as_text :String = ""
+		var timeline_as_text: String = ""
 		# if events are resources, create text
 		if resource.events_processed:
-
 			var indent := 0
 			for idx in range(0, len(resource.events)):
 				if resource.events[idx]:
-					var event : DialogicEvent = resource.events[idx]
-					if event.event_name == 'End Branch':
-						indent -=1
+					var event: DialogicEvent = resource.events[idx]
+					if event.event_name == "End Branch":
+						indent -= 1
 						continue
 
 					for i in event.empty_lines_above:
-						timeline_as_text += '\t'.repeat(indent) + '\n'
+						timeline_as_text += "\t".repeat(indent) + "\n"
 
 					if event != null:
-						timeline_as_text += "\t".repeat(indent)+ event.event_node_as_text + "\n"
+						timeline_as_text += "\t".repeat(indent) + event.event_node_as_text + "\n"
 					if event.can_contain_events:
 						indent += 1
 					if indent < 0:

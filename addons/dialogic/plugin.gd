@@ -10,7 +10,6 @@ const PLUGIN_ICON_PATH := "res://addons/dialogic/Editor/Images/plugin-icon.svg"
 ## References used by various other scripts to quickly reference these things
 var editor_view: Control  # the root of the dialogic editor
 
-
 ## Signal emitted if godot wants us to save
 signal dialogic_save
 
@@ -22,6 +21,7 @@ func _init() -> void:
 
 #region ACTIVATION & EDITOR SETUP
 ################################################################################
+
 
 ## Activation & Editor Setup
 func _enable_plugin():
@@ -54,9 +54,9 @@ func _exit_tree() -> void:
 
 #endregion
 
-
 #region PLUGIN_INFO
 ################################################################################
+
 
 func _has_main_screen() -> bool:
 	return true
@@ -69,14 +69,15 @@ func _get_plugin_name() -> String:
 func _get_plugin_icon():
 	return load(PLUGIN_ICON_PATH)
 
-#endregion
 
+#endregion
 
 #region EDITOR INTERACTION
 ################################################################################
 
+
 ## Editor Interaction
-func _make_visible(visible:bool) -> void:
+func _make_visible(visible: bool) -> void:
 	if not editor_view:
 		return
 
@@ -94,7 +95,7 @@ func _save_external_data() -> void:
 		editor_view.editors_manager.save_current_resource()
 
 
-func _get_unsaved_status(for_scene:String) -> String:
+func _get_unsaved_status(for_scene: String) -> String:
 	if for_scene.is_empty():
 		_save_external_data()
 	return ""
@@ -118,16 +119,17 @@ func _edit(object) -> void:
 func _editor_view_and_manager_exist() -> bool:
 	return editor_view and editor_view.editors_manager
 
-#endregion
 
+#endregion
 
 #region PROJECT SETUP
 ################################################################################
 
+
 ## Special Setup/Updates
 ## Methods that adds a dialogic_default_action if non exists
 func add_dialogic_default_action() -> void:
-	if ProjectSettings.has_setting('input/dialogic_default_action'):
+	if ProjectSettings.has_setting("input/dialogic_default_action"):
 		return
 
 	var input_enter: InputEventKey = InputEventKey.new()
@@ -143,7 +145,7 @@ func add_dialogic_default_action() -> void:
 	var input_controller: InputEventJoypadButton = InputEventJoypadButton.new()
 	input_controller.button_index = JOY_BUTTON_A
 
-	ProjectSettings.set_setting('input/dialogic_default_action', {'deadzone':0.5, 'events':[input_enter, input_left_click, input_space, input_x, input_controller]})
+	ProjectSettings.set_setting("input/dialogic_default_action", {"deadzone": 0.5, "events": [input_enter, input_left_click, input_space, input_x, input_controller]})
 	ProjectSettings.save()
 
 #endregion

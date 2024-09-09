@@ -47,6 +47,7 @@ var footstep_sound: int:
 				AudioManager.play_sound_2d(sand_footstep_sfx.pick_random(), volume_db, global_position, true)
 				footstep_sound_timer.start()
 
+
 func _physics_process(_delta: float) -> void:
 	if owner.velocity != Vector2.ZERO:
 		if WorldManager.world.tile_map.get_tile_type(global_position) == 2:

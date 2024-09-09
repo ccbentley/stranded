@@ -6,9 +6,9 @@ signal finished
 
 var prev_state: int = 0
 
-
 #region MAIN METHODS
 ####################################################################################################
+
 
 func is_animating() -> bool:
 	return dialogic.current_state == dialogic.States.ANIMATING

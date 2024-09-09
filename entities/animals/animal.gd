@@ -15,6 +15,7 @@ var is_facing_right: bool = true:
 			turn_tween.tween_property(sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		is_facing_right = value
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if $HealthComponent.health <= 0:
 		return
@@ -36,12 +37,14 @@ func move(dir: Vector2, speed: float) -> void:
 	else:
 		is_facing_right = true
 
+
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	play_anim()
 
+
 func play_anim() -> void:
-	if animation_player.is_playing() and (animation_player.current_animation == "hit" or animation_player.current_animation ==  "death"):
+	if animation_player.is_playing() and (animation_player.current_animation == "hit" or animation_player.current_animation == "death"):
 		return
 	if velocity != Vector2.ZERO:
 		animation_player.play("walk")

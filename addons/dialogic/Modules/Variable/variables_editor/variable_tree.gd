@@ -1,12 +1,12 @@
 @tool
 extends Tree
 
-enum TreeButtons {ADD_FOLDER, ADD_VARIABLE, DUPLICATE_FOLDER, DELETE, CHANGE_TYPE}
+enum TreeButtons { ADD_FOLDER, ADD_VARIABLE, DUPLICATE_FOLDER, DELETE, CHANGE_TYPE }
 
 @onready var editor: DialogicEditor = find_parent("VariablesEditor")
 
-
 #region INITIAL SETUP
+
 
 func _ready() -> void:
 	set_column_title(0, "Name")
@@ -18,18 +18,19 @@ func _ready() -> void:
 	set_column_title_alignment(2, 0)
 
 	%ChangeTypePopup.self_modulate = get_theme_color("dark_color_3", "Editor")
-	%ChangeTypePopup.theme.set_stylebox('pressed', 'Button', get_theme_stylebox("LaunchPadMovieMode", "EditorStyles"))
-	%ChangeTypePopup.theme.set_stylebox('hover', 'Button', get_theme_stylebox("LaunchPadMovieMode", "EditorStyles"))
+	%ChangeTypePopup.theme.set_stylebox("pressed", "Button", get_theme_stylebox("LaunchPadMovieMode", "EditorStyles"))
+	%ChangeTypePopup.theme.set_stylebox("hover", "Button", get_theme_stylebox("LaunchPadMovieMode", "EditorStyles"))
 	for child in %ChangeTypePopup/HBox.get_children():
-		child.toggled.connect(_on_type_pressed.bind(child.get_index()+1))
+		child.toggled.connect(_on_type_pressed.bind(child.get_index() + 1))
 		child.icon = get_theme_icon(["String", "float", "int", "bool"][child.get_index()], "EditorIcons")
+
 
 #endregion
 
-
 #region POPULATING THE TREE
 
-func load_info(dict:Dictionary, parent:TreeItem = null, is_new:=false) -> void:
+
+func load_info(dict: Dictionary, parent: TreeItem = null, is_new := false) -> void:
 	if parent == null:
 		clear()
 		parent = add_folder_item("VAR", null)
@@ -50,16 +51,15 @@ func load_info(dict:Dictionary, parent:TreeItem = null, is_new:=false) -> void:
 			load_info(dict[key], folder, is_new)
 
 
-
-func add_variable_item(name:String, value:Variant, parent:TreeItem) -> TreeItem:
+func add_variable_item(name: String, value: Variant, parent: TreeItem) -> TreeItem:
 	var item := create_item(parent)
 	item.set_meta("type", "VARIABLE")
 
 	item.set_text(0, name)
 	item.set_editable(0, true)
 	item.set_metadata(0, name)
-	item.set_icon(0, load(DialogicUtil.get_module_path('Variable').path_join("variable.svg")))
-	var folder_color: Color = parent.get_meta('color', Color.DARK_GOLDENROD)
+	item.set_icon(0, load(DialogicUtil.get_module_path("Variable").path_join("variable.svg")))
+	var folder_color: Color = parent.get_meta("color", Color.DARK_GOLDENROD)
 	item.set_custom_bg_color(0, folder_color.lerp(get_theme_color("background", "Editor"), 0.8))
 
 	item.add_button(1, get_theme_icon("String", "EditorIcons"), TreeButtons.CHANGE_TYPE)
@@ -67,11 +67,11 @@ func add_variable_item(name:String, value:Variant, parent:TreeItem) -> TreeItem:
 	item.set_editable(2, true)
 	item.add_button(2, get_theme_icon("Remove", "EditorIcons"), TreeButtons.DELETE)
 
-	item.set_meta('prev_path', get_item_path(item))
+	item.set_meta("prev_path", get_item_path(item))
 	return item
 
 
-func add_folder_item(name:String, parent:TreeItem) -> TreeItem:
+func add_folder_item(name: String, parent: TreeItem) -> TreeItem:
 	var item := create_item(parent)
 	item.set_icon(0, get_theme_icon("Folder", "EditorIcons"))
 	item.set_text(0, name)
@@ -81,12 +81,12 @@ func add_folder_item(name:String, parent:TreeItem) -> TreeItem:
 	if parent == null:
 		folder_color = Color(0.33000001311302, 0.15179999172688, 0.15179999172688)
 	else:
-		folder_color = parent.get_meta('color')
-	folder_color.h = wrap(folder_color.h+0.15*(item.get_index()+1), 0, 1)
+		folder_color = parent.get_meta("color")
+	folder_color.h = wrap(folder_color.h + 0.15 * (item.get_index() + 1), 0, 1)
 	item.set_custom_bg_color(0, folder_color)
 	item.set_custom_bg_color(1, folder_color)
 	item.set_custom_bg_color(2, folder_color)
-	item.set_meta('color', folder_color)
+	item.set_meta("color", folder_color)
 	item.add_button(2, load(self.get_script().get_path().get_base_dir().get_base_dir() + "/add-variable.svg"), TreeButtons.ADD_VARIABLE)
 	item.add_button(2, load("res://addons/dialogic/Editor/Images/Pieces/add-folder.svg"), TreeButtons.ADD_FOLDER)
 	item.add_button(2, get_theme_icon("Duplicate", "EditorIcons"), TreeButtons.DUPLICATE_FOLDER, item == get_root())
@@ -97,16 +97,16 @@ func add_folder_item(name:String, parent:TreeItem) -> TreeItem:
 
 #endregion
 
-
 #region EDITING THE TREE
 
-func set_variable_item_type(item:TreeItem, type:int) -> void:
-	item.set_meta('value_type', type)
+
+func set_variable_item_type(item: TreeItem, type: int) -> void:
+	item.set_meta("value_type", type)
 	item.set_button(1, 0, get_theme_icon(["Variant", "String", "float", "int", "bool"][type], "EditorIcons"))
 
 
-func get_variable_item_default(item:TreeItem) -> Variant:
-	match int(item.get_meta('value_type', DialogicUtil.VarTypes.STRING)):
+func get_variable_item_default(item: TreeItem) -> Variant:
+	match int(item.get_meta("value_type", DialogicUtil.VarTypes.STRING)):
 		DialogicUtil.VarTypes.STRING:
 			return item.get_text(2)
 		DialogicUtil.VarTypes.FLOAT:
@@ -135,25 +135,25 @@ func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index
 		TreeButtons.DELETE:
 			item.free()
 		TreeButtons.DUPLICATE_FOLDER:
-			load_info({item.get_text(0)+"(copy)":get_info(item)}, item.get_parent(), true)
+			load_info({item.get_text(0) + "(copy)": get_info(item)}, item.get_parent(), true)
 		TreeButtons.CHANGE_TYPE:
 			%ChangeTypePopup.show()
-			%ChangeTypePopup.set_meta('item', item)
-			%ChangeTypePopup.position = get_local_mouse_position()+Vector2(-%ChangeTypePopup.size.x/2, 10)
+			%ChangeTypePopup.set_meta("item", item)
+			%ChangeTypePopup.position = get_local_mouse_position() + Vector2(-%ChangeTypePopup.size.x / 2, 10)
 			for child in %ChangeTypePopup/HBox.get_children():
 				child.set_pressed_no_signal(false)
-			%ChangeTypePopup/HBox.get_child(int(item.get_meta('value_type', DialogicUtil.VarTypes.STRING)-1)).set_pressed_no_signal(true)
+			%ChangeTypePopup/HBox.get_child(int(item.get_meta("value_type", DialogicUtil.VarTypes.STRING) - 1)).set_pressed_no_signal(true)
 
 
-func _on_type_pressed(pressed:bool, type:int) -> void:
+func _on_type_pressed(pressed: bool, type: int) -> void:
 	%ChangeTypePopup.hide()
-	var item := %ChangeTypePopup.get_meta('item')
+	var item := %ChangeTypePopup.get_meta("item")
 	adjust_variable_type(item, type, item.get_metadata(2))
 
 
 func _on_item_edited() -> void:
 	var item := get_edited()
-	match item.get_meta('type'):
+	match item.get_meta("type"):
 		"VARIABLE":
 			match get_edited_column():
 				0:
@@ -171,7 +171,7 @@ func _on_item_edited() -> void:
 			report_name_changes(item)
 
 
-func adjust_variable_type(item:TreeItem, type:int, prev_value:Variant) -> void:
+func adjust_variable_type(item: TreeItem, type: int, prev_value: Variant) -> void:
 	set_variable_item_type(item, type)
 	match type:
 		DialogicUtil.VarTypes.STRING:
@@ -201,16 +201,17 @@ func _input(event):
 		if not %ChangeTypePopup.get_global_rect().has_point(get_global_mouse_position()):
 			%ChangeTypePopup.hide()
 
+
 #endregion
 
 
-func filter(filter_term:String, item:TreeItem = null) -> bool:
+func filter(filter_term: String, item: TreeItem = null) -> bool:
 	if item == null:
 		item = get_root()
 
 	var any := false
 	for child in item.get_children():
-		match child.get_meta('type'):
+		match child.get_meta("type"):
 			"VARIABLE":
 				child.visible = filter_term.is_empty() or filter_term.to_lower() in child.get_text(0).to_lower()
 
@@ -222,7 +223,7 @@ func filter(filter_term:String, item:TreeItem = null) -> bool:
 
 
 ## Parses the tree and returns a dictionary representing it.
-func get_info(item:TreeItem = null) -> Dictionary:
+func get_info(item: TreeItem = null) -> Dictionary:
 	if item == null:
 		item = get_root()
 		if item == null:
@@ -231,7 +232,7 @@ func get_info(item:TreeItem = null) -> Dictionary:
 	var dict := {}
 
 	for child in item.get_children():
-		match child.get_meta('type'):
+		match child.get_meta("type"):
 			"VARIABLE":
 				dict[child.get_text(0)] = child.get_metadata(2)
 			"FOLDER":
@@ -243,21 +244,22 @@ func get_info(item:TreeItem = null) -> Dictionary:
 #region DRAG AND DROP
 ################################################################################
 
-func _get_drag_data(position:Vector2) -> Variant:
+
+func _get_drag_data(position: Vector2) -> Variant:
 	drop_mode_flags = DROP_MODE_INBETWEEN
 	var preview := Label.new()
-	preview.text = "     "+get_selected().get_text(0)
-	preview.add_theme_stylebox_override('normal', get_theme_stylebox("Background", "EditorStyles"))
+	preview.text = "     " + get_selected().get_text(0)
+	preview.add_theme_stylebox_override("normal", get_theme_stylebox("Background", "EditorStyles"))
 	set_drag_preview(preview)
 
 	return get_selected()
 
 
-func _can_drop_data(position:Vector2, data:Variant) -> bool:
+func _can_drop_data(position: Vector2, data: Variant) -> bool:
 	return data is TreeItem
 
 
-func _drop_data(position:Vector2, item:Variant) -> void:
+func _drop_data(position: Vector2, item: Variant) -> void:
 	var to_item := get_item_at_position(position)
 
 	if !to_item:
@@ -265,13 +267,13 @@ func _drop_data(position:Vector2, item:Variant) -> void:
 
 	var drop_section := get_drop_section_at_position(position)
 	var parent: TreeItem = null
-	if (drop_section == 1 and to_item.get_meta('type') == "FOLDER") or to_item == get_root():
+	if (drop_section == 1 and to_item.get_meta("type") == "FOLDER") or to_item == get_root():
 		parent = to_item
 	else:
 		parent = to_item.get_parent()
 
 	## Test for inheritance-recursion
-	var test_item:= to_item
+	var test_item := to_item
 	while true:
 		if test_item == item:
 			return
@@ -280,10 +282,10 @@ func _drop_data(position:Vector2, item:Variant) -> void:
 			break
 
 	var new_item: TreeItem = null
-	match item.get_meta('type'):
+	match item.get_meta("type"):
 		"VARIABLE":
 			new_item = add_variable_item(item.get_text(0), item.get_metadata(2), parent)
-			new_item.set_meta('prev_path', get_item_path(item))
+			new_item.set_meta("prev_path", get_item_path(item))
 			if item.get_meta("new", false):
 				new_item.set_meta("new", true)
 		"FOLDER":
@@ -303,34 +305,33 @@ func _drop_data(position:Vector2, item:Variant) -> void:
 
 	item.free()
 
-#endregion
 
+#endregion
 
 #region NAME CHANGES
 ################################################################################
 
-func report_name_changes(item:TreeItem) -> void:
-	
-	match item.get_meta('type'):
+
+func report_name_changes(item: TreeItem) -> void:
+	match item.get_meta("type"):
 		"VARIABLE":
 			if item.get_meta("new", false):
 				return
 			var new_path := get_item_path(item)
-			editor.variable_renamed(item.get_meta('prev_path'), new_path)
-			item.set_meta('prev_path', new_path)
+			editor.variable_renamed(item.get_meta("prev_path"), new_path)
+			item.set_meta("prev_path", new_path)
 		"FOLDER":
 			for child in item.get_children():
 				report_name_changes(child)
 
 
-func get_item_path(item:TreeItem) -> String:
-	if item.get_meta('type') == "VARIABLE":
+func get_item_path(item: TreeItem) -> String:
+	if item.get_meta("type") == "VARIABLE":
 		var path := item.get_text(0)
 		while item.get_parent() != get_root():
 			item = item.get_parent()
-			path = item.get_text(0)+"."+path
+			path = item.get_text(0) + "." + path
 		return path
 	return ""
-
 
 #endregion

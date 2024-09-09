@@ -3,7 +3,6 @@ extends DialogicSubsystem
 ##
 ## This subsystem can be accessed via GDScript: `Dialogic.Inputs`.
 
-
 signal dialogic_action_priority
 signal dialogic_action
 
@@ -11,18 +10,17 @@ signal dialogic_action
 ## Configure Auto-Skip settings via [member auto_skip].
 signal autoskip_timer_finished
 
-
 var input_block_timer := Timer.new()
 var _auto_skip_timer_left: float = 0.0
 var action_was_consumed := false
 
 var auto_skip: DialogicAutoSkip = null
-var auto_advance : DialogicAutoAdvance = null
+var auto_advance: DialogicAutoAdvance = null
 var manual_advance: DialogicManualAdvance = null
-
 
 #region SUBSYSTEM METHODS
 ################################################################################
+
 
 func clear_game_state(_clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
 	if not is_node_ready():
@@ -46,7 +44,7 @@ func resume() -> void:
 
 
 func post_install() -> void:
-	dialogic.Settings.connect_to_change('autoadvance_delay_modifier', auto_advance._update_autoadvance_delay_modifier)
+	dialogic.Settings.connect_to_change("autoadvance_delay_modifier", auto_advance._update_autoadvance_delay_modifier)
 	auto_skip.toggled.connect(_on_autoskip_toggled)
 	auto_skip._init()
 	add_child(input_block_timer)
@@ -55,9 +53,9 @@ func post_install() -> void:
 
 #endregion
 
-
 #region MAIN METHODS
 ################################################################################
+
 
 func handle_input() -> void:
 	if dialogic.paused or is_input_blocked():
@@ -65,18 +63,15 @@ func handle_input() -> void:
 
 	if not action_was_consumed:
 		# We want to stop auto-advancing that cancels on user inputs.
-		if (auto_advance.is_enabled()
-			and auto_advance.enabled_until_user_input):
+		if auto_advance.is_enabled() and auto_advance.enabled_until_user_input:
 			auto_advance.enabled_until_user_input = false
 			action_was_consumed = true
 
 		# We want to stop auto-skipping if it's enabled, we are listening
 		# to user inputs, and it's not instant skipping.
-		if (auto_skip.disable_on_user_input
-		and auto_skip.enabled):
+		if auto_skip.disable_on_user_input and auto_skip.enabled:
 			auto_skip.enabled = false
 			action_was_consumed = true
-
 
 	dialogic_action_priority.emit()
 
@@ -88,8 +83,8 @@ func handle_input() -> void:
 
 
 ## Unhandled Input is used for all NON-Mouse based inputs.
-func _unhandled_input(event:InputEvent) -> void:
-	if Input.is_action_just_pressed(ProjectSettings.get_setting('dialogic/text/input_action', 'dialogic_default_action')):
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(ProjectSettings.get_setting("dialogic/text/input_action", "dialogic_default_action")):
 		if event is InputEventMouse:
 			return
 		handle_input()
@@ -97,18 +92,17 @@ func _unhandled_input(event:InputEvent) -> void:
 
 ## Input is used for all mouse based inputs.
 ## If any DialogicInputNode is present this won't do anything (because that node handles MouseInput then).
-func _input(event:InputEvent) -> void:
-	if Input.is_action_just_pressed(ProjectSettings.get_setting('dialogic/text/input_action', 'dialogic_default_action')):
-
-		if not event is InputEventMouse or get_tree().get_nodes_in_group('dialogic_input').any(func(node):return node.is_visible_in_tree()):
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(ProjectSettings.get_setting("dialogic/text/input_action", "dialogic_default_action")):
+		if not event is InputEventMouse or get_tree().get_nodes_in_group("dialogic_input").any(func(node): return node.is_visible_in_tree()):
 			return
 
 		handle_input()
 
 
 ## This is called from the gui_input of the InputCatcher and DialogText nodes
-func handle_node_gui_input(event:InputEvent) -> void:
-	if Input.is_action_just_pressed(ProjectSettings.get_setting('dialogic/text/input_action', 'dialogic_default_action')):
+func handle_node_gui_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(ProjectSettings.get_setting("dialogic/text/input_action", "dialogic_default_action")):
 		if event is InputEventMouseButton and event.pressed:
 			DialogicUtil.autoload().Inputs.handle_input()
 
@@ -117,7 +111,7 @@ func is_input_blocked() -> bool:
 	return input_block_timer.time_left > 0.0
 
 
-func block_input(time:=0.1) -> void:
+func block_input(time := 0.1) -> void:
 	if time > 0:
 		input_block_timer.wait_time = time
 		input_block_timer.start()
@@ -137,11 +131,12 @@ func stop_timers() -> void:
 	input_block_timer.stop()
 	_auto_skip_timer_left = 0.0
 
-#endregion
 
+#endregion
 
 #region AUTO-SKIP
 ################################################################################
+
 
 ## This method will advance the timeline based on Auto-Skip settings.
 ## The state, whether Auto-Skip is enabled, is ignored.
@@ -171,13 +166,14 @@ func _process(delta: float) -> void:
 		autoskip_timer_finished.emit()
 		set_process(false)
 
+
 #endregion
 
 #region TEXT EFFECTS
 ################################################################################
 
 
-func effect_input(text_node:Control, skipped:bool, argument:String) -> void:
+func effect_input(text_node: Control, skipped: bool, argument: String) -> void:
 	if skipped:
 		return
 	dialogic.Text.show_next_indicators()
@@ -186,15 +182,15 @@ func effect_input(text_node:Control, skipped:bool, argument:String) -> void:
 	dialogic.Inputs.action_was_consumed = true
 
 
-func effect_noskip(text_node:Control, skipped:bool, argument:String) -> void:
+func effect_noskip(text_node: Control, skipped: bool, argument: String) -> void:
 	dialogic.Text.set_text_reveal_skippable(false, true)
 	manual_advance.disabled_until_next_event = true
 	effect_autoadvance(text_node, skipped, argument)
 
 
-func effect_autoadvance(text_node: Control, skipped:bool, argument:String) -> void:
-	if argument.ends_with('?'):
-		argument = argument.trim_suffix('?')
+func effect_autoadvance(text_node: Control, skipped: bool, argument: String) -> void:
+	if argument.ends_with("?"):
+		argument = argument.trim_suffix("?")
 	else:
 		auto_advance.enabled_until_next_event = true
 

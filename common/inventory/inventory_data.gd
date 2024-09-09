@@ -77,19 +77,19 @@ func on_slot_clicked(index: int, button: int) -> void:
 	inventory_interact.emit(self, index, button)
 
 
-func get_amount(name: String) -> int:
+func get_amount(item_data: ItemData) -> int:
 	var amount: int = 0
 	for slot_data in slot_datas:
 		if slot_data and slot_data.item_data:
-			if slot_data.item_data.name == name:
+			if slot_data.item_data == item_data:
 				amount += slot_data.quantity
 	return amount
 
 
-func remove_item(name: String, amount: int) -> void:
+func remove_item(item_data: ItemData, amount: int) -> void:
 	for slot_data in slot_datas.size():
 		if slot_datas[slot_data] and slot_datas[slot_data].item_data:
-			if slot_datas[slot_data].item_data.name == name:
+			if slot_datas[slot_data].item_data == item_data:
 				if amount == 0:
 					if slot_datas[slot_data].quantity < 1:
 						slot_datas[slot_data] = null

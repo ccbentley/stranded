@@ -5,7 +5,6 @@ extends DialogicSubsystem
 ## in your timeline.
 ## For instance, you can listen to music changes via [signal music_started].
 
-
 ## Whenever a new background music is started, this signal is emitted and
 ## contains a dictionary with the following keys: [br]
 ## [br]
@@ -16,7 +15,6 @@ extends DialogicSubsystem
 ## `audio_bus` | [type String] | The audio bus name that the [member base_music_player] will use. [br]
 ## `loop`      | [type bool]   | Whether the audio resource will loop or not once it finishes playing. [br]
 signal music_started(info: Dictionary)
-
 
 ## Whenever a new sound effect is set, this signal is emitted and contains a
 ## dictionary with the following keys: [br]
@@ -29,7 +27,6 @@ signal music_started(info: Dictionary)
 ## `loop`      | [type bool]   | Whether the audio resource will loop or not once it finishes playing. [br]
 signal sound_started(info: Dictionary)
 
-
 ## Audio player base duplicated to play background music.
 ##
 ## Background music is long audio.
@@ -41,9 +38,9 @@ var current_music_player: AudioStreamPlayer
 ## Sound effects are short audio.
 var base_sound_player := AudioStreamPlayer.new()
 
-
 #region STATE
 ####################################################################################################
+
 
 ## Clears the state on this subsystem and stops all audio.
 ##
@@ -54,7 +51,7 @@ func clear_game_state(clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -
 
 
 ## Loads the state on this subsystem from the current state info.
-func load_game_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
+func load_game_state(load_flag := LoadFlags.FULL_LOAD) -> void:
 	if load_flag == LoadFlags.ONLY_DNODES:
 		return
 	var info: Dictionary = dialogic.current_state_info.get("music", {})
@@ -75,11 +72,12 @@ func resume() -> void:
 	for child in get_children():
 		child.stream_paused = false
 
-#endregion
 
+#endregion
 
 #region MAIN METHODS
 ####################################################################################################
+
 
 func _ready() -> void:
 	base_music_player.name = "Music"
@@ -91,9 +89,8 @@ func _ready() -> void:
 
 ## Updates the background music. Will fade out previous music.
 func update_music(path := "", volume := 0.0, audio_bus := "", fade_time := 0.0, loop := true) -> void:
-
-	dialogic.current_state_info['music'] = {'path':path, 'volume':volume, 'audio_bus':audio_bus, 'loop':loop}
-	music_started.emit(dialogic.current_state_info['music'])
+	dialogic.current_state_info["music"] = {"path": path, "volume": volume, "audio_bus": audio_bus, "loop": loop}
+	music_started.emit(dialogic.current_state_info["music"])
 
 	var fader: Tween = null
 	if is_instance_valid(current_music_player) and current_music_player.playing or !path.is_empty():
@@ -104,7 +101,7 @@ func update_music(path := "", volume := 0.0, audio_bus := "", fade_time := 0.0, 
 		prev_node = current_music_player.duplicate()
 		add_child(prev_node)
 		prev_node.play(current_music_player.get_playback_position())
-		fader.tween_method(interpolate_volume_linearly.bind(prev_node), db_to_linear(prev_node.volume_db),0.0,fade_time)
+		fader.tween_method(interpolate_volume_linearly.bind(prev_node), db_to_linear(prev_node.volume_db), 0.0, fade_time)
 
 	if path:
 		current_music_player = base_music_player.duplicate()
@@ -123,7 +120,7 @@ func update_music(path := "", volume := 0.0, audio_bus := "", fade_time := 0.0, 
 					current_music_player.stream.loop_mode = AudioStreamWAV.LOOP_DISABLED
 
 		current_music_player.play(0)
-		fader.parallel().tween_method(interpolate_volume_linearly.bind(current_music_player), 0.0, db_to_linear(volume),fade_time)
+		fader.parallel().tween_method(interpolate_volume_linearly.bind(current_music_player), 0.0, db_to_linear(volume), fade_time)
 	else:
 		if is_instance_valid(current_music_player):
 			current_music_player.stop()
@@ -135,13 +132,13 @@ func update_music(path := "", volume := 0.0, audio_bus := "", fade_time := 0.0, 
 
 ## Whether music is playing.
 func has_music() -> bool:
-	return !dialogic.current_state_info.get('music', {}).get('path', '').is_empty()
+	return !dialogic.current_state_info.get("music", {}).get("path", "").is_empty()
 
 
 ## Plays a given sound file.
 func play_sound(path: String, volume := 0.0, audio_bus := "", loop := false) -> void:
 	if base_sound_player != null and !path.is_empty():
-		sound_started.emit({'path':path, 'volume':volume, 'audio_bus':audio_bus, 'loop':loop})
+		sound_started.emit({"path": path, "volume": volume, "audio_bus": audio_bus, "loop": loop})
 
 		var new_sound_node := base_sound_player.duplicate()
 		new_sound_node.name += "Sound"
@@ -182,8 +179,7 @@ func interpolate_volume_linearly(value: float, node: Node) -> void:
 ## Returns whether the currently playing audio resource is the same as this
 ## event's [param resource_path].
 func is_music_playing_resource(resource_path: String) -> bool:
-	var is_playing_resource: bool = (base_music_player.is_playing()
-		and base_music_player.stream.resource_path == resource_path)
+	var is_playing_resource: bool = base_music_player.is_playing() and base_music_player.stream.resource_path == resource_path
 
 	return is_playing_resource
 

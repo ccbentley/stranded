@@ -1,34 +1,16 @@
 extends Inventory
 class_name CraftingInventory
 
-const recipes: Dictionary = {
-	"Stick": {
-		"output": "res://entities/items/materials/stick/stick.tres",
-		"materials": {
-			"Wood": 1,
-		}
-	},
-	"Boat": {
-		"output": "res://entities/items/placeable/boat/boat.tres",
-		"materials": {
-			"Wood": 5,
-		}
-	},
-	"Fishing Rod": {
-		"output": "res://entities/items/fishing_rod/fishing_rod.tres",
-		"materials": {
-			"Stick": 2,
-			"Wood": 2,
-		}
-	},
-	"Wooden Pickaxe": {
-		"output": "res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tres",
-		"materials": {
-			"Wood": 3,
-			"Stick": 1,
-		}
-	}
-}
+var recipes: Array[CraftingRecipe]
+
+func _ready() -> void:
+	var dir: DirAccess = DirAccess.open("res://utilities/crafting_system/recipes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name: String = dir.get_next()
+		while file_name != "":
+			recipes.append(ResourceLoader.load("res://utilities/crafting_system/recipes/" + file_name))
+			file_name = dir.get_next()
 
 @export var player: Player
 var _inventory_data: InventoryData
@@ -55,19 +37,17 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 
 	var crafts_visible: bool = false
 
-	for recipe_name: String in recipes:
-		var recipe: Dictionary = recipes[recipe_name]
+	for recipe: CraftingRecipe in recipes:
 		var can_craft: bool = true
-		for mat: String in recipe["materials"]:
-			var required_amount: int = recipe["materials"][mat]
-			if not player.inventory_data.get_amount(mat) >= required_amount:
+		for requirement: CraftingRecipeRequirement in recipe.requirements:
+			if not player.inventory_data.get_amount(requirement.item) >= requirement.quantity:
 				can_craft = false
 		if can_craft:
 			crafts_visible = true
 			var slot: Slot = SLOT.instantiate()
 			item_grid.add_child(slot)
 			var slot_data: SlotData = SlotData.new()
-			slot_data.item_data = load(recipe["output"])
+			slot_data.item_data = recipe.item
 			slot_data.set_quantity(1)
 			slot.set_slot_data(slot_data)
 			inventory_data.slot_datas.append(slot_data)
@@ -75,9 +55,8 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 			slot.slot_clicked.connect(
 				func(_index: int, button: int) -> void:
 					if button == MOUSE_BUTTON_LEFT:
-						for mat: String in recipe["materials"]:
-							var required_amount: int =recipe ["materials"][mat]
-							player.inventory_data.remove_item(mat, required_amount)
+						for requirement: CraftingRecipeRequirement in recipe.requirements:
+							player.inventory_data.remove_item(requirement.item, requirement.quantity)
 						AudioManager.play_sound(load("res://assets/sounds/pop.ogg"), 0, true)
 			)
 	if crafts_visible:

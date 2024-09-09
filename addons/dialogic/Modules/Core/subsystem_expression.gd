@@ -3,19 +3,18 @@ extends DialogicSubsystem
 ## Subsystem that allows executing strings (with the Expression class).
 ## This is used by conditions and to allow expresions as variables.
 
-
 #region MAIN METHODS
 ####################################################################################################
 
-func execute_string(string:String, default: Variant = null, no_warning := false) -> Variant:
+
+func execute_string(string: String, default: Variant = null, no_warning := false) -> Variant:
 	# Some methods are not supported by the expression class, but very useful.
 	# Thus they are recreated below and secretly added.
-	string = string.replace('range(', 'd_range(')
-	string = string.replace('len(', 'd_len(')
-	string = string.replace('regex(', 'd_regex(')
+	string = string.replace("range(", "d_range(")
+	string = string.replace("len(", "d_len(")
+	string = string.replace("regex(", "d_regex(")
 
-
-	var regex: RegEx = RegEx.create_from_string('{([^{}]*)}')
+	var regex: RegEx = RegEx.create_from_string("{([^{}]*)}")
 
 	for res in regex.search_all(string):
 		var value: Variant = dialogic.VAR.get_variable(res.get_string())
@@ -32,7 +31,7 @@ func execute_string(string:String, default: Variant = null, no_warning := false)
 	if expr.parse(string, autoload_names) != OK:
 		if not no_warning:
 			printerr('[Dialogic] Expression "', string, '" failed to parse.')
-			printerr('           ', expr.get_error_text())
+			printerr("           ", expr.get_error_text())
 			dialogic.print_debug_moment()
 		return default
 
@@ -40,23 +39,24 @@ func execute_string(string:String, default: Variant = null, no_warning := false)
 	if expr.has_execute_failed():
 		if not no_warning:
 			printerr('[Dialogic] Expression "', string, '" failed to parse.')
-			printerr('           ', expr.get_error_text())
+			printerr("           ", expr.get_error_text())
 			dialogic.print_debug_moment()
 		return default
 	return result
 
 
-func execute_condition(condition:String) -> bool:
+func execute_condition(condition: String) -> bool:
 	if execute_string(condition, false):
 		return true
 	return false
+
 
 #endregion
 
 
 #region HELPERS
 ####################################################################################################
-func d_range(a1, a2=null,a3=null,a4=null) -> Array:
+func d_range(a1, a2 = null, a3 = null, a4 = null) -> Array:
 	if !a2:
 		return range(a1)
 	elif !a3:
@@ -66,7 +66,8 @@ func d_range(a1, a2=null,a3=null,a4=null) -> Array:
 	else:
 		return range(a1, a2, a3, a4)
 
-func d_len(arg:Variant) -> int:
+
+func d_len(arg: Variant) -> int:
 	return len(arg)
 
 

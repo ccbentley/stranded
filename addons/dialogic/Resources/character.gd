@@ -2,7 +2,6 @@
 extends Resource
 class_name DialogicCharacter
 
-
 ## Resource that represents a character in dialog.
 ## Manages/contains portraits, custom info and translation of characters.
 
@@ -12,7 +11,7 @@ class_name DialogicCharacter
 @export var color := Color()
 @export var description := ""
 
-@export var scale  := 1.0
+@export var scale := 1.0
 @export var offset := Vector2()
 @export var mirror := false
 
@@ -31,7 +30,7 @@ var _translation_id := ""
 
 
 func _to_string() -> String:
-	return "[{name}:{id}]".format({"name":get_character_name(), "id":get_instance_id()})
+	return "[{name}:{id}]".format({"name": get_character_name(), "id": get_instance_id()})
 
 
 ## Adds a translation ID to the character.
@@ -91,10 +90,7 @@ func _get_property_original_text(property: TranslatedProperties) -> String:
 ##
 ## Undefined behaviour if an invalid integer is passed.
 func _get_property_translated(property: TranslatedProperties) -> String:
-	var try_translation: bool = (_translation_id != null
-		and not _translation_id.is_empty()
-		and ProjectSettings.get_setting('dialogic/translation/enabled', false)
-	)
+	var try_translation: bool = _translation_id != null and not _translation_id.is_empty() and ProjectSettings.get_setting("dialogic/translation/enabled", false)
 
 	if try_translation:
 		var translation_key := get_property_translation_key(property)
@@ -115,7 +111,7 @@ func _get_property_translated(property: TranslatedProperties) -> String:
 ## of strings.
 func get_nicknames_translated() -> Array:
 	var translated_nicknames := _get_property_translated(TranslatedProperties.NICKNAMES)
-	return (translated_nicknames.split(", ") as Array)
+	return translated_nicknames.split(", ") as Array
 
 
 ## Translates and returns the display name of the character.
@@ -126,7 +122,7 @@ func get_display_name_translated() -> String:
 ## Returns the name of the file (without the extension).
 func get_character_name() -> String:
 	if !resource_path.is_empty():
-		return resource_path.get_file().trim_suffix('.dch')
+		return resource_path.get_file().trim_suffix(".dch")
 	elif !display_name.is_empty():
 		return display_name.validate_node_name()
 	else:
@@ -135,5 +131,5 @@ func get_character_name() -> String:
 
 ## Returns the info of the given portrait.
 ## Uses the default portrait if the given portrait doesn't exist.
-func get_portrait_info(portrait_name:String) -> Dictionary:
+func get_portrait_info(portrait_name: String) -> Dictionary:
 	return portraits.get(portrait_name, portraits.get(default_portrait, {}))

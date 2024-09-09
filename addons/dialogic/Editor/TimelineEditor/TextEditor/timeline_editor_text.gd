@@ -4,12 +4,13 @@ extends CodeEdit
 ## Sub-Editor that allows editing timelines in a text format.
 
 @onready var timeline_editor := get_parent().get_parent()
-@onready var code_completion_helper :Node= find_parent('EditorsManager').get_node('CodeCompletionHelper')
+@onready var code_completion_helper: Node = find_parent("EditorsManager").get_node("CodeCompletionHelper")
 
-var label_regex := RegEx.create_from_string('label +(?<name>[^\n]+)')
+var label_regex := RegEx.create_from_string("label +(?<name>[^\n]+)")
+
 
 func _ready():
-	await find_parent('EditorView').ready
+	await find_parent("EditorView").ready
 	syntax_highlighter = code_completion_helper.syntax_highlighter
 	timeline_editor.editors_manager.sidebar.content_item_activated.connect(_on_content_item_clicked)
 
@@ -21,11 +22,11 @@ func _on_text_editor_text_changed():
 
 
 func clear_timeline():
-	text = ''
+	text = ""
 	update_content_list()
 
 
-func load_timeline(timeline:DialogicTimeline) -> void:
+func load_timeline(timeline: DialogicTimeline) -> void:
 	clear_timeline()
 
 	text = timeline.as_text()
@@ -49,20 +50,20 @@ func save_timeline():
 
 	timeline_editor.current_resource.set_meta("timeline_not_saved", false)
 	timeline_editor.current_resource_state = DialogicEditor.ResourceStates.SAVED
-	DialogicResourceUtil.update_directory('dtl')
+	DialogicResourceUtil.update_directory("dtl")
 
 
-func text_timeline_to_array(text:String) -> Array:
+func text_timeline_to_array(text: String) -> Array:
 	# Parse the lines down into an array
 	var events := []
 
-	var lines := text.split('\n', true)
+	var lines := text.split("\n", true)
 	var idx := -1
 
-	while idx < len(lines)-1:
+	while idx < len(lines) - 1:
 		idx += 1
-		var line :String = lines[idx]
-		var line_stripped :String = line.strip_edges(true, true)
+		var line: String = lines[idx]
+		var line_stripped: String = line.strip_edges(true, true)
 		events.append(line)
 
 	return events
@@ -72,9 +73,12 @@ func text_timeline_to_array(text:String) -> Array:
 ## 					HELPFUL EDITOR FUNCTIONALITY
 ################################################################################
 
+
 func _gui_input(event):
-	if not event is InputEventKey: return
-	if not event.is_pressed(): return
+	if not event is InputEventKey:
+		return
+	if not event.is_pressed():
+		return
 	match event.as_text():
 		"Ctrl+K":
 			toggle_comment()
@@ -87,6 +91,7 @@ func _gui_input(event):
 		_:
 			return
 	get_viewport().set_input_as_handled()
+
 
 # Toggle the selected lines as comments
 func toggle_comment() -> void:
@@ -124,7 +129,8 @@ func move_line(offset: int) -> void:
 
 	var lines := text.split("\n")
 
-	if from + offset < 0 or to + offset >= lines.size(): return
+	if from + offset < 0 or to + offset >= lines.size():
+		return
 
 	var target_from_index: int = from - 1 if offset == -1 else to + 1
 	var target_to_index: int = to if offset == -1 else from
@@ -147,38 +153,38 @@ func move_line(offset: int) -> void:
 func duplicate_line() -> void:
 	var cursor: Vector2 = Vector2(get_caret_column(), get_caret_line())
 	var from: int = cursor.y
-	var to: int = cursor.y+1
+	var to: int = cursor.y + 1
 	if has_selection():
 		from = get_selection_from_line()
-		to = get_selection_to_line()+1
+		to = get_selection_to_line() + 1
 
 	var lines := text.split("\n")
 	var lines_to_dupl: PackedStringArray = lines.slice(from, to)
 
-	text = "\n".join(lines.slice(0, from)+lines_to_dupl+lines.slice(from))
+	text = "\n".join(lines.slice(0, from) + lines_to_dupl + lines.slice(from))
 
-	set_caret_line(cursor.y+to-from)
+	set_caret_line(cursor.y + to - from)
 	set_caret_column(cursor.x)
 	text_changed.emit()
 
 
 # Allows dragging files into the editor
-func _can_drop_data(at_position:Vector2, data:Variant) -> bool:
-	if typeof(data) == TYPE_DICTIONARY and 'files' in data.keys() and len(data.files) == 1:
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if typeof(data) == TYPE_DICTIONARY and "files" in data.keys() and len(data.files) == 1:
 		return true
 	return false
 
 
 # Allows dragging files into the editor
-func _drop_data(at_position:Vector2, data:Variant) -> void:
-	if typeof(data) == TYPE_DICTIONARY and 'files' in data.keys() and len(data.files) == 1:
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+	if typeof(data) == TYPE_DICTIONARY and "files" in data.keys() and len(data.files) == 1:
 		set_caret_column(get_line_column_at_pos(at_position).x)
 		set_caret_line(get_line_column_at_pos(at_position).y)
 		var result: String = data.files[0]
-		if get_line(get_caret_line())[get_caret_column()-1] != '"':
-			result = '"'+result
+		if get_line(get_caret_line())[get_caret_column() - 1] != '"':
+			result = '"' + result
 		if get_line(get_caret_line())[get_caret_column()] != '"':
-			result = result+'"'
+			result = result + '"'
 
 		insert_text_at_caret(result)
 
@@ -188,13 +194,13 @@ func _on_update_timer_timeout():
 
 
 func update_content_list():
-	var labels :PackedStringArray = []
+	var labels: PackedStringArray = []
 	for i in label_regex.search_all(text):
-		labels.append(i.get_string('name'))
+		labels.append(i.get_string("name"))
 	timeline_editor.editors_manager.sidebar.update_content_list(labels)
 
 
-func _on_content_item_clicked(label:String) -> void:
+func _on_content_item_clicked(label: String) -> void:
 	if label == "~ Top":
 		set_caret_line(0)
 		set_caret_column(0)
@@ -202,9 +208,9 @@ func _on_content_item_clicked(label:String) -> void:
 		return
 
 	for i in label_regex.search_all(text):
-		if i.get_string('name') == label:
+		if i.get_string("name") == label:
 			set_caret_column(0)
-			set_caret_line(text.count('\n', 0, i.get_start()+1))
+			set_caret_line(text.count("\n", 0, i.get_start() + 1))
 			center_viewport_to_caret()
 			return
 
@@ -213,20 +219,21 @@ func _on_content_item_clicked(label:String) -> void:
 ## 					AUTO COMPLETION
 ################################################################################
 
+
 # Called if something was typed
-func _request_code_completion(force:bool):
+func _request_code_completion(force: bool):
 	code_completion_helper.request_code_completion(force, self)
 
 
 # Filters the list of all possible options, depending on what was typed
 # Purpose of the different Kinds is explained in [_request_code_completion]
-func _filter_code_completion_candidates(candidates:Array) -> Array:
+func _filter_code_completion_candidates(candidates: Array) -> Array:
 	return code_completion_helper.filter_code_completion_candidates(candidates, self)
 
 
 # Called when code completion was activated
 # Inserts the selected item
-func _confirm_code_completion(replace:bool) -> void:
+func _confirm_code_completion(replace: bool) -> void:
 	code_completion_helper.confirm_code_completion(replace, self)
 
 
@@ -234,11 +241,12 @@ func _confirm_code_completion(replace:bool) -> void:
 ##					SYMBOL CLICKING
 ################################################################################
 
+
 # Performs an action (like opening a link) when a valid symbol was clicked
 func _on_symbol_lookup(symbol, line, column):
 	code_completion_helper.symbol_lookup(symbol, line, column)
 
 
 # Called to test if a symbol can be clicked
-func _on_symbol_validate(symbol:String) -> void:
+func _on_symbol_validate(symbol: String) -> void:
 	code_completion_helper.symbol_validate(symbol, self)

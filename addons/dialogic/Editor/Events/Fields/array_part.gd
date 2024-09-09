@@ -3,36 +3,22 @@ extends PanelContainer
 
 ## Event block field part for the Array field.
 
-signal value_changed()
+signal value_changed
 
 var value_field: Node
 var value_type: int = -1
 
 var current_value: Variant
 
+
 func _ready() -> void:
-	%ValueType.options = [{
-			'label': 'String',
-			'icon': ["String", "EditorIcons"],
-			'value': TYPE_STRING
-		},{
-			'label': 'Number (int)',
-			'icon': ["int", "EditorIcons"],
-			'value': TYPE_INT
-		},{
-			'label': 'Number (float)',
-			'icon': ["float", "EditorIcons"],
-			'value': TYPE_FLOAT
-		},{
-			'label': 'Boolean',
-			'icon': ["bool", "EditorIcons"],
-			'value': TYPE_BOOL
-		},{
-			'label': 'Expression',
-			'icon': ["Variant", "EditorIcons"],
-			'value': TYPE_MAX
-		}
-		]
+	%ValueType.options = [
+		{"label": "String", "icon": ["String", "EditorIcons"], "value": TYPE_STRING},
+		{"label": "Number (int)", "icon": ["int", "EditorIcons"], "value": TYPE_INT},
+		{"label": "Number (float)", "icon": ["float", "EditorIcons"], "value": TYPE_FLOAT},
+		{"label": "Boolean", "icon": ["bool", "EditorIcons"], "value": TYPE_BOOL},
+		{"label": "Expression", "icon": ["Variant", "EditorIcons"], "value": TYPE_MAX}
+	]
 	%ValueType.symbol_only = true
 	%ValueType.value_changed.connect(_on_type_changed.bind())
 	%ValueType.tooltip_text = "Change type"
@@ -40,7 +26,7 @@ func _ready() -> void:
 	%Delete.icon = get_theme_icon("Remove", "EditorIcons")
 
 
-func set_value(value:Variant):
+func set_value(value: Variant):
 	change_field_type(deduce_type(value))
 	%ValueType.set_value(deduce_type(value))
 	current_value = value
@@ -52,17 +38,17 @@ func set_value(value:Variant):
 		TYPE_FLOAT, TYPE_INT:
 			value_field.set_value(value)
 		TYPE_MAX, _:
-			value_field.text = value.trim_prefix('@')
+			value_field.text = value.trim_prefix("@")
 
 
-func deduce_type(value:Variant) -> int:
-	if value is String and value.begins_with('@'):
+func deduce_type(value: Variant) -> int:
+	if value is String and value.begins_with("@"):
 		return TYPE_MAX
 	else:
 		return typeof(value)
 
 
-func _on_type_changed(prop:String, type:Variant) -> void:
+func _on_type_changed(prop: String, type: Variant) -> void:
 	if type == value_type:
 		return
 
@@ -76,17 +62,16 @@ func _on_type_changed(prop:String, type:Variant) -> void:
 				current_value = true if current_value else false
 			set_value(current_value)
 		TYPE_STRING:
-			current_value = str(current_value).trim_prefix('@')
+			current_value = str(current_value).trim_prefix("@")
 			set_value(current_value)
 		TYPE_FLOAT, TYPE_INT:
 			current_value = float(current_value)
 			set_value(current_value)
-		TYPE_MAX,_:
+		TYPE_MAX, _:
 			current_value = var_to_str(current_value)
-			set_value('@'+current_value)
+			set_value("@" + current_value)
 
-
-	emit_signal.call_deferred('value_changed')
+	emit_signal.call_deferred("value_changed")
 
 
 func get_value() -> Variant:
@@ -98,7 +83,7 @@ func _on_delete_pressed() -> void:
 	value_changed.emit()
 
 
-func change_field_type(type:int) -> void:
+func change_field_type(type: int) -> void:
 	if type == value_type:
 		return
 
@@ -128,19 +113,23 @@ func change_field_type(type:int) -> void:
 	$Value.add_child(value_field)
 	$Value.move_child(value_field, 1)
 
-func _on_bool_toggled(value:bool) -> void:
+
+func _on_bool_toggled(value: bool) -> void:
 	current_value = value
 	value_changed.emit()
 
-func _on_str_text_changed(value:String) -> void:
+
+func _on_str_text_changed(value: String) -> void:
 	current_value = value
 	value_changed.emit()
 
-func _on_expression_changed(value:String) -> void:
-	current_value = '@'+value
+
+func _on_expression_changed(value: String) -> void:
+	current_value = "@" + value
 	value_changed.emit()
 
-func _on_number_value_changed(prop:String, value:float, int := false) -> void:
+
+func _on_number_value_changed(prop: String, value: float, int := false) -> void:
 	if int:
 		current_value = int(value)
 	else:

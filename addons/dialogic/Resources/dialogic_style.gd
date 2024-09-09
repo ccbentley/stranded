@@ -5,7 +5,6 @@ class_name DialogicStyle
 ## A style represents a collection of layers and settings.
 ## A style can inherit from another style.
 
-
 @export var name := "Style":
 	get:
 		if name.is_empty():
@@ -20,8 +19,7 @@ class_name DialogicStyle
 @export var layers: Array[DialogicStyleLayer] = []
 
 
-
-func _init(_name:="") -> void:
+func _init(_name := "") -> void:
 	if not _name.is_empty():
 		name = _name
 
@@ -36,29 +34,29 @@ func get_base_scene() -> PackedScene:
 
 ## This always returns the full inherited roots layers!
 func get_layer_list() -> PackedStringArray:
-	return PackedStringArray(get_inheritance_root().layers.map(func(x:DialogicStyleLayer): return x.scene.resource_path))
+	return PackedStringArray(get_inheritance_root().layers.map(func(x: DialogicStyleLayer): return x.scene.resource_path))
 
 
 func get_layer_count() -> int:
 	return layers.size()
 
 
-func get_layer_info(index:int) -> Dictionary:
+func get_layer_info(index: int) -> Dictionary:
 	if index == -1:
-		return {'path':get_base_scene().resource_path, 'overrides':base_overrides.duplicate()}
+		return {"path": get_base_scene().resource_path, "overrides": base_overrides.duplicate()}
 
 	if index < layers.size():
 		if layers[index].scene != null:
-			return {'path':layers[index].scene.resource_path, 'overrides':layers[index].overrides.duplicate()}
+			return {"path": layers[index].scene.resource_path, "overrides": layers[index].overrides.duplicate()}
 		else:
-			return {'path':'', 'overrides':layers[index].overrides.duplicate()}
+			return {"path": "", "overrides": layers[index].overrides.duplicate()}
 
-	return {'path':'', 'overrides':{}}
+	return {"path": "", "overrides": {}}
 
 
-func get_layer_inherited_info(index:int, inherited_only:=false) -> Dictionary:
+func get_layer_inherited_info(index: int, inherited_only := false) -> Dictionary:
 	var style := self
-	var info := {'path':'', 'overrides':{}}
+	var info := {"path": "", "overrides": {}}
 	if not inherited_only:
 		info = get_layer_info(index)
 
@@ -69,12 +67,12 @@ func get_layer_inherited_info(index:int, inherited_only:=false) -> Dictionary:
 	return info
 
 
-func add_layer(scene:String, overrides:Dictionary = {}) -> void:
+func add_layer(scene: String, overrides: Dictionary = {}) -> void:
 	layers.append(DialogicStyleLayer.new(scene, overrides))
 	changed.emit()
 
 
-func delete_layer(layer_index:int) -> void:
+func delete_layer(layer_index: int) -> void:
 	if not has_layer(layer_index):
 		return
 
@@ -82,8 +80,8 @@ func delete_layer(layer_index:int) -> void:
 	changed.emit()
 
 
-func move_layer(from_index:int, to_index:int) -> void:
-	if not has_layer(from_index) or not has_layer(to_index-1):
+func move_layer(from_index: int, to_index: int) -> void:
+	if not has_layer(from_index) or not has_layer(to_index - 1):
 		return
 
 	var info: Resource = layers.pop_at(from_index)
@@ -91,7 +89,7 @@ func move_layer(from_index:int, to_index:int) -> void:
 	changed.emit()
 
 
-func set_layer_scene(layer_index:int, scene:String) -> void:
+func set_layer_scene(layer_index: int, scene: String) -> void:
 	if not has_layer(layer_index):
 		return
 
@@ -103,7 +101,7 @@ func set_layer_scene(layer_index:int, scene:String) -> void:
 	changed.emit()
 
 
-func set_layer_setting(layer:int, setting:String, value:Variant) -> void:
+func set_layer_setting(layer: int, setting: String, value: Variant) -> void:
 	if not has_layer(layer):
 		return
 
@@ -115,7 +113,7 @@ func set_layer_setting(layer:int, setting:String, value:Variant) -> void:
 	changed.emit()
 
 
-func remove_layer_setting(layer:int, setting:String) -> void:
+func remove_layer_setting(layer: int, setting: String) -> void:
 	if not has_layer(layer):
 		return
 
@@ -128,7 +126,7 @@ func remove_layer_setting(layer:int, setting:String) -> void:
 
 
 ## This merges two layers (mainly their overrides). Layer a has priority!
-func merge_layer_infos(layer_a:Dictionary, layer_b:Dictionary) -> Dictionary:
+func merge_layer_infos(layer_a: Dictionary, layer_b: Dictionary) -> Dictionary:
 	var combined := layer_a.duplicate(true)
 
 	combined.path = layer_b.path
@@ -137,7 +135,7 @@ func merge_layer_infos(layer_a:Dictionary, layer_b:Dictionary) -> Dictionary:
 	return combined
 
 
-func has_layer(index:int) -> bool:
+func has_layer(index: int) -> bool:
 	return index < layers.size()
 
 

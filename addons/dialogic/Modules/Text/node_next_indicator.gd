@@ -5,7 +5,6 @@ extends Control
 ## Node that is shown when the text is fully revealed.
 ## The default implementation allows to set an icon and animation.
 
-
 @export var enabled := true
 
 ## If true the next indicator will also be shown if the text is a question.
@@ -14,34 +13,34 @@ extends Control
 @export var show_on_autoadvance := false
 
 ## What animation should the indicator do.
-@export_enum('bounce', 'blink', 'none') var animation := 0
+@export_enum("bounce", "blink", "none") var animation := 0
 
-var texture_rect : TextureRect
+var texture_rect: TextureRect
 
 ## Set the image to use as the indicator.
-@export var texture : Texture2D = preload("res://addons/dialogic/Example Assets/next-indicator/next-indicator.png") as Texture2D:
+@export var texture: Texture2D = preload("res://addons/dialogic/Example Assets/next-indicator/next-indicator.png") as Texture2D:
 	set(_texture):
 		texture = _texture
 		if texture_rect:
 			texture_rect.texture = texture
 
-@export var texture_size := Vector2(32,32):
+@export var texture_size := Vector2(32, 32):
 	set(_texture_size):
 		texture_size = _texture_size
-		if has_node('Texture'):
-			get_node('Texture').size = _texture_size
-			get_node('Texture').position = -_texture_size
-
+		if has_node("Texture"):
+			get_node("Texture").size = _texture_size
+			get_node("Texture").position = -_texture_size
 
 var tween: Tween
 
+
 func _ready():
-	add_to_group('dialogic_next_indicator')
+	add_to_group("dialogic_next_indicator")
 
 	# Creating TextureRect if missing
 	if not texture_rect:
 		var icon := TextureRect.new()
-		icon.name = 'Texture'
+		icon.name = "Texture"
 		icon.ignore_texture_size = true
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.size = texture_size
@@ -60,7 +59,7 @@ func _on_visibility_changed():
 		play_animation(animation, 1.0)
 
 
-func play_animation(animation: int, time:float) -> void:
+func play_animation(animation: int, time: float) -> void:
 	# clean up previous tween to prevent slipping
 	if tween:
 		tween.stop()
@@ -73,8 +72,8 @@ func play_animation(animation: int, time:float) -> void:
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_loops()
 
-		tween.tween_property(self, 'position', Vector2(0,distance), time*0.3).as_relative()
-		tween.tween_property(self, 'position', - Vector2(0,distance), time*0.3).as_relative()
+		tween.tween_property(self, "position", Vector2(0, distance), time * 0.3).as_relative()
+		tween.tween_property(self, "position", -Vector2(0, distance), time * 0.3).as_relative()
 	if animation == 1:
 		tween = (create_tween() as Tween)
 		tween.set_parallel(false)
@@ -82,5 +81,5 @@ func play_animation(animation: int, time:float) -> void:
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_loops()
 
-		tween.tween_property(self, 'modulate:a', 0, time*0.3)
-		tween.tween_property(self, 'modulate:a', 1, time*0.3)
+		tween.tween_property(self, "modulate:a", 0, time * 0.3)
+		tween.tween_property(self, "modulate:a", 1, time * 0.3)

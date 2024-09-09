@@ -16,8 +16,10 @@ func get_value() -> Vector2:
 
 func _on_sub_value_changed(sub_component: String, value: float) -> void:
 	match sub_component:
-		'X': current_value.x = value
-		'Y': current_value.y = value
+		"X":
+			current_value.x = value
+		"Y":
+			current_value.y = value
 	_on_value_changed(current_value)
 
 

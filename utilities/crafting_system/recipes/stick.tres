@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=6 format=3 uid="uid://btel81o2xx7uy"]
+
+[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_4wu2v"]
+[ext_resource type="Resource" uid="uid://bxdidjyuncfqv" path="res://entities/items/materials/stick/stick.tres" id="1_mg0e4"]
+[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_axu1b"]
+[ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_jbsj7"]
+
+[sub_resource type="Resource" id="Resource_u8dmu"]
+script = ExtResource("1_4wu2v")
+item = ExtResource("3_jbsj7")
+quantity = 1
+
+[resource]
+script = ExtResource("2_axu1b")
+item = ExtResource("1_mg0e4")
+requirements = Array[ExtResource("1_4wu2v")]([SubResource("Resource_u8dmu")])

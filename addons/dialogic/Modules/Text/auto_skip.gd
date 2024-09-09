@@ -13,7 +13,8 @@ signal toggled(is_enabled: bool)
 ## If Auto-Skip is referred to be [i]disabled[/i], it refers to setting this
 ## this variable to `false`.
 ## This variable will automatically emit [signal autoskip_changed] when changed.
-var enabled: bool = false : set = _set_enabled
+var enabled: bool = false:
+	set = _set_enabled
 
 ## If `true`, Auto-Skip will be disabled when the user presses a recognised
 ## input action.
@@ -38,10 +39,10 @@ var time_per_event: float = 0.1
 
 ## Setting up Auto-Skip.
 func _init() -> void:
-	enable_on_visited = ProjectSettings.get_setting('dialogic/text/autoskip_enabled', enable_on_visited)
-	time_per_event = ProjectSettings.get_setting('dialogic/text/autoskip_time_per_event', time_per_event)
+	enable_on_visited = ProjectSettings.get_setting("dialogic/text/autoskip_enabled", enable_on_visited)
+	time_per_event = ProjectSettings.get_setting("dialogic/text/autoskip_time_per_event", time_per_event)
 
-	if DialogicUtil.autoload().has_subsystem('History'):
+	if DialogicUtil.autoload().has_subsystem("History"):
 		DialogicUtil.autoload().History.visited_event.connect(_handle_seen_event)
 		DialogicUtil.autoload().History.unvisited_event.connect(_handle_unseen_event)
 

@@ -6,9 +6,9 @@ class_name QuestManager
 @onready var quest_description_label: Label = $QuestDescription
 
 @export_group("Quest Settings")
-@export var quest_name: String # Name of quest
-@export var quest_description: String # UI description text
-@export var reached_goal_text: String # Ui description text after reaching goal
+@export var quest_name: String  # Name of quest
+@export var quest_description: String  # UI description text
+@export var reached_goal_text: String  # Ui description text after reaching goal
 
 # Quest statuses
 enum QuestStatus {

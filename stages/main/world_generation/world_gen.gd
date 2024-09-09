@@ -274,6 +274,7 @@ func get_tile_type(pos: Vector2i) -> int:
 	else:
 		return 0
 
+
 func map_to_local(tile_pos: Vector2i) -> Vector2:
 	return tile_pos * tile_size
 

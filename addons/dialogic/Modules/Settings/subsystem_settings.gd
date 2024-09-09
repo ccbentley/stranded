@@ -11,59 +11,60 @@ extends DialogicSubsystem
 var settings := {}
 var _connections := {}
 
-
 #region MAIN METHODS
 ####################################################################################################
 
+
 ## Built-in, called by DialogicGameHandler.
-func clear_game_state(clear_flag:=DialogicGameHandler.ClearFlags.FULL_CLEAR):
+func clear_game_state(clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR):
 	_reload_settings()
 
 
 func _reload_settings() -> void:
 	settings = {}
 	for prop in ProjectSettings.get_property_list():
-		if prop.name.begins_with('dialogic/settings'):
-			settings[prop.name.trim_prefix('dialogic/settings/')] = ProjectSettings.get_setting(prop.name)
+		if prop.name.begins_with("dialogic/settings"):
+			settings[prop.name.trim_prefix("dialogic/settings/")] = ProjectSettings.get_setting(prop.name)
 
-	if dialogic.has_subsystem('Save'):
+	if dialogic.has_subsystem("Save"):
 		for i in settings:
 			settings[i] = dialogic.Save.get_global_info(i, settings[i])
 
 
-func _set(property:StringName, value:Variant) -> bool:
+func _set(property: StringName, value: Variant) -> bool:
 	if not settings.has(property) or settings[property] != value:
 		_setting_changed(property, value)
 	settings[property] = value
-	if dialogic.has_subsystem('Save'):
+	if dialogic.has_subsystem("Save"):
 		dialogic.Save.set_global_info(property, value)
 	return true
 
 
-func _get(property:StringName) -> Variant:
+func _get(property: StringName) -> Variant:
 	if property in settings:
 		return settings[property]
 	return null
 
 
-func _setting_changed(property:StringName, value:Variant) -> void:
+func _setting_changed(property: StringName, value: Variant) -> void:
 	if !property in _connections:
 		return
 
 	for i in _connections[property]:
 		i.call(value)
 
-#endregion
 
+#endregion
 
 #region HANDY METHODS
 ####################################################################################################
 
-func get_setting(property:StringName, default:Variant) -> Variant:
+
+func get_setting(property: StringName, default: Variant) -> Variant:
 	return _get(property) if _get(property) != null else default
 
 
-func has_setting(property:StringName) -> bool:
+func has_setting(property: StringName) -> bool:
 	return property in settings
 
 
@@ -72,16 +73,16 @@ func reset_all() -> void:
 		reset_setting(setting)
 
 
-func reset_setting(property:StringName) -> void:
-	if ProjectSettings.has_setting('dialogic/settings/'+property):
-		settings[property] = ProjectSettings.get_setting('dialogic/settings/'+property)
+func reset_setting(property: StringName) -> void:
+	if ProjectSettings.has_setting("dialogic/settings/" + property):
+		settings[property] = ProjectSettings.get_setting("dialogic/settings/" + property)
 		_setting_changed(property, settings[property])
 	else:
 		settings.erase(property)
 		_setting_changed(property, null)
 
 
-func connect_to_change(setting:StringName, callable:Callable) -> void:
+func connect_to_change(setting: StringName, callable: Callable) -> void:
 	if !setting in _connections:
 		_connections[setting] = []
 	_connections[setting].append(callable)

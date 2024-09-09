@@ -11,11 +11,11 @@ var events_processed: bool = false
 
 ## Method used for printing timeline resources identifiably
 func _to_string() -> String:
-	return "[DialogicTimeline:{file}]".format({"file":resource_path})
+	return "[DialogicTimeline:{file}]".format({"file": resource_path})
 
 
 ## Helper method
-func get_event(index:int) -> Variant:
+func get_event(index: int) -> Variant:
 	if index >= len(events):
 		return null
 	return events[index]
@@ -23,8 +23,8 @@ func get_event(index:int) -> Variant:
 
 ## Parses the lines as seperate events and insert them in an array,
 ## so they can be converted to DialogicEvent's when processed later
-func from_text(text:String) -> void:
-	events = text.split('\n', true)
+func from_text(text: String) -> void:
+	events = text.split("\n", true)
 	events_processed = false
 
 
@@ -37,23 +37,23 @@ func as_text() -> String:
 		for idx in range(0, len(events)):
 			var event: DialogicEvent = events[idx]
 
-			if event.event_name == 'End Branch':
+			if event.event_name == "End Branch":
 				indent -= 1
 				continue
 
 			if event != null:
 				for i in event.empty_lines_above:
-					result += "\t".repeat(indent)+"\n"
-				result += "\t".repeat(indent)+event.event_node_as_text.replace('\n', "\n"+"\t".repeat(indent)) + "\n"
+					result += "\t".repeat(indent) + "\n"
+				result += "\t".repeat(indent) + event.event_node_as_text.replace("\n", "\n" + "\t".repeat(indent)) + "\n"
 			if event.can_contain_events:
 				indent += 1
 			if indent < 0:
 				indent = 0
 	else:
 		for event in events:
-			result += str(event)+"\n"
+			result += str(event) + "\n"
 
-		result.trim_suffix('\n')
+		result.trim_suffix("\n")
 
 	return result.strip_edges()
 
@@ -81,7 +81,7 @@ func process() -> void:
 	var lines := events
 	var idx := -1
 	var empty_lines := 0
-	while idx < len(lines)-1:
+	while idx < len(lines) - 1:
 		idx += 1
 
 		# make sure we are using the string version, in case this was already converted
@@ -98,9 +98,9 @@ func process() -> void:
 			continue
 
 		## Add an end event if the indent is smaller then previously
-		var indent: String = line.substr(0,len(line)-len(line_stripped))
+		var indent: String = line.substr(0, len(line) - len(line_stripped))
 		if len(indent) < len(prev_indent):
-			for i in range(len(prev_indent)-len(indent)):
+			for i in range(len(prev_indent) - len(indent)):
 				processed_events.append(end_event.duplicate())
 		## Add an end event if the indent is the same but the previous was an opener
 		## (so for example choice that is empty)
@@ -130,7 +130,7 @@ func process() -> void:
 			if following_line_stripped.is_empty():
 				break
 
-			event_content += "\n"+following_line_stripped
+			event_content += "\n" + following_line_stripped
 
 		event._load_from_string(event_content)
 		event.event_node_as_text = event_content
@@ -156,7 +156,7 @@ func clean() -> void:
 	# are disconnected before they can disconnect themselves.
 	await Engine.get_main_loop().process_frame
 
-	for event:DialogicEvent in events:
+	for event: DialogicEvent in events:
 		for con_in in event.get_incoming_connections():
 			con_in.signal.disconnect(con_in.callable)
 

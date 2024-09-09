@@ -8,7 +8,7 @@ extends Control
 signal changed
 
 ## Reference to the character editor, set when instantiated
-var character_editor:Control
+var character_editor: Control
 
 ## If not empty, a hint icon is added to the section title.
 var hint_text := ""
@@ -30,12 +30,12 @@ func _start_opened() -> bool:
 
 
 ## Overwrite to load all the information from the character into this section.
-func _load_character(resource:DialogicCharacter) -> void:
+func _load_character(resource: DialogicCharacter) -> void:
 	pass
 
 
 ## Overwrite to save all changes made in this section to the resource.
 ## In custom sections you will mostly likely save to the [resource.custom_info]
 ##  dictionary.
-func _save_changes(resource:DialogicCharacter) -> DialogicCharacter:
+func _save_changes(resource: DialogicCharacter) -> DialogicCharacter:
 	return resource

@@ -4,6 +4,7 @@ class_name DialogicSettingsPage
 
 @export_multiline var short_info := ""
 
+
 ## Called to get the title of the page
 func _get_title() -> String:
 	return name

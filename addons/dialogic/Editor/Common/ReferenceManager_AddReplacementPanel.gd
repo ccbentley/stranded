@@ -1,11 +1,10 @@
 @tool
 extends PanelContainer
 
-
-enum Modes {EDIT, ADD}
+enum Modes { EDIT, ADD }
 
 var mode := Modes.EDIT
-var item :TreeItem = null
+var item: TreeItem = null
 
 
 func _ready() -> void:
@@ -15,6 +14,7 @@ func _ready() -> void:
 
 	%WholeWords.icon = get_theme_icon("FontItem", "EditorIcons")
 	%MatchCase.icon = get_theme_icon("MatchCase", "EditorIcons")
+
 
 func _on_add_pressed() -> void:
 	if visible:
@@ -35,7 +35,7 @@ func _on_add_pressed() -> void:
 	%New.text = ""
 
 
-func open_existing(_item:TreeItem, info:Dictionary):
+func open_existing(_item: TreeItem, info: Dictionary):
 	mode = Modes.EDIT
 	item = _item
 	show()
@@ -52,7 +52,8 @@ func open_existing(_item:TreeItem, info:Dictionary):
 	%Old.text = info.what
 	%New.text = info.forwhat
 
-func _on_type_item_selected(index:int) -> void:
+
+func _on_type_item_selected(index: int) -> void:
 	match index:
 		0:
 			%Where.select(0)
@@ -69,7 +70,7 @@ func _on_type_item_selected(index:int) -> void:
 			%Where.set_item_disabled(0, true)
 			%Where.set_item_disabled(1, false)
 			%Where.set_item_disabled(2, true)
-		3,4:
+		3, 4:
 			%Where.select(0)
 			%Where.set_item_disabled(0, false)
 			%Where.set_item_disabled(1, true)
@@ -78,24 +79,21 @@ func _on_type_item_selected(index:int) -> void:
 	_on_where_item_selected(%Where.selected)
 
 
-func _on_where_item_selected(index:int) -> void:
+func _on_where_item_selected(index: int) -> void:
 	%Character.visible = index == 1
 
 
-func get_character_suggestions(search_text:String) -> Dictionary:
+func get_character_suggestions(search_text: String) -> Dictionary:
 	var suggestions := {}
 
 	#override the previous _character_directory with the meta, specifically for searching otherwise new nodes wont work
 	var _character_directory = DialogicResourceUtil.get_character_directory()
 
 	var icon := load("res://addons/dialogic/Editor/Images/Resources/character.svg")
-	suggestions['(No one)'] = {'value':null, 'editor_icon':["GuiRadioUnchecked", "EditorIcons"]}
+	suggestions["(No one)"] = {"value": null, "editor_icon": ["GuiRadioUnchecked", "EditorIcons"]}
 
 	for resource in _character_directory.keys():
-		suggestions[resource] = {
-				'value' 	: resource,
-				'tooltip' 	: _character_directory[resource],
-				'icon' 		: icon.duplicate()}
+		suggestions[resource] = {"value": resource, "tooltip": _character_directory[resource], "icon": icon.duplicate()}
 	return suggestions
 
 
@@ -111,7 +109,7 @@ func save():
 		item.get_parent()
 		item.free()
 
-	var ref_manager := find_parent('ReferenceManager')
+	var ref_manager := find_parent("ReferenceManager")
 	var character_names := []
 	if %Character.current_value != null:
 		character_names = [%Character.current_value]
