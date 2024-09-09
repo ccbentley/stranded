@@ -1,3 +1,4 @@
+@icon("node_dialog_text_icon.svg")
 class_name DialogicNode_DialogText
 extends RichTextLabel
 
@@ -33,8 +34,6 @@ func _set(property: StringName, what: Variant) -> bool:
 			textbox_root.visible = !what.is_empty()
 
 		return true
-	return false
-
 	return false
 
 

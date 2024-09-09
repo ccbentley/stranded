@@ -45,7 +45,7 @@ var base_sound_player := AudioStreamPlayer.new()
 ## Clears the state on this subsystem and stops all audio.
 ##
 ## If you want to stop sounds only, use [method stop_all_sounds].
-func clear_game_state(clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
+func clear_game_state(_clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
 	update_music()
 	stop_all_sounds()
 
@@ -73,6 +73,12 @@ func resume() -> void:
 		child.stream_paused = false
 
 
+func _on_dialogic_timeline_ended() -> void:
+	if not dialogic.Styles.get_layout_node():
+		clear_game_state()
+	pass
+
+
 #endregion
 
 #region MAIN METHODS
@@ -80,6 +86,8 @@ func resume() -> void:
 
 
 func _ready() -> void:
+	dialogic.timeline_ended.connect(_on_dialogic_timeline_ended)
+
 	base_music_player.name = "Music"
 	add_child(base_music_player)
 

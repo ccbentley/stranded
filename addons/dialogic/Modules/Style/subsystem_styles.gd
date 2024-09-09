@@ -8,7 +8,7 @@ signal style_changed(info: Dictionary)
 ####################################################################################################
 
 
-func clear_game_state(clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
+func clear_game_state(_clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
 	pass
 
 
@@ -24,7 +24,16 @@ func load_game_state(load_flag := LoadFlags.FULL_LOAD) -> void:
 ####################################################################################################
 
 
-func load_style(style_name := "", parent: Node = null, is_base_style := true) -> Node:
+## This helper method calls load_style, but with the [parameter state_reload] as true,
+## which is commonly wanted if you expect a game to already be in progress.
+func change_style(style_name := "", is_base_style := true) -> Node:
+	return load_style(style_name, null, is_base_style, true)
+
+
+## Loads a style. Consider using the simpler [method change_style] if you want to change the style while another style is already in use.
+## [br] If [param state_reload] is true, the current state will be loaded into a new layout scenes nodes.
+## That should not be done before calling start() or load() as it would be unnecessary or cause double-loading.
+func load_style(style_name := "", parent: Node = null, is_base_style := true, state_reload := false) -> Node:
 	var style := DialogicUtil.get_style_by_name(style_name)
 
 	var signal_info := {"style": style_name}
@@ -62,7 +71,8 @@ func load_style(style_name := "", parent: Node = null, is_base_style := true) ->
 
 	# if this is another style:
 	var new_layout := create_layout(style, parent)
-	new_layout.ready.connect(reload_current_info_into_new_style)
+	if state_reload:
+		new_layout.ready.connect(reload_current_info_into_new_style)
 
 	style_changed.emit(signal_info)
 

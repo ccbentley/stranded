@@ -41,5 +41,5 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 
-func build_event_editor():
+func build_event_editor() -> void:
 	pass

@@ -17,7 +17,7 @@ enum VarValueType {
 ## Settings
 
 ## Name/Path of the variable that should be changed.
-var name: String = "":
+var name := "":
 	set(_value):
 		name = _value
 		if Engine.is_editor_hint() and not value:
@@ -32,7 +32,7 @@ var name: String = "":
 		update_editor_warning()
 
 ## The operation to perform.
-var operation: int = Operations.SET:
+var operation := Operations.SET:
 	set(value):
 		operation = value
 		if operation != Operations.SET and _value_type == VarValueType.STRING:
@@ -64,7 +64,7 @@ var random_max: int = 100
 
 ## Used to suppress _value_type from overwriting value with a default value when the type changes
 ## This is only used when initializing the event_variable.
-var _suppress_default_value: bool = false
+var _suppress_default_value := false
 
 ################################################################################
 ## 						EXECUTE
@@ -235,7 +235,7 @@ func is_valid_event(string: String) -> bool:
 ################################################################################
 
 
-func build_event_editor():
+func build_event_editor() -> void:
 	add_header_edit(
 		"name",
 		ValueType.DYNAMIC_OPTIONS,
@@ -302,7 +302,7 @@ func get_var_suggestions(filter: String) -> Dictionary:
 	return suggestions
 
 
-func get_value_suggestions(filter: String) -> Dictionary:
+func get_value_suggestions(_filter: String) -> Dictionary:
 	var suggestions := {}
 
 	for var_path in DialogicUtil.list_variables(DialogicUtil.get_default_variables()):
@@ -310,8 +310,8 @@ func get_value_suggestions(filter: String) -> Dictionary:
 	return suggestions
 
 
-func _on_variable_editor_pressed():
-	var editor_manager := _editor_node.find_parent("EditorsManager")
+func _on_variable_editor_pressed() -> void:
+	var editor_manager := editor_node.find_parent("EditorsManager")
 	if editor_manager:
 		editor_manager.open_editor(editor_manager.editors["VariablesEditor"]["node"], true)
 
@@ -333,14 +333,14 @@ func update_editor_warning() -> void:
 ################################################################################
 
 
-func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, word: String, symbol: String) -> void:
+func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, _word: String, symbol: String) -> void:
 	if CodeCompletionHelper.get_line_untill_caret(line) == "set ":
 		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "{", "{", TextNode.syntax_highlighter.variable_color)
 	if symbol == "{":
 		CodeCompletionHelper.suggest_variables(TextNode)
 
 
-func _get_start_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
+func _get_start_code_completion(_CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, "set", "set ", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5))
 
 

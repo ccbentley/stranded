@@ -7,15 +7,15 @@ signal resource_opened(resource)
 signal editor_changed(previous, current)
 
 ### References
-@onready var hsplit = $HSplit
-@onready var sidebar = $HSplit/Sidebar
-@onready var editors_holder = $HSplit/VBox/Editors
-@onready var toolbar = $HSplit/VBox/Toolbar
-@onready var tabbar = $HSplit/VBox/Toolbar/EditorTabBar
+@onready var hsplit := $HSplit
+@onready var sidebar := $HSplit/Sidebar
+@onready var editors_holder := $HSplit/VBox/Editors
+@onready var toolbar := $HSplit/VBox/Toolbar
+@onready var tabbar := $HSplit/VBox/Toolbar/EditorTabBar
 
 var reference_manager: Node:
 	get:
-		return get_node("../../ReferenceManager")
+		return get_node("../ReferenceManager")
 
 ## Information on supported resource extensions and registered editors
 var current_editor: DialogicEditor = null
@@ -56,7 +56,7 @@ func _ready() -> void:
 
 	DialogicResourceUtil.update()
 
-	await get_parent().get_parent().ready
+	await get_parent().ready
 	await get_tree().process_frame
 
 	load_saved_state()
@@ -120,7 +120,7 @@ func _on_editors_tab_changed(tab: int) -> void:
 func edit_resource(resource: Resource, save_previous: bool = true, silent := false) -> void:
 	if not resource:
 		# The resource doesn't exists, show an error
-		print("[Dialogic] The resource you are trying to edit doesn't exists any more.")
+		print("[Dialogic] The resource you are trying to edit doesn't exist any more.")
 		return
 
 	if current_editor and save_previous:
@@ -205,7 +205,8 @@ func _on_add_resource_dialog_accepted(path: String, callable: Callable) -> void:
 
 ## Called by the plugin.gd script on CTRL+S or Debug Game start
 func save_current_resource() -> void:
-	current_editor._save()
+	if current_editor:
+		current_editor._save()
 
 
 ## Change the resource state
@@ -274,5 +275,5 @@ func get_current_editor() -> DialogicEditor:
 	return current_editor
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	DialogicUtil.set_editor_setting("last_resources", used_resources_cache)

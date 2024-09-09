@@ -38,7 +38,7 @@ var current_indent_level := 1
 ################################################################################
 
 
-func _ready():
+func _ready() -> void:
 	if get_parent() is SubViewport:
 		return
 
@@ -62,9 +62,11 @@ func initialize_ui() -> void:
 
 	# Expand Button
 	%ToggleBodyVisibilityButton.icon = get_theme_icon("CodeFoldedRightArrow", "EditorIcons")
-	%ToggleBodyVisibilityButton.modulate = get_theme_color("contrast_color_1", "Editor")
-	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_normal_color", get_theme_color("contrast_color_1", "Editor"))
-	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_pressed_color", get_theme_color("contrast_color_1", "Editor"))
+	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_normal_color", get_theme_color("contrast_color_2", "Editor"))
+	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_hover_color", get_theme_color("accent_color", "Editor"))
+	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_pressed_color", get_theme_color("contrast_color_2", "Editor"))
+	%ToggleBodyVisibilityButton.set("theme_override_colors/icon_hover_pressed_color", get_theme_color("accent_color", "Editor"))
+	%ToggleBodyVisibilityButton.add_theme_stylebox_override("hover_pressed", StyleBoxEmpty.new())
 
 	# Icon Panel
 	%IconPanel.tooltip_text = resource.event_name
@@ -216,6 +218,7 @@ func build_editor(build_header: bool = true, build_body: bool = false) -> void:
 		elif p.field_type == resource.ValueType.BUTTON:
 			editor_node = Button.new()
 			editor_node.text = p.display_info.text
+			editor_node.tooltip_text = p.display_info.get("tooltip", "")
 			if typeof(p.display_info.icon) == TYPE_ARRAY:
 				editor_node.icon = callv("get_theme_icon", p.display_info.icon)
 			else:
@@ -319,6 +322,8 @@ func recalculate_field_visibility() -> void:
 		else:
 			if _evaluate_visibility_condition(p):
 				if p.node != null:
+					if p.node.visible == false and p.has("property"):
+						p.node._set_value(resource.get(p.property))
 					p.node.show()
 				if p.location == 1:
 					has_any_enabled_body_content = true
@@ -370,7 +375,7 @@ func _on_resource_ui_update_needed() -> void:
 
 func _on_collapse_toggled(toggled: bool) -> void:
 	collapsed = toggled
-	var timeline_editor = find_parent("VisualEditor")
+	var timeline_editor: Node = find_parent("VisualEditor")
 	if timeline_editor != null:
 		# @todo select item and clear selection is marked as "private" in TimelineEditor.gd
 		# consider to make it "public" or add a public helper function

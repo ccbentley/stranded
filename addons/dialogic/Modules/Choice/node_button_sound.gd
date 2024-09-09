@@ -12,7 +12,7 @@ extends AudioStreamPlayer
 @export var sound_focus: AudioStream
 
 
-func _ready():
+func _ready() -> void:
 	add_to_group("dialogic_button_sound")
 	_connect_all_buttons()
 
@@ -24,7 +24,7 @@ func play_sound(sound) -> void:
 		play()
 
 
-func _connect_all_buttons():
+func _connect_all_buttons() -> void:
 	for child in get_parent().get_children():
 		if child is DialogicNode_ChoiceButton:
 			child.button_up.connect(_on_pressed.bind(child.sound_pressed))

@@ -1,7 +1,7 @@
 extends DialogicAnimation
 
 
-func animate():
+func animate() -> void:
 	var tween := node.create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
@@ -18,3 +18,9 @@ func animate():
 	tween.parallel().tween_property(node, "rotation", 0.0, time * 0.3)
 
 	tween.finished.connect(emit_signal.bind("finished_once"))
+
+
+func _get_named_variations() -> Dictionary:
+	return {
+		"tada": {"type": AnimationType.ACTION},
+	}

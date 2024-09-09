@@ -1,7 +1,7 @@
 @tool
 extends DialogicLayoutLayer
 
-## This layout won't do anything on it's own
+## This layout won't do anything on its own
 
 @export_group("Main")
 @export_subgroup("Text")
@@ -138,8 +138,7 @@ func bubble_apply_overrides(bubble: TextBubble) -> void:
 	bubble.name_label_offset = name_label_offset
 	bubble.name_label_alignment = name_label_alignment
 
-	if !name_label_enabled:
-		nlp.queue_free()
+	nlp.get_parent().visible = name_label_enabled
 
 	## CHOICE SETTINGS
 	if choices_layout_force_lines:

@@ -3,7 +3,7 @@ extends Control
 
 func _ready() -> void:
 	print("[Dialogic] Testing scene was started.")
-	if !ProjectSettings.get_setting("internationalization/locale/test", "").is_empty():
+	if not ProjectSettings.get_setting("internationalization/locale/test", "").is_empty():
 		print("Testing locale is: ", ProjectSettings.get_setting("internationalization/locale/test"))
 	$PauseIndictator.hide()
 
@@ -15,8 +15,8 @@ func _ready() -> void:
 			scene.position = get_viewport_rect().size / 2.0
 
 	randomize()
-	var current_timeline: String = DialogicUtil.get_editor_setting("current_timeline_path", null)
-	if !current_timeline:
+	var current_timeline: String = DialogicUtil.get_editor_setting("current_timeline_path", "")
+	if not current_timeline:
 		get_tree().quit()
 	DialogicUtil.autoload().start(current_timeline)
 	DialogicUtil.autoload().timeline_ended.connect(get_tree().quit)
@@ -42,4 +42,4 @@ func _input(event: InputEvent) -> void:
 		var is_auto_skip_enabled := auto_skip.enabled
 
 		auto_skip.disable_on_unread_text = false
-		auto_skip.enabled = !is_auto_skip_enabled
+		auto_skip.enabled = not is_auto_skip_enabled

@@ -7,7 +7,7 @@ extends DialogicEvent
 ### Settings
 
 ## The name of the style to change to. Can be set on the DialogicNode_Style.
-var style_name: String = ""
+var style_name := ""
 
 ################################################################################
 ## 						EXECUTE
@@ -15,7 +15,7 @@ var style_name: String = ""
 
 
 func _execute() -> void:
-	dialogic.Styles.load_style(style_name)
+	dialogic.Styles.change_style(style_name)
 	# we need to wait till the new layout is ready before continuing
 	await dialogic.get_tree().process_frame
 	finish()
@@ -52,7 +52,7 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 
-func build_event_editor():
+func build_event_editor() -> void:
 	add_header_edit(
 		"style_name",
 		ValueType.DYNAMIC_OPTIONS,
@@ -60,7 +60,7 @@ func build_event_editor():
 	)
 
 
-func get_style_suggestions(filter: String = "") -> Dictionary:
+func get_style_suggestions(_filter := "") -> Dictionary:
 	var styles: Array = ProjectSettings.get_setting("dialogic/layout/style_list", [])
 
 	var suggestions := {}

@@ -12,10 +12,10 @@ extends Control
 @export_node_path var confirmation_button: NodePath
 
 # This is set by the subsystem and used as a confirmation check.
-var _allow_empty: bool = false
+var _allow_empty := false
 
 
-func _ready():
+func _ready() -> void:
 	add_to_group("dialogic_text_input")
 	if confirmation_button:
 		get_node(confirmation_button).pressed.connect(_on_confirmation_button_pressed)

@@ -11,7 +11,7 @@ func _update_portrait(passed_character: DialogicCharacter, passed_portrait: Stri
 		$Sprite.play(passed_portrait)
 
 
-func _on_animated_sprite_2d_animation_finished():
+func _on_animated_sprite_2d_animation_finished() -> void:
 	$Sprite.frame = randi() % $Sprite.sprite_frames.get_frame_count($Sprite.animation)
 	$Sprite.play()
 

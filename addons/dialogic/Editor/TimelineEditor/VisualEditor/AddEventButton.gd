@@ -1,8 +1,8 @@
 @tool
 extends Button
 
-@export var visible_name: String = ""
-@export var event_id: String = ""
+@export var visible_name := ""
+@export var event_id := ""
 @export var event_icon: Texture:
 	get:
 		return event_icon
@@ -11,7 +11,7 @@ extends Button
 		icon = event_icon
 @export var event_sorting_index: int = 0
 @export var resource: DialogicEvent
-@export var dialogic_color_name: String = ""
+@export var dialogic_color_name := ""
 
 
 func _ready() -> void:
@@ -59,5 +59,5 @@ func toggle_name(on := false) -> void:
 		apply_base_button_style()
 
 
-func _on_button_down():
+func _on_button_down() -> void:
 	find_parent("VisualEditor").get_node("%TimelineArea").start_dragging(1, resource)

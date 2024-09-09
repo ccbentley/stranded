@@ -11,7 +11,7 @@ var animation_in: AnimationsIn
 var animation_out: AnimationsOut
 var animation_new_text: AnimationsNewText
 
-var full_clear: bool = true
+var full_clear := true
 
 
 func get_text_panel() -> PanelContainer:
@@ -24,11 +24,12 @@ func get_dialog() -> DialogicNode_DialogText:
 
 func _ready() -> void:
 	var text_system: Node = DialogicUtil.autoload().get(&"Text")
-	var _error: int = 0
-	_error = text_system.connect(&"animation_textbox_hide", _on_textbox_hide)
-	_error = text_system.connect(&"animation_textbox_show", _on_textbox_show)
-	_error = text_system.connect(&"animation_textbox_new_text", _on_textbox_new_text)
-	_error = text_system.connect(&"about_to_show_text", _on_about_to_show_text)
+	text_system.connect(&"animation_textbox_hide", _on_textbox_hide)
+	text_system.connect(&"animation_textbox_show", _on_textbox_show)
+	text_system.connect(&"animation_textbox_new_text", _on_textbox_new_text)
+	text_system.connect(&"about_to_show_text", _on_about_to_show_text)
+	var animation_system: Node = DialogicUtil.autoload().get(&"Animations")
+	animation_system.connect(&"animation_interrupted", _on_animation_interrupted)
 
 
 func _on_textbox_show() -> void:
@@ -44,8 +45,8 @@ func _on_textbox_show() -> void:
 			play("textbox_pop")
 		AnimationsIn.FADE_UP:
 			play("textbox_fade_up")
-	if not is_connected(&"animation_finished", Callable(animation_system, &"animation_finished")):
-		var _error: int = connect(&"animation_finished", Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
+	if not animation_finished.is_connected(Callable(animation_system, &"animation_finished")):
+		animation_finished.connect(Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
 
 
 func _on_textbox_hide() -> void:
@@ -60,8 +61,8 @@ func _on_textbox_hide() -> void:
 		AnimationsOut.FADE_DOWN:
 			play_backwards("textbox_fade_up")
 
-	if not is_connected(&"animation_finished", Callable(animation_system, &"animation_finished")):
-		var _error: int = connect(&"animation_finished", Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
+	if not animation_finished.is_connected(Callable(animation_system, &"animation_finished")):
+		animation_finished.connect(Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
 
 
 func _on_about_to_show_text(info: Dictionary) -> void:
@@ -75,7 +76,7 @@ func _on_textbox_new_text() -> void:
 	if animation_new_text == AnimationsNewText.NONE:
 		return
 
-	var animation_system: Node = DialogicUtil.autoload().get(&"Animation")
+	var animation_system: Node = DialogicUtil.autoload().get(&"Animations")
 	animation_system.call(&"start_animating")
 	if full_clear:
 		get_dialog().text = ""
@@ -83,5 +84,10 @@ func _on_textbox_new_text() -> void:
 		AnimationsNewText.WIGGLE:
 			play("new_text")
 
-			if not is_connected(&"animation_finished", Callable(animation_system, &"animation_finished")):
-				var _error: int = connect(&"animation_finished", Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
+			if not animation_finished.is_connected(Callable(animation_system, &"animation_finished")):
+				animation_finished.connect(Callable(animation_system, &"animation_finished"), CONNECT_ONE_SHOT)
+
+
+func _on_animation_interrupted() -> void:
+	if is_playing():
+		stop()

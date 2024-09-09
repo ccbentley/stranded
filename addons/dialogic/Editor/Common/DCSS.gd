@@ -16,7 +16,10 @@ static func inline(style: Dictionary) -> StyleBoxFlat:
 				s.set("corner_radius_bottom_left", radius)
 				s.set("corner_radius_bottom_right", radius)
 			"background":
-				s.set("bg_color", style[property])
+				if typeof(style[property]) == TYPE_STRING and style[property] == "none":
+					s.set("draw_center", false)
+				else:
+					s.set("bg_color", style[property])
 			"border":
 				var width: float = style[property] * scale
 				s.set("border_width_left", width)
@@ -42,17 +45,4 @@ static func inline(style: Dictionary) -> StyleBoxFlat:
 				s.set("content_margin_right", style[property] * scale)
 			"padding-left":
 				s.set("content_margin_left", style[property] * scale)
-	return s
-
-
-static func style(node, style: Dictionary) -> StyleBoxFlat:
-	var s: StyleBoxFlat = inline(style)
-
-	node.set("theme_override_styles/normal", s)
-	node.set("theme_override_styles/focus", s)
-	node.set("theme_override_styles/read_only", s)
-	node.set("theme_override_styles/hover", s)
-	node.set("theme_override_styles/pressed", s)
-	node.set("theme_override_styles/disabled", s)
-	node.set("theme_override_styles/panel", s)
 	return s

@@ -21,7 +21,7 @@ func _set_value(value: Variant) -> void:
 		load_simple_editor(value)
 
 
-func _autofocus():
+func _autofocus() -> void:
 	%Value1Variable.grab_focus()
 
 

@@ -10,7 +10,7 @@ enum Modes { SET, RESET, RESET_ALL }
 enum SettingValueType { STRING, NUMBER, VARIABLE, EXPRESSION }
 
 ## The name of the setting to save to.
-var name: String = ""
+var name := ""
 var _value_type := 0:
 	get:
 		return _value_type
@@ -143,7 +143,7 @@ func is_valid_event(string: String) -> bool:
 ################################################################################
 
 
-func build_event_editor():
+func build_event_editor() -> void:
 	add_header_edit(
 		"mode",
 		ValueType.FIXED_OPTIONS,
@@ -198,7 +198,7 @@ func get_settings_suggestions(filter: String) -> Dictionary:
 	return suggestions
 
 
-func get_value_suggestions(filter: String) -> Dictionary:
+func get_value_suggestions(_filter: String) -> Dictionary:
 	var suggestions := {}
 
 	var vars: Dictionary = ProjectSettings.get_setting("dialogic/variables", {})
@@ -211,7 +211,7 @@ func get_value_suggestions(filter: String) -> Dictionary:
 ################################################################################
 
 
-func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, word: String, symbol: String) -> void:
+func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, _word: String, symbol: String) -> void:
 	if symbol == " " and !"reset" in line and !"=" in line and !'"' in line:
 		TextNode.add_code_completion_option(
 			CodeEdit.KIND_MEMBER, "reset", "reset ", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("RotateLeft", "EditorIcons")
@@ -238,7 +238,7 @@ func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: 
 				)
 
 
-func _get_start_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
+func _get_start_code_completion(_CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, "setting", "setting ", event_color)
 
 

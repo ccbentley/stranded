@@ -10,7 +10,7 @@ enum ConditionTypes { IF, ELIF, ELSE }
 ## condition type (see [ConditionTypes]). Defaults to if.
 var condition_type := ConditionTypes.IF
 ## The condition as a string. Will be executed as an Expression.
-var condition: String = ""
+var condition := ""
 
 ################################################################################
 ## 						EXECUTE
@@ -111,7 +111,7 @@ func is_valid_event(string: String) -> bool:
 ################################################################################
 
 
-func build_event_editor():
+func build_event_editor() -> void:
 	add_header_edit(
 		"condition_type",
 		ValueType.FIXED_OPTIONS,
@@ -141,12 +141,12 @@ func build_event_editor():
 ################################################################################
 
 
-func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, word: String, symbol: String) -> void:
+func _get_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit, line: String, _word: String, symbol: String) -> void:
 	if (line.begins_with("if") or line.begins_with("elif")) and symbol == "{":
 		CodeCompletionHelper.suggest_variables(TextNode)
 
 
-func _get_start_code_completion(CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
+func _get_start_code_completion(_CodeCompletionHelper: Node, TextNode: TextEdit) -> void:
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, "if", "if ", TextNode.syntax_highlighter.code_flow_color)
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, "elif", "elif ", TextNode.syntax_highlighter.code_flow_color)
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, "else", "else:\n	", TextNode.syntax_highlighter.code_flow_color)
