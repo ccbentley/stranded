@@ -1,19 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmsdop1snjvdn"]
+[gd_scene load_steps=5 format=3 uid="uid://dmsdop1snjvdn"]
 
+[ext_resource type="Texture2D" uid="uid://cdjlv8mmfae58" path="res://assets/art/sprout_lands_ui/Sprite sheet for Basic Pack.png" id="1_ao6td"]
 [ext_resource type="Script" path="res://common/inventory/slot.gd" id="1_ejgbi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jirf3"]
-bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.392157)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="AtlasTexture" id="AtlasTexture_laljd"]
+atlas = ExtResource("1_ao6td")
+region = Rect2(613, 4.5, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2o4g6"]
+texture = SubResource("AtlasTexture_laljd")
 
 [node name="Slot" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_jirf3")
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_2o4g6")
 script = ExtResource("1_ejgbi")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

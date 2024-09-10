@@ -7,12 +7,12 @@ signal force_close
 var grabbed_slot_data: SlotData
 var external_inventory_owner: Node2D
 
-@onready var player_inventory: PanelContainer = $VBoxContainer/PlayerInventoryContainer/PlayerInventory
+@onready var player_inventory: PanelContainer = $VBoxContainer/PlayerInventory/PlayerInventory
 @onready var grabbed_slot: Slot = $GrabbedSlot
-@onready var external_inventory: Inventory = $VBoxContainer/ExternalInventory
-@onready var external_inventory_label: Label = $VBoxContainer/ExternalInventoryLabel
-@onready var equip_inventory: PanelContainer = $VBoxContainer/PlayerInventoryContainer/EquipInventory
-@onready var crafting_inventory: CraftingInventory = $VBoxContainer/CraftingInventory
+@onready var external_inventory: Inventory = $VBoxContainer/ExternalInventory/ExternalInventory
+@onready var external_inventory_label: Label = $VBoxContainer/ExternalInventory/ExternalInventoryLabel
+@onready var equip_inventory: PanelContainer = $EquipInventory/EquipInventory
+@onready var crafting_inventory: CraftingInventory = $Crafting/CraftingInventory
 
 
 func set_player_inventory_data(inventory_data: InventoryData) -> void:

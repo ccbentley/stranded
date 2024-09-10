@@ -3,17 +3,12 @@
 [ext_resource type="Script" path="res://common/inventory/hot_bar/hot_bar_inventory.gd" id="1_gycws"]
 [ext_resource type="Texture2D" uid="uid://3mwrkqle6neu" path="res://common/inventory/hot_bar/art/selected.png" id="2_vmjdh"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5u0c"]
-bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b0gs1"]
 
 [node name="HotBarInventory" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_e5u0c")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b0gs1")
 script = ExtResource("1_gycws")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

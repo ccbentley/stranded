@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=28 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -21,7 +21,14 @@
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
 [ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
+[ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://entities/chest/chest.tscn" id="21_r5s4u"]
+[ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="22_rtnn6"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
+[ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="23_r7itn"]
+
+[sub_resource type="Resource" id="Resource_jhwue"]
+script = ExtResource("22_rtnn6")
+slot_datas = Array[ExtResource("23_r7itn")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
 stream_count = 1
@@ -63,55 +70,96 @@ layout_mode = 2
 script = ExtResource("12_5ileu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -113.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="PlayerInventoryContainer" type="HBoxContainer" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+[node name="ExternalInventory" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayerInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventoryContainer" instance=ExtResource("13_utryv")]
-layout_mode = 2
-
-[node name="EquipInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventoryContainer" instance=ExtResource("13_utryv")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="ExternalInventoryLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+[node name="ExternalInventoryLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/ExternalInventory"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "External Inventory"
 
-[node name="ExternalInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" instance=ExtResource("13_utryv")]
+[node name="ExternalInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/ExternalInventory" instance=ExtResource("13_utryv")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 
-[node name="CraftingLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
+[node name="PlayerInventory" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface/VBoxContainer"]
 layout_mode = 2
+
+[node name="PlayerInventoryLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventory"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
-text = "Crafting"
+text = "Inventory"
 
-[node name="CraftingInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer" node_paths=PackedStringArray("player") instance=ExtResource("8_8thps")]
+[node name="PlayerInventory" parent="UI/MarginContainer/InventoryInterface/VBoxContainer/PlayerInventory" instance=ExtResource("13_utryv")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-player = NodePath("../../../../../Player")
 
 [node name="GrabbedSlot" parent="UI/MarginContainer/InventoryInterface" instance=ExtResource("14_fq4si")]
 modulate = Color(1, 1, 1, 0.494118)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="HotBarInventory" parent="UI/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("15_sa7if")]
+[node name="EquipInventory" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="EquipInventoryLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/EquipInventory"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="EquipInventory" parent="UI/MarginContainer/InventoryInterface/EquipInventory" instance=ExtResource("13_utryv")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Crafting" type="VBoxContainer" parent="UI/MarginContainer/InventoryInterface"]
+layout_mode = 0
+offset_right = 103.0
+offset_bottom = 45.0
+
+[node name="CraftingLabel" type="Label" parent="UI/MarginContainer/InventoryInterface/Crafting"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Crafting"
+
+[node name="CraftingInventory" parent="UI/MarginContainer/InventoryInterface/Crafting" node_paths=PackedStringArray("player") instance=ExtResource("8_8thps")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+player = NodePath("../../../../../Player")
+
+[node name="HotBarInventory" parent="UI/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("15_sa7if")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 player = NodePath("../../../Player")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
@@ -173,6 +221,10 @@ tile_set = ExtResource("13_xl4hy")
 
 [node name="FloatingObject" parent="Entities" instance=ExtResource("20_oor4f")]
 position = Vector2(600, 4965)
+
+[node name="Chest" parent="Entities" instance=ExtResource("21_r5s4u")]
+position = Vector2(600, 1000)
+inventory_data = SubResource("Resource_jhwue")
 
 [node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_q67av")
