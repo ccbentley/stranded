@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=24 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -21,14 +21,7 @@
 [ext_resource type="Script" path="res://stages/main/world_generation/world_gen.gd" id="16_dsn1p"]
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
 [ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
-[ext_resource type="PackedScene" uid="uid://madc445wb3oe" path="res://entities/chest/chest.tscn" id="21_r5s4u"]
-[ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="22_rtnn6"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
-[ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="23_r7itn"]
-
-[sub_resource type="Resource" id="Resource_jhwue"]
-script = ExtResource("22_rtnn6")
-slot_datas = Array[ExtResource("23_r7itn")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
 stream_count = 1
@@ -221,10 +214,6 @@ tile_set = ExtResource("13_xl4hy")
 
 [node name="FloatingObject" parent="Entities" instance=ExtResource("20_oor4f")]
 position = Vector2(600, 4965)
-
-[node name="Chest" parent="Entities" instance=ExtResource("21_r5s4u")]
-position = Vector2(600, 1000)
-inventory_data = SubResource("Resource_jhwue")
 
 [node name="AmbientSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_q67av")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://madc445wb3oe"]
+[gd_scene load_steps=6 format=3 uid="uid://madc445wb3oe"]
 
 [ext_resource type="Script" path="res://entities/chest/chest.gd" id="1_ueeyf"]
 [ext_resource type="Texture2D" uid="uid://dohhkkbp5k68" path="res://entities/chest/art/iron_chest.png" id="2_v7gro"]
+[ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="3_ld8gg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k8tdc"]
 radius = 20.0
@@ -26,3 +27,5 @@ shape = SubResource("CircleShape2D_k8tdc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_vo371")
+
+[node name="ChunkNodeHelper" parent="." instance=ExtResource("3_ld8gg")]
