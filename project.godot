@@ -67,7 +67,7 @@ mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogic/plugin.cfg")
 
 [filesystem]
 
