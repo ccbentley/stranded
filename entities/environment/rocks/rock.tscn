@@ -132,7 +132,7 @@ position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_caeht")
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_obvgd")]
-position = Vector2(0, 5)
+position = Vector2(0, 3)
 health_component = NodePath("../HealthComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
