@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=26 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -22,6 +22,14 @@
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
 [ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v21ha"]
+frequency = 0.1
+fractal_type = 0
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sts2y"]
+noise = SubResource("FastNoiseLite_v21ha")
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_q67av"]
 stream_count = 1
@@ -184,6 +192,7 @@ z_index = -2
 y_sort_enabled = true
 script = ExtResource("16_dsn1p")
 noise_height_text = ExtResource("2_iuy5t")
+noise_temperature_text = SubResource("NoiseTexture2D_sts2y")
 noise_decoration_text = ExtResource("3_d1a5b")
 
 [node name="Chunks" type="Node2D" parent="TileMap"]

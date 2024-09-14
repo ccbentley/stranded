@@ -1,25 +1,34 @@
-extends Node
-class_name QuestManager
+extends Node2D
+class_name Quest
 
 @onready var quest_box: Panel = $QuestBox
 @onready var quest_title_label: Label = $QuestTitle
 @onready var quest_description_label: Label = $QuestDescription
 
-@export_group("Quest Settings")
-@export var quest_name: String  # Name of quest
-@export var quest_description: String  # UI description text
-@export var reached_goal_text: String  # Ui description text after reaching goal
+@export var quest_data: QuestData
 
-# Quest statuses
-enum QuestStatus {
-	AVAILABLE,
-	STARTED,
-	REACHED_GOAL,
-	FINISHED,
-}
+func start_quest() -> void:
+	if quest_data.quest_status == quest_data.QuestStatus.AVAILABLE:
+		# Update quest status
+		quest_data.quest_status = quest_data.QuestStatus.STARTED
+		# Update UI
+		quest_box.visible = true
+		quest_title_label.text = quest_data.quest_name
+		quest_description_label.text = quest_data.quest_description
 
-# Quest status
-@export var quest_status: QuestStatus = QuestStatus.AVAILABLE
 
-@export_group("Reward Settings")
-@export var reward_items: Array[SlotData]
+func reached_goal() -> void:
+	if quest_data.quest_status == quest_data.QuestStatus.STARTED:
+		# Update quest status
+		quest_data.quest_status = quest_data.QuestStatus.REACHED_GOAL
+		# Update UI
+		quest_description_label.text = quest_data.reached_goal_text
+
+
+func finish_quest() -> void:
+	if quest_data.quest_status == quest_data.QuestStatus.REACHED_GOAL:
+		# Update quest status
+		quest_data.quest_status = quest_data.QuestStatus.FINISHED
+		# Update UI
+		quest_box.visible = false
+		#TODO Reward player

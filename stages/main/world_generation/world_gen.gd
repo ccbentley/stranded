@@ -4,8 +4,10 @@ extends Node2D
 
 #Noise
 @export var noise_height_text: NoiseTexture2D
+@export var noise_temperature_text: NoiseTexture2D
 @export var noise_decoration_text: NoiseTexture2D
 var noise: Noise
+var temperature_noise: Noise
 var decoration_noise: Noise
 
 #Source ID
@@ -21,6 +23,7 @@ const tile_size: int = 16
 
 #Tiles
 var water_atlas: Vector2i = Vector2i(8, 4)
+var sand_atlas: Vector2i = Vector2i(9, 1)
 var water_bubble_atlas_arr: Array = [Vector2i(28, 2), Vector2i(29, 2), Vector2i(30, 2), Vector2i(31, 2)]
 var grass_blade_atlas_arr: Array = [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)]
 var flower_atlas_arr: Array = [Vector2i(0, 12), Vector2i(4, 12), Vector2i(8, 12)]
@@ -43,6 +46,13 @@ var sand_decoration_atlas_arr: Array = [
 ]
 var terrain_sand_int: int = 0
 var terrain_grass_int: int = 1
+var terrain_snow_int: int = 2
+
+enum Biome {
+	GRASSLAND,
+	DESERT,
+	SNOW,
+}
 
 #Chunks
 var player_chunk_pos: Vector2i
@@ -54,6 +64,7 @@ var view_distance: int = 1
 #Objects
 const TREE: PackedScene = preload("res://entities/environment/trees/tree.tscn")
 const ROCK: PackedScene = preload("res://entities/environment/rocks/rock.tscn")
+const CACTUS: PackedScene = preload("res://entities/environment/cactus/cactus.tscn")
 
 #Animals
 var animal_arr: Array = [BUNNY, FOX]
@@ -63,9 +74,11 @@ const FOX = preload("res://entities/animals/fox/fox.tscn")
 
 func _ready() -> void:
 	noise = noise_height_text.noise
+	temperature_noise = noise_temperature_text.noise
 	decoration_noise = noise_decoration_text.noise
 
 	noise.seed = Global.world_data.world_seed
+	temperature_noise.seed = Global.world_data.world_seed
 	decoration_noise.seed = Global.world_data.world_seed
 
 
@@ -82,6 +95,14 @@ func find_spawn_location() -> void:
 func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated: bool) -> void:
 	var sand_tiles_arr: PackedVector2Array = []
 	var grass_tiles_arr: PackedVector2Array = []
+	var temperature_noise_val: float = temperature_noise.get_noise_2d(chunk.x, chunk.y)
+	var chunk_biome: int
+	if temperature_noise_val < -0.1:
+		chunk_biome = Biome.SNOW
+	elif temperature_noise_val > 0.55:
+		chunk_biome = Biome.DESERT
+	else:
+		chunk_biome = Biome.GRASSLAND
 	for _x: int in range(32):
 		for _y: int in range(32):
 			var x: int = _x + chunk.x * 32
@@ -95,17 +116,21 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated
 						if not grass_tiles_arr.has(adj_tile):
 							if is_in_chunk(chunk, adj_tile):
 								grass_tiles_arr.append(adj_tile)
-				if decoration_noise_val > 0.7 and not chunk_entites_generated:
-					call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)
-				elif decoration_noise_val > 0.6 and not chunk_entites_generated:
-					call_deferred("draw_object", ROCK, map_to_local(Vector2i(x, y)), chunk_node)
-				elif decoration_noise_val > 0.5:
-					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
-				elif decoration_noise_val > 0.4:
-					environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
+				if chunk_biome == Biome.GRASSLAND or chunk_biome == Biome.SNOW:
+					if decoration_noise_val > 0.7 and not chunk_entites_generated:
+						call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)
+					elif decoration_noise_val > 0.6 and not chunk_entites_generated:
+						call_deferred("draw_object", ROCK, map_to_local(Vector2i(x, y)), chunk_node)
+					elif decoration_noise_val > 0.5:
+						environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, flower_atlas_arr.pick_random())
+					elif decoration_noise_val > 0.4:
+						environment_layer.call_deferred("set_cell", Vector2i(x, y), source_id, grass_blade_atlas_arr.pick_random())
 
-				if decoration_noise_val > 0.8 and not chunk_entites_generated:
-					call_deferred("draw_object", animal_arr.pick_random(), map_to_local(Vector2i(x, y)), chunk_node)
+					if decoration_noise_val > 0.8 and not chunk_entites_generated:
+						call_deferred("draw_object", animal_arr.pick_random(), map_to_local(Vector2i(x, y)), chunk_node)
+				elif chunk_biome == Biome.DESERT:
+					if decoration_noise_val > 0.5 and not chunk_entites_generated:
+						call_deferred("draw_object", CACTUS, map_to_local(Vector2i(x, y)), chunk_node)
 			elif noise_val >= 0.6:
 				for dx in range(-2, 3):
 					for dy in range(-2, 3):
@@ -137,7 +162,7 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated
 				if not grass_tiles_arr.has(adj_tile) and not sand_tiles_arr.has(adj_tile):
 					if not is_in_chunk(chunk, adj_tile):
 						sand_tiles_arr.append(adj_tile)
-	call_deferred("draw_tiles", chunk, sand_tiles_arr, grass_tiles_arr)
+	call_deferred("draw_tiles", chunk, sand_tiles_arr, grass_tiles_arr, chunk_biome)
 
 
 const WATER_TEXTURE = preload("res://common/shaders/water_texture/water_texture.tscn")
@@ -155,9 +180,15 @@ func get_chunk_node(chunk: Vector2i) -> Node2D:
 	return chunk_node
 
 
-func draw_tiles(_chunk: Vector2i, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array) -> void:
+func draw_tiles(_chunk: Vector2i, _sand_tiles_arr: PackedVector2Array, _grass_tiles_arr: PackedVector2Array, _chunk_biome: int) -> void:
 	ground_1_layer.set_cells_terrain_connect(_sand_tiles_arr, terrain_sand_int, 0)
-	ground_2_layer.set_cells_terrain_connect(_grass_tiles_arr, terrain_grass_int, 0)
+	if _chunk_biome == Biome.SNOW:
+		ground_2_layer.set_cells_terrain_connect(_grass_tiles_arr, terrain_snow_int, 0)
+	elif _chunk_biome == Biome.DESERT:
+		for tile in _grass_tiles_arr:
+			ground_1_layer.set_cell(tile, source_id, sand_atlas)
+	else:
+		ground_2_layer.set_cells_terrain_connect(_grass_tiles_arr, terrain_grass_int, 0)
 
 
 func draw_object(OBJ: PackedScene, pos: Vector2 = Vector2i(0, 0), child_node: Node2D = self) -> void:

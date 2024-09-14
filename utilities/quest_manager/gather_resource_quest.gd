@@ -1,29 +1,18 @@
-extends QuestManager
-class_name Quest
+extends Quest
+class_name GatherResourceQuest
 
+@onready var player: Player = PlayerManager.player
 
-func start_quest() -> void:
-	if quest_status == QuestStatus.AVAILABLE:
-		# Update quest status
-		quest_status = QuestStatus.STARTED
-		# Update UI
-		quest_box.visible = true
-		quest_title_label.text = quest_name
-		quest_description_label.text = quest_description
+@export_group("Goal Settings")
+@export var goals: Array
 
+func _ready() -> void:
+	player.inventory_data.inventory_updated.connect(update_goal)
+	
 
-func reached_goal() -> void:
-	if quest_status == QuestStatus.STARTED:
-		# Update quest status
-		quest_status = QuestStatus.REACHED_GOAL
-		# Update UI
-		quest_description_label.text = reached_goal_text
-
-
-func finish_quest() -> void:
-	if quest_status == QuestStatus.REACHED_GOAL:
-		# Update quest status
-		quest_status = QuestStatus.FINISHED
-		# Update UI
-		quest_box.visible = false
-		#TODO Reward player
+func update_goal() -> void:
+	if quest_data.quest_status == quest_data.QuestStatus.STARTED:
+		var goal = quest_data.goal
+		var current = player.inventory_data.get_item_count(goal.item_name)
+		if current >= goal.amount:
+			reached_goal()

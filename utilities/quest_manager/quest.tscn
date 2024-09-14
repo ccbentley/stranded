@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci5tad8ea3ndc"]
-
-[ext_resource type="Script" path="res://utilities/quest_manager/gather_resource_quest.gd" id="1_3wsuf"]
+[gd_scene load_steps=2 format=3 uid="uid://ci5tad8ea3ndc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2fgn"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
@@ -20,7 +18,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_3wsuf")
 
 [node name="QuestBox" type="Panel" parent="."]
 custom_minimum_size = Vector2(350, 100)
