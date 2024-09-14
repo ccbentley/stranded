@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $CharacterSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var health_component: HealthComponent = $HealthComponent
 var is_facing_right: bool = true:
 	set(value):
 		if value and is_facing_right != value:
@@ -22,13 +22,14 @@ func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	var entity_data: SavedData = SavedData.new()
 	entity_data.position = global_position
 	entity_data.scene_path = scene_file_path
+	entity_data.health = health_component.health
 
 	saved_data.append(entity_data)
 
 
 func on_load_chunk(saved_data: SavedData) -> void:
 	global_position = saved_data.position
-
+	health_component.set_health(saved_data.health)
 
 func move(dir: Vector2, speed: float) -> void:
 	velocity = (dir.normalized() * speed)

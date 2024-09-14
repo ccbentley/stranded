@@ -229,9 +229,9 @@ func load_chunk_entities(chunk: Vector2i) -> bool:
 	for entity in saved_chunk.saved_data:
 		var scene: PackedScene = load(entity.scene_path) as PackedScene
 		var loaded_node: Node2D = scene.instantiate()
+		chunk_node.add_child(loaded_node)
 		if loaded_node.has_method("on_load_chunk"):
 			loaded_node.on_load_chunk(entity)
-		chunk_node.add_child(loaded_node)
 	return true
 
 

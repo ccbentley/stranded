@@ -11,13 +11,16 @@ var damage_bar_tween: Tween
 
 
 func _ready() -> void:
+	health_bar.visible = false
 	if health_component:
 		health_component.damaged.connect(self.damaged)
 		health_bar.max_value = health_component.MAX_HEALTH
-		health_bar.value = health_component.health
 		damage_bar.max_value = health_component.MAX_HEALTH
+		await get_tree().process_frame
+		health_bar.value = health_component.health
 		damage_bar.value = health_component.health
-	health_bar.visible = false
+		if health_component.health < health_component.MAX_HEALTH:
+			health_bar.visible = true
 
 
 func damaged(prev_health: float, health: float) -> void:

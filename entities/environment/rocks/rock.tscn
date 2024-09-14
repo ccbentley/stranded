@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://c86ycwq5bfkuc"]
 
+[ext_resource type="Script" path="res://entities/environment/environment_object.gd" id="1_1ewun"]
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_1oaxa"]
-[ext_resource type="Script" path="res://entities/environment/rocks/rock.gd" id="1_yr6ch"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="2_77g8f"]
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_eb6y3"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_m1pa8"]
@@ -106,7 +106,7 @@ _data = {
 
 [node name="Rock" type="StaticBody2D"]
 y_sort_enabled = true
-script = ExtResource("1_yr6ch")
+script = ExtResource("1_1ewun")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -2.5)

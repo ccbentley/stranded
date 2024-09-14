@@ -1,13 +1,87 @@
-[gd_scene load_steps=4 format=3 uid="uid://g3iatvh2g08"]
+[gd_scene load_steps=13 format=3 uid="uid://g3iatvh2g08"]
 
 [ext_resource type="Texture2D" uid="uid://cs27f6gdtgu8s" path="res://entities/environment/cactus/art/cactus.png" id="1_1wuxk"]
+[ext_resource type="Script" path="res://entities/environment/environment_object.gd" id="1_rss0o"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="2_ufx5p"]
+[ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="4_cu7dk"]
+[ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="5_oewdj"]
+[ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="6_r42gb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p47y5"]
 size = Vector2(5, 3)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qaad"]
+size = Vector2(6, 23)
+
+[sub_resource type="Animation" id="Animation_0nqc3"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0698132, 0.0698132, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6sm3d"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ogv5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpbfs"]
+_data = {
+"RESET": SubResource("Animation_ogv5u"),
+"death": SubResource("Animation_6sm3d"),
+"hit": SubResource("Animation_0nqc3")
+}
+
 [node name="Cactus" type="StaticBody2D"]
 y_sort_enabled = true
+script = ExtResource("1_rss0o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -19,3 +93,23 @@ position = Vector2(0.5, -3.5)
 shape = SubResource("RectangleShape2D_p47y5")
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("2_ufx5p")]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("4_cu7dk")]
+anim = NodePath("../AnimationPlayer")
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_oewdj")]
+position = Vector2(0, 3)
+health_component = NodePath("../HealthComponent")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_r42gb")]
+health_component = NodePath("../HealthComponent")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, -14.5)
+shape = SubResource("RectangleShape2D_8qaad")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fpbfs")
+}

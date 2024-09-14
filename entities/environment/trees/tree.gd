@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends EnvironmentObject
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 const green_tree_textures: Array = [
@@ -24,17 +24,3 @@ func _ready() -> void:
 		sprite_2d.texture = load(green_tree_textures.pick_random())
 	else:
 		sprite_2d.texture = load(orange_tree_textures.pick_random())
-
-
-func on_save_chunk(saved_data: Array[SavedData]) -> void:
-	if $HealthComponent.health <= 0:
-		return
-	var entity_data: SavedData = SavedData.new()
-	entity_data.position = global_position
-	entity_data.scene_path = scene_file_path
-
-	saved_data.append(entity_data)
-
-
-func on_load_chunk(saved_data: SavedData) -> void:
-	global_position = saved_data.position
