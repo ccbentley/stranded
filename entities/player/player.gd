@@ -127,6 +127,8 @@ func _ready() -> void:
 	player_swim_state.player_exited_water.connect(player_state.change_state.bind(player_moving_state))
 	player_sit_state.player_exited.connect(player_state.change_state.bind(player_moving_state))
 
+	health_component.died.connect(on_health_component_died)
+
 
 #Returns move input as a Vector2
 func get_input() -> Vector2:
@@ -232,3 +234,7 @@ func use_item(index: int) -> void:
 
 func _on_health_component_damaged(_prev_health: float, _health: float) -> void:
 	main.vignette.pulse_vignette(Color.RED)
+
+
+func on_health_component_died() -> void:
+	main.display_death_screen()

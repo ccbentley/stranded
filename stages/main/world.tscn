@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cmfumnest4jlg" path="res://common/shaders/vignette/vignette.tscn" id="13_qlnb4"]
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://common/inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="TileSet" uid="uid://bcy0q2dkwpmny" path="res://stages/main/tile_set/tile_set.tres" id="13_xl4hy"]
+[ext_resource type="PackedScene" uid="uid://cupg6q4afstgi" path="res://entities/menu/death/death_screen.tscn" id="14_e0ugc"]
 [ext_resource type="PackedScene" uid="uid://dmsdop1snjvdn" path="res://common/inventory/slot.tscn" id="14_fq4si"]
 [ext_resource type="PackedScene" uid="uid://opabwwcquurw" path="res://utilities/weather_manager/weather_manager.tscn" id="15_4r43r"]
 [ext_resource type="PackedScene" uid="uid://25v8rjkwdg57" path="res://entities/menu/pause/pause_menu.tscn" id="15_fqub2"]
@@ -49,6 +50,7 @@ equip_inventory_data = ExtResource("4_jkkiy")
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
@@ -172,6 +174,7 @@ layout_mode = 2
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
 visible = false
+z_index = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -181,6 +184,10 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="Vignette" parent="UI" instance=ExtResource("13_qlnb4")]
+
+[node name="DeathScreen" parent="UI" instance=ExtResource("14_e0ugc")]
+process_mode = 3
+visible = false
 
 [node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
 

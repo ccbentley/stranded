@@ -97,7 +97,7 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated
 	var grass_tiles_arr: PackedVector2Array = []
 	var temperature_noise_val: float = temperature_noise.get_noise_2d(chunk.x, chunk.y)
 	var chunk_biome: int
-	if temperature_noise_val < -0.1:
+	if temperature_noise_val < -0.3:
 		chunk_biome = Biome.SNOW
 	elif temperature_noise_val > 0.55:
 		chunk_biome = Biome.DESERT
@@ -110,12 +110,20 @@ func generate_chunk(chunk: Vector2i, chunk_node: Node2D, chunk_entites_generated
 			var noise_val: float = noise.get_noise_2d(x, y)
 			var decoration_noise_val: float = decoration_noise.get_noise_2d(x, y)
 			if noise_val >= 0.65:
-				for dx in range(-1, 2):
-					for dy in range(-1, 2):
-						var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
-						if not grass_tiles_arr.has(adj_tile):
-							if is_in_chunk(chunk, adj_tile):
-								grass_tiles_arr.append(adj_tile)
+				if not chunk_biome == Biome.DESERT:
+					for dx in range(-1, 2):
+						for dy in range(-1, 2):
+							var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
+							if not grass_tiles_arr.has(adj_tile):
+								if is_in_chunk(chunk, adj_tile):
+									grass_tiles_arr.append(adj_tile)
+				else:
+					for dx in range(0, 1):
+						for dy in range(0, 1):
+							var adj_tile: Vector2i = Vector2i(x + dx, y + dy)
+							if not grass_tiles_arr.has(adj_tile):
+								if is_in_chunk(chunk, adj_tile):
+									grass_tiles_arr.append(adj_tile)
 				if chunk_biome == Biome.GRASSLAND or chunk_biome == Biome.SNOW:
 					if decoration_noise_val > 0.7 and not chunk_entites_generated:
 						call_deferred("draw_object", TREE, map_to_local(Vector2i(x, y)), chunk_node)

@@ -65,5 +65,3 @@ func damage(attack: Attack) -> void:
 			await anim.animation_finished
 		if owner is not Player:
 			owner.call_deferred("queue_free")
-		else:
-			Global.load_next_scene()
