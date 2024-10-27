@@ -269,6 +269,10 @@ func unload_distant_chunks() -> void:
 
 func _process(_delta: float) -> void:
 	player_chunk_pos = local_to_map(player.position) / 32
+	if player.position.x < 0:
+		player_chunk_pos.x -= 1
+	if player.position.y < 0:
+		player_chunk_pos.y -= 1
 	for dx in range(-view_distance, view_distance + 1):
 		for dy in range(-view_distance, view_distance + 1):
 			var adj_chunk: Vector2i = Vector2i(player_chunk_pos.x + dx, player_chunk_pos.y + dy)

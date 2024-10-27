@@ -12,4 +12,9 @@ var chunk_position: Vector2i:
 
 
 func _process(_delta: float) -> void:
-	chunk_position = tile_map.local_to_map(global_position) / 32
+	var _chunk_position: Vector2i = tile_map.local_to_map(global_position) / 32
+	if global_position.x < 0:
+		_chunk_position.x -= 1
+	if global_position.y < 0:
+		_chunk_position.y -= 1
+	chunk_position = _chunk_position

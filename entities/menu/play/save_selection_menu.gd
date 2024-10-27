@@ -76,9 +76,10 @@ func check_for_saves() -> void:
 		child.world_data = null
 		child.slot_info.text = "<Empty>"
 	var dir: DirAccess = DirAccess.open(Global.save_file_path)
-	for directory in dir.get_directories():
-		if int(directory) >= 1 and int(directory) <= save_file_arr.size():
-			set_save(int(directory))
+	if dir.get_directories():
+		for directory in dir.get_directories():
+			if int(directory) >= 1 and int(directory) <= save_file_arr.size():
+				set_save(int(directory))
 
 
 func set_save(save_slot: int) -> void:

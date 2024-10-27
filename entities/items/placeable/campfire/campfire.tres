@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ItemDataPlaceable" load_steps=3 format=3 uid="uid://cgy1oy28id7ge"]
+[gd_resource type="Resource" script_class="ItemDataPlaceable" load_steps=4 format=3 uid="uid://cgy1oy28id7ge"]
 
 [ext_resource type="Script" path="res://entities/items/placeable/item_data_placeable.gd" id="1_d8cye"]
+[ext_resource type="PackedScene" uid="uid://bd2xc6p3frrmi" path="res://entities/items/placeable/placeable_preview.tscn" id="1_rkbl0"]
 [ext_resource type="Texture2D" uid="uid://bamkxifb0612c" path="res://entities/items/placeable/campfire/art/fire1.png" id="2_yiwdl"]
 
 [resource]
@@ -8,6 +9,7 @@ script = ExtResource("1_d8cye")
 placeable_object_path = "res://entities/items/placeable/campfire/object/campfire.tscn"
 max_placeable_distance = 50.0
 placeable_tile_types = 6
+scene = ExtResource("1_rkbl0")
 useable = true
 name = "Campfire"
 description = "Provices warmth and light"
