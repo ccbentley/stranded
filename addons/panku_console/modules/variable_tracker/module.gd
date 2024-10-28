@@ -19,10 +19,10 @@ var _raw_exceptions_string: String = ""
 var _nodes_exception_regexp: RegEx
 
 var _reverse_root_nodes_order: bool
-var _current_scene_root:Node
+var _current_scene_root: Node
 var _user_singleton_files := []
-var _tween_loop:Tween
-var _loop_call_back:CallbackTweener
+var _tween_loop: Tween
+var _loop_call_back: CallbackTweener
 
 
 func init_module():
@@ -30,7 +30,7 @@ func init_module():
 	_reverse_root_nodes_order = load_module_data("use_last_as_current", true)
 	_raw_exceptions_string = load_module_data("root_node_exceptions", _raw_exceptions_string)
 
-	await core.get_tree().process_frame # not sure if it is necessary
+	await core.get_tree().process_frame  # not sure if it is necessary
 
 	update_exceptions_regexp()
 	_update_project_singleton_files()
@@ -41,7 +41,7 @@ func init_module():
 # Build root node exceptions regular expression
 func update_exceptions_regexp() -> void:
 	if _raw_exceptions_string.is_empty():
-		_nodes_exception_regexp = RegEx.new() # not valid expression
+		_nodes_exception_regexp = RegEx.new()  # not valid expression
 		return
 
 	_nodes_exception_regexp = RegEx.create_from_string(_raw_exceptions_string)

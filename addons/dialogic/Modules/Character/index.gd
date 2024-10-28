@@ -18,7 +18,10 @@ func _get_settings_pages() -> Array:
 
 
 func _get_text_effects() -> Array[Dictionary]:
-	return [{"command": "portrait", "subsystem": "Portraits", "method": "text_effect_portrait", "arg": true}]
+	return [
+		{"command": "portrait", "subsystem": "Portraits", "method": "text_effect_portrait", "arg": true},
+		{"command": "extra_data", "subsystem": "Portraits", "method": "text_effect_extradata", "arg": true},
+	]
 
 
 func _get_special_resources() -> Dictionary:

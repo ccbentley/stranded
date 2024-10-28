@@ -7,6 +7,7 @@ class_name Quest
 
 @export var quest_data: QuestData
 
+
 func start_quest() -> void:
 	if quest_data.quest_status == quest_data.QuestStatus.AVAILABLE:
 		# Update quest status

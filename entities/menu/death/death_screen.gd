@@ -2,10 +2,12 @@ extends Control
 
 @onready var player: Player = PlayerManager.player
 
+
 func display_screen() -> void:
 	self.visible = true
 	get_tree().paused = true
 	set_process(true)
+
 
 func _on_button_button_down() -> void:
 	self.visible = false

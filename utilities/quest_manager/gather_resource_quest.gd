@@ -6,9 +6,10 @@ class_name GatherResourceQuest
 @export_group("Goal Settings")
 @export var goals: Array
 
+
 func _ready() -> void:
 	player.inventory_data.inventory_updated.connect(update_goal)
-	
+
 
 func update_goal() -> void:
 	if quest_data.quest_status == quest_data.QuestStatus.STARTED:

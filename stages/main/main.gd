@@ -77,5 +77,6 @@ func zoom_out() -> void:
 func toggle_debug_menu() -> void:
 	$UI/DebugMenu.visible = !$UI/DebugMenu.visible
 
+
 func display_death_screen() -> void:
 	$UI/DeathScreen.display_screen()

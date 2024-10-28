@@ -2,39 +2,48 @@
 
 var rtl := PackedStringArray()
 
+
 # Returns a human-readable string from a date and time, date, or time dictionary.
 func datetime_to_string(date):
-	if (
-		date.has("year")
-		and date.has("month")
-		and date.has("day")
-		and date.has("hour")
-		and date.has("minute")
-		and date.has("second")
-	):
+	if date.has("year") and date.has("month") and date.has("day") and date.has("hour") and date.has("minute") and date.has("second"):
 		# Date and time.
-		return "{year}-{month}-{day} {hour}:{minute}:{second}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
+		return (
+			"{year}-{month}-{day} {hour}:{minute}:{second}"
+			. format(
+				{
+					year = str(date.year).pad_zeros(2),
+					month = str(date.month).pad_zeros(2),
+					day = str(date.day).pad_zeros(2),
+					hour = str(date.hour).pad_zeros(2),
+					minute = str(date.minute).pad_zeros(2),
+					second = str(date.second).pad_zeros(2),
+				}
+			)
+		)
 	elif date.has("year") and date.has("month") and date.has("day"):
 		# Date only.
-		return "{year}-{month}-{day}".format({
-			year = str(date.year).pad_zeros(2),
-			month = str(date.month).pad_zeros(2),
-			day = str(date.day).pad_zeros(2),
-		})
+		return (
+			"{year}-{month}-{day}"
+			. format(
+				{
+					year = str(date.year).pad_zeros(2),
+					month = str(date.month).pad_zeros(2),
+					day = str(date.day).pad_zeros(2),
+				}
+			)
+		)
 	else:
 		# Time only.
-		return "{hour}:{minute}:{second}".format({
-			hour = str(date.hour).pad_zeros(2),
-			minute = str(date.minute).pad_zeros(2),
-			second = str(date.second).pad_zeros(2),
-		})
+		return (
+			"{hour}:{minute}:{second}"
+			. format(
+				{
+					hour = str(date.hour).pad_zeros(2),
+					minute = str(date.minute).pad_zeros(2),
+					second = str(date.second).pad_zeros(2),
+				}
+			)
+		)
 
 
 func scan_midi_devices():
@@ -45,16 +54,36 @@ func scan_midi_devices():
 
 
 func add_header(header):
-	rtl.append("\n[font_size=24][color=#6df]{header}[/color][/font_size]\n\n".format({
-		header = header,
-	}))
+	(
+		rtl
+		. append(
+			(
+				"\n[font_size=24][color=#6df]{header}[/color][/font_size]\n\n"
+				. format(
+					{
+						header = header,
+					}
+				)
+			)
+		)
+	)
 
 
 func add_line(key, value):
-	rtl.append("[color=#adf]{key}:[/color] {value}\n".format({
-		key = key,
-		value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
-	}))
+	(
+		rtl
+		. append(
+			(
+				"[color=#adf]{key}:[/color] {value}\n"
+				. format(
+					{
+						key = key,
+						value = value if str(value) != "" else "[color=#fff8](empty)[/color]",
+					}
+				)
+			)
+		)
+	)
 
 
 func inspect():
@@ -83,15 +112,18 @@ func inspect():
 	add_line("Startup screen size", DisplayServer.screen_get_size())
 	add_line("Startup screen refresh rate", ("%f Hz" % DisplayServer.screen_get_refresh_rate()) if DisplayServer.screen_get_refresh_rate() > 0.0 else "")
 	add_line("Usable (safe) area rectangle", DisplayServer.get_display_safe_area())
-	add_line("Screen orientation", [
-		"Landscape",
-		"Portrait",
-		"Landscape (reverse)",
-		"Portrait (reverse)",
-		"Landscape (defined by sensor)",
-		"Portrait (defined by sensor)",
-		"Defined by sensor",
-	][DisplayServer.screen_get_orientation()])
+	add_line(
+		"Screen orientation",
+		[
+			"Landscape",
+			"Portrait",
+			"Landscape (reverse)",
+			"Portrait (reverse)",
+			"Landscape (defined by sensor)",
+			"Portrait (defined by sensor)",
+			"Defined by sensor",
+		][DisplayServer.screen_get_orientation()]
+	)
 
 	add_header("Engine")
 	add_line("Version", Engine.get_version_info()["string"])
@@ -152,13 +184,16 @@ func inspect():
 	add_header("Video")
 	add_line("Adapter name", RenderingServer.get_video_adapter_name())
 	add_line("Adapter vendor", RenderingServer.get_video_adapter_vendor())
-	add_line("Adapter type", [
-		"Other (Unknown)",
-		"Integrated",
-		"Discrete",
-		"Virtual",
-		"CPU",
-	][RenderingServer.get_video_adapter_type()])
+	add_line(
+		"Adapter type",
+		[
+			"Other (Unknown)",
+			"Integrated",
+			"Discrete",
+			"Virtual",
+			"CPU",
+		][RenderingServer.get_video_adapter_type()]
+	)
 	add_line("Adapter graphics API version", RenderingServer.get_video_adapter_api_version())
 
 	var video_adapter_driver_info = OS.get_video_adapter_driver_info()

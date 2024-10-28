@@ -1,9 +1,10 @@
 extends Control
 
-@onready var trect:TextureRect = $TextureRect
+@onready var trect: TextureRect = $TextureRect
 
-var _module:PankuModule
-var expr:String
+var _module: PankuModule
+var expr: String
+
 
 func _physics_process(delta: float) -> void:
 	if Engine.get_physics_frames() % 10 != 1:

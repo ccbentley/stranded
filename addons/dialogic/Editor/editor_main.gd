@@ -8,10 +8,15 @@ var editors_manager: Control = null
 
 var editor_file_dialog: EditorFileDialog
 
+@onready var sidebar := %Sidebar as DialogicSidebar
+
 
 func _ready() -> void:
 	if get_parent() is SubViewport:
 		return
+
+	## CONNECTIONS
+	sidebar.show_sidebar.connect(_on_sidebar_toggled)
 
 	## REFERENCES
 	editors_manager = $EditorsManager
@@ -32,6 +37,18 @@ func _ready() -> void:
 	$SaveConfirmationDialog.hide()
 	update_theme_additions()
 	EditorInterface.get_base_control().theme_changed.connect(update_theme_additions)
+
+
+func _on_sidebar_toggled(sidebar_shown: bool) -> void:
+	var h_split := %HSplit as HSplitContainer
+	if sidebar_shown:
+		h_split.dragger_visibility = SplitContainer.DRAGGER_VISIBLE
+		h_split.split_offset = 150
+		h_split.collapsed = false
+	else:
+		h_split.dragger_visibility = SplitContainer.DRAGGER_HIDDEN_COLLAPSED
+		h_split.split_offset = 0
+		h_split.collapsed = true
 
 
 func update_theme_additions() -> void:
