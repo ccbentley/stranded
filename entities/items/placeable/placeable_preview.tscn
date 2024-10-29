@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd2xc6p3frrmi"]
+[gd_scene load_steps=3 format=3 uid="uid://bd2xc6p3frrmi"]
 
 [ext_resource type="Script" path="res://entities/items/placeable/placeable_preview.gd" id="1_3xanp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vm64h"]
+size = Vector2(16, 16)
 
 [node name="PlaceablePreview" type="Node2D"]
 top_level = true
@@ -8,4 +11,8 @@ script = ExtResource("1_3xanp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(0, 7)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_vm64h")
