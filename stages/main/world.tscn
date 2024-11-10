@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=28 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1yv6c124r1k7" path="res://common/inventory/crafting/crafting_inventory.tscn" id="8_8thps"]
 [ext_resource type="PackedScene" uid="uid://cw6w20chfrgev" path="res://entities/player/health_bar/player_health_bar.tscn" id="10_7p1pw"]
 [ext_resource type="PackedScene" uid="uid://brtyff5a5fflm" path="res://entities/menu/debug/debug_menu.tscn" id="11_f00c6"]
+[ext_resource type="PackedScene" uid="uid://ca7c34x6newnt" path="res://utilities/quest_manager/quest_manager.tscn" id="11_xydi1"]
 [ext_resource type="Script" path="res://common/inventory/inventory_interface.gd" id="12_5ileu"]
 [ext_resource type="PackedScene" uid="uid://c05qpfqg6xjd7" path="res://utilities/day_night_cycle/day_night_cycle.tscn" id="12_dx3ki"]
 [ext_resource type="PackedScene" uid="uid://cmfumnest4jlg" path="res://common/shaders/vignette/vignette.tscn" id="13_qlnb4"]
@@ -171,6 +172,12 @@ mouse_filter = 2
 
 [node name="HealthBar" parent="UI/MarginContainer/VBoxContainer" instance=ExtResource("10_7p1pw")]
 layout_mode = 2
+
+[node name="QuestManager" parent="UI/MarginContainer" instance=ExtResource("11_xydi1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
 visible = false

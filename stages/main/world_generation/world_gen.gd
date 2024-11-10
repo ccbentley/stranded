@@ -323,4 +323,9 @@ func map_to_local(tile_pos: Vector2i) -> Vector2:
 
 
 func local_to_map(pos: Vector2) -> Vector2i:
-	return pos / tile_size
+	var map_pos: Vector2i = pos / tile_size
+	if map_pos.x < 0:
+		map_pos.x -= 1
+	if map_pos.y < 0:
+		map_pos.y -= 1
+	return map_pos

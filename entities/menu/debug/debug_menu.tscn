@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://brtyff5a5fflm"]
+[gd_scene load_steps=3 format=3 uid="uid://brtyff5a5fflm"]
 
 [ext_resource type="Script" path="res://entities/menu/debug/debug_menu.gd" id="1_b8s0l"]
+
+[sub_resource type="GDScript" id="GDScript_wva0l"]
+script/source = "extends Label
+
+
+func _process(_delta: float) -> void:
+	text = \"FPS: \" + str(Engine.get_frames_per_second())
+"
 
 [node name="DebugMenu" type="Control"]
 layout_mode = 3
@@ -75,6 +83,15 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 focus_mode = 0
 text = "Object"
+
+[node name="FPS" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "FPS: 0"
+horizontal_alignment = 2
+script = SubResource("GDScript_wva0l")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SpawnButton" to="." method="_on_spawn_button_pressed"]

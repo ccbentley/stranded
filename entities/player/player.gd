@@ -98,6 +98,8 @@ var is_facing_right: bool = true:
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
+	if Input.is_action_just_pressed("quests"):
+		main.toggle_quests()
 	if Input.is_action_just_pressed("interact"):
 		interact()
 	if Input.is_action_just_pressed("zoom_in"):

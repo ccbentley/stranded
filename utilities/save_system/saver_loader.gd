@@ -11,6 +11,7 @@ func save_game() -> void:
 	player_data.position = player.global_position
 	player_data.health = player.health_component.health
 	player_data.is_facing_right = player.is_facing_right
+	player_data.quests = main.quest_manager.save_quests()
 	ResourceSaver.save(player_data, Global.world_save_file_path + Global.player_save_file_name)
 
 	Global.world_data.day_count = main.day_night_cycle.day_counter
@@ -34,6 +35,7 @@ func load_game() -> bool:
 	player.health_component.set_health(player_data.health)
 	player.health_component.damage(Attack.new())
 	player.is_facing_right = player_data.is_facing_right
+	main.quest_manager.load_quests(player_data.quests)
 
 	main.day_night_cycle.day_counter = Global.world_data.day_count
 	main.day_night_cycle.set_current_time(Global.world_data.current_time)

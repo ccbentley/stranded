@@ -29,7 +29,9 @@ func on_button_pressed() -> void:
 			Global.next_scene = "res://stages/main/world.tscn"
 			Global.next_scene_name = "Main Land"
 			Global.next_scene_background = load("res://assets/art/background/screenshot.png")
-			Global.load_next_scene()
+			#TODO Add loading screen back later
+			#Global.load_next_scene()
+			SceneTransition.change_scene(load("res://stages/main/world.tscn"), "fade")
 		else:
 			get_parent().owner.create_save(slot_number)
 	elif save_selection_menu.mode == save_selection_menu.DELETE:
