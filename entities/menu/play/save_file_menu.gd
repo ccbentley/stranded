@@ -32,6 +32,7 @@ func on_button_pressed() -> void:
 			#TODO Add loading screen back later
 			#Global.load_next_scene()
 			SceneTransition.change_scene(load("res://stages/main/world.tscn"), "fade")
+			AudioManager.play_music(null)
 		else:
 			get_parent().owner.create_save(slot_number)
 	elif save_selection_menu.mode == save_selection_menu.DELETE:

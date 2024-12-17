@@ -1,18 +1,16 @@
 extends LineEdit
 
-var module: PankuModuleInteractiveShell
+var module:PankuModuleInteractiveShell
 
 #up/down history
 var history_idx := 0
 
 var hints = []
 
-
 func _ready():
 	text_submitted.connect(on_text_submitted)
 
-
-func on_text_submitted(s: String):
+func on_text_submitted(s:String):
 	var histories = module.get_histories()
 	if histories.size() > 0 and history_idx < histories.size() and text == histories[history_idx]:
 		pass
@@ -21,21 +19,20 @@ func on_text_submitted(s: String):
 	history_idx = histories.size()
 	clear()
 
-
 func _gui_input(e):
 	#navigate through histories
 	var histories = module.get_histories()
 	if hints.is_empty():
 		if e is InputEventKey and e.keycode == KEY_UP and e.pressed:
-			if !histories.is_empty():
-				history_idx = wrapi(history_idx - 1, 0, histories.size())
+			if !histories.is_empty() :
+				history_idx = wrapi(history_idx-1, 0, histories.size())
 				text = histories[history_idx]
 				get_parent().navigate_histories.emit(histories, history_idx)
 				await get_tree().process_frame
 				caret_column = text.length()
 		elif e is InputEventKey and e.keycode == KEY_DOWN and e.pressed:
 			if !histories.is_empty():
-				history_idx = wrapi(history_idx + 1, 0, histories.size())
+				history_idx = wrapi(history_idx+1, 0, histories.size())
 				text = histories[history_idx]
 				get_parent().navigate_histories.emit(histories, history_idx)
 				await get_tree().process_frame

@@ -4,11 +4,14 @@ signal pressed
 signal button_down
 signal button_up
 
-@export var button: Button
+@export
+var button:Button
 
-@export var trect: TextureRect
+@export
+var trect:TextureRect
 
-@export var label: Label
+@export
+var label:Label
 
 var icon:
 	set(v):
@@ -22,8 +25,15 @@ var text:
 	get:
 		return label.text
 
-
 func _ready():
-	button.pressed.connect(func(): pressed.emit())
-	button.button_down.connect(func(): button_down.emit())
-	button.button_up.connect(func(): button_up.emit())
+	
+	button.pressed.connect(
+		func():
+			pressed.emit()
+	)
+	button.button_down.connect(
+		func(): button_down.emit()
+	)
+	button.button_up.connect(
+		func(): button_up.emit()
+	)

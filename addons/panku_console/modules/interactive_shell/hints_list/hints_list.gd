@@ -6,14 +6,13 @@ const MAX_HEIGHT = 400
 
 @export var auto_resize := false
 
-@export var container: VBoxContainer
+@export var container:VBoxContainer
 
 var hints_count = 0
 
-var selected: int = 0:
+var selected:int = 0:
 	set(v):
-		if !container:
-			return
+		if !container: return
 		if v < container.get_child_count():
 			if selected < container.get_child_count():
 				container.get_child(selected).set_highlight(false)
@@ -29,14 +28,11 @@ var selected: int = 0:
 			var d = bar.max_value / hints_count
 			var l = d * selected
 			var r = d * (selected + 1)
-			if b > l:
-				b = l
-			if b + c < r:
-				b = r - c
+			if b > l: b = l
+			if b + c < r: b = r - c
 			bar.value = b
 
-
-func set_hints(texts: Array):
+func set_hints(texts:Array):
 	hints_count = texts.size()
 	for i in range(texts.size()):
 		var h
@@ -52,7 +48,7 @@ func set_hints(texts: Array):
 	if texts.size() < container.get_child_count():
 		for i in range(texts.size(), container.get_child_count()):
 			container.get_child(i).hide()
-
+	
 	if auto_resize:
 		await get_tree().process_frame
 		custom_minimum_size.y = min(MAX_HEIGHT, container.size.y)
