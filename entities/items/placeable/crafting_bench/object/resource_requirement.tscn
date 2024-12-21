@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://muam1whokqy0"]
+
+[ext_resource type="Texture2D" uid="uid://bqtj6l3a0xkya" path="res://entities/items/materials/stick/art/stick.png" id="1_eardc"]
+[ext_resource type="Script" path="res://entities/items/placeable/crafting_bench/object/resource_requirement.gd" id="1_xdr13"]
+
+[node name="ResourceRequirement" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 64)
+script = ExtResource("1_xdr13")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_eardc")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Stick"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0/1"

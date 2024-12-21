@@ -19,6 +19,7 @@ var item_list: PackedStringArray = [
 	"res://entities/items/fishing_rod/fishing_rod.tres",
 	"res://entities/items/placeable/campfire/campfire.tres",
 	"res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tres",
+	"res://entities/items/placeable/crafting_bench/crafting_bench.tres",
 ]
 
 var object_list: PackedStringArray = [

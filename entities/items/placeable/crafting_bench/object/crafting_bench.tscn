@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpu5vk7gui7bj"]
+
+[ext_resource type="Texture2D" uid="uid://b4vv8aeon7yc1" path="res://entities/items/placeable/crafting_bench/object/art/craftingbench.png" id="1_2wthq"]
+[ext_resource type="Script" path="res://entities/items/placeable/crafting_bench/object/crafting_bench.gd" id="1_wwv6t"]
+[ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="2_ryj1g"]
+[ext_resource type="Script" path="res://common/components/health/health_component.gd" id="3_p2cdt"]
+[ext_resource type="Script" path="res://common/components/chunk_node_helper/chunk_node_helper.gd" id="4_p2o30"]
+[ext_resource type="PackedScene" uid="uid://cn0avyokjnale" path="res://entities/items/placeable/crafting_bench/object/item_button.tscn" id="6_q02et"]
+[ext_resource type="PackedScene" uid="uid://muam1whokqy0" path="res://entities/items/placeable/crafting_bench/object/resource_requirement.tscn" id="8_hlejx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77xh0"]
+size = Vector2(16, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fap5e"]
+size = Vector2(16, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_co1ic"]
+radius = 35.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3sf5"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x0rbn"]
+
+[node name="CraftingBench" type="StaticBody2D"]
+script = ExtResource("1_wwv6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2wthq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_77xh0")
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_ryj1g")
+health_component = NodePath("../HealthComponent")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_fap5e")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_p2cdt")
+
+[node name="ChunkNodeHelper" type="Node2D" parent="."]
+script = ExtResource("4_p2o30")
+
+[node name="Area2D" type="Area2D" parent="." groups=["interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_co1ic")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(800, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -8.5
+offset_right = 0.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3sf5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_x0rbn")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+text = "Crafting Bench"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Crafts" type="PanelContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(475, 430)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Crafts"]
+layout_mode = 2
+columns = 7
+
+[node name="ItemButton" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Crafts/GridContainer" instance=ExtResource("6_q02et")]
+layout_mode = 2
+
+[node name="Resources" type="PanelContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(320, 430)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Resources"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Resources/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Item Name"
+
+[node name="Materials" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Resources/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResourceRequirement" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Resources/VBoxContainer/Materials" instance=ExtResource("8_hlejx")]
+layout_mode = 2
+
+[node name="CraftButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/Resources"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+text = "Craft"

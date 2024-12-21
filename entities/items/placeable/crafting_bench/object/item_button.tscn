@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn0avyokjnale"]
+
+[ext_resource type="Texture2D" uid="uid://b3t2r8ndigig6" path="res://entities/items/melee/sword/wooden/art/wooden_sword.png" id="1_bcqhs"]
+[ext_resource type="Script" path="res://entities/items/placeable/crafting_bench/object/crafting_button.gd" id="2_nat2u"]
+
+[node name="ItemButton" type="TextureButton"]
+custom_minimum_size = Vector2(64, 64)
+texture_normal = ExtResource("1_bcqhs")
+stretch_mode = 0
+script = ExtResource("2_nat2u")
