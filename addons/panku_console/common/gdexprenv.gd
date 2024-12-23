@@ -44,48 +44,54 @@ const type_names = {
 var _envs = {}
 var _envs_info = {}
 var _expression = Expression.new()
-var _base_instance:Object
+var _base_instance: Object
 
-func set_base_instance(base_instance:Object):
+
+func set_base_instance(base_instance: Object):
 	_base_instance = base_instance
 	#add info of base instance
 	var env_info = extract_info_from_script(_base_instance.get_script())
-	for k in env_info: _envs_info[k] = env_info[k]
+	for k in env_info:
+		_envs_info[k] = env_info[k]
+
 
 func get_base_instance():
 	return _base_instance
 
+
 ## Register an environment that run expressions.
 ## [br][code]env_name[/code]: the name of the environment
 ## [br][code]env[/code]: The base instance that runs the expressions. For exmaple your player node.
-func register_env(env_name:String, env:Object):
+func register_env(env_name: String, env: Object):
 	_envs[env_name] = env
 #	output("[color=green][Info][/color] [b]%s[/b] env loaded!"%env_name)
 	if env is Node:
-		env.tree_exiting.connect(
-			func(): remove_env(env_name)
-		)
+		env.tree_exiting.connect(func(): remove_env(env_name))
 	if env.get_script():
 		var env_info = extract_info_from_script(env.get_script())
 		for k in env_info:
 			var keyword = "%s.%s" % [env_name, k]
 			_envs_info[keyword] = env_info[k]
 
+
 ## Return the environment object or [code]null[/code] by its name.
-func get_env(env_name:String) -> Node:
+func get_env(env_name: String) -> Node:
 	return _envs.get(env_name)
 
+
 ## Remove the environment named [code]env_name[/code]
-func remove_env(env_name:String):
+func remove_env(env_name: String):
 	if _envs.has(env_name):
 		_envs.erase(env_name)
 		for k in _envs_info.keys():
 			if k.begins_with(env_name + "."):
 				_envs_info.erase(k)
 
+
 #Execute an expression in a preset environment.
-func execute(exp:String) -> Dictionary:
+func execute(exp: String) -> Dictionary:
 	return execute_exp(exp, _expression, _base_instance, _envs)
+
 
 # TODO: not used
 func get_available_export_objs() -> Array:
@@ -100,12 +106,14 @@ func get_available_export_objs() -> Array:
 		result.push_back(obj_name)
 	return result
 
-func get_help_info(k:String) -> String:
+
+func get_help_info(k: String) -> String:
 	return _envs_info[k]["help"]
 
+
 #TODO: refactor all those mess
-func parse_exp(exp:String, allow_empty:=false):
-	var result:Array
+func parse_exp(exp: String, allow_empty := false):
+	var result: Array
 	var empty_flag = allow_empty and exp.is_empty()
 
 	if empty_flag:
@@ -115,11 +123,11 @@ func parse_exp(exp:String, allow_empty:=false):
 
 	var hints_bbcode = []
 	var hints_value = []
-	
+
 	for r in result:
-		var keyword:String
-		var bbcode_main:String
-		
+		var keyword: String
+		var bbcode_main: String
+
 		if empty_flag:
 			keyword = r
 			bbcode_main = r
@@ -131,25 +139,19 @@ func parse_exp(exp:String, allow_empty:=false):
 		var keyword_type = _envs_info[keyword]["type"]
 		hints_value.push_back(keyword)
 		hints_bbcode.push_back(bbcode_main + bbcode_postfix)
-	return {
-		"hints_bbcode": hints_bbcode,
-		"hints_value": hints_value
-	}
+	return {"hints_bbcode": hints_bbcode, "hints_value": hints_value}
 
-static func search_and_sort_and_highlight(s:String, li:Array):
+
+static func search_and_sort_and_highlight(s: String, li: Array):
 	s = s.lstrip(" ").rstrip(" ")
 	var matched = []
-	if s == "": return matched
+	if s == "":
+		return matched
 	for k in li:
 		var start = k.find(s)
 		if start >= 0:
 			var similarity = 1.0 * s.length() / k.length()
-			matched.append({
-				"keyword": k,
-				"similarity": similarity,
-				"start": start,
-				"bbcode": ""
-			})
+			matched.append({"keyword": k, "similarity": similarity, "start": start, "bbcode": ""})
 
 	matched.sort_custom(
 		func(k1, k2):
@@ -174,38 +176,30 @@ static func search_and_sort_and_highlight(s:String, li:Array):
 
 	return matched
 
-static func extract_info_from_script(script:Script):
+
+static func extract_info_from_script(script: Script):
 	var result = {}
 
 	var methods = []
 	var properties = []
 	var constants = []
 	var constants_bbcode_postfix = {}
-	
+
 	for m in script.get_script_method_list():
 		if m["name"] != "" and m["name"].is_valid_identifier() and !m["name"].begins_with("_"):
 			var args = []
 			for a in m["args"]:
-				args.push_back("[color=cyan]%s[/color][color=gray]:[/color][color=orange]%s[/color]"%[a["name"], type_names[a["type"]]])
-			result[m["name"]] = {
-				"type": "method",
-				"bbcode_postfix": "(%s)"%("[color=gray], [/color]".join(PackedStringArray(args)))
-			}
+				args.push_back("[color=cyan]%s[/color][color=gray]:[/color][color=orange]%s[/color]" % [a["name"], type_names[a["type"]]])
+			result[m["name"]] = {"type": "method", "bbcode_postfix": "(%s)" % ("[color=gray], [/color]".join(PackedStringArray(args)))}
 	for p in script.get_script_property_list():
 		if p["name"] != "" and !p["name"].begins_with("_") and p["name"].is_valid_identifier():
-			result[p["name"]] = {
-				"type": "property",
-				"bbcode_postfix":"[color=gray]:[/color][color=orange]%s[/color]"%type_names[p["type"]]
-			}
+			result[p["name"]] = {"type": "property", "bbcode_postfix": "[color=gray]:[/color][color=orange]%s[/color]" % type_names[p["type"]]}
 
 	var constant_map = script.get_script_constant_map()
 	var help_info = {}
 	for c in constant_map:
 		if !c.begins_with("_"):
-			result[c] = {
-				"type": "constant",
-				"bbcode_postfix":"[color=gray]:[/color][color=orange]%s[/color]"%type_names[typeof(constant_map[c])]
-			}
+			result[c] = {"type": "constant", "bbcode_postfix": "[color=gray]:[/color][color=orange]%s[/color]" % type_names[typeof(constant_map[c])]}
 		elif c.begins_with("_HELP_") and c.length() > 6 and typeof(constant_map[c]) == TYPE_STRING:
 			var key = c.lstrip("_HELP_")
 			help_info[key] = constant_map[c]
@@ -219,7 +213,8 @@ static func extract_info_from_script(script:Script):
 	#keyword -> {type, bbcode_postfix, help}
 	return result
 
-static func execute_exp(exp_str:String, expression:Expression, base_instance:Object, env:Dictionary):
+
+static func execute_exp(exp_str: String, expression: Expression, base_instance: Object, env: Dictionary):
 	var failed := false
 	var result = null
 
@@ -233,12 +228,10 @@ static func execute_exp(exp_str:String, expression:Expression, base_instance:Obj
 			failed = true
 			result = expression.get_error_text()
 
-	return {
-		"failed": failed,
-		"result": result
-	}
+	return {"failed": failed, "result": result}
 
-static func get_export_properties_from_script(script:Script):
+
+static func get_export_properties_from_script(script: Script):
 	var result = []
 	var data = script.get_script_property_list()
 	for d in data:
@@ -247,20 +240,23 @@ static func get_export_properties_from_script(script:Script):
 		result.append(d)
 	return result
 
-static func generate_help_text_from_script(script:Script):
+
+static func generate_help_text_from_script(script: Script):
 	var result = ["[color=cyan][b]User script defined identifiers[/b][/color]: "]
 	var env_info = extract_info_from_script(script)
 	var keys = env_info.keys()
 	keys.sort()
 	for k in keys:
-		result.push_back("%s - [i]%s[/i]"%[k + env_info[k]["bbcode_postfix"], env_info[k]["help"]])
+		result.push_back("%s - [i]%s[/i]" % [k + env_info[k]["bbcode_postfix"], env_info[k]["help"]])
 	return "\n".join(PackedStringArray(result))
+
 
 #returns a string containing all public script properties of an object
 #please BE AWARE when using this function on an object with custom getters.
-static func get_object_outline(obj:Object) -> String:
+static func get_object_outline(obj: Object) -> String:
 	var result := PackedStringArray()
-	if obj == null: return "null"
+	if obj == null:
+		return "null"
 	var script = obj.get_script()
 	if script == null:
 		return "this object has no script attached."

@@ -13,10 +13,11 @@ extends DialogicVisualEditorField
 @export var prefix: String = ""
 @export var suffix: String = ""
 
-var _is_holding_button: bool = false #For handling incrementing while holding key or click
+var _is_holding_button: bool = false  #For handling incrementing while holding key or click
 
 #region MAIN METHODS
 ################################################################################
+
 
 func _ready() -> void:
 	if %Value.text.is_empty():
@@ -27,24 +28,29 @@ func _ready() -> void:
 
 
 func _load_display_info(info: Dictionary) -> void:
-	match info.get('mode', 0):
-		0: #FLOAT
-			use_float_mode(info.get('step', 0.1))
-		1: #INT
-			use_int_mode(info.get('step', 1))
-		2: #DECIBLE:
-			use_decibel_mode(info.get('step', step))
+	match info.get("mode", 0):
+		0:  #FLOAT
+			use_float_mode(info.get("step", 0.1))
+		1:  #INT
+			use_int_mode(info.get("step", 1))
+		2:  #DECIBLE:
+			use_decibel_mode(info.get("step", step))
 
 	for option in info.keys():
 		match option:
-			'min': min = info[option]
-			'max': max = info[option]
-			'prefix': update_prefix(info[option])
-			'suffix': update_suffix(info[option])
-			'step':
+			"min":
+				min = info[option]
+			"max":
+				max = info[option]
+			"prefix":
+				update_prefix(info[option])
+			"suffix":
+				update_suffix(info[option])
+			"step":
 				enforce_step = true
 				step = info[option]
-			'hide_step_button': %Spin.hide()
+			"hide_step_button":
+				%Spin.hide()
 
 
 func _set_value(new_value: Variant) -> void:
@@ -77,6 +83,7 @@ func use_decibel_mode(value_step: float = step) -> void:
 	update_suffix("dB")
 	min = -80
 
+
 #endregion
 
 #region UI FUNCTIONALITY
@@ -108,7 +115,7 @@ func _holding_button(value_direction: int, button: BaseButton) -> void:
 	var delay_timer_ms: int = 600
 
 	#Instead of awaiting for the duration, await per-frame so we can catch any changes in _is_holding_button and exit completely
-	while(delay_timer_ms > 0):
+	while delay_timer_ms > 0:
 		if _is_holding_button == false:
 			return
 		var pre_time: int = Time.get_ticks_msec()
@@ -117,10 +124,10 @@ func _holding_button(value_direction: int, button: BaseButton) -> void:
 
 	var change_speed: float = 0.25
 
-	while(_is_holding_button == true):
+	while _is_holding_button == true:
 		await scene_tree.create_timer(change_speed).timeout
 		change_speed = maxf(0.05, change_speed - 0.01)
-		_on_value_text_submitted(str(value+(step * value_direction)))
+		_on_value_text_submitted(str(value + (step * value_direction)))
 
 
 func update_prefix(to_prefix: String) -> void:
@@ -134,28 +141,30 @@ func update_suffix(to_suffix: String) -> void:
 	%Suffix.visible = to_suffix != null and to_suffix != ""
 	%Suffix.text = suffix
 
+
 #endregion
+
 
 #region SIGNAL METHODS
 ################################################################################
 func _on_gui_input(event: InputEvent) -> void:
-	if event.is_action('ui_up') and event.get_action_strength('ui_up') > 0.5:
-		_on_value_text_submitted(str(value+step))
-	elif event.is_action('ui_down') and event.get_action_strength('ui_down') > 0.5:
-		_on_value_text_submitted(str(value-step))
+	if event.is_action("ui_up") and event.get_action_strength("ui_up") > 0.5:
+		_on_value_text_submitted(str(value + step))
+	elif event.is_action("ui_down") and event.get_action_strength("ui_down") > 0.5:
+		_on_value_text_submitted(str(value - step))
 
 
 func _on_increment_button_down(button: NodePath) -> void:
-	_on_value_text_submitted(str(value+step))
+	_on_value_text_submitted(str(value + step))
 	_holding_button(1.0, get_node(button) as BaseButton)
 
 
 func _on_decrement_button_down(button: NodePath) -> void:
-	_on_value_text_submitted(str(value-step))
+	_on_value_text_submitted(str(value - step))
 	_holding_button(-1.0, get_node(button) as BaseButton)
 
 
-func _on_value_text_submitted(new_text: String, no_signal:= false) -> void:
+func _on_value_text_submitted(new_text: String, no_signal := false) -> void:
 	if new_text.is_empty() and not allow_string:
 		new_text = "0.0"
 	if new_text.is_valid_float():
@@ -166,7 +175,7 @@ func _on_value_text_submitted(new_text: String, no_signal:= false) -> void:
 			value = snapped(temp, step)
 	elif allow_string:
 		value = new_text
-	%Value.text = str(value).pad_decimals(len(str(float(step)-floorf(step)))-2)
+	%Value.text = str(value).pad_decimals(len(str(float(step) - floorf(step))) - 2)
 	if not no_signal:
 		value_changed.emit(property_name, value)
 	# Visually disable Up or Down arrow when limit is reached to better indicate a limit has been hit
@@ -188,12 +197,11 @@ func _on_sublabel_clicked(event: InputEvent) -> void:
 
 func _on_value_focus_exited() -> void:
 	_on_value_text_submitted(%Value.text)
-	$Value_Panel.add_theme_stylebox_override('panel', get_theme_stylebox('panel', 'DialogicEventEdit'))
+	$Value_Panel.add_theme_stylebox_override("panel", get_theme_stylebox("panel", "DialogicEventEdit"))
 
 
 func _on_value_focus_entered() -> void:
-	$Value_Panel.add_theme_stylebox_override('panel', get_theme_stylebox('focus', 'DialogicEventEdit'))
+	$Value_Panel.add_theme_stylebox_override("panel", get_theme_stylebox("focus", "DialogicEventEdit"))
 	%Value.select_all.call_deferred()
 
 #endregion
-

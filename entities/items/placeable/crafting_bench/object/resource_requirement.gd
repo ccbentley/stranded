@@ -8,6 +8,7 @@ extends PanelContainer
 
 var crafting_recipe_requirement: CraftingRecipeRequirement
 
+
 func _ready() -> void:
 	if crafting_recipe_requirement:
 		texture_rect.texture = crafting_recipe_requirement.item.texture
