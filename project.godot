@@ -29,6 +29,7 @@ PlayerManager="*res://entities/player/player_manager.gd"
 AudioManager="*res://utilities/audio_manager/audio_manager.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Panku="*res://addons/panku_console/console.tscn"
+Notification="*res://utilities/notification_manager/notification.tscn"
 
 [debug]
 

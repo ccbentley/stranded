@@ -17,6 +17,7 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.inventory_data.pick_up_slot_data(slot_data):
 		AudioManager.play_sound(load("res://assets/sounds/pop.ogg"), 0, true)
+		Notification.show_side(slot_data.item_data.name + " x" + str(slot_data.quantity))
 		queue_free()
 
 

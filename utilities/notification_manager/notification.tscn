@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg4mwantkvmc8"]
+
+[ext_resource type="Script" path="res://utilities/notification_manager/notification.gd" id="1_yoe6o"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_74ctv"]
+
+[node name="Notification" type="CanvasLayer"]
+script = ExtResource("1_yoe6o")
+
+[node name="Top" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -129.5
+offset_right = 129.5
+offset_bottom = 118.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = SubResource("PlaceholderTexture2D_74ctv")
+
+[node name="Label" type="Label" parent="Top"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Area"
+
+[node name="Mid" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -60.0
+offset_right = 171.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Mid"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Message Shown"
+vertical_alignment = 1
+
+[node name="Side" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -253.0
+offset_bottom = 417.0
+grow_horizontal = 0
+mouse_filter = 2

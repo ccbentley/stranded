@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b66wl4tgjc548"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ce3fu"]
+
+[node name="Label" type="Label"]
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ce3fu")
+text = "Item"
+horizontal_alignment = 2
+vertical_alignment = 1
