@@ -7,5 +7,5 @@ use_parent_material = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-position = Vector2(6, -4)
+position = Vector2(8, -6)
 texture = ExtResource("1_pqxgx")

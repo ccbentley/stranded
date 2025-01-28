@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_eb6y3"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="5_m1pa8"]
 [ext_resource type="Resource" uid="uid://bs5nfhubmellu" path="res://entities/items/materials/stone/stone.tres" id="5_t66ti"]
-[ext_resource type="AudioStream" uid="uid://c7fosy7760s7l" path="res://entities/environment/rocks/sounds/impact_4.ogg" id="6_n6611"]
+[ext_resource type="AudioStream" uid="uid://cm1b8rdg6rvmi" path="res://entities/environment/rocks/sounds/impact_4.wav" id="6_h11sj"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_obvgd"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="7_x4j51"]
 
@@ -121,7 +121,7 @@ offset = Vector2(-0.666666, -1.33333)
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("2_77g8f")]
 anim = NodePath("../AnimationPlayer")
 drop_data = Array[ExtResource("4_eb6y3")]([SubResource("Resource_ksb6a"), SubResource("Resource_h3yiv"), SubResource("Resource_6ivwd")])
-hit_sfx = ExtResource("6_n6611")
+hit_sfx = ExtResource("6_h11sj")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_m1pa8")]
 health_component = NodePath("../HealthComponent")

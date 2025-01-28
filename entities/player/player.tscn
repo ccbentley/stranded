@@ -262,6 +262,7 @@ shape = SubResource("RectangleShape2D_hgslm")
 one_shot = true
 
 [node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
+z_index = -1
 material = SubResource("ShaderMaterial_f5bsv")
 position = Vector2(7, 2.5)
 scale = Vector2(0.75, 0.75)

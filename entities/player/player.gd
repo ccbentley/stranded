@@ -67,6 +67,10 @@ enum PlayerTile {
 var player_tile_type: int = PlayerTile.GRASS
 
 
+func _process(_delta: float) -> void:
+	on_hand_rotation()
+
+
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	player_tile_pos = tile_map.local_to_map(position)
@@ -76,6 +80,31 @@ func _physics_process(_delta: float) -> void:
 		player_tile_type = PlayerTile.SAND
 	else:
 		player_tile_type = PlayerTile.WATER
+
+
+func on_hand_rotation() -> void:
+	var mouse_position: Vector2 = get_global_mouse_position()
+	var direction: Vector2 = (mouse_position - global_position).normalized()
+	
+	var angle_to_mouse = direction.angle()
+	
+	var current_rotation = on_hand.rotation
+	var target_rotation = angle_to_mouse
+	
+	if mouse_position.x < global_position.x:
+		on_hand.scale.x = -abs(on_hand.scale.x)
+		target_rotation += PI
+	elif mouse_position.x > global_position.x:
+		on_hand.scale.x = abs(on_hand.scale.x)
+	
+	on_hand.rotation = lerp_angle(current_rotation, target_rotation, 0.3)
+	
+	var target_position_x: float
+	if on_hand.scale.x < 0:
+		target_position_x = -8
+	else:
+		target_position_x = 8
+	on_hand.position.x = lerp(on_hand.position.x, target_position_x, 0.3)
 
 
 var is_facing_right: bool = true:
