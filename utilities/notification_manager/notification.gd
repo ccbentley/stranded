@@ -13,7 +13,7 @@ func _ready() -> void:
 	mid.modulate = Color(1, 1, 1, 0)
 	top.modulate = Color(1, 1, 1, 0)
 
-func show_side(message = "Item") -> void:
+func show_side(message: String = "Item") -> void:
 	var side_label: Label = SIDE_LABEL.instantiate()
 	side_label.text = message
 	side.add_child(side_label)
@@ -23,7 +23,7 @@ func show_side(message = "Item") -> void:
 	tween.tween_property(side_label, "modulate", Color(1,1,1,0), 0.3)
 	tween.tween_callback(side_label.queue_free)
 
-func show_mid(message = "Message") -> void:
+func show_mid(message: String = "Message") -> void:
 	if mid_tween_reference:
 		mid_tween_reference.kill()
 	
@@ -34,7 +34,7 @@ func show_mid(message = "Message") -> void:
 	mid_tween_reference.tween_interval(2)
 	mid_tween_reference.tween_property(mid, "modulate", Color(1,1,1,0), 0.5)
 	
-func show_top(message = "Area") -> void:
+func show_top(message: String = "Area") -> void:
 	if top_tween_reference:
 		top_tween_reference.kill()
 	

@@ -86,10 +86,10 @@ func on_hand_rotation() -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()
 	var direction: Vector2 = (mouse_position - global_position).normalized()
 	
-	var angle_to_mouse = direction.angle()
+	var angle_to_mouse: float = direction.angle()
 	
-	var current_rotation = on_hand.rotation
-	var target_rotation = angle_to_mouse
+	var current_rotation: float = on_hand.rotation
+	var target_rotation: float = angle_to_mouse
 	
 	if mouse_position.x < global_position.x:
 		on_hand.scale.x = -abs(on_hand.scale.x)

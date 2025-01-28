@@ -1,10 +1,10 @@
-extends ProgressBar
+extends Control
 
 @onready var player: Player = PlayerManager.player
 @onready var health_component: HealthComponent = player.health_component
 
-@onready var health_bar: ProgressBar = $"."
-@onready var damage_bar: ProgressBar = $DamageBar
+@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var damage_bar: TextureProgressBar = $DamageBar
 @onready var timer: Timer = $Timer
 var damage_bar_tween: Tween
 
