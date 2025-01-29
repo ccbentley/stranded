@@ -14,5 +14,7 @@ func _on_button_button_down() -> void:
 	get_tree().paused = false
 	set_process(false)
 	player.health_component.set_health(player.health_component.MAX_HEALTH)
+	player.hunger = player.MAX_HUNGER
+	player.saturation = player.MAX_SATURATION
 	player.health_component.dead = false
 	WorldManager.world.tile_map.find_spawn_location()

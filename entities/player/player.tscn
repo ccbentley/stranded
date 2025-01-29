@@ -302,4 +302,8 @@ z_index = -1
 
 [node name="FootstepComponent" parent="." instance=ExtResource("21_0wihk")]
 
+[node name="StarveDamageTimer" type="Timer" parent="."]
+wait_time = 1.5
+
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="timeout" from="StarveDamageTimer" to="." method="_on_starve_damage_timer_timeout"]

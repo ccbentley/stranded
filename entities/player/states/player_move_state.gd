@@ -38,3 +38,5 @@ func _physics_process(delta: float) -> void:
 
 	if actor.player_tile_type == actor.PlayerTile.WATER:
 		player_entered_water.emit()
+		
+	actor.decrase_hunger(1 * delta)

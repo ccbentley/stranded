@@ -1,8 +1,12 @@
 extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var day_counter_label: Label = $"../UI/MarginContainer/VBoxContainer/DayCounter"
 
-var day_counter: int = 0
+var day_counter: int = 0:
+	set(value):
+		day_counter = value
+		day_counter_label.text = "Day " + str(value)
 
 var current_time: float
 var total_time: float

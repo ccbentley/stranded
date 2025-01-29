@@ -66,6 +66,38 @@ enum PlayerTile {
 
 var player_tile_type: int = PlayerTile.GRASS
 
+signal hunger_updated
+@onready var starve_damage_timer: Timer = $StarveDamageTimer
+
+const MAX_HUNGER: float = 100
+const MAX_SATURATION: float = 25
+
+var hunger: float = MAX_HUNGER:
+	set(value):
+		hunger = clamp(value, 0, MAX_HUNGER)
+		hunger_updated.emit()
+		
+var saturation: float = MAX_SATURATION:
+	set(value):
+		saturation = clamp(value, 0, MAX_SATURATION)
+
+func decrase_hunger(value: float) -> void:
+	if saturation > 0:
+		saturation -= value
+	else:
+		hunger -= value
+		
+	if hunger <= 0 and starve_damage_timer.is_stopped():
+		starve_damage_timer.start()
+
+func _on_starve_damage_timer_timeout() -> void:
+	if hunger > 0:
+		starve_damage_timer.stop()
+		return
+	var attack: Attack = Attack.new()
+	attack.attack_damage = 1
+	health_component.damage(attack)
+
 
 func _process(_delta: float) -> void:
 	on_hand_rotation()
