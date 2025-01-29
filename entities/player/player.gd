@@ -76,19 +76,21 @@ var hunger: float = MAX_HUNGER:
 	set(value):
 		hunger = clamp(value, 0, MAX_HUNGER)
 		hunger_updated.emit()
-		
+
 var saturation: float = MAX_SATURATION:
 	set(value):
 		saturation = clamp(value, 0, MAX_SATURATION)
+
 
 func decrase_hunger(value: float) -> void:
 	if saturation > 0:
 		saturation -= value
 	else:
 		hunger -= value
-		
+
 	if hunger <= 0 and starve_damage_timer.is_stopped():
 		starve_damage_timer.start()
+
 
 func _on_starve_damage_timer_timeout() -> void:
 	if hunger > 0:
@@ -117,20 +119,20 @@ func _physics_process(_delta: float) -> void:
 func on_hand_rotation() -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()
 	var direction: Vector2 = (mouse_position - global_position).normalized()
-	
+
 	var angle_to_mouse: float = direction.angle()
-	
+
 	var current_rotation: float = on_hand.rotation
 	var target_rotation: float = angle_to_mouse
-	
+
 	if mouse_position.x < global_position.x:
 		on_hand.scale.x = -abs(on_hand.scale.x)
 		target_rotation += PI
 	elif mouse_position.x > global_position.x:
 		on_hand.scale.x = abs(on_hand.scale.x)
-	
+
 	on_hand.rotation = lerp_angle(current_rotation, target_rotation, 0.3)
-	
+
 	var target_position_x: float
 	if on_hand.scale.x < 0:
 		target_position_x = -8

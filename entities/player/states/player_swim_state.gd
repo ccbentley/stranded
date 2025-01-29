@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		actor.is_facing_right = false
 	elif input.x > 0:
 		actor.is_facing_right = true
-		
+
 	actor.decrase_hunger(1 * delta)
 
 
