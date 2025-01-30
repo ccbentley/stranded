@@ -67,7 +67,8 @@ enum PlayerTile {
 var player_tile_type: int = PlayerTile.GRASS
 
 signal temp_changed
-var temp: int = 25:
+const STARTING_TEMP: int = 25
+var temp: int = STARTING_TEMP:
 	set(value):
 		temp = value
 		temp_changed.emit()
