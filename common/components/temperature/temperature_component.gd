@@ -6,15 +6,18 @@ extends Area2D
 
 @export var value: int = 1
 @export var timer_wait_time: float = 1
+@export var max_option: bool = false
+@export var min_option: bool = false
 @export var max_value: int = 0
 @export var min_value: int = 0
+
 
 func _ready() -> void:
 	timer.wait_time = timer_wait_time
 
 
 func _on_timer_timeout() -> void:
-	if player.temp + value > max_value or player.temp + value < min_value:
+	if (max_option and player.temp + value > max_value) or (min_option and player.temp + value < min_value):
 		return
 	player.increase_temp(value)
 

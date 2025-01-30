@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func on_temp_changed() -> void:
-	label.text = str(player.temp)
+	label.text = str(player.temp) + "°"
 	if player.temp > 30:
 		icon.texture = TEMP_HOT
 	elif player.temp > 15:

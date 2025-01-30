@@ -150,6 +150,7 @@ max_distance = 300.0
 bus = &"Sfx"
 
 [node name="TemperatureComponent" parent="." instance=ExtResource("15_l1npe")]
+max_option = true
 max_value = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TemperatureComponent"]
