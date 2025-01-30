@@ -14,6 +14,7 @@ func save_game() -> void:
 	player_data.quests = main.quest_manager.save_quests()
 	player_data.hunger = player.hunger
 	player_data.saturation = player.saturation
+	player_data.temp = player.temp
 	ResourceSaver.save(player_data, Global.world_save_file_path + Global.player_save_file_name)
 
 	Global.world_data.day_count = main.day_night_cycle.day_counter
@@ -40,6 +41,7 @@ func load_game() -> bool:
 	main.quest_manager.load_quests(player_data.quests)
 	player.hunger = player_data.hunger
 	player.saturation = player_data.saturation
+	player.temp = player_data.temp
 
 	main.day_night_cycle.day_counter = Global.world_data.day_count
 	main.day_night_cycle.set_current_time(Global.world_data.current_time)

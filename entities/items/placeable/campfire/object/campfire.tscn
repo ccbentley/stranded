@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dshuhhh7gh7np"]
+[gd_scene load_steps=24 format=3 uid="uid://dshuhhh7gh7np"]
 
 [ext_resource type="Texture2D" uid="uid://bnhctpinxgmd6" path="res://entities/items/placeable/campfire/object/art/fire1.png" id="1_iknff"]
 [ext_resource type="Script" path="res://entities/items/placeable/campfire/object/campfire.gd" id="1_w1jlw"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://crf38fv3nqtiv" path="res://entities/items/placeable/campfire/object/art/fire8.png" id="10_gc35u"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="10_t67g1"]
 [ext_resource type="AudioStream" uid="uid://0fnl41mgkllw" path="res://entities/items/placeable/campfire/object/sounds/fire.ogg" id="15_b3caq"]
+[ext_resource type="PackedScene" uid="uid://bkfx7hno0ss2o" path="res://common/components/temperature/temperature_component.tscn" id="15_l1npe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sbln1"]
 animations = [{
@@ -93,6 +94,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5afu"]
 size = Vector2(12, 9)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7qde"]
+radius = 80.0
+
 [node name="Campfire" type="StaticBody2D"]
 script = ExtResource("1_w1jlw")
 
@@ -144,5 +148,11 @@ volume_db = 10.0
 autoplay = true
 max_distance = 300.0
 bus = &"Sfx"
+
+[node name="TemperatureComponent" parent="." instance=ExtResource("15_l1npe")]
+max_value = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TemperatureComponent"]
+shape = SubResource("CircleShape2D_q7qde")
 
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]

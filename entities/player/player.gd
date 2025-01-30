@@ -66,6 +66,12 @@ enum PlayerTile {
 
 var player_tile_type: int = PlayerTile.GRASS
 
+signal temp_changed
+var temp: int = 25:
+	set(value):
+		temp = value
+		temp_changed.emit()
+
 signal hunger_updated
 @onready var starve_damage_timer: Timer = $StarveDamageTimer
 
@@ -303,3 +309,7 @@ func _on_health_component_damaged(_prev_health: float, _health: float) -> void:
 
 func on_health_component_died() -> void:
 	main.display_death_screen()
+
+
+func increase_temp(value: int) -> void:
+	temp += value

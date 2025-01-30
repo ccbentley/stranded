@@ -7,6 +7,7 @@ var day_counter: int = 0:
 	set(value):
 		day_counter = value
 		day_counter_label.text = "Day " + str(value)
+		Notification.show_top("Day " + str(value))
 
 var current_time: float
 var total_time: float

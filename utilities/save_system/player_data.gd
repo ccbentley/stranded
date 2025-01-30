@@ -8,5 +8,6 @@ class_name PlayerData
 @export var is_facing_right: bool
 @export var hunger: float
 @export var saturation: float
+@export var temp: int
 
 @export var quests: Array[QuestData]

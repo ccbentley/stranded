@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0p7eem5cnubx"]
+[gd_scene load_steps=30 format=3 uid="uid://d0p7eem5cnubx"]
 
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_uw73h"]
 [ext_resource type="Texture2D" uid="uid://bj74edfi26gtl" path="res://stages/main/world_generation/noise.tres" id="2_iuy5t"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ca7c34x6newnt" path="res://utilities/quest_manager/quest_manager.tscn" id="11_xydi1"]
 [ext_resource type="Script" path="res://common/inventory/inventory_interface.gd" id="12_5ileu"]
 [ext_resource type="PackedScene" uid="uid://c05qpfqg6xjd7" path="res://utilities/day_night_cycle/day_night_cycle.tscn" id="12_dx3ki"]
+[ext_resource type="Texture2D" uid="uid://bi15rsqomkw6s" path="res://entities/player/temperature/art/temp_warm.png" id="12_e5dgb"]
+[ext_resource type="Script" path="res://entities/player/temperature/temperature.gd" id="13_dpi01"]
 [ext_resource type="PackedScene" uid="uid://cmfumnest4jlg" path="res://common/shaders/vignette/vignette.tscn" id="13_qlnb4"]
 [ext_resource type="PackedScene" uid="uid://7n3kvnhu76wv" path="res://common/inventory/inventory.tscn" id="13_utryv"]
 [ext_resource type="TileSet" uid="uid://bcy0q2dkwpmny" path="res://stages/main/tile_set/tile_set.tres" id="13_xl4hy"]
@@ -24,20 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://bg4imc5jw4gav" path="res://entities/floating_object/floating_object.tscn" id="20_oor4f"]
 [ext_resource type="Script" path="res://utilities/save_system/saver_loader.gd" id="21_irevq"]
 [ext_resource type="AudioStream" uid="uid://ch3n7ywy27krt" path="res://assets/sounds/ambient/amb_river.ogg" id="23_jql4u"]
-
-[sub_resource type="GDScript" id="GDScript_hoy07"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_v21ha"]
 frequency = 0.1
@@ -194,7 +182,10 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HealthBar" parent="UI/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("10_7p1pw")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthBar" parent="UI/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("10_7p1pw")]
 z_index = 3
 layout_mode = 2
 
@@ -202,13 +193,40 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Day 0"
-script = SubResource("GDScript_hoy07")
 
 [node name="QuestManager" parent="UI/MarginContainer" instance=ExtResource("11_xydi1")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TempContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = -5
+script = ExtResource("13_dpi01")
+
+[node name="Temperature" type="TextureRect" parent="UI/MarginContainer/TempContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("12_e5dgb")
+
+[node name="Label" type="Label" parent="UI/MarginContainer/TempContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 39
+text = "25°"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("15_fqub2")]
 visible = false
