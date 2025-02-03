@@ -10,6 +10,8 @@ extends State
 
 signal player_exited_water
 
+const SPLASH_1 = preload("res://entities/player/sounds/splash/splash1.wav")
+const SPLASH_2 = preload("res://entities/player/sounds/splash/splash2.wav")
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -25,6 +27,7 @@ func _enter_state() -> void:
 	drown_bar_timer.start()
 	water_trail.visible = true
 	actor.main.vignette.display_vignette(Color.SKY_BLUE)
+	AudioManager.play_sound_2d(SPLASH_2, -1, actor.global_position, true)
 
 
 func _exit_state() -> void:
@@ -34,6 +37,7 @@ func _exit_state() -> void:
 	player_hurt_timer.stop()
 	water_trail.visible = false
 	actor.main.vignette.remove_vignette()
+	AudioManager.play_sound_2d(SPLASH_1, -1, actor.global_position, true)
 
 
 func _physics_process(delta: float) -> void:
