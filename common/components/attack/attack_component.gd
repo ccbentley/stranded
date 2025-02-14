@@ -22,3 +22,4 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent and area.type & _attack.material_type:
 		if not area.owner == self.owner:
 			area.damage(_attack)
+			WorldManager.freeze_engine()
