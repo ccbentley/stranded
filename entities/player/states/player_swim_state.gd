@@ -13,6 +13,7 @@ signal player_exited_water
 const SPLASH_1 = preload("res://entities/player/sounds/splash/splash1.wav")
 const SPLASH_2 = preload("res://entities/player/sounds/splash/splash2.wav")
 
+
 func _ready() -> void:
 	set_physics_process(false)
 	drown_bar_timer.timeout.connect(self.on_drown_bar_timer_timeout)

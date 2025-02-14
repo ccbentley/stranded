@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxg8yp0u12n02"]
+[gd_scene load_steps=3 format=3 uid="uid://bf7koc58pyt7h"]
 
-[ext_resource type="Texture2D" uid="uid://cayuyk7fwsmg7" path="res://entities/items/melee/pickaxe/wooden/art/wooden_pickaxe.png" id="1_iyyjb"]
+[ext_resource type="PackedScene" uid="uid://c0xkxv6f32qih" path="res://entities/items/melee/melee_item.tscn" id="1_8ueae"]
+[ext_resource type="Texture2D" uid="uid://cayuyk7fwsmg7" path="res://entities/items/melee/pickaxe/wooden/art/wooden_pickaxe.png" id="2_qsmrx"]
 
-[node name="WoodenPickaxe" type="Node2D"]
-use_parent_material = true
+[node name="MeleeItem" instance=ExtResource("1_8ueae")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-use_parent_material = true
-position = Vector2(5, -5)
-texture = ExtResource("1_iyyjb")
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_qsmrx")
+
+[node name="Trail" parent="Sprite2D" index="0"]
+position = Vector2(-4, -6)

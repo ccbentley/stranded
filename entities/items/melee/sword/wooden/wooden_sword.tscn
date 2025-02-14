@@ -1,11 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bquf3ojo5sfi3"]
+[gd_scene load_steps=3 format=3 uid="uid://crdq8mfbw8rus"]
 
 [ext_resource type="Texture2D" uid="uid://b3t2r8ndigig6" path="res://entities/items/melee/sword/wooden/art/wooden_sword.png" id="1_apypm"]
+[ext_resource type="PackedScene" uid="uid://c0xkxv6f32qih" path="res://entities/items/melee/melee_item.tscn" id="1_tjl5x"]
 
-[node name="WoodenSword" type="Node2D"]
-use_parent_material = true
+[node name="MeleeItem" instance=ExtResource("1_tjl5x")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-use_parent_material = true
-position = Vector2(5, -5)
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_apypm")

@@ -12,7 +12,6 @@ extends CharacterBody2D
 # Custom Components
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var attack_component: AttackComponent = $AttackComponent
 
 # Inventory
 @export var inventory_data: InventoryData
@@ -30,10 +29,8 @@ signal toggle_inventory
 
 # On hand
 @onready var on_hand: Sprite2D = $OnHand
+@onready var hand_point: Node2D = $OnHand/HandPoint
 var held_item: Node2D = null
-
-# Timers
-@onready var attack_cooldown_timer: Timer = $AttackCooldown
 
 # Movement
 var input: Vector2 = Vector2.ZERO
@@ -138,7 +135,7 @@ func on_hand_rotation() -> void:
 	elif mouse_position.x > global_position.x:
 		on_hand.scale.x = abs(on_hand.scale.x)
 
-	on_hand.rotation = lerp_angle(current_rotation, target_rotation, 0.3)
+	on_hand.rotation = lerp_angle(current_rotation, target_rotation, 1)
 
 	var target_position_x: float
 	if on_hand.scale.x < 0:
@@ -231,33 +228,6 @@ func heal(heal_value: int) -> void:
 	health_component.health += heal_value
 
 
-func try_attack() -> bool:
-	return attack_cooldown_timer.time_left <= 0
-
-
-func melee_attack(attack: Attack) -> void:
-	attack_cooldown_timer.start(attack.attack_cooldown)
-	attack.attack_position = global_position
-	attack_component.set_attack_range(attack.attack_range, is_facing_right)
-	attack_component.attack(attack)
-	if is_facing_right:
-		on_hand_animation_player.play("melee_attack_right")
-	else:
-		on_hand_animation_player.play("melee_attack_left")
-	AudioManager.play_sound(load("res://assets/sounds/woosh.wav"), 0, true)
-	can_move = false
-	if player_state.state == player_moving_state:
-		movement_animation_player.play("idle")
-	await get_tree().create_timer(0.4).timeout
-	if player_state.state == player_moving_state:
-		movement_animation_player.play("move")
-	can_move = true
-
-
-func ranged_attack(attack: Attack) -> void:
-	attack_cooldown_timer.start(attack.attack_cooldown)
-
-
 func place_object(object: PackedScene, pos: Vector2) -> void:
 	var obj: Node2D = object.instantiate()
 	obj.position = pos
@@ -276,11 +246,11 @@ func get_tile_data(pos: Vector2i) -> int:
 
 
 func hold_item(item_scene: PackedScene) -> void:
-	for child: Node2D in on_hand.get_children():
+	for child: Node2D in hand_point.get_children():
 		child.queue_free()
 	if item_scene:
 		var item_node: Node2D = item_scene.instantiate()
-		on_hand.add_child(item_node)
+		hand_point.add_child(item_node)
 		held_item = item_node
 
 

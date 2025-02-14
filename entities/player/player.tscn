@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=36 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="5_q6e4e"]
 [ext_resource type="Script" path="res://entities/player/states/player_sit_state.gd" id="6_fg33t"]
-[ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://common/components/attack/attack_component.tscn" id="6_in0ea"]
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="7_phdj8"]
 [ext_resource type="Texture2D" uid="uid://0mc6ux1v7fv6" path="res://entities/player/art/walk/player_walk_cycle.png" id="8_7dubk"]
 [ext_resource type="Script" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
@@ -259,16 +258,14 @@ type = 1
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hgslm")
 
-[node name="AttackComponent" parent="." instance=ExtResource("6_in0ea")]
-
-[node name="AttackCooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
-z_index = -1
 material = SubResource("ShaderMaterial_f5bsv")
 position = Vector2(7, 2.5)
-scale = Vector2(0.75, 0.75)
+
+[node name="HandPoint" type="Node2D" parent="OnHand"]
+use_parent_material = true
+position = Vector2(6, 0)
+scale = Vector2(0.85, 0.85)
 
 [node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
