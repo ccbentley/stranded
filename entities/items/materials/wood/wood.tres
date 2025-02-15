@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_7t42h")
+useable = false
 name = "Wood"
 description = "wood from tree"
 stackable = true
 texture = ExtResource("2_lew3d")
-held_offset = Vector2(0, 0)

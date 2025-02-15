@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtjskiad21mrh"
-path="res://.godot/imported/player_walk_cycle3.png-feb34b4ee5d82f3a9647bf11210e204a.ctex"
+uid="uid://dmpmko5pyopfe"
+path="res://.godot/imported/human_nobleman_2.png-9941466b6128fe34760311a61008fef5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/art/walk/player_walk_cycle3.png"
-dest_files=["res://.godot/imported/player_walk_cycle3.png-feb34b4ee5d82f3a9647bf11210e204a.ctex"]
+source_file="res://entities/player/art/human_nobleman_2.png"
+dest_files=["res://.godot/imported/human_nobleman_2.png-9941466b6128fe34760311a61008fef5.ctex"]
 
 [params]
 

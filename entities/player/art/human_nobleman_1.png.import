@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://51427gtgui3s"
-path="res://.godot/imported/player_idle.png-248e6f45dd014153df516c3b5a35fa42.ctex"
+uid="uid://bbu35skiruntu"
+path="res://.godot/imported/human_nobleman_1.png-0ad18a6b40773fc9efaad343d16851c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/art/idle/player_idle.png"
-dest_files=["res://.godot/imported/player_idle.png-248e6f45dd014153df516c3b5a35fa42.ctex"]
+source_file="res://entities/player/art/human_nobleman_1.png"
+dest_files=["res://.godot/imported/human_nobleman_1.png-0ad18a6b40773fc9efaad343d16851c3.ctex"]
 
 [params]
 

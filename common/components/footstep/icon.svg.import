@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmtd25nar6kww"
-path="res://.godot/imported/player_walk_cycle2.png-e20507b1fa4fedfb353e89d910f3a675.ctex"
+uid="uid://ctmiokoqgn0fk"
+path="res://.godot/imported/icon.svg-26e97b0609de3ab85a2a4bcc25ab7643.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/art/walk/player_walk_cycle2.png"
-dest_files=["res://.godot/imported/player_walk_cycle2.png-e20507b1fa4fedfb353e89d910f3a675.ctex"]
+source_file="res://common/components/footstep/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-26e97b0609de3ab85a2a4bcc25ab7643.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

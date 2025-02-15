@@ -1,3 +1,4 @@
+@icon("icon.svg")
 extends Node2D
 class_name ChunkNodeHelper
 

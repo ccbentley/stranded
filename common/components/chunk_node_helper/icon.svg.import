@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d00uquwx08e05"
-path="res://.godot/imported/player_swim1.png-f99d68444253771fd030cf30c2bc73b2.ctex"
+uid="uid://bli1xrx3r5wbj"
+path="res://.godot/imported/icon.svg-d5835bf9b9996c3d64f1da962ad74011.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/art/swim/player_swim1.png"
-dest_files=["res://.godot/imported/player_swim1.png-f99d68444253771fd030cf30c2bc73b2.ctex"]
+source_file="res://common/components/chunk_node_helper/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-d5835bf9b9996c3d64f1da962ad74011.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

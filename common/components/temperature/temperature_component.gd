@@ -1,3 +1,4 @@
+@icon("icon.svg")
 class_name TemperatureComponent
 extends Area2D
 
