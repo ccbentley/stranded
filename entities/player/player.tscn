@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="20_11rme"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="21_0wihk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eb6rx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp56p"]
 atlas = ExtResource("8_b35jp")
-region = Rect2(0, 416, 32, 32)
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4f3oy"]
 size = Vector2(10, 4)
@@ -24,40 +24,8 @@ size = Vector2(10, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgslm"]
 size = Vector2(10, 19)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5bsv"]
-shader = ExtResource("16_ylx78")
-shader_parameter/outline_color = null
-
 [sub_resource type="Animation" id="Animation_ydgaj"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OnHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(7, 2.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OnHand:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2.5]
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mp56p"]
-atlas = ExtResource("8_b35jp")
-region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jvq0d"]
 atlas = ExtResource("8_b35jp")
@@ -77,18 +45,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [SubResource("AtlasTexture_mp56p"), SubResource("AtlasTexture_jvq0d")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OnHand:position:y")
-tracks/1/interp = 0
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [2.5, 3.5]
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0v2ek"]
@@ -123,18 +79,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [SubResource("AtlasTexture_0v2ek"), SubResource("AtlasTexture_dq6bj"), SubResource("AtlasTexture_hoptd"), SubResource("AtlasTexture_plj2k")]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OnHand:position:y")
-tracks/1/interp = 0
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [2.5, 3.5, 2.5, 3.5]
-}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb6rx"]
+atlas = ExtResource("8_b35jp")
+region = Rect2(0, 416, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhvr6"]
 atlas = ExtResource("8_b35jp")
@@ -167,50 +115,14 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_ltw5y"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OnHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_skaai"]
 resource_name = "melee_attack_left"
 length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OnHand:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -1.0472, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_jnbma"]
 resource_name = "melee_attack"
 length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OnHand:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0472, 0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66n73"]
 _data = {
@@ -231,6 +143,10 @@ expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdnxj"]
 bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_biwr1"]
+shader = ExtResource("16_ylx78")
+shader_parameter/outline_color = null
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -266,7 +182,7 @@ actor = NodePath("../../..")
 anim = NodePath("../../../MovementAnimationPlayer")
 
 [node name="CharacterSprite" parent="." instance=ExtResource("7_phdj8")]
-texture = SubResource("AtlasTexture_eb6rx")
+texture = SubResource("AtlasTexture_mp56p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -282,15 +198,6 @@ type = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hgslm")
-
-[node name="OnHand" parent="." instance=ExtResource("7_phdj8")]
-material = SubResource("ShaderMaterial_f5bsv")
-position = Vector2(7, 2.5)
-
-[node name="HandPoint" type="Node2D" parent="OnHand"]
-use_parent_material = true
-position = Vector2(6, 0)
-scale = Vector2(0.75, 0.75)
 
 [node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -330,6 +237,14 @@ position = Vector2(0, 5)
 
 [node name="StarveDamageTimer" type="Timer" parent="."]
 wait_time = 1.5
+
+[node name="OnHand" type="Marker2D" parent="."]
+material = SubResource("ShaderMaterial_biwr1")
+
+[node name="HandPoint" type="Node2D" parent="OnHand"]
+use_parent_material = true
+position = Vector2(10, -3)
+scale = Vector2(0.75, 0.75)
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="timeout" from="StarveDamageTimer" to="." method="_on_starve_damage_timer_timeout"]

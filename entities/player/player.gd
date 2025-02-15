@@ -28,7 +28,7 @@ signal toggle_inventory
 @onready var player_sit_state: PlayerSitState = $StateMachines/MovementStateMachine/PlayerSitState as PlayerSitState
 
 # On hand
-@onready var on_hand: Sprite2D = $OnHand
+@onready var on_hand: Marker2D = $OnHand
 @onready var hand_point: Node2D = $OnHand/HandPoint
 var held_item: Node2D = null
 
@@ -122,27 +122,11 @@ func _physics_process(_delta: float) -> void:
 
 func on_hand_rotation() -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()
-	var direction: Vector2 = (mouse_position - global_position).normalized()
-
-	var angle_to_mouse: float = direction.angle()
-
-	var current_rotation: float = on_hand.rotation
-	var target_rotation: float = angle_to_mouse
-
-	if mouse_position.x < global_position.x:
-		on_hand.scale.x = -abs(on_hand.scale.x)
-		target_rotation += PI
-	elif mouse_position.x > global_position.x:
-		on_hand.scale.x = abs(on_hand.scale.x)
-
-	on_hand.rotation = lerp_angle(current_rotation, target_rotation, 1)
-
-	var target_position_x: float
-	if on_hand.scale.x < 0:
-		target_position_x = -8
+	on_hand.look_at(mouse_position)
+	if mouse_position.x - global_position.x < 0:
+		on_hand.scale.y = -1
 	else:
-		target_position_x = 8
-	on_hand.position.x = lerp(on_hand.position.x, target_position_x, 0.3)
+		on_hand.scale.y = 1
 
 
 var is_facing_right: bool = true:
@@ -151,14 +135,10 @@ var is_facing_right: bool = true:
 			# Turn right
 			var turn_tween: Tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			on_hand.scale.x = abs(on_hand.scale.x)
-			on_hand.position.x = abs(on_hand.position.x)
 		elif not value and is_facing_right != value:
 			# Turn left
 			var turn_tween: Tween = get_tree().create_tween()
 			turn_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			on_hand.scale.x = -abs(on_hand.scale.x)
-			on_hand.position.x = -abs(on_hand.position.x)
 		is_facing_right = value
 
 

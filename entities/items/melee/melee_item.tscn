@@ -68,7 +68,7 @@ _data = {
 "slash": SubResource("Animation_rf13v")
 }
 
-[node name="MeleeItem2" type="Node2D"]
+[node name="MeleeItem" type="Node2D"]
 use_parent_material = true
 script = ExtResource("1_66dfw")
 
@@ -78,6 +78,7 @@ position = Vector2(4, -4)
 
 [node name="Trail" type="Sprite2D" parent="Sprite2D"]
 visible = false
+modulate = Color(1, 1, 1, 0.513726)
 z_index = -1
 position = Vector2(-4, -7)
 rotation = -0.727802
