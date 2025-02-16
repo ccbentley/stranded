@@ -9,7 +9,8 @@ var chunk_position: Vector2i:
 	set(value):
 		if chunk_position != value:
 			chunk_position = value
-			actor.reparent(tile_map.chunks_node.get_node(str(chunk_position)))
+			if tile_map.chunks_node.get_node_or_null(str(chunk_position)):
+				actor.reparent(tile_map.chunks_node.get_node(str(chunk_position)))
 
 
 func _process(_delta: float) -> void:
