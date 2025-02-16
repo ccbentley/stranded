@@ -52,6 +52,9 @@ equip_inventory_data = ExtResource("4_jkkiy")
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Utilities/DayNightCycle")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 process_mode = 3
 zoom = Vector2(5, 5)
@@ -245,8 +248,6 @@ size_flags_vertical = 8
 process_mode = 3
 visible = false
 
-[node name="DayNightCycle" parent="." instance=ExtResource("12_dx3ki")]
-
 [node name="WeatherManager" parent="." instance=ExtResource("15_4r43r")]
 
 [node name="TileMap" type="Node2D" parent="."]
@@ -295,6 +296,10 @@ bus = &"Sfx"
 
 [node name="SaverLoader" type="Node" parent="Utilities"]
 script = ExtResource("21_irevq")
+
+[node name="DayNightCycle" parent="Utilities" instance=ExtResource("12_dx3ki")]
+z_index = -1
+z_as_relative = false
 
 [connection signal="drop_slot_data" from="UI/MarginContainer/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/MarginContainer/InventoryInterface" to="UI/MarginContainer/InventoryInterface" method="_on_gui_input"]

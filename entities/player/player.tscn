@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=38 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -148,6 +148,9 @@ bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
 shader = ExtResource("16_ylx78")
 shader_parameter/outline_color = null
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dvj8k"]
+polygon = PackedVector2Array(2, 6, -2, 6, -3, 5, -3, 4, -2, 3, 2, 3, 3, 4, 3, 5)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -245,6 +248,9 @@ material = SubResource("ShaderMaterial_biwr1")
 use_parent_material = true
 position = Vector2(10, -3)
 scale = Vector2(0.75, 0.75)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_dvj8k")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="timeout" from="StarveDamageTimer" to="." method="_on_starve_damage_timer_timeout"]

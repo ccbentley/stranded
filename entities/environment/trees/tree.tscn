@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnj62ts5tdlcl"]
+[gd_scene load_steps=23 format=3 uid="uid://dnj62ts5tdlcl"]
 
 [ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
-[ext_resource type="Texture2D" uid="uid://dtm15fka3l4nl" path="res://entities/environment/trees/art/green_tree_3.png" id="1_udmqk"]
 [ext_resource type="Shader" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="2_evma0"]
+[ext_resource type="Texture2D" uid="uid://sui0lmneci55" path="res://entities/environment/trees/art/green_tree_1.png" id="3_cy5fu"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
@@ -138,6 +138,9 @@ _data = {
 "hit": SubResource("Animation_32xba")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vdvlo"]
+polygon = PackedVector2Array(11, -20, -10, -20, -13, -23, -16, -28, -19, -35, -19, -41, -15, -47, -10, -52, -1, -53, 8, -52, 13, -50, 17, -43, 17, -30)
+
 [node name="Tree" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_ltc28")
@@ -151,7 +154,7 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_drjcf")
 position = Vector2(0, -2)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_udmqk")
+texture = ExtResource("3_cy5fu")
 offset = Vector2(0, -15)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_pl3hv")]
@@ -178,3 +181,6 @@ libraries = {
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("10_qgqc0")]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_vdvlo")
