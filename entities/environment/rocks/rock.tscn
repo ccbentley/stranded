@@ -17,6 +17,9 @@ size = Vector2(15, 6)
 atlas = ExtResource("1_1oaxa")
 region = Rect2(288, 145, 16, 16)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cyacr"]
+polygon = PackedVector2Array(5, -2, -7, -2, -8, -4, -8, -6, -5, -8, -4, -8, -4, -10, 0, -13, 2, -13, 6, -9, 6, -6, 6, -3)
+
 [sub_resource type="Resource" id="Resource_ksb6a"]
 script = ExtResource("4_eb6y3")
 drop_chance = 1.0
@@ -104,9 +107,6 @@ _data = {
 "hit": SubResource("Animation_fle8r")
 }
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cyacr"]
-polygon = PackedVector2Array(5, -2, -7, -2, -8, -4, -8, -6, -5, -8, -4, -8, -4, -10, 0, -13, 2, -13, 6, -9, 6, -6, 6, -3)
-
 [node name="Rock" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_1ewun")
@@ -120,6 +120,10 @@ y_sort_enabled = true
 position = Vector2(0, -6)
 texture = SubResource("AtlasTexture_djilb")
 offset = Vector2(-0.666666, -1.33333)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+position = Vector2(0, 6)
+occluder = SubResource("OccluderPolygon2D_cyacr")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("2_77g8f")]
 anim = NodePath("../AnimationPlayer")
@@ -144,6 +148,3 @@ libraries = {
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("7_x4j51")]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_cyacr")

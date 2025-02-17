@@ -27,6 +27,9 @@ shader_parameter/distortion = null
 shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vdvlo"]
+polygon = PackedVector2Array(11, -20, -10, -20, -13, -23, -16, -28, -19, -35, -19, -41, -15, -47, -10, -52, -1, -53, 8, -52, 13, -50, 17, -43, 17, -30)
+
 [sub_resource type="Resource" id="Resource_6p6ry"]
 script = ExtResource("4_kpk1k")
 drop_chance = 1.0
@@ -138,9 +141,6 @@ _data = {
 "hit": SubResource("Animation_32xba")
 }
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vdvlo"]
-polygon = PackedVector2Array(11, -20, -10, -20, -13, -23, -16, -28, -19, -35, -19, -41, -15, -47, -10, -52, -1, -53, 8, -52, 13, -50, 17, -43, 17, -30)
-
 [node name="Tree" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_ltc28")
@@ -156,6 +156,11 @@ position = Vector2(0, -2)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_cy5fu")
 offset = Vector2(0, -15)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+position = Vector2(0, 1.33333)
+scale = Vector2(0.666667, 0.666667)
+occluder = SubResource("OccluderPolygon2D_vdvlo")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("anim") instance=ExtResource("3_pl3hv")]
 anim = NodePath("../AnimationPlayer")
@@ -181,6 +186,3 @@ libraries = {
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("10_qgqc0")]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_vdvlo")
