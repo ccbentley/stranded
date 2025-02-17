@@ -5,7 +5,7 @@ var world: Node2D
 const PICKUP: PackedScene = preload("res://common/item/pickup/pickup.tscn")
 
 const freeze_slow: float = 0.07
-const freeze_time: float = 0.3
+const freeze_time: float = 0.15
 
 
 func spawn_pickup(slot_data: SlotData, pos: Vector2) -> void:
