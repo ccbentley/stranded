@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=6 format=3 uid="uid://dl2o8notsvx72"]
 
-[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_jhcu7"]
+[ext_resource type="Script" uid="uid://c1ef1rk27aqy5" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_jhcu7"]
 [ext_resource type="Resource" uid="uid://5vewugr6evja" path="res://entities/items/placeable/boat/boat.tres" id="1_o8xyi"]
-[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_kkjl7"]
+[ext_resource type="Script" uid="uid://dsl6l8x40r0fr" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_kkjl7"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_pj8j0"]
 
 [sub_resource type="Resource" id="Resource_pg8ou"]

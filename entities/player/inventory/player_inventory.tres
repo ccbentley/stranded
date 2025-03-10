@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="InventoryData" load_steps=5 format=3 uid="uid://bnxpj0puqauvh"]
 
-[ext_resource type="Script" path="res://common/inventory/inventory_data.gd" id="1_a6h45"]
+[ext_resource type="Script" uid="uid://c5orqlcfuh67b" path="res://common/inventory/inventory_data.gd" id="1_a6h45"]
 [ext_resource type="Resource" uid="uid://d0s76x510hhta" path="res://entities/items/melee/axe/wooden/wooden_axe.tres" id="2_j8bkw"]
-[ext_resource type="Script" path="res://common/inventory/slot_data.gd" id="3_38chp"]
+[ext_resource type="Script" uid="uid://bnr88njmxc3jf" path="res://common/inventory/slot_data.gd" id="3_38chp"]
 
 [sub_resource type="Resource" id="Resource_w026c"]
 script = ExtResource("3_38chp")

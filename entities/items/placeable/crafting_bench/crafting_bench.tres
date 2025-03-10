@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataPlaceable" load_steps=4 format=3 uid="uid://dvrcqdes2rk2o"]
 
 [ext_resource type="PackedScene" uid="uid://bd2xc6p3frrmi" path="res://entities/items/placeable/placeable_preview.tscn" id="1_78l4n"]
-[ext_resource type="Script" path="res://entities/items/placeable/item_data_placeable.gd" id="2_rhn2q"]
+[ext_resource type="Script" uid="uid://d0oh06huijwi2" path="res://entities/items/placeable/item_data_placeable.gd" id="2_rhn2q"]
 [ext_resource type="Texture2D" uid="uid://b4vv8aeon7yc1" path="res://entities/items/placeable/crafting_bench/object/art/craftingbench.png" id="3_poagm"]
 
 [resource]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dr8dw3tr2seov"]
 
-[ext_resource type="Script" path="res://entities/cut_scenes/splash_screen/splash_screen.gd" id="1_xrfdx"]
+[ext_resource type="Script" uid="uid://bo3ak827lidf3" path="res://entities/cut_scenes/splash_screen/splash_screen.gd" id="1_xrfdx"]
 [ext_resource type="PackedScene" uid="uid://drwrt7b3b4c0e" path="res://entities/menu/options/options_menu.tscn" id="2_lodqo"]
 
 [sub_resource type="Animation" id="Animation_alas6"]
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_etamo"]
 _data = {
-"RESET": SubResource("Animation_alas6"),
-"splash_screen": SubResource("Animation_utbhh")
+&"RESET": SubResource("Animation_alas6"),
+&"splash_screen": SubResource("Animation_utbhh")
 }
 
 [node name="SplashScreen" type="Control"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dg4mwantkvmc8"]
 
-[ext_resource type="Script" path="res://utilities/notification_manager/notification.gd" id="1_yoe6o"]
+[ext_resource type="Script" uid="uid://b3dorqei858wn" path="res://utilities/notification_manager/notification.gd" id="1_yoe6o"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_74ctv"]
 

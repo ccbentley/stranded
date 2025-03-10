@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ba121m7i7tanp"]
 
-[ext_resource type="Script" path="res://entities/items/fishing_rod/fishing_rod.gd" id="1_80ck0"]
+[ext_resource type="Script" uid="uid://dtnfy23v03al4" path="res://entities/items/fishing_rod/fishing_rod.gd" id="1_80ck0"]
 [ext_resource type="Texture2D" uid="uid://bm5plc2gkway3" path="res://entities/items/fishing_rod/art/fishing_rod.png" id="2_44jfs"]
 
 [sub_resource type="Curve2D" id="Curve2D_tkxdr"]

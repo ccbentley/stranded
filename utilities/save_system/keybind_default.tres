@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="KeybindData" load_steps=9 format=3 uid="uid://dsxodcd55vp30"]
 
-[ext_resource type="Script" path="res://utilities/save_system/keybind_data.gd" id="1_77nl7"]
+[ext_resource type="Script" uid="uid://bpwi8nq24avr4" path="res://utilities/save_system/keybind_data.gd" id="1_77nl7"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_vysoa"]
 device = -1

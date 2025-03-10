@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c05qpfqg6xjd7"]
 
-[ext_resource type="Script" path="res://utilities/day_night_cycle/day_night_cycle.gd" id="1_7dv4r"]
-[ext_resource type="Shader" path="res://common/shaders/shadows/shadows.gdshader" id="2_evv5h"]
-[ext_resource type="Shader" path="res://common/shaders/light_rays/light_rays.gdshader" id="3_p15we"]
+[ext_resource type="Script" uid="uid://dt4baukfjh1b4" path="res://utilities/day_night_cycle/day_night_cycle.gd" id="1_7dv4r"]
+[ext_resource type="Shader" uid="uid://db8x3rhbrlv2k" path="res://common/shaders/shadows/shadows.gdshader" id="2_evv5h"]
+[ext_resource type="Shader" uid="uid://vgi3i2d81j8n" path="res://common/shaders/light_rays/light_rays.gdshader" id="3_p15we"]
 
 [sub_resource type="Animation" id="Animation_csc6l"]
 length = 0.001
@@ -148,8 +148,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jmjq"]
 _data = {
-"RESET": SubResource("Animation_csc6l"),
-"day_night": SubResource("Animation_k8atw")
+&"RESET": SubResource("Animation_csc6l"),
+&"day_night": SubResource("Animation_k8atw")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n218r"]

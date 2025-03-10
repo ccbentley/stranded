@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://nngdwr1wtlfp"]
 
 [ext_resource type="FontFile" uid="uid://b8nthqud4vlk6" path="res://assets/fonts/cozette/CozetteVectorBold.ttf" id="1_cwl3s"]
-[ext_resource type="Script" path="res://entities/menu/credits/credits_item.gd" id="1_yyp6t"]
+[ext_resource type="Script" uid="uid://cf0vsdrvf6x6u" path="res://entities/menu/credits/credits_item.gd" id="1_yyp6t"]
 [ext_resource type="FontFile" uid="uid://bkn7fxdgr81rt" path="res://assets/fonts/cozette/CozetteVector.ttf" id="2_ravsq"]
 
 [node name="CreditsItem" type="Control"]

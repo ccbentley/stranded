@@ -133,7 +133,7 @@ varying vec4 var_VertexColour;
 
 uniform float InitialAlpha = 0.46000000834465;
 uniform float Speed = 0.10000000149012;
-uniform float QuantizeColourAmount = 6;
+uniform float QuantizeColourAmount = 6.0;
 uniform float BrightnessOffset;
 uniform float UpperCutoff = 0.30000001192093;
 

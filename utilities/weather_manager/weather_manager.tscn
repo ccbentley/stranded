@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://opabwwcquurw"]
 
-[ext_resource type="Shader" path="res://common/shaders/rain/rain.gdshader" id="1_b4v2y"]
-[ext_resource type="Script" path="res://utilities/weather_manager/weather_manager.gd" id="1_svqat"]
+[ext_resource type="Shader" uid="uid://dyhw72ns4qeqa" path="res://common/shaders/rain/rain.gdshader" id="1_b4v2y"]
+[ext_resource type="Script" uid="uid://bqn45l48o1ax1" path="res://utilities/weather_manager/weather_manager.gd" id="1_svqat"]
 [ext_resource type="AudioStream" uid="uid://30bnldaeqbll" path="res://utilities/weather_manager/sounds/ambient_nature_storm_rain_thunder_02.ogg" id="3_kqrgn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pik1d"]
@@ -209,9 +209,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_decee"]
 _data = {
-"RESET": SubResource("Animation_i1vsr"),
-"clear": SubResource("Animation_r6a0m"),
-"rain": SubResource("Animation_ua2t4")
+&"RESET": SubResource("Animation_i1vsr"),
+&"clear": SubResource("Animation_r6a0m"),
+&"rain": SubResource("Animation_ua2t4")
 }
 
 [node name="WeatherManager" type="CanvasLayer"]

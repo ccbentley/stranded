@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://jp3xp1h2twdk" path="res://common/shaders/water_trail/ripple_shader.tres" id="1_2688h"]
 [ext_resource type="Texture2D" uid="uid://c2o58keoomthg" path="res://common/shaders/water_trail/water_trail_gradient.png" id="2_6qigx"]
-[ext_resource type="Script" path="res://common/shaders/water_trail/trail.gd" id="3_0uwfu"]
+[ext_resource type="Script" uid="uid://jgrmc22cnotp" path="res://common/shaders/water_trail/trail.gd" id="3_0uwfu"]
 [ext_resource type="Texture2D" uid="uid://dh5mkhwaisgy3" path="res://common/shaders/water_trail/circle_blur64x64.png" id="4_rfxw6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mx7hg"]
@@ -10,7 +10,7 @@ shader = ExtResource("1_2688h")
 shader_parameter/InitialAlpha = 0.6
 shader_parameter/Speed = 0.09
 shader_parameter/QuantizeColourAmount = 3.0
-shader_parameter/BrightnessOffset = null
+shader_parameter/BrightnessOffset = 0.0
 shader_parameter/UpperCutoff = 0.5
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h58cs"]

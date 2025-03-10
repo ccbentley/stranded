@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmsdop1snjvdn"]
 
 [ext_resource type="Texture2D" uid="uid://cdjlv8mmfae58" path="res://assets/art/sprout_lands_ui/Sprite sheet for Basic Pack.png" id="1_ao6td"]
-[ext_resource type="Script" path="res://common/inventory/slot.gd" id="1_ejgbi"]
+[ext_resource type="Script" uid="uid://gdwjmpeuummp" path="res://common/inventory/slot.gd" id="1_ejgbi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_laljd"]
 atlas = ExtResource("1_ao6td")

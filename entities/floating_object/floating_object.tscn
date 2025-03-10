@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg4imc5jw4gav"]
 
 [ext_resource type="Texture2D" uid="uid://cxrbn5hlkmy8y" path="res://entities/items/materials/wood/art/wood.png" id="1_2h5gp"]
-[ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="2_7yiw2"]
+[ext_resource type="Script" uid="uid://uhwc35286f0v" path="res://common/components/hitbox/hitbox_component.gd" id="2_7yiw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvkc"]
 size = Vector2(30, 30)

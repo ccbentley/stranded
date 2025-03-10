@@ -1,16 +1,16 @@
 [gd_scene load_steps=24 format=3 uid="uid://dshuhhh7gh7np"]
 
 [ext_resource type="Texture2D" uid="uid://bnhctpinxgmd6" path="res://entities/items/placeable/campfire/object/art/fire1.png" id="1_iknff"]
-[ext_resource type="Script" path="res://entities/items/placeable/campfire/object/campfire.gd" id="1_w1jlw"]
+[ext_resource type="Script" uid="uid://1dqaewstpcig" path="res://entities/items/placeable/campfire/object/campfire.gd" id="1_w1jlw"]
 [ext_resource type="Texture2D" uid="uid://c3av8ovg8d1tm" path="res://entities/items/placeable/campfire/object/art/fire3.png" id="2_yivcm"]
 [ext_resource type="Texture2D" uid="uid://2njodxejdsof" path="res://entities/items/placeable/campfire/object/art/fire2.png" id="3_sod2h"]
 [ext_resource type="Texture2D" uid="uid://ca7w7l5ek35bq" path="res://entities/items/placeable/campfire/object/art/fire4.png" id="4_x1jsd"]
 [ext_resource type="Texture2D" uid="uid://b2xc6xcscm17p" path="res://assets/art/light_textures/neutral_point_light_texture.webp" id="6_wiv7e"]
 [ext_resource type="Texture2D" uid="uid://dv332b14raf8i" path="res://entities/items/placeable/campfire/object/art/fire5.png" id="7_fv04p"]
-[ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="8_0b3jn"]
+[ext_resource type="Script" uid="uid://uhwc35286f0v" path="res://common/components/hitbox/hitbox_component.gd" id="8_0b3jn"]
 [ext_resource type="Texture2D" uid="uid://drah0c7pw1dkh" path="res://entities/items/placeable/campfire/object/art/fire6.png" id="8_0ewyr"]
 [ext_resource type="Texture2D" uid="uid://ccrjabexhumwv" path="res://entities/items/placeable/campfire/object/art/fire7.png" id="9_1h74x"]
-[ext_resource type="Script" path="res://common/components/health/health_component.gd" id="9_am1xl"]
+[ext_resource type="Script" uid="uid://w8l7wj0b0t72" path="res://common/components/health/health_component.gd" id="9_am1xl"]
 [ext_resource type="Texture2D" uid="uid://crf38fv3nqtiv" path="res://entities/items/placeable/campfire/object/art/fire8.png" id="10_gc35u"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="10_t67g1"]
 [ext_resource type="AudioStream" uid="uid://0fnl41mgkllw" path="res://entities/items/placeable/campfire/object/sounds/fire.ogg" id="15_b3caq"]
@@ -87,8 +87,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_shl3x"]
 _data = {
-"RESET": SubResource("Animation_w7p65"),
-"spawn": SubResource("Animation_e3x26")
+&"RESET": SubResource("Animation_w7p65"),
+&"spawn": SubResource("Animation_e3x26")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5afu"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1yv6c124r1k7"]
 
-[ext_resource type="Script" path="res://common/inventory/crafting/crafting_inventory.gd" id="1_joug6"]
+[ext_resource type="Script" uid="uid://5eygimbwshwy" path="res://common/inventory/crafting/crafting_inventory.gd" id="1_joug6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o47of"]
 

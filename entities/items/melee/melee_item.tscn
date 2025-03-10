@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0xkxv6f32qih"]
 
-[ext_resource type="Script" path="res://entities/items/melee/melee_item.gd" id="1_66dfw"]
+[ext_resource type="Script" uid="uid://njbs3amhy3l" path="res://entities/items/melee/melee_item.gd" id="1_66dfw"]
 [ext_resource type="Texture2D" uid="uid://be3iq6y28my2t" path="res://entities/items/melee/trail.png" id="2_rd8er"]
-[ext_resource type="PackedScene" path="res://common/components/attack/attack_component.tscn" id="4_ttvjg"]
+[ext_resource type="PackedScene" uid="uid://bju7dyy2ek5k4" path="res://common/components/attack/attack_component.tscn" id="4_ttvjg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18vky"]
 size = Vector2(8.48528, 17.7886)
@@ -64,8 +64,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_puc5i"]
 _data = {
-"RESET": SubResource("Animation_5ak80"),
-"slash": SubResource("Animation_rf13v")
+&"RESET": SubResource("Animation_5ak80"),
+&"slash": SubResource("Animation_rf13v")
 }
 
 [node name="MeleeItem" type="Node2D"]

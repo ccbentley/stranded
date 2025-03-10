@@ -1,16 +1,16 @@
 [gd_scene load_steps=38 format=3 uid="uid://b13j56wiy5bjp"]
 
-[ext_resource type="Script" path="res://entities/player/player.gd" id="1_qsibb"]
-[ext_resource type="Script" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
+[ext_resource type="Script" uid="uid://bhj15bk7665fp" path="res://entities/player/player.gd" id="1_qsibb"]
+[ext_resource type="Script" uid="uid://bnokmymefa6j6" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_q3ebq"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="5_q6e4e"]
-[ext_resource type="Script" path="res://entities/player/states/player_sit_state.gd" id="6_fg33t"]
+[ext_resource type="Script" uid="uid://cdhdk6wm0se3g" path="res://entities/player/states/player_sit_state.gd" id="6_fg33t"]
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="7_phdj8"]
 [ext_resource type="Texture2D" uid="uid://dmpmko5pyopfe" path="res://entities/player/art/human_nobleman_2.png" id="8_b35jp"]
-[ext_resource type="Script" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
-[ext_resource type="Script" path="res://entities/player/states/player_move_state.gd" id="9_02503"]
-[ext_resource type="Script" path="res://entities/player/states/player_swim_state.gd" id="9_fa61r"]
-[ext_resource type="Shader" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="16_ylx78"]
+[ext_resource type="Script" uid="uid://dyrditdrw0y7m" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
+[ext_resource type="Script" uid="uid://bhd6y10i2h8en" path="res://entities/player/states/player_move_state.gd" id="9_02503"]
+[ext_resource type="Script" uid="uid://cy2qbv4dcn3m8" path="res://entities/player/states/player_swim_state.gd" id="9_fa61r"]
+[ext_resource type="Shader" uid="uid://0bpyxli0ycbv" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="16_ylx78"]
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="20_11rme"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="21_0wihk"]
 
@@ -107,10 +107,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ankr7"]
 _data = {
-"RESET": SubResource("Animation_ydgaj"),
-"idle": SubResource("Animation_a5un6"),
-"move": SubResource("Animation_yo6ve"),
-"swim": SubResource("Animation_k7cy2")
+&"RESET": SubResource("Animation_ydgaj"),
+&"idle": SubResource("Animation_a5un6"),
+&"move": SubResource("Animation_yo6ve"),
+&"swim": SubResource("Animation_k7cy2")
 }
 
 [sub_resource type="Animation" id="Animation_ltw5y"]
@@ -126,9 +126,9 @@ length = 0.4
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66n73"]
 _data = {
-"RESET": SubResource("Animation_ltw5y"),
-"melee_attack_left": SubResource("Animation_skaai"),
-"melee_attack_right": SubResource("Animation_jnbma")
+&"RESET": SubResource("Animation_ltw5y"),
+&"melee_attack_left": SubResource("Animation_skaai"),
+&"melee_attack_right": SubResource("Animation_jnbma")
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x1kgs"]
@@ -146,7 +146,7 @@ bg_color = Color(0.0939358, 0.646466, 0.711549, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_biwr1"]
 shader = ExtResource("16_ylx78")
-shader_parameter/outline_color = null
+shader_parameter/outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dvj8k"]
 polygon = PackedVector2Array(2, 6, -2, 6, -3, 5, -3, 4, -2, 3, 2, 3, 3, 4, 3, 5)
@@ -204,12 +204,12 @@ shape = SubResource("RectangleShape2D_hgslm")
 
 [node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ankr7")
+&"": SubResource("AnimationLibrary_ankr7")
 }
 
 [node name="OnHandAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_66n73")
+&"": SubResource("AnimationLibrary_66n73")
 }
 
 [node name="DrownBar" type="ProgressBar" parent="."]

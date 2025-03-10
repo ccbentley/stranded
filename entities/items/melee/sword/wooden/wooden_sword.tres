@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemDataMeleeWeapon" load_steps=4 format=3 uid="uid://cnepkvwxe6frn"]
 
-[ext_resource type="Script" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_4t0wq"]
+[ext_resource type="Script" uid="uid://bdldjehuabtbd" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_4t0wq"]
 [ext_resource type="PackedScene" uid="uid://crdq8mfbw8rus" path="res://entities/items/melee/sword/wooden/wooden_sword.tscn" id="1_vcg46"]
 [ext_resource type="Texture2D" uid="uid://b3t2r8ndigig6" path="res://entities/items/melee/sword/wooden/art/wooden_sword.png" id="2_t2bdw"]
 

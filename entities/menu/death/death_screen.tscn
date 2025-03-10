@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cupg6q4afstgi"]
 
-[ext_resource type="Script" path="res://entities/menu/death/death_screen.gd" id="1_qabvg"]
+[ext_resource type="Script" uid="uid://ditr112m14wr8" path="res://entities/menu/death/death_screen.gd" id="1_qabvg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ie8u"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.784314)

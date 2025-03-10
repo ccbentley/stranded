@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb5q6m2gc0ngs"]
 
-[ext_resource type="Script" path="res://entities/menu/credits/credits_header.gd" id="1_ptwns"]
+[ext_resource type="Script" uid="uid://b0oldjd0spsr0" path="res://entities/menu/credits/credits_header.gd" id="1_ptwns"]
 [ext_resource type="FontFile" uid="uid://b8nthqud4vlk6" path="res://assets/fonts/cozette/CozetteVectorBold.ttf" id="2_mtjqf"]
 
 [node name="CreditsHeader" type="Control"]

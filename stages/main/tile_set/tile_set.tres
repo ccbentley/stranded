@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bcy0q2dkwpmny"]
 
 [ext_resource type="Texture2D" uid="uid://ctve5t4fa5s1f" path="res://stages/main/tile_set/art/islands_tileset.png" id="1_bmy77"]
-[ext_resource type="Shader" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="1_ls1ek"]
+[ext_resource type="Shader" uid="uid://dtckuyg78rlki" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="1_ls1ek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3yfd1"]
 shader = ExtResource("1_ls1ek")
@@ -11,8 +11,8 @@ shader_parameter/maxStrength = 0.01
 shader_parameter/strengthScale = 100.0
 shader_parameter/interval = 3.5
 shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = null
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsmls"]

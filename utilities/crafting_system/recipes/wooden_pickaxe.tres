@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=8 format=3 uid="uid://d4jlcuue57j2r"]
 
 [ext_resource type="Resource" uid="uid://drh8lx722macr" path="res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tres" id="1_uihll"]
-[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_ybamv"]
-[ext_resource type="Script" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_ivjkl"]
+[ext_resource type="Script" uid="uid://c1ef1rk27aqy5" path="res://utilities/crafting_system/crafting_recipe_requirement.gd" id="1_ybamv"]
+[ext_resource type="Script" uid="uid://dsl6l8x40r0fr" path="res://utilities/crafting_system/crafting_recipe.gd" id="2_ivjkl"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_yj7b3"]
 [ext_resource type="Resource" uid="uid://bxdidjyuncfqv" path="res://entities/items/materials/stick/stick.tres" id="4_t6ltl"]
 

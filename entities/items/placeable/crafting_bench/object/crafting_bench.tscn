@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://dpu5vk7gui7bj"]
 
 [ext_resource type="Texture2D" uid="uid://b4vv8aeon7yc1" path="res://entities/items/placeable/crafting_bench/object/art/craftingbench.png" id="1_2wthq"]
-[ext_resource type="Script" path="res://entities/items/placeable/crafting_bench/object/crafting_bench.gd" id="1_wwv6t"]
-[ext_resource type="Script" path="res://common/components/hitbox/hitbox_component.gd" id="2_ryj1g"]
-[ext_resource type="Script" path="res://common/components/health/health_component.gd" id="3_p2cdt"]
-[ext_resource type="Script" path="res://common/components/chunk_node_helper/chunk_node_helper.gd" id="4_p2o30"]
+[ext_resource type="Script" uid="uid://dk681gcolqxib" path="res://entities/items/placeable/crafting_bench/object/crafting_bench.gd" id="1_wwv6t"]
+[ext_resource type="Script" uid="uid://uhwc35286f0v" path="res://common/components/hitbox/hitbox_component.gd" id="2_ryj1g"]
+[ext_resource type="Script" uid="uid://w8l7wj0b0t72" path="res://common/components/health/health_component.gd" id="3_p2cdt"]
+[ext_resource type="Script" uid="uid://c05n878nfm2hd" path="res://common/components/chunk_node_helper/chunk_node_helper.gd" id="4_p2o30"]
 [ext_resource type="PackedScene" uid="uid://cn0avyokjnale" path="res://entities/items/placeable/crafting_bench/object/item_button.tscn" id="6_q02et"]
 [ext_resource type="PackedScene" uid="uid://muam1whokqy0" path="res://entities/items/placeable/crafting_bench/object/resource_requirement.tscn" id="8_hlejx"]
 

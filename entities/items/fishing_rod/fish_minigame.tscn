@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cd1dxllgrgxgv"]
 
-[ext_resource type="Script" path="res://entities/items/fishing_rod/fish_minigame.gd" id="1_2vcwd"]
+[ext_resource type="Script" uid="uid://b8pfu1bvjj4xp" path="res://entities/items/fishing_rod/fish_minigame.gd" id="1_2vcwd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a304m"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.588235)

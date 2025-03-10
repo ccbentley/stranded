@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://cqfpj7wumfjvp"]
 
-[ext_resource type="Script" path="res://common/item/pickup/pickup.gd" id="1_hgpy1"]
-[ext_resource type="Shader" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="2_frwrd"]
+[ext_resource type="Script" uid="uid://4b43bntm8qe3" path="res://common/item/pickup/pickup.gd" id="1_hgpy1"]
+[ext_resource type="Shader" uid="uid://0bpyxli0ycbv" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="2_frwrd"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="3_cd6uq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rttm"]
 shader = ExtResource("2_frwrd")
-shader_parameter/outline_color = null
+shader_parameter/outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1eyn"]
 
@@ -74,9 +74,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wtx4s"]
 _data = {
-"RESET": SubResource("Animation_5ei81"),
-"item_bob": SubResource("Animation_umjd2"),
-"item_spawn": SubResource("Animation_7jphx")
+&"RESET": SubResource("Animation_5ei81"),
+&"item_bob": SubResource("Animation_umjd2"),
+&"item_spawn": SubResource("Animation_7jphx")
 }
 
 [node name="Pickup" type="StaticBody2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkfx7hno0ss2o"]
 
-[ext_resource type="Script" path="res://common/components/temperature/temperature_component.gd" id="1_52qod"]
+[ext_resource type="Script" uid="uid://2v17pxy4efn6" path="res://common/components/temperature/temperature_component.gd" id="1_52qod"]
 
 [node name="TemperatureComponent" type="Area2D"]
 script = ExtResource("1_52qod")

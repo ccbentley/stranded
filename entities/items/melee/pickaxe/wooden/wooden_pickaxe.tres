@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDataMeleeWeapon" load_steps=4 format=3 uid="uid://drh8lx722macr"]
 
 [ext_resource type="PackedScene" uid="uid://bcpen2yeybcn1" path="res://entities/items/melee/pickaxe/wooden/wooden_pickaxe.tscn" id="1_fh0b8"]
-[ext_resource type="Script" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_wkedh"]
+[ext_resource type="Script" uid="uid://bdldjehuabtbd" path="res://entities/items/melee/item_data_melee_weapon.gd" id="1_wkedh"]
 [ext_resource type="Texture2D" uid="uid://cayuyk7fwsmg7" path="res://entities/items/melee/pickaxe/wooden/art/wooden_pickaxe.png" id="3_qgdho"]
 
 [resource]

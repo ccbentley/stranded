@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bxdidjyuncfqv"]
 
-[ext_resource type="Script" path="res://common/item/item_data.gd" id="1_4xg5j"]
+[ext_resource type="Script" uid="uid://ba6m16rfjcnbr" path="res://common/item/item_data.gd" id="1_4xg5j"]
 [ext_resource type="Texture2D" uid="uid://bqtj6l3a0xkya" path="res://entities/items/materials/stick/art/stick.png" id="2_nm0im"]
 
 [resource]
 script = ExtResource("1_4xg5j")
+useable = false
 name = "Stick"
 description = "A twig"
 stackable = true
 texture = ExtResource("2_nm0im")
-held_offset = Vector2(0, 0)

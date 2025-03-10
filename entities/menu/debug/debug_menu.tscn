@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://brtyff5a5fflm"]
 
-[ext_resource type="Script" path="res://entities/menu/debug/debug_menu.gd" id="1_b8s0l"]
+[ext_resource type="Script" uid="uid://d3jw5psxi1x28" path="res://entities/menu/debug/debug_menu.gd" id="1_b8s0l"]
 
 [sub_resource type="GDScript" id="GDScript_wva0l"]
 script/source = "extends Label

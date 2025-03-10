@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cw6w20chfrgev"]
 
-[ext_resource type="Script" path="res://entities/player/health_bar/player_health_bar.gd" id="1_ghbpr"]
+[ext_resource type="Script" uid="uid://dpqrciu5j0a7d" path="res://entities/player/health_bar/player_health_bar.gd" id="1_ghbpr"]
 [ext_resource type="Texture2D" uid="uid://bwvv7ioohiu1m" path="res://entities/player/health_bar/art/red/Border.png" id="2_x1qfu"]
 [ext_resource type="Texture2D" uid="uid://clxva5k5163vt" path="res://entities/player/health_bar/art/red/BorderBG.png" id="3_v4a2x"]
 [ext_resource type="Texture2D" uid="uid://d2ijybdsrnvk3" path="res://entities/player/health_bar/art/red/Colors.png" id="4_cpgch"]

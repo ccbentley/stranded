@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://dnj62ts5tdlcl"]
 
-[ext_resource type="Script" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
-[ext_resource type="Shader" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="2_evma0"]
+[ext_resource type="Script" uid="uid://ee782cegi7d4" path="res://entities/environment/trees/tree.gd" id="1_ltc28"]
+[ext_resource type="Shader" uid="uid://dtckuyg78rlki" path="res://common/shaders/wind_sway/wind_sway.gdshader" id="2_evma0"]
 [ext_resource type="Texture2D" uid="uid://sui0lmneci55" path="res://entities/environment/trees/art/green_tree_1.png" id="3_cy5fu"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_pl3hv"]
 [ext_resource type="Resource" uid="uid://bex33uu0wd3eg" path="res://entities/items/materials/wood/wood.tres" id="3_uts0b"]
 [ext_resource type="PackedScene" uid="uid://ykdbqyw6lecd" path="res://common/components/hitbox/hitbox_component.tscn" id="4_2jwj5"]
-[ext_resource type="Script" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
+[ext_resource type="Script" uid="uid://cwnaao31y1qqj" path="res://common/inventory/loot_data.gd" id="4_kpk1k"]
 [ext_resource type="AudioStream" uid="uid://7umwy5tjdtmc" path="res://entities/environment/trees/sounds/rustle.ogg" id="6_8tw3c"]
 [ext_resource type="PackedScene" uid="uid://bp6sdg8br2uvi" path="res://common/components/health_bar/health_bar_component.tscn" id="6_kqkgg"]
 [ext_resource type="AudioStream" uid="uid://857x3e7prira" path="res://entities/environment/trees/sounds/impact_1.ogg" id="7_nmeq5"]
@@ -18,13 +18,13 @@ size = Vector2(19, 6)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drjcf"]
 shader = ExtResource("2_evma0")
 shader_parameter/speed = 1.0
-shader_parameter/minStrength = 0.05
+shader_parameter/minStrength = 0.015
 shader_parameter/maxStrength = 0.01
 shader_parameter/strengthScale = 100.0
 shader_parameter/interval = 3.5
 shader_parameter/detail = 1.0
-shader_parameter/distortion = null
-shader_parameter/heightOffset = null
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vdvlo"]
@@ -136,9 +136,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v0qbr"]
 _data = {
-"RESET": SubResource("Animation_8dcxk"),
-"death": SubResource("Animation_e27e7"),
-"hit": SubResource("Animation_32xba")
+&"RESET": SubResource("Animation_8dcxk"),
+&"death": SubResource("Animation_e27e7"),
+&"hit": SubResource("Animation_32xba")
 }
 
 [node name="Tree" type="StaticBody2D"]
@@ -182,7 +182,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_v0qbr")
+&"": SubResource("AnimationLibrary_v0qbr")
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("10_qgqc0")]

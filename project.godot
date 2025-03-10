@@ -14,7 +14,7 @@ config/name="Stranded"
 config/version="0.1"
 run/main_scene="res://entities/cut_scenes/splash_screen/splash_screen.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
 
 [autoload]

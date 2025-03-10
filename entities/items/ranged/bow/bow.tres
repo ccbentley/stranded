@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemDataRangedWeapon" load_steps=3 format=3 uid="uid://b5sltenfhjkok"]
 
-[ext_resource type="Script" path="res://entities/items/ranged/item_data_ranged_weapon.gd" id="1_fl4kq"]
+[ext_resource type="Script" uid="uid://bya6bm3ji2otb" path="res://entities/items/ranged/item_data_ranged_weapon.gd" id="1_fl4kq"]
 [ext_resource type="Texture2D" uid="uid://8240dv4uj31" path="res://entities/items/ranged/bow/art/bow.png" id="2_dmror"]
 
 [resource]

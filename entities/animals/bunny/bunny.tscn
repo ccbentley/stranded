@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://btg8kocs0wld7"]
 
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="1_lc0nb"]
-[ext_resource type="Script" path="res://entities/animals/animal.gd" id="1_op87p"]
+[ext_resource type="Script" uid="uid://dq5knmoqeiof2" path="res://entities/animals/animal.gd" id="1_op87p"]
 [ext_resource type="Texture2D" uid="uid://dgwfhpekox8ee" path="res://entities/animals/bunny/art/idle/bunny_idle_1.png" id="2_lx3qf"]
 [ext_resource type="PackedScene" uid="uid://cjpp55dyan0tc" path="res://common/components/health/health_component.tscn" id="3_psk1s"]
 [ext_resource type="BehaviorTree" uid="uid://dnc6mxdyv8gvj" path="res://entities/animals/bunny/trees/bunny.tres" id="3_x608w"]
@@ -134,11 +134,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6r4qi"]
 _data = {
-"RESET": SubResource("Animation_uk3hm"),
-"death": SubResource("Animation_7umdj"),
-"hit": SubResource("Animation_4agme"),
-"idle": SubResource("Animation_knjo8"),
-"walk": SubResource("Animation_lk5y3")
+&"RESET": SubResource("Animation_uk3hm"),
+&"death": SubResource("Animation_7umdj"),
+&"hit": SubResource("Animation_4agme"),
+&"idle": SubResource("Animation_knjo8"),
+&"walk": SubResource("Animation_lk5y3")
 }
 
 [node name="Bunny" type="CharacterBody2D"]

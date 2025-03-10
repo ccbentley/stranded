@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d2s40e1amubhv"]
 
-[ext_resource type="Script" path="res://common/components/footstep/footstep_component.gd" id="1_koovy"]
+[ext_resource type="Script" uid="uid://ct6hg7day2x54" path="res://common/components/footstep/footstep_component.gd" id="1_koovy"]
 
 [node name="FootstepComponent" type="Node2D"]
 script = ExtResource("1_koovy")

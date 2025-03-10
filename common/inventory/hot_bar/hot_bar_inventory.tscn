@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ce30hjwcituiy"]
 
-[ext_resource type="Script" path="res://common/inventory/hot_bar/hot_bar_inventory.gd" id="1_gycws"]
+[ext_resource type="Script" uid="uid://c1gr2wq44rugs" path="res://common/inventory/hot_bar/hot_bar_inventory.gd" id="1_gycws"]
 [ext_resource type="Texture2D" uid="uid://3mwrkqle6neu" path="res://common/inventory/hot_bar/art/selected.png" id="2_vmjdh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b0gs1"]
