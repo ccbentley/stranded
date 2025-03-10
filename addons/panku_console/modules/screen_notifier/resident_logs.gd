@@ -6,18 +6,16 @@ const MAX_LOGS = 10
 
 var prev_log = ""
 
-@export var named_container: VBoxContainer
-@export var unnamed_container: VBoxContainer
+@export var named_container:VBoxContainer
+@export var unnamed_container:VBoxContainer
 
 # logs whose id >= 0
 var named_logs := {}
 
-
 func _ready():
 	$ResidentLogs.size = get_viewport().size * 0.5
 
-
-func add_log(bbcode: String, id := -1):
+func add_log(bbcode:String, id:=-1):
 	# logs whose id>=0 will be fixed to the bottom of the log list
 	# useful for loop print
 	# you can use `get_instance_id()` as logs's unique id
@@ -30,7 +28,10 @@ func add_log(bbcode: String, id := -1):
 			named_container.add_child(new_node)
 			named_container.move_child(new_node, 0)
 			named_logs[id] = new_node
-			new_node.tree_exiting.connect(func(): named_logs.erase(id))
+			new_node.tree_exiting.connect(
+				func():
+					named_logs.erase(id)
+			)
 		var log_node = named_logs[id]
 		named_logs[id].content_label.text = bbcode
 		log_node.play_lifespan_animation()
