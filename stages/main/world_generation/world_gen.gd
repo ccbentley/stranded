@@ -221,18 +221,18 @@ func save_chunk_entities(chunk: Vector2i) -> void:
 		if child.has_method("on_save_chunk"):
 			child.on_save_chunk(saved_data)
 	saved_chunk.saved_data = saved_data
-	ResourceSaver.save(saved_chunk, Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res")
+	ResourceSaver.save(saved_chunk, Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + Global.save_file_extension)
 
 
 func chunk_save_exisits(chunk: Vector2i) -> bool:
-	if not ResourceLoader.exists(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res"):
+	if not ResourceLoader.exists(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + Global.save_file_extension):
 		return false
 	else:
 		return true
 
 
 func load_chunk_entities(chunk: Vector2i) -> bool:
-	var saved_chunk: SavedChunk = ResourceLoader.load(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + ".res")
+	var saved_chunk: SavedChunk = ResourceLoader.load(Global.world_save_file_path + Global.chunk_data_save_file_path + str(chunk) + Global.save_file_extension)
 	var chunk_node: Node2D = get_chunk_node(chunk)
 	for entity in saved_chunk.saved_data:
 		var scene: PackedScene = load(entity.scene_path) as PackedScene

@@ -1,9 +1,10 @@
 extends Node
 
 const save_file_path: String = "user://save/"
-const player_save_file_name: String = "player_save.res"
-const settings_save_file_name: String = "settings_data.res"
-const world_save_file_name: String = "world_data.res"
+const save_file_extension: String = ".tres"
+const player_save_file_name: String = "player_save" + save_file_extension
+const settings_save_file_name: String = "settings_data" + save_file_extension
+const world_save_file_name: String = "world_data" + save_file_extension
 var world_save_file_path: String
 const chunk_data_save_file_path: String = "chunk_data/"
 

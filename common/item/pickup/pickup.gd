@@ -8,6 +8,7 @@ class_name Pickup
 
 
 func _ready() -> void:
+	await get_tree().process_frame
 	sprite_2d.texture = slot_data.item_data.texture
 	animation_player.play("item_spawn")
 	await animation_player.animation_finished
