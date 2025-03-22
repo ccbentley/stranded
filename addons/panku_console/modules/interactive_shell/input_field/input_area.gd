@@ -1,25 +1,20 @@
 extends HBoxContainer
 
-@onready var console:PankuConsole = get_node(PankuConsole.SingletonPath)
+@onready var console: PankuConsole = get_node(PankuConsole.SingletonPath)
 
-signal submitted(exp:String)
-signal update_hints(exp:String)
-signal next_hint()
-signal prev_hint()
-signal navigate_histories(histories:Array, cur:int)
+signal submitted(exp: String)
+signal update_hints(exp: String)
+signal next_hint
+signal prev_hint
+signal navigate_histories(histories: Array, cur: int)
 
-@export var input:LineEdit
-@export var btn:PankuButton
+@export var input: LineEdit
+@export var btn: PankuButton
+
 
 func _ready():
-	input.text_submitted.connect(
-		func(s):
-			submitted.emit(s)
-	)
-	input.text_changed.connect(
-		func(s):
-			update_hints.emit(s)
-	)
+	input.text_submitted.connect(func(s): submitted.emit(s))
+	input.text_changed.connect(func(s): update_hints.emit(s))
 	btn.pressed.connect(
 		func():
 			submitted.emit(input.text)

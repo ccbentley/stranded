@@ -1,7 +1,8 @@
 class_name PankuModuleScreenCrtEffect extends PankuModule
 
 var crt_effect_enabled := false
-var crt_effect_layer:CanvasLayer = null
+var crt_effect_layer: CanvasLayer = null
+
 
 func toggle_crt_effect():
 	crt_effect_enabled = !crt_effect_enabled

@@ -1,17 +1,14 @@
 class_name PankuModuleNativeLogger extends PankuModule
 
-var output_overlay:RichTextLabel
-var native_logs_monitor:Node
-var window:PankuLynxWindow
-var logger_ui:Node
-var output_overlay_display_mode:ScreenOverlayDisplayMode
-var show_timestamp:bool
+var output_overlay: RichTextLabel
+var native_logs_monitor: Node
+var window: PankuLynxWindow
+var logger_ui: Node
+var output_overlay_display_mode: ScreenOverlayDisplayMode
+var show_timestamp: bool
 
-enum ScreenOverlayDisplayMode {
-	AlwaysShow,
-	ShowIfShellVisible,
-	NeverShow
-}
+enum ScreenOverlayDisplayMode { AlwaysShow, ShowIfShellVisible, NeverShow }
+
 
 func init_module():
 	# add godot log monitor
@@ -33,25 +30,13 @@ func init_module():
 	window.queue_free_on_close = false
 	window.set_window_title_text("Native Logger")
 
-	native_logs_monitor.error_msg_received.connect(
-		func(msg:String):
-			logger_ui.add_log(msg, 3)
-	)
-	native_logs_monitor.warning_msg_received.connect(
-		func(msg:String):
-			logger_ui.add_log(msg, 2)
-	)
-	native_logs_monitor.info_msg_received.connect(
-		func(msg:String):
-			logger_ui.add_log(msg, 1)
-	)
-	logger_ui.content_updated.connect(
-		func(bbcode:String):
-			output_overlay.text = bbcode
-	)
+	native_logs_monitor.error_msg_received.connect(func(msg: String): logger_ui.add_log(msg, 3))
+	native_logs_monitor.warning_msg_received.connect(func(msg: String): logger_ui.add_log(msg, 2))
+	native_logs_monitor.info_msg_received.connect(func(msg: String): logger_ui.add_log(msg, 1))
+	logger_ui.content_updated.connect(func(bbcode: String): output_overlay.text = bbcode)
 
 	core.interactive_shell_visibility_changed.connect(
-		func(v:bool):
+		func(v: bool):
 			if output_overlay_display_mode == ScreenOverlayDisplayMode.ShowIfShellVisible:
 				output_overlay.visible = v
 	)
@@ -65,6 +50,7 @@ func init_module():
 	get_module_opt().show_timestamp = load_module_data("show_timestamp", true)
 	logger_ui.load_data(load_module_data("logger_tags", ["[error]", "[warning]"]))
 
+
 func quit_module():
 	super.quit_module()
 	# properties defined in opt.gd will be automatically saved as soon as the value is changed
@@ -72,8 +58,10 @@ func quit_module():
 	save_window_data(window)
 	save_module_data("logger_tags", logger_ui.get_data())
 
+
 func open_window():
 	window.show_window()
+
 
 func toggle_overlay():
 	var next = {
@@ -84,7 +72,8 @@ func toggle_overlay():
 	output_overlay_display_mode = next[output_overlay_display_mode]
 	set_overlay_display_mode(output_overlay_display_mode)
 
-func set_overlay_display_mode(mode:ScreenOverlayDisplayMode):
+
+func set_overlay_display_mode(mode: ScreenOverlayDisplayMode):
 	output_overlay_display_mode = mode
 	if output_overlay_display_mode == ScreenOverlayDisplayMode.AlwaysShow:
 		output_overlay.visible = true
@@ -93,6 +82,7 @@ func set_overlay_display_mode(mode:ScreenOverlayDisplayMode):
 	elif output_overlay_display_mode == ScreenOverlayDisplayMode.NeverShow:
 		output_overlay.visible = false
 
-func set_show_timestamp(v:bool):
+
+func set_show_timestamp(v: bool):
 	show_timestamp = v
 	logger_ui.update_view()

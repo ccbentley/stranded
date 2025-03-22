@@ -4,5 +4,6 @@ extends ModuleOptions
 
 @export var export_button_check_update := "Check Update"
 
+
 func check_update():
 	_module.check()
