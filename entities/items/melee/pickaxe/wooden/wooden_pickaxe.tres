@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_wkedh")
 attack_damage = 3.0
-attack_knockback = 0.0
+attack_knockback = 75.0
 attack_cooldown = 0.5
 attack_stun_time = 0.0
 material_type = 4

@@ -10,7 +10,6 @@ extends Node2D
 @onready var saver_loader: Node = $Utilities/SaverLoader
 @onready var day_night_cycle: Node2D = $Utilities/DayNightCycle
 @onready var weather_manager: CanvasLayer = $WeatherManager
-@onready var quest_manager: Control = $UI/MarginContainer/QuestManager
 
 var player_data: PlayerData = PlayerData.new()
 
@@ -81,7 +80,3 @@ func toggle_debug_menu() -> void:
 
 func display_death_screen() -> void:
 	$UI/DeathScreen.display_screen()
-
-
-func toggle_quests() -> void:
-	quest_manager.visible = !quest_manager.visible

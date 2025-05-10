@@ -6,12 +6,12 @@ extends CharacterBody2D
 @onready var main: Node2D = $".."
 @export var tile_map: Node2D
 
-@onready var on_hand_animation_player: AnimationPlayer = $OnHandAnimationPlayer
 @onready var movement_animation_player: AnimationPlayer = $MovementAnimationPlayer
 
 # Custom Components
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var knockback_component: KnockbackComponent = $KnockbackComponent
 
 # Inventory
 @export var inventory_data: InventoryData
@@ -146,7 +146,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
 	if Input.is_action_just_pressed("quests"):
-		main.toggle_quests()
+		#main.toggle_quests()
+		pass
 	if Input.is_action_just_pressed("interact"):
 		interact()
 	if Input.is_action_just_pressed("zoom_in"):

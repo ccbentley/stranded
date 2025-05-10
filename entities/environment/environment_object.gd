@@ -3,6 +3,7 @@ class_name EnvironmentObject
 
 @onready var health_component: HealthComponent = $HealthComponent
 
+var can_move: bool = false
 
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if health_component.health <= 0:

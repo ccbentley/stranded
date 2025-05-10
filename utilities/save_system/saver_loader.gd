@@ -11,7 +11,6 @@ func save_game() -> void:
 	player_data.position = player.global_position
 	player_data.health = player.health_component.health
 	player_data.is_facing_right = player.is_facing_right
-	player_data.quests = main.quest_manager.save_quests()
 	player_data.hunger = player.hunger
 	player_data.saturation = player.saturation
 	player_data.temp = player.temp
@@ -38,7 +37,6 @@ func load_game() -> bool:
 	player.health_component.set_health(player_data.health)
 	player.health_component.damage(Attack.new())
 	player.is_facing_right = player_data.is_facing_right
-	main.quest_manager.load_quests(player_data.quests)
 	player.hunger = player_data.hunger
 	player.saturation = player_data.saturation
 	player.temp = player_data.temp

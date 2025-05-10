@@ -144,7 +144,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_x5kqj")
+&"": SubResource("AnimationLibrary_x5kqj")
 }
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("7_x4j51")]

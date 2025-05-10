@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b13j56wiy5bjp"]
+[gd_scene load_steps=35 format=3 uid="uid://b13j56wiy5bjp"]
 
 [ext_resource type="Script" uid="uid://bhj15bk7665fp" path="res://entities/player/player.gd" id="1_qsibb"]
 [ext_resource type="Script" uid="uid://bnokmymefa6j6" path="res://common/finite_state_machine/finite_state_machine.gd" id="2_f4eej"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dyrditdrw0y7m" path="res://entities/player/states/player_idle_state.gd" id="9_0khh0"]
 [ext_resource type="Script" uid="uid://bhd6y10i2h8en" path="res://entities/player/states/player_move_state.gd" id="9_02503"]
 [ext_resource type="Script" uid="uid://cy2qbv4dcn3m8" path="res://entities/player/states/player_swim_state.gd" id="9_fa61r"]
+[ext_resource type="PackedScene" uid="uid://ceqd1nka8h5w" path="res://common/components/knockback/knockback_component.tscn" id="11_afbqv"]
 [ext_resource type="Shader" uid="uid://0bpyxli0ycbv" path="res://common/shaders/sprite_outline/sprite_outline.gdshader" id="16_ylx78"]
 [ext_resource type="PackedScene" uid="uid://dbvxi8hlunflt" path="res://common/shaders/water_trail/water_trail.tscn" id="20_11rme"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="21_0wihk"]
@@ -113,24 +114,6 @@ _data = {
 &"swim": SubResource("Animation_k7cy2")
 }
 
-[sub_resource type="Animation" id="Animation_ltw5y"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_skaai"]
-resource_name = "melee_attack_left"
-length = 0.4
-
-[sub_resource type="Animation" id="Animation_jnbma"]
-resource_name = "melee_attack"
-length = 0.4
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_66n73"]
-_data = {
-&"RESET": SubResource("Animation_ltw5y"),
-&"melee_attack_left": SubResource("Animation_skaai"),
-&"melee_attack_right": SubResource("Animation_jnbma")
-}
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x1kgs"]
 load_path = "res://.godot/imported/health_bar.png-bcbcf931410eb7285f52e35f5e52614e.ctex"
 
@@ -202,14 +185,11 @@ type = 1
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hgslm")
 
+[node name="KnockbackComponent" parent="." instance=ExtResource("11_afbqv")]
+
 [node name="MovementAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ankr7")
-}
-
-[node name="OnHandAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_66n73")
 }
 
 [node name="DrownBar" type="ProgressBar" parent="."]

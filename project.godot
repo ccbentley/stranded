@@ -68,7 +68,7 @@ mouse_cursor/tooltip_position_offset=Vector2(24, 24)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/panku_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/quest_system/plugin.cfg")
 
 [filesystem]
 
