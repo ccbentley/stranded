@@ -14,6 +14,7 @@ var is_facing_right: bool = true:
 			var turn_tween: Tween = get_tree().create_tween()
 			turn_tween.tween_property(sprite, "scale", Vector2(-1, 1), 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		is_facing_right = value
+var can_move: bool = true
 
 
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
@@ -33,11 +34,12 @@ func on_load_chunk(saved_data: SavedData) -> void:
 
 
 func move(dir: Vector2, speed: float) -> void:
-	velocity = (dir.normalized() * speed)
-	if dir.x < 0:
-		is_facing_right = false
-	else:
-		is_facing_right = true
+	if can_move:
+		velocity = (dir.normalized() * speed)
+		if dir.x < 0:
+			is_facing_right = false
+		else:
+			is_facing_right = true
 
 
 func _physics_process(_delta: float) -> void:

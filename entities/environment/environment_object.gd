@@ -5,6 +5,7 @@ class_name EnvironmentObject
 
 var can_move: bool = false
 
+
 func on_save_chunk(saved_data: Array[SavedData]) -> void:
 	if health_component.health <= 0:
 		return

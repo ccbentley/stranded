@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btg8kocs0wld7"]
+[gd_scene load_steps=32 format=3 uid="uid://btg8kocs0wld7"]
 
 [ext_resource type="PackedScene" uid="uid://cnb68lje5v6iy" path="res://common/shaders/silhouette_sprite/silhouette_sprite.tscn" id="1_lc0nb"]
 [ext_resource type="Script" uid="uid://dq5knmoqeiof2" path="res://entities/animals/animal.gd" id="1_op87p"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://ctjvq34gdb7d6" path="res://entities/animals/bunny/art/death/bunny_death_3.png" id="17_731j0"]
 [ext_resource type="PackedScene" uid="uid://d2s40e1amubhv" path="res://common/components/footstep/footstep_component.tscn" id="20_1uwnk"]
 [ext_resource type="PackedScene" uid="uid://ctoesqspj385y" path="res://common/components/chunk_node_helper/chunk_node_helper.tscn" id="21_jwioc"]
+[ext_resource type="PackedScene" uid="uid://ceqd1nka8h5w" path="res://common/components/knockback/knockback_component.tscn" id="22_r40yv"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rdlch"]
 
@@ -173,10 +174,12 @@ health_component = NodePath("../HealthComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6r4qi")
+&"": SubResource("AnimationLibrary_6r4qi")
 }
 
 [node name="FootstepComponent" parent="." instance=ExtResource("20_1uwnk")]
 volume_db = -15.0
 
 [node name="ChunkNodeHelper" parent="." instance=ExtResource("21_jwioc")]
+
+[node name="KnockbackComponent" parent="." instance=ExtResource("22_r40yv")]

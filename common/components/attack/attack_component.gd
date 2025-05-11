@@ -26,6 +26,6 @@ func _on_area_entered(area: Area2D) -> void:
 				var knockback_direction: Vector2 = (area.owner.global_position - self.owner.get_parent().owner.global_position).normalized()
 				for child in area.owner.get_children():
 					if child is KnockbackComponent:
-						child.apply_knockback(knockback_direction, _attack.attack_knockback, 0.12)
-				self.owner.get_parent().owner.knockback_component.apply_knockback(-knockback_direction, _attack.attack_knockback/2, 0.12)
+						child.apply_knockback(knockback_direction, _attack.attack_knockback, 0.2)
+				self.owner.get_parent().owner.knockback_component.apply_knockback(-knockback_direction, _attack.attack_knockback / 2, 0.12)
 				#WorldManager.freeze_engine()
